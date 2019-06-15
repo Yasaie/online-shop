@@ -5,9 +5,7 @@
  * @copyright   2019-06-15
  */
 
-namespace App;
-
-use Psr\SimpleCache\InvalidArgumentException;
+namespace App\Usage;
 
 /**
  * App\Product

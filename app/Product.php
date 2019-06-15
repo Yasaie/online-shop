@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Usage\DictionaryTrait;
 use Illuminate\Database\Eloquent\Model;
 
 /**
