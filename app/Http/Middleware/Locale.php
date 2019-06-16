@@ -16,9 +16,9 @@ class Locale
      */
     public function handle($request, Closure $next)
     {
-        $lang = session('lang');
+        $lang = session('lang', \Config::get('app.locale'));
         if ($lang and Language::find($lang)) {
-            app()->setLocale(session('lang'));
+            app()->setLocale($lang);
         }
 
         return $next($request);

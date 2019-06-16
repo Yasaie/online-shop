@@ -11,5 +11,5 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Dictionary extends Model
 {
-    //
+    public $timestamps = false;
 }

@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index');
-Route::get('/lang/{id}', function($id) {
-    return redirect('/')->with(session(['lang' => $id]));
-});
+Route::get('/lang/{id}', 'PublicController@lang');
+
+
+Route::get('/image/{image}.{ext}', 'PublicController@image');

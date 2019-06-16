@@ -7,6 +7,8 @@
 
 namespace App\Usage;
 
+use App\Dictionary;
+
 /**
  * App\Product
  *
@@ -33,5 +35,10 @@ trait DictionaryTrait
         });
 
         return $result;
+    }
+
+    public function dictionary()
+    {
+        $this->hasMany(Dictionary::class, 'context_id');
     }
 }
