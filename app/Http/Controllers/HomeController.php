@@ -21,7 +21,7 @@ class HomeController extends Controller
 //        $user = factory(\App\User::class)->create();
 
 //        $langs = ['en' => 'en_US', 'fa' => 'fa_IR', 'tr' => 'tr_TR'];
-//        $fields = ['name' => 'name', 'description' => 'text', 'info' => 'address', 'data' => 'text'];
+//        $fields = ['title' => 'name', 'description' => 'text', 'info' => 'address', 'data' => 'text'];
 //        $product = factory(\App\Product::class, 2)->create()->each(function ($d) use ($langs, $fields) {
 //            foreach ($fields as $fkey => $field) {
 //                foreach ($langs as $key => $lang) {

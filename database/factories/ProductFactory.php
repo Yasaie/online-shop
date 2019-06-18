@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 $factory->define(\App\Dictionary::class, function ($faker) use ($factory) {
     return [
-        'table_name' => 'product',
+        'table_name' => 'products',
         'key' => 'name',
     ];
 });

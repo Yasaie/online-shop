@@ -12,7 +12,8 @@
 */
 
 Route::get('/', 'HomeController@index');
+Route::get('/product/{id}/{slag?}', 'ProductController@index');
+
+
 Route::get('/lang/{id}', 'PublicController@lang');
-
-
 Route::get('/image/{image}.{ext}', 'PublicController@image');

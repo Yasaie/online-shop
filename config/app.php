@@ -67,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Tehran',
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'fa',
+    'fallback_locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -166,7 +166,8 @@ return [
          * Package Service Providers...
          */
         Intervention\Image\ImageServiceProvider::class,
-        \Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Hekmatinasser\Verta\VertaServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -230,6 +231,7 @@ return [
 
         # Payam Yasaie
         'Image' => Intervention\Image\Facades\Image::class, # http://image.intervention.io
+        'Verta' => Hekmatinasser\Verta\Facades\Verta::class,
     ],
 
 ];

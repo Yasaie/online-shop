@@ -23,4 +23,24 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use DictionaryTrait;
+
+    public function productSpecs()
+    {
+        return $this->hasMany(ProductSpecs::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function rates()
+    {
+        return $this->hasMany(Rate::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

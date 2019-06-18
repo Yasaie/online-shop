@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Intervention\Image\Constraint;
-use Intervention\Image\Image;
 use Intervention\Image\ImageCache;
 
 /**
@@ -17,7 +16,7 @@ class PublicController extends Controller
 {
     public function lang($id)
     {
-        return redirect('/')->with(session(['lang' => $id]));
+        return back()->with(session(['lang' => $id]));
     }
 
     public function image(Request $request, $image, $ext)
