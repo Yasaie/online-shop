@@ -15,8 +15,8 @@ class CreateProductSpecsTable extends Migration
     {
         Schema::create('product_specs', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->integer('product_id')->unsigned();
-            $table->integer('spec_id')->unsigned();
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('spec_id');
             $table->timestamps();
 
             $table->foreign('product_id')->references('id')->on('products');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\City;
 use App\Country;
 use App\Currency;
@@ -11,6 +12,23 @@ use Intervention\Image\Facades\Image;
 
 class HomeController extends Controller
 {
+    function buildTree($elements, $parentId = 0)
+    {
+        $branch = array();
+
+        foreach ($elements as $element) {
+            if ($element->parent_id == $parentId) {
+                $children = self::buildTree($elements, $element->id);
+                if ($children) {
+                    $element->children = $children;
+                }
+                $branch[] = $element;
+            }
+        }
+
+        return $branch;
+    }
+
     public function index(Request $request)
     {
 //        $city = City::whereName('تبریز')->first();
@@ -50,6 +68,11 @@ class HomeController extends Controller
 ////        dd($img);
 //        return $img->response('png');
 //        return view('welcome');
+
+        $category = Category::orderBy('sort')->get();
+        dd($this->buildTree($category));
+
+
         return app()->getLocale();
     }
 

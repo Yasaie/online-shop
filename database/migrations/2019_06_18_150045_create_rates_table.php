@@ -15,9 +15,9 @@ class CreateRatesTable extends Migration
     {
         Schema::create('rates', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->integer('product_id')->unsigned();
-            $table->integer('user_id')->unsigned();
-            $table->integer('rate')->unsigned();
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('rate');
             $table->timestamps();
         });
     }
