@@ -14,5 +14,6 @@ return [
     'rates' => 'Puan',
     'category' => 'Kategori',
     'related_products' => 'Ilgili Ürünler',
+    'sellers' => 'Satıcılar',
 
 ];

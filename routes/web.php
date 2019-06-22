@@ -12,8 +12,12 @@
 */
 
 Route::get('/', 'HomeController@index');
-Route::get('/product/{id}/{slag?}', 'ProductController@index');
 
+
+Route::get('/product/{id}/{slag?}', 'Front\ProductController@index');
+Route::get('/product_t/{id}/{slag?}', 'Front\ProductController@index_t');
 
 Route::get('/lang/{id}', 'PublicController@lang');
+Route::get('/currency/{id}', 'PublicController@currency');
+
 Route::get('/image/{image}.{ext}', 'PublicController@image');

@@ -14,5 +14,6 @@ return [
     'rates' => 'امتیاز',
     'category' => 'دسته‌بندی',
     'related_products' => 'محصولات مرتبط',
+    'sellers' => 'فروشندگان',
 
 ];

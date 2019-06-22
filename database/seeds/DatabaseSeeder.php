@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
              ProductSpecsTableSeeder::class, #optional
              CommentTableSeeder::class, #optional
              RateTableSeeder::class, # optional
+             SellerTableSeeder::class, # optional
 
              DictionaryTableSeeder::class,
          ]);

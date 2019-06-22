@@ -24,6 +24,13 @@ class Currency extends Model
 {
     use DictionaryTrait;
 
+    protected $appends = ['title'];
+
+    public function getTitleAttribute()
+    {
+        return $this->symbol ?: $this->locale('name');
+    }
+
     public function language()
     {
         return $this->belongsTo(Language::class);

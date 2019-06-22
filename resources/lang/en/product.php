@@ -14,4 +14,5 @@ return [
     'rates' => 'Stars',
     'category' => 'Category',
     'related_products' => 'Related Products',
+    'sellers' => 'Sellers',
 ];

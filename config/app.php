@@ -82,6 +82,8 @@ return [
 
     'locale' => 'fa',
 
+    'currency' => 'irr',
+
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
@@ -168,6 +170,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Hekmatinasser\Verta\VertaServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -232,6 +235,7 @@ return [
         # Payam Yasaie
         'Image' => Intervention\Image\Facades\Image::class, # http://image.intervention.io
         'Verta' => Hekmatinasser\Verta\Facades\Verta::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class, # https://github.com/barryvdh/laravel-debugbar
     ],
 
 ];

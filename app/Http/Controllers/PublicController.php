@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Currency;
+use App\Language;
 use Illuminate\Http\Request;
 use Intervention\Image\Constraint;
 use Intervention\Image\ImageCache;
@@ -14,9 +16,18 @@ use Intervention\Image\ImageCache;
  */
 class PublicController extends Controller
 {
-    public function lang($id)
+    public function lang($lang)
     {
-        return back()->with(session(['lang' => $id]));
+        return Language::find($lang)
+            ? back()->with(session(['lang' => $lang]))
+            : back();
+    }
+
+    public function currency($key)
+    {
+        return Currency::where('key', $key)
+            ? back()->with(session(['currency' => $key]))
+            : back();
     }
 
     public function image(Request $request, $image, $ext)

@@ -19,6 +19,7 @@ class CreateSellersTable extends Migration
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('currency_id');
             $table->decimal('price', 12, 2);
+            $table->unsignedTinyInteger('amount')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

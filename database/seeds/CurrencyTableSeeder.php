@@ -13,10 +13,10 @@ class CurrencyTableSeeder extends Seeder
     public function run()
     {
         $array = [
-            ['id' => 1, 'language_id' => 'fa', 'ratio' => 1],
-            ['id' => 2, 'language_id' => null, 'ratio' => 0.1],
-            ['id' => 3, 'language_id' => 'en', 'ratio' => 130000],
-            ['id' => 4, 'language_id' => 'tr', 'ratio' => 22000],
+            ['id' => 1, 'language_id' => 'fa', 'key' => 'irr', 'symbol' => null, 'ratio' => 1, 'places' => 0],
+            ['id' => 2, 'language_id' => null, 'key' => 'irt', 'symbol' => null, 'ratio' => 10, 'places' => 0],
+            ['id' => 3, 'language_id' => 'en', 'key' => 'usd', 'symbol' => '$', 'ratio' => 130000, 'places' => 2],
+            ['id' => 4, 'language_id' => 'tr', 'key' => 'try', 'symbol' => '₺', 'ratio' => 22000, 'places' => 2],
         ];
 
         DB::table('currencies')->insert($array);
