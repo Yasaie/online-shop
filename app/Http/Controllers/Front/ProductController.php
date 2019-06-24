@@ -11,23 +11,46 @@ class ProductController extends BaseController
     public function index($id, $slag = null)
     {
         $product = Product::find($id)
-            ->load(['productSpecs.specs', 'comments.user', 'rates', 'sellers.user', 'sellers.currency']);
+            ->load([
+                'comments.user',
+                'rates',
+                'sellers.user.products.rates',
+                'sellers.currency',
+                'details.detailKey.detailCategory',
+                'details.detailValue',
+            ]);
 
         $product_cats = collect();
         $product_cats[0] = $this->categories->firstWhere('id', $product->category_id)
             ->load('products');
         $product_cats[1] = $product_cats[0] ? $this->categories->firstWhere('id', $product_cats[0]->parent_id) : [];
         $product_cats[2] = $product_cats[1] ? $this->categories->firstWhere('id', $product_cats[1]->parent_id) : [];
-
-        $product_specs = $product->productSpecs;
         $comments = $product->comments;
-        $rates = $product->rates->avg('rate');
+        $rates = $product->product_rate;
         $related_products = $product_cats[0]->products;
         $sellers = $product->sellers->sortBy('current_price', SORT_NATURAL);
+        $product_details = [];
+
+        foreach ($product->details as $detail) {
+            $detailKey = $detail->detailKey;
+            $detailValue = $detail->detailValue;
+            $detailCategory = $detailKey->detailCategory;
+
+            if (!isset($product_details[$detailCategory->id])) {
+                $product_details[$detailCategory->id] = collect();
+                $product_details[$detailCategory->id]->title = $detailCategory->locale('title');
+                $product_details[$detailCategory->id]->children = [];
+            }
+
+            $product_details[$detailCategory->id]->children[] = (object)[
+                'key'   => $detailKey->locale('title'),
+                'value' => $detailValue->locale('title'),
+            ];
+        }
 
         return view('front.product.index')
             ->with(compact(
-                'id', 'product', 'product_specs', 'comments',
+                'id', 'product', 'comments', 'product_details',
                 'product_cats', 'rates', 'related_products', 'sellers'
             ));
     }

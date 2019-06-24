@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSellersTable extends Migration
+class CreateProductDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,17 @@ class CreateSellersTable extends Migration
      */
     public function up()
     {
-        Schema::create('sellers', function (Blueprint $table) {
+        Schema::create('product_details', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->unsignedInteger('user_id');
             $table->unsignedInteger('product_id');
-            $table->unsignedInteger('currency_id');
-            $table->decimal('price', 12, 2);
-            $table->decimal('prev_price', 12, 2)->nullable();
-            $table->unsignedTinyInteger('amount')->default(0);
+            $table->unsignedInteger('detail_key_id');
+            $table->unsignedInteger('detail_value_id')->nullable();
+            $table->boolean('highlighted')->default(0);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('currency_id')->references('id')->on('currencies');
+            $table->foreign('detail_key_id')->references('id')->on('detail_keys');
+            $table->foreign('detail_value_id')->references('id')->on('detail_values');
         });
     }
 
@@ -36,6 +34,6 @@ class CreateSellersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sellers');
+        Schema::dropIfExists('product_details');
     }
 }

@@ -30,3 +30,17 @@ if (! function_exists('buildTree')) {
         return $branch;
     }
 }
+
+if (! function_exists('setting')) {
+    function setting($key)
+    {
+        $keys = explode('.', $key, 2);
+        $settings = \Cache::rememberForever('app.settings', function () {
+            return \App\Setting::get();
+        });
+        $setting = $settings->where('section', $keys[0])
+            ->where('key', $keys[1])
+            ->first();
+        return $setting ? $setting->data : null;
+    }
+}

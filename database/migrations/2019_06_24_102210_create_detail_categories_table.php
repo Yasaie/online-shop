@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSpecsTable extends Migration
+class CreateDetailCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSpecsTable extends Migration
      */
     public function up()
     {
-        Schema::create('specs', function (Blueprint $table) {
+        Schema::create('detail_categories', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateSpecsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('specs');
+        Schema::dropIfExists('detail_categories');
     }
 }

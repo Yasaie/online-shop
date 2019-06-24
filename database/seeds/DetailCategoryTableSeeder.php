@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class SpecsTableSeeder extends Seeder
+class DetailCategoryTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,6 @@ class SpecsTableSeeder extends Seeder
             ['id' => 1],
             ['id' => 2],
         ];
-
-        DB::table('specs')->insert($array);
+        DB::table('detail_categories')->insert($array);
     }
 }

@@ -12,4 +12,9 @@ use Illuminate\Database\Eloquent\Model;
 class Dictionary extends Model
 {
     public $timestamps = false;
+
+    public function context()
+    {
+        return $this->morphTo();
+    }
 }

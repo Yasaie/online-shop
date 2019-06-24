@@ -26,7 +26,7 @@ trait DictionaryTrait
         ];
         $key = implode('.', $req);
 
-        return \Cache::rememberForever($key, function() use ($req, $lang) {
+        return \Cache::rememberForever($key, function() use ($req) {
             return $this->dictionary()->where([
                 ['language_id', $req[0]],
                 ['key', $req[3]]
@@ -42,7 +42,6 @@ trait DictionaryTrait
 
     public function dictionary()
     {
-        return $this->hasMany(Dictionary::class, 'context_id')
-            ->where('table_name', $this->table);
+        return $this->morphMany(Dictionary::class, 'context');
     }
 }

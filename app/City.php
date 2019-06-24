@@ -27,7 +27,7 @@ class City extends Model
 
     public function country()
     {
-        return State::find($this->state_id)->belongsTo(Country::class);
+        return $this->state->country();
     }
 
 }

@@ -24,9 +24,11 @@ class Product extends Model
 {
     use DictionaryTrait;
 
-    public function productSpecs()
+    protected $appends = ['product_rate'];
+
+    public function getProductRateAttribute()
     {
-        return $this->hasMany(ProductSpecs::class);
+        return $this->rates->avg('rate');
     }
 
     public function comments()
@@ -47,5 +49,14 @@ class Product extends Model
     public function sellers()
     {
         return $this->hasMany(Seller::class);
+    }
+
+    public function details()
+    {
+        return $this->hasMany(ProductDetail::class);
+    }
+
+    public function detailCategories()
+    {
     }
 }

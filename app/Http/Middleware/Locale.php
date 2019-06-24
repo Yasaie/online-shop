@@ -23,7 +23,9 @@ class Locale
             return Currency::get();
         });
         $lang_currency = $currencies->firstWhere('language_id', $lang);
-        $user_currency = session('currency', $lang_currency->key);
+        $lang_currency_key = $lang_currency ? $lang_currency->key : \Config::get('app.currency');
+
+        $user_currency = session('currency', $lang_currency_key);
         \Config::set('app.current_currency', $currencies->firstWhere('key', $user_currency));
 
 

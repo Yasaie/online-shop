@@ -1,0 +1,17 @@
+App\Currency
+    name
+App\Product
+    title
+    description
+App\DetailCategory
+    title
+App\DetailKey
+    title
+App\DetailValue
+    title
+App\Seller
+    type
+App\Category
+    title
+App\Setting
+    value

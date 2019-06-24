@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Usage\DictionaryTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Seller extends Model
 {
+    use DictionaryTrait;
+
     protected $appends = ['current_price'];
 
     public function getCurrentPriceAttribute()
@@ -24,5 +27,16 @@ class Seller extends Model
     public function currency()
     {
         return $this->belongsTo(Currency::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function rate()
+    {
+        dd($this->products()->get());
+        return $this->products()->rate;
     }
 }

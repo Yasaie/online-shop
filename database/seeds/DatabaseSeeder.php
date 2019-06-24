@@ -18,14 +18,19 @@ class DatabaseSeeder extends Seeder
              CityTableSeeder::class,
              LanguageTableSeeder::class,
              CurrencyTableSeeder::class,
+             SettingsTableSeeder::class,
 
-             CategoryTableSeeder::class, # optional
-             ProductTableSeeder::class, # optional
-             SpecsTableSeeder::class, # optional
-             ProductSpecsTableSeeder::class, #optional
-             CommentTableSeeder::class, #optional
-             RateTableSeeder::class, # optional
-             SellerTableSeeder::class, # optional
+             # optional
+             CategoryTableSeeder::class,
+             ProductTableSeeder::class,
+             DetailCategoryTableSeeder::class,
+             DetailKeyTableSeeder::class,
+             DetailValueTableSeeder::class,
+             ProductDetailTableSeeder::class,
+             CommentTableSeeder::class,
+             RateTableSeeder::class,
+             SellerTableSeeder::class,
+             # optional
 
              DictionaryTableSeeder::class,
          ]);

@@ -1,3 +1,4 @@
 [lang].[table].[id].[key]	# dictionary
 app.categories			# categories tree
 app.currencies			# all currencies
+app.settings            # all settings
