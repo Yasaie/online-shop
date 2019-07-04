@@ -2,21 +2,23 @@
 
 namespace App;
 
-use App\Usage\DictionaryTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Seller extends Model
 {
-    use DictionaryTrait;
+    use SoftDeletes;
 
     protected $appends = ['current_price'];
 
     public function getCurrentPriceAttribute()
     {
-        $base_price = $this->price * $this->currency->ratio;
-        $currency = \Config::get('app.current_currency');
+        return userPrice($this->price, $this->currency->ratio);
+    }
 
-        return number_format($base_price / $currency->ratio, $currency->places);
+    public function getPreviousPriceAttribute()
+    {
+        return userPrice($this->prev_price, $this->currency->ratio);
     }
 
     public function user()
@@ -29,14 +31,14 @@ class Seller extends Model
         return $this->belongsTo(Currency::class);
     }
 
+    public function sellerService()
+    {
+        return $this->belongsTo(SellerService::class);
+    }
+
     public function products()
     {
         return $this->hasMany(Product::class);
     }
 
-    public function rate()
-    {
-        dd($this->products()->get());
-        return $this->products()->rate;
-    }
 }

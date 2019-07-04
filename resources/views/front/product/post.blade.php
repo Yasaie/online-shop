@@ -144,10 +144,7 @@
                                     <div class="attrs">
                                         <span class="title">@lang('product.specification')</span>
                                         <ul class="attrs">
-                                            @foreach($product_specs->slice(0, 5) as $spec)
-                                            <li>{{$spec->specs()->first()->locale('title')}}: {{$spec->locale('title')}}
-                                            </li>
-                                            @endforeach
+                                            <li>فثسف</li>
                                         </ul>
                                     </div>
                                 </div>

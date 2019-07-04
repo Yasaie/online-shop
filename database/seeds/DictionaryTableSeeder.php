@@ -67,9 +67,9 @@ class DictionaryTableSeeder extends Seeder
             ['language_id' => 'fa', 'context_id' => 4, 'context_type' => 'App\DetailValue', 'key' => 'title', 'value' => 'دارد'],
             ['language_id' => 'en', 'context_id' => 4, 'context_type' => 'App\DetailValue', 'key' => 'title', 'value' => 'Has'],
 
-            # App\Seller
-            ['language_id' => 'fa', 'context_id' => 1, 'context_type' => 'App\Seller', 'key' => 'type', 'value' => 'صورتی + گارانتی آراد'],
-            ['language_id' => 'en', 'context_id' => 1, 'context_type' => 'App\Seller', 'key' => 'type', 'value' => 'Pink + Arad Warranty'],
+            # App\SellerService
+            ['language_id' => 'fa', 'context_id' => 1, 'context_type' => 'App\SellerService', 'key' => 'title', 'value' => 'صورتی + گارانتی آراد'],
+            ['language_id' => 'en', 'context_id' => 1, 'context_type' => 'App\SellerService', 'key' => 'title', 'value' => 'Pink + Arad Warranty'],
 
             # App\Category
             ['language_id' => 'fa', 'context_id' => 1, 'context_type' => 'App\Category', 'key' => 'title', 'value' => 'کالای دیجیتال'],

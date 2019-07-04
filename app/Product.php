@@ -2,8 +2,13 @@
 
 namespace App;
 
-use App\Usage\DictionaryTrait;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\File;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\Models\Media;
+use Yasaie\Dictionary\Traits\HasDictionary;
 
 /**
  * App\Product
@@ -20,11 +25,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|DictionaryTrait dictionary()
  * @mixin \Eloquent
  */
-class Product extends Model
+class Product extends Model implements HasMedia
 {
-    use DictionaryTrait;
+    use HasDictionary,
+        HasMediaTrait;
 
     protected $appends = ['product_rate'];
+
+    protected $dictionary = ['title', 'description'];
 
     public function getProductRateAttribute()
     {
@@ -41,11 +49,6 @@ class Product extends Model
         return $this->hasMany(Rate::class);
     }
 
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-
     public function sellers()
     {
         return $this->hasMany(Seller::class);
@@ -56,7 +59,28 @@ class Product extends Model
         return $this->hasMany(ProductDetail::class);
     }
 
-    public function detailCategories()
+    public function category()
     {
+        return $this->belongsTo(Category::class);
     }
+
+    public function registerMediaCollections()
+    {
+        $this->addMediaCollection('images')
+            ->acceptsFile(function (File $file) {
+                $acceptable = [
+                    'image/jpeg',
+                    'image/png',
+                    'image/gif',
+                ];
+                return in_array($file->mimeType, $acceptable);
+            });
+    }
+
+    public function registerMediaConversions(Media $media = null)
+    {
+        $this->addMediaConversion('small')
+            ->fit(Manipulations::FIT_MAX, 250, 250);
+    }
+
 }

@@ -12,9 +12,15 @@ use Illuminate\Database\Eloquent\Model;
 class Dictionary extends Model
 {
     public $timestamps = false;
+    protected $appends = ['full_path'];
 
     public function context()
     {
         return $this->morphTo();
+    }
+
+    public function getFullPathAttribute()
+    {
+        return "{$this->context_type}{$this->context_id}";
     }
 }

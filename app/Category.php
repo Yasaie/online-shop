@@ -2,12 +2,14 @@
 
 namespace App;
 
-use App\Usage\DictionaryTrait;
 use Illuminate\Database\Eloquent\Model;
+use Yasaie\Dictionary\Traits\HasDictionary;
 
 class Category extends Model
 {
-    use DictionaryTrait;
+    use HasDictionary;
+
+    protected $dictionary = ['title'];
 
     public function parent()
     {

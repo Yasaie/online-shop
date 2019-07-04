@@ -171,6 +171,7 @@ return [
         Hekmatinasser\Verta\VertaServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        # medialibrary https://docs.spatie.be
 
         /*
          * Application Service Providers...

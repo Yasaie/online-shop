@@ -2,8 +2,8 @@
 
 namespace App;
 
-use App\Usage\DictionaryTrait;
 use Illuminate\Database\Eloquent\Model;
+use Yasaie\Dictionary\Traits\HasDictionary;
 
 /**
  * App\Currency
@@ -22,9 +22,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Currency extends Model
 {
-    use DictionaryTrait;
+    use HasDictionary;
 
     protected $appends = ['title'];
+
+    protected $dictionary = ['name'];
 
     public function getTitleAttribute()
     {

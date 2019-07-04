@@ -29,7 +29,9 @@ class DatabaseSeeder extends Seeder
              ProductDetailTableSeeder::class,
              CommentTableSeeder::class,
              RateTableSeeder::class,
+             SellerServicesTableSeeder::class,
              SellerTableSeeder::class,
+             MediaTableSeeder::class,
              # optional
 
              DictionaryTableSeeder::class,

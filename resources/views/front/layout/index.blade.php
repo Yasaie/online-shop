@@ -8,7 +8,7 @@
     <title>{{setting('site.title')}} - @yield('page-title')</title>
 </head>
 <body>
-<h1>{{setting('site.title')}}</h1>
+<h1><a href="{{url('/')}}">{{setting('site.title')}}</a></h1>
 <hr>
 @foreach(\App\Language::get() as $lang)
     <a href="/lang/{{$lang->id}}">{{$lang->name}}</a>

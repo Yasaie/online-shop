@@ -12,10 +12,11 @@ class ProductController extends BaseController
     {
         $product = Product::find($id)
             ->load([
-                'comments.user',
                 'rates',
-                'sellers.user.products.rates',
+                'comments.user',
                 'sellers.currency',
+                'sellers.sellerService',
+                'sellers.user.products.rates',
                 'details.detailKey.detailCategory',
                 'details.detailValue',
             ]);
@@ -29,6 +30,7 @@ class ProductController extends BaseController
         $rates = $product->product_rate;
         $related_products = $product_cats[0]->products;
         $sellers = $product->sellers->sortBy('current_price', SORT_NATURAL);
+        $first_seller = $sellers->first();
         $product_details = [];
 
         foreach ($product->details as $detail) {
@@ -51,7 +53,7 @@ class ProductController extends BaseController
         return view('front.product.index')
             ->with(compact(
                 'id', 'product', 'comments', 'product_details',
-                'product_cats', 'rates', 'related_products', 'sellers'
+                'product_cats', 'rates', 'related_products', 'sellers', 'first_seller'
             ));
     }
 
@@ -61,7 +63,7 @@ class ProductController extends BaseController
         $categories[0] = $product->category()->first();
         $categories[1] = $categories[0] ? $categories[0]->parent()->first() : [];
         $categories[2] = $categories[1] ? $categories[1]->parent()->first() : [];
-        $product_specs = $product->productSpecs()->get();
+        $product_specs = [];
         $comments = $product->comments()->get();
         $rates = $product->rates()->avg('rate');
         $related_products = $categories[0]->products()->get();

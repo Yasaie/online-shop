@@ -2,10 +2,13 @@
 
 namespace App;
 
-use App\Usage\DictionaryTrait;
 use Illuminate\Database\Eloquent\Model;
+use Yasaie\Dictionary\Traits\HasDictionary;
 
 class DetailCategory extends Model
 {
-    use DictionaryTrait;
+    use HasDictionary;
+
+    protected $dictionary = ['title'];
+
 }

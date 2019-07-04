@@ -2,14 +2,16 @@
 
 namespace App;
 
-use App\Usage\DictionaryTrait;
 use Illuminate\Database\Eloquent\Model;
+use Yasaie\Dictionary\Traits\HasDictionary;
 
 class Setting extends Model
 {
-    use DictionaryTrait;
+    use HasDictionary;
 
     protected $appends = ['data'];
+
+    protected $dictionary = ['value'];
 
     public function getDataAttribute()
     {
