@@ -15,7 +15,9 @@
 <div class="wrapper">
     @include('admin.layout.navbar')
     @include('admin.layout.sidebar')
+    <div class="content-wrapper">
     @yield('body')
+    </div>
     @include('admin.layout.control')
 </div>
 

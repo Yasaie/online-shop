@@ -2,19 +2,26 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Dictionary;
-use App\Product;
-use function foo\func;
+use App\Country;
+use App\State;
+use function compact;
+use function flattenItems;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\Paginator;
+use App\Http\Controllers\Controller;
+use function paginate;
+use const SORT_NATURAL;
+use function view;
 
-class ProductController extends BaseController
+class StateController extends BaseController
 {
 
     /**
-     * Display a listing of the resource.
+     * @package index
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Request $request)
     {
@@ -24,18 +31,19 @@ class ProductController extends BaseController
                 'name' => 'id',
             ],
             [
-                'name' => 'title',
+                'name' => 'name',
                 'visible' => 1
             ],
             [
-                'name' => 'category_title',
-                'get' => 'category.title',
+                'name' => 'country_name',
+                'get' => 'country.name',
                 'visible' => 1
             ],
             [
-                'name' => 'updated_at',
+                'name' => 'cities',
+                'get' => 'city.count()',
                 'visible' => 1
-            ]
+            ],
         ];
 
         # Url query requested
@@ -47,12 +55,12 @@ class ProductController extends BaseController
 
         # Custom fields
         $search = $request->search;
-        $sort = $request->sort ?: 'updated_at';
+        $sort = $request->sort ?: 'id';
         $desc = $request->desc ? 1 : 0;
 
         # Load items for send to view
-        $items = Product::get()
-            ->load(['category']);
+        $items = State::get()
+            ->load(['country', 'city']);
 
         # flatten and Search in model if search requested
         $items = flattenItems($items, $heads, $search);
@@ -72,7 +80,7 @@ class ProductController extends BaseController
      */
     public function create()
     {
-        echo 'create';
+        //
     }
 
     /**
@@ -94,31 +102,7 @@ class ProductController extends BaseController
      */
     public function show($id)
     {
-        # table headers
-        $heads = [
-            [
-                'name' => 'id',
-            ],
-            [
-                'name' => 'title',
-            ],
-            [
-                'name' => 'category_title',
-                'get' => 'category.title',
-            ],
-            [
-                'name' => 'created_at',
-            ],
-            [
-                'name' => 'updated_at',
-            ]
-        ];
-
-        $item = Product::find($id)
-            ->load('category');
-
-        return view('admin.crud.show')
-            ->with(compact('item', 'heads'));
+        //
     }
 
     /**

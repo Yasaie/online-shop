@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Dictionary;
+use App\Country;
 use App\Product;
-use function foo\func;
+use function compact;
+use function flattenItems;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\Paginator;
+use function paginate;
+use const SORT_NATURAL;
+use function view;
 
-class ProductController extends BaseController
+class CountryController extends BaseController
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -24,18 +26,19 @@ class ProductController extends BaseController
                 'name' => 'id',
             ],
             [
-                'name' => 'title',
+                'name' => 'name',
                 'visible' => 1
             ],
             [
-                'name' => 'category_title',
-                'get' => 'category.title',
-                'visible' => 1
+                'name' => 'states',
+                'get' => 'state.count()',
+                'visible' => 1,
             ],
             [
-                'name' => 'updated_at',
-                'visible' => 1
-            ]
+                'name' => 'cities',
+                'get' => 'city.count()',
+                'visible' => 1,
+            ],
         ];
 
         # Url query requested
@@ -47,12 +50,12 @@ class ProductController extends BaseController
 
         # Custom fields
         $search = $request->search;
-        $sort = $request->sort ?: 'updated_at';
+        $sort = $request->sort ?: 'id';
         $desc = $request->desc ? 1 : 0;
 
         # Load items for send to view
-        $items = Product::get()
-            ->load(['category']);
+        $items = Country::get()
+            ->load(['state', 'city']);
 
         # flatten and Search in model if search requested
         $items = flattenItems($items, $heads, $search);
@@ -72,7 +75,7 @@ class ProductController extends BaseController
      */
     public function create()
     {
-        echo 'create';
+        //
     }
 
     /**
@@ -94,31 +97,9 @@ class ProductController extends BaseController
      */
     public function show($id)
     {
-        # table headers
-        $heads = [
-            [
-                'name' => 'id',
-            ],
-            [
-                'name' => 'title',
-            ],
-            [
-                'name' => 'category_title',
-                'get' => 'category.title',
-            ],
-            [
-                'name' => 'created_at',
-            ],
-            [
-                'name' => 'updated_at',
-            ]
-        ];
 
-        $item = Product::find($id)
-            ->load('category');
 
-        return view('admin.crud.show')
-            ->with(compact('item', 'heads'));
+
     }
 
     /**

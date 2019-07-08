@@ -37,6 +37,12 @@ class DictionaryTableSeeder extends Seeder
             ['language_id' => 'fa', 'context_id' => 1, 'context_type' => 'App\Product', 'key' => 'description', 'value' => 'اس اس دی «WDS240G2G0A» محصولی از شرکت «وسترن دیجیتال» است که از طریق رابط SATA3.0 به کامپیوتر و لپ تاپ متصل می‌شود.'],
             ['language_id' => 'en', 'context_id' => 1, 'context_type' => 'App\Product', 'key' => 'description', 'value' => 'In this article, we study how to create a Laravel controller for CRUD operations. By using resourceful controller, we get the pre-defined methods ..'],
 
+            ['language_id' => 'fa', 'context_id' => 2, 'context_type' => 'App\Product', 'key' => 'title', 'value' => 'تست کالای نمونه'],
+            ['language_id' => 'en', 'context_id' => 2, 'context_type' => 'App\Product', 'key' => 'title', 'value' => 'Example Product Test'],
+
+            ['language_id' => 'fa', 'context_id' => 2, 'context_type' => 'App\Product', 'key' => 'description', 'value' => 'اس اس دی «WDS240G2G0A» محصولی از شرکت «وسترن دیجیتال» است که از طریق رابط SATA3.0 به کامپیوتر و لپ تاپ متصل می‌شود.'],
+            ['language_id' => 'en', 'context_id' => 2, 'context_type' => 'App\Product', 'key' => 'description', 'value' => 'In this article, we study how to create a Laravel controller for CRUD operations. By using resourceful controller, we get the pre-defined methods ..'],
+
             # App\DetailCategory
             ['language_id' => 'fa', 'context_id' => 1, 'context_type' => 'App\DetailCategory', 'key' => 'title', 'value' => 'مشخصات فیزیکی'],
             ['language_id' => 'en', 'context_id' => 1, 'context_type' => 'App\DetailCategory', 'key' => 'title', 'value' => 'Physical Specifications'],

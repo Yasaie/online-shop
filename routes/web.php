@@ -25,7 +25,16 @@ Route::namespace('Admin')
 {
 
     Route::get('/', 'HomeController@index')->name('home');
+    # Product
     Route::resource('product', 'ProductController');
+    # Addresses
+    Route::name('address.')
+        ->group(function ()
+    {
+        Route::resource('country', 'CountryController');
+        Route::resource('state', 'StateController');
+        Route::resource('city', 'CityController');
+    });
 
 });
 

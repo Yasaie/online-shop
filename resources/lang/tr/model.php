@@ -6,8 +6,6 @@
  */
 
 return [
-    'id'    => 'ID',
-    'title'    => 'Title',
-    'category_title' => 'Category',
-    'updated_at' => 'Updated At'
+
+    'name' => 'isim',
 ];

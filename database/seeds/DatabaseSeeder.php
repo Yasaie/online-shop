@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
              SellerServicesTableSeeder::class,
              SellerTableSeeder::class,
              MediaTableSeeder::class,
+             MenuTableSeeder::class,
              # optional
 
              DictionaryTableSeeder::class,

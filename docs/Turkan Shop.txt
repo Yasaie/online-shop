@@ -1,0 +1,17 @@
+Product			CRUDV
+Product Details
+	Category	CRUD
+	Key		CRUD
+	Value		CRUD
+Category		CRUD	Special
+Setting			U
+Currency		CRUD
+User			CRUDV
+	Profile		CRUD
+Seller			CRUDVT
+	Service		CRUD
+Places
+	Country		CRUD
+	State		CRUD
+	City		CRUD
+Report			RDV

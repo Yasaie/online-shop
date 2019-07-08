@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\File;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
@@ -25,7 +24,7 @@ use Yasaie\Dictionary\Traits\HasDictionary;
  * @method static \Illuminate\Database\Eloquent\Builder|DictionaryTrait dictionary()
  * @mixin \Eloquent
  */
-class Product extends Model implements HasMedia
+class Product extends BaseModel implements HasMedia
 {
     use HasDictionary,
         HasMediaTrait;

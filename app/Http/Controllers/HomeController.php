@@ -6,6 +6,7 @@ use App\Category;
 use App\City;
 use App\Country;
 use App\Currency;
+use App\Menu;
 use App\Product;
 use App\Seller;
 use App\State;
@@ -61,10 +62,10 @@ class HomeController extends Controller
 
 //        Seller::find(2)->delete();
 
-        $product = Product::find(1);
-        $product->addMedia('C:\Users\yasaie\Desktop\Stock Photos\php-1024x538.png')
-            ->preservingOriginal()
-            ->toMediaCollection('images');
+//        $product = Product::find(1);
+//        $product->addMedia('C:\Users\yasaie\Desktop\Stock Photos\php-1024x538.png')
+//            ->preservingOriginal()
+//            ->toMediaCollection('images');
 
 //        $product->clearMediaCollection('images');
 //        $image = $product->getFirstMedia()->getPath();
@@ -81,6 +82,9 @@ class HomeController extends Controller
 //
 //
 //        return app()->getLocale();
+
+//        dd(Menu::with('category')->get());
+//        dd(dotObject(Country::find(1), 'state.count()'));
     }
 
 }

@@ -37,7 +37,7 @@
                 <a href="#" class="dropdown-item">
 
                     <div class="media">
-                        <img src="{{asset('admin/img/user1-128x128.jpg')}}" alt="User Avatar"
+                        <img src="{{asset('assets/admin/img/user1-128x128.jpg')}}" alt="User Avatar"
                              class="img-size-50 ml-3 img-circle">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
@@ -54,7 +54,7 @@
                 <a href="#" class="dropdown-item">
 
                     <div class="media">
-                        <img src="{{asset('admin/img/user8-128x128.jpg')}}" alt="User Avatar"
+                        <img src="{{asset('assets/admin/img/user8-128x128.jpg')}}" alt="User Avatar"
                              class="img-size-50 img-circle ml-3">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">
@@ -71,7 +71,7 @@
                 <a href="#" class="dropdown-item">
 
                     <div class="media">
-                        <img src="{{asset('admin/img/user3-128x128.jpg')}}" alt="User Avatar"
+                        <img src="{{asset('assets/admin/img/user3-128x128.jpg')}}" alt="User Avatar"
                              class="img-size-50 img-circle ml-3">
                         <div class="media-body">
                             <h3 class="dropdown-item-title">

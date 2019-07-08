@@ -16,4 +16,5 @@ return [
     'related_products' => 'Ilgili Ürünler',
     'sellers' => 'Satıcılar',
 
+
 ];

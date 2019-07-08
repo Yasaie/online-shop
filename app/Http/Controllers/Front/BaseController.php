@@ -9,6 +9,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Category;
 use App\Http\Controllers\Controller;
+use App\Menu;
 
 class BaseController extends Controller
 {
@@ -17,11 +18,11 @@ class BaseController extends Controller
     public function __construct()
     {
         $this->categories = collect(\Cache::rememberForever('app.categories', function () {
-            return Category::orderBy('sort')->get();
+            return Category::get();
         }));
-        $categories = \Cache::rememberForever(md5($this->categories->toJson()), function () {
-            return buildTree($this->categories);
+        $menus = \Cache::rememberForever('app.menus', function () {
+            return buildTree(Menu::with('category')->get()->sortBy('sort'));
         });
-        view()->share('categories', $categories);
+        view()->share(compact('menus'));
     }
 }
