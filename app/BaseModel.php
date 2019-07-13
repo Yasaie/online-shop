@@ -7,6 +7,8 @@
 
 namespace App;
 
+use Carbon\Carbon;
+use Hekmatinasser\Verta\Verta;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -31,7 +33,7 @@ class BaseModel extends Model
      *
      * @param string $key
      *
-     * @return \Carbon\Carbon|\Hekmatinasser\Verta\Verta|mixed
+     * @return Carbon|Verta|mixed
      * @throws \Exception
      */
     public function getAttribute($key)
@@ -39,10 +41,11 @@ class BaseModel extends Model
         $value = parent::getAttribute($key);
 
         if (in_array($key, ['updated_at', 'created_at'])) {
+            Verta::setStringFormat('Y-m-d - H:i');
             $date = app()->getLocale() == 'fa'
-                ? new \Hekmatinasser\Verta\Verta($value)
-                : new \Carbon\Carbon($value);
-            return $date->format('Y-m-d - H:i');
+                ? new Verta($value)
+                : new Carbon($value);
+            return $date;
         }
 
         return $value;

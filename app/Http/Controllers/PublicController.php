@@ -18,7 +18,7 @@ class PublicController extends Controller
 {
     public function lang($lang)
     {
-        return Language::find($lang)
+        return config('global.langs.' . $lang)
             ? back()->with(session(['lang' => $lang]))
             : back();
     }

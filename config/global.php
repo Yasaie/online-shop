@@ -5,7 +5,12 @@
  * @copyright   2019-06-15
  */
 
+use Carbon\Language;
 
 return [
-    'name' => env('APP_NAME', 'Laravel'),
+    'langs' => [
+        'fa' => new Language('fa'),
+        'en' => new Language('en'),
+        'tr' => new Language('tr')
+    ],
 ];

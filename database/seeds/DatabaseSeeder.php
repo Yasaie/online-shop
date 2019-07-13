@@ -16,7 +16,6 @@ class DatabaseSeeder extends Seeder
              CountryTableSeeder::class,
              StateTableSeeder::class,
              CityTableSeeder::class,
-             LanguageTableSeeder::class,
              CurrencyTableSeeder::class,
              SettingsTableSeeder::class,
 

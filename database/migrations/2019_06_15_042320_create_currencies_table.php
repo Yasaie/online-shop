@@ -22,7 +22,6 @@ class CreateCurrenciesTable extends Migration
             $table->decimal('ratio', 18, 9);
             $table->unsignedTinyInteger('places');
 
-            $table->foreign('language_id')->references('id')->on('languages');
             $table->unique('key');
         });
     }

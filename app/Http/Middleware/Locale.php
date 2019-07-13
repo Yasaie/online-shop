@@ -27,11 +27,9 @@ class Locale
 
         $user_currency = session('currency', $lang_currency_key);
         \Config::set('app.current_currency', $currencies->firstWhere('key', $user_currency));
-
+        \Config::set('app.currency', $user_currency);
 
         view()->share(compact('currencies'));
-
-        \Config::set('app.currency', $user_currency);
 
         return $next($request);
     }

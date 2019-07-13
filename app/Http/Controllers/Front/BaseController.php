@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Front;
 use App\Category;
 use App\Http\Controllers\Controller;
 use App\Menu;
+use Yasaie\Helper\Y;
 
 class BaseController extends Controller
 {
@@ -21,7 +22,7 @@ class BaseController extends Controller
             return Category::get();
         }));
         $menus = \Cache::rememberForever('app.menus', function () {
-            return buildTree(Menu::with('category')->get()->sortBy('sort'));
+            return Y::buildTree(Menu::with('category')->get()->sortBy('sort'));
         });
         view()->share(compact('menus'));
     }

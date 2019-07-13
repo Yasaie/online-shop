@@ -2,14 +2,22 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Dictionary;
 use App\Product;
-use function foo\func;
+use Carbon\Language;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\Paginator;
+use Yasaie\Cruder\Crud;
 
 class ProductController extends BaseController
 {
+
+    /**
+     * ProductController constructor.
+     */
+    public function __construct()
+    {
+        view()->share(['title' => 'محصولات']);
+        parent::__construct();
+    }
 
     /**
      * Display a listing of the resource.
@@ -18,6 +26,7 @@ class ProductController extends BaseController
      */
     public function index(Request $request)
     {
+        dd(Language::all());
         # table headers
         $heads = [
             [
@@ -37,32 +46,11 @@ class ProductController extends BaseController
                 'visible' => 1
             ]
         ];
-
-        # Url query requested
-        $query = [
-            'search' => $request->search,
-            'sort' => $request->sort,
-            'desc' => $request->desc
-        ];
-
-        # Custom fields
-        $search = $request->search;
-        $sort = $request->sort ?: 'updated_at';
-        $desc = $request->desc ? 1 : 0;
-
         # Load items for send to view
         $items = Product::get()
             ->load(['category']);
 
-        # flatten and Search in model if search requested
-        $items = flattenItems($items, $heads, $search);
-        # Sort and desc/asc items
-        $items = $items->sortBy($sort, SORT_NATURAL, $desc);
-        # Paginate items
-        $pages = paginate($items, $request->page, $this->perPage);
-
-        return view('admin.crud.table')
-            ->with(compact('heads', 'sort', 'desc', 'search', 'items', 'pages', 'query'));
+        return Crud::index($items, $heads, $request, 'updated_at', $this->perPage);
     }
 
     /**
@@ -72,7 +60,7 @@ class ProductController extends BaseController
      */
     public function create()
     {
-        echo 'create';
+        return view('admin.crud.create');
     }
 
     /**
@@ -117,8 +105,7 @@ class ProductController extends BaseController
         $item = Product::find($id)
             ->load('category');
 
-        return view('admin.crud.show')
-            ->with(compact('item', 'heads'));
+        return Crud::show($item, $heads);
     }
 
     /**

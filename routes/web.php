@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::namespace('Front')->group(function () {
     Route::get('product/{id}/{slag?}', 'ProductController@index');

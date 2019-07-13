@@ -11,9 +11,19 @@ use App\Http\Controllers\Controller;
 use function paginate;
 use const SORT_NATURAL;
 use function view;
+use Yasaie\Cruder\Crud;
 
 class StateController extends BaseController
 {
+
+    /**
+     * ProductController constructor.
+     */
+    public function __construct()
+    {
+        view()->share(['title' => 'استان‌ها']);
+        parent::__construct();
+    }
 
     /**
      * @package index
@@ -45,32 +55,11 @@ class StateController extends BaseController
                 'visible' => 1
             ],
         ];
-
-        # Url query requested
-        $query = [
-            'search' => $request->search,
-            'sort' => $request->sort,
-            'desc' => $request->desc
-        ];
-
-        # Custom fields
-        $search = $request->search;
-        $sort = $request->sort ?: 'id';
-        $desc = $request->desc ? 1 : 0;
-
         # Load items for send to view
         $items = State::get()
             ->load(['country', 'city']);
 
-        # flatten and Search in model if search requested
-        $items = flattenItems($items, $heads, $search);
-        # Sort and desc/asc items
-        $items = $items->sortBy($sort, SORT_NATURAL, $desc);
-        # Paginate items
-        $pages = paginate($items, $request->page, $this->perPage);
-
-        return view('admin.crud.table')
-            ->with(compact('heads', 'sort', 'desc', 'search', 'items', 'pages', 'query'));
+        return Crud::index($items, $heads, $request, 'id', $this->perPage);
     }
 
     /**
@@ -102,7 +91,28 @@ class StateController extends BaseController
      */
     public function show($id)
     {
-        //
+        # table headers
+        $heads = [
+            [
+                'name' => 'id',
+            ],
+            [
+                'name' => 'name',
+            ],
+            [
+                'name' => 'country_name',
+                'get' => 'country.name',
+            ],
+            [
+                'name' => 'cities',
+                'get' => 'city.count()',
+            ],
+        ];
+
+        $item = State::find($id)
+            ->load(['country', 'city']);
+
+        return Crud::show($item, $heads);
     }
 
     /**

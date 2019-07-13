@@ -10,8 +10,8 @@
 <body>
 <h1><a href="{{url('/')}}">{{setting('site.title')}}</a></h1>
 <hr>
-@foreach(\App\Language::get() as $lang)
-    <a href="/lang/{{$lang->id}}">{{$lang->name}}</a>
+@foreach(config('global.langs') as $lang)
+    <a href="/lang/{{$lang->getId()}}">{{$lang->getNativeName()}}</a>
 @endforeach
 |
 @foreach($currencies as $currency)

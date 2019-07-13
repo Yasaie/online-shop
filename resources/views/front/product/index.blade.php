@@ -93,7 +93,7 @@
 @foreach($comments as $comment)
     <div>
         <div>@lang('product.comment_by', ['name' => "{$comment->user->first_name} {$comment->user->last_name}"])</div>
-        <div>@lang('product.comment_at', ['date' => gdate($comment->created_at)->format('l j F Y')])</div>
+        <div>@lang('product.comment_at', ['date' => $comment->created_at->format('l j F Y')])</div>
         <div>متن: {{$comment->body}}</div>
     </div>
     <hr>

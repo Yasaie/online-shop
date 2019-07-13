@@ -1,24 +1,8 @@
 @extends('admin.layout')
 
-@section('title', 'table')
+@section('title', $title)
 
 @section('body')
-
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 text-dark">داشبورد</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-left">
-                    <li class="breadcrumb-item"><a href="#">خانه</a></li>
-                    <li class="breadcrumb-item active">داشبورد ورژن 2</li>
-                </ol>
-            </div>
-        </div>
-    </div>
-</div>
 
 <section class="content">
     <div class="container-fluid">
@@ -29,7 +13,7 @@
                 <div class="card">
 
                     <div class="card-header">
-                        <h3 class="card-title">جدول ریسپانسیو</h3>
+                        <h3 class="card-title"> </h3>
 
                         <div class="card-tools">
                             <form class="input-group input-group-sm" style="width: 150px;">
@@ -87,7 +71,7 @@
                     </div>
                 </div>
 
-                @include('admin.crud.pagination')
+                @include('admin.crud.inc.pagination')
 
             </div>
         </div>

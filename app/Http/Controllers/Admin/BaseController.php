@@ -12,7 +12,6 @@ use App\Product;
 
 class BaseController extends Controller
 {
-
     protected $perPage = 15;
 
     public function __construct()
