@@ -25,7 +25,11 @@
                 </div>
             </div>
         </div>
-    @yield('body')
+        <section class="content">
+            <div class="container-fluid">
+            @yield('body')
+            </div>
+        </section>
     </div>
     @include('admin.layout.control')
 </div>

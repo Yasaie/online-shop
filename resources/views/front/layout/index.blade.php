@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{app()->getLocale()}}" dir="{{app()->getLocale() == 'fa' ? 'rtl' : 'ltr'}}">
+<html lang="{{app()->getLocale()}}" dir="{{isRTL(0)}}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"

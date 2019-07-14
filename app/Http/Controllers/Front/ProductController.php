@@ -40,13 +40,13 @@ class ProductController extends BaseController
 
             if (!isset($product_details[$detailCategory->id])) {
                 $product_details[$detailCategory->id] = collect();
-                $product_details[$detailCategory->id]->title = $detailCategory->locale('title');
+                $product_details[$detailCategory->id]->title = $detailCategory->title;
                 $product_details[$detailCategory->id]->children = [];
             }
 
             $product_details[$detailCategory->id]->children[] = (object)[
-                'key'   => $detailKey->locale('title'),
-                'value' => $detailValue->locale('title'),
+                'key'   => $detailKey->title,
+                'value' => $detailValue ? $detailValue->title : null,
             ];
         }
 

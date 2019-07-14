@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Product;
-use Carbon\Language;
 use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
 
@@ -15,7 +15,10 @@ class ProductController extends BaseController
      */
     public function __construct()
     {
-        view()->share(['title' => 'محصولات']);
+        view()->share([
+            'title' => 'محصولات',
+            'route' => 'admin.product'
+        ]);
         parent::__construct();
     }
 
@@ -26,7 +29,6 @@ class ProductController extends BaseController
      */
     public function index(Request $request)
     {
-        dd(Language::all());
         # table headers
         $heads = [
             [
@@ -60,13 +62,34 @@ class ProductController extends BaseController
      */
     public function create()
     {
-        return view('admin.crud.create');
+        $inputs = [
+            [
+                'name' => 'category',
+                'type' => 'select',
+                'content' => [
+                    'all' => Category::all(),
+                    'name' => 'title',
+                ]
+            ]
+        ];
+        $multilang = [
+            [
+                'name' => 'title',
+                'type' => 'input'
+            ],
+            [
+                'name' => 'description',
+                'type' => 'texthtml'
+            ]
+        ];
+        return Crud::create($inputs, $multilang);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -77,7 +100,8 @@ class ProductController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -111,19 +135,45 @@ class ProductController extends BaseController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        $inputs = [
+            [
+                'name' => 'category',
+                'type' => 'select',
+                'content' => [
+                    'all' => Category::all(),
+                    'name' => 'title',
+                ],
+                'value' => $product->category_id
+            ]
+        ];
+        $multilang = [
+            [
+                'name' => 'title',
+                'type' => 'input',
+                'value' => $product
+            ],
+            [
+                'name' => 'description',
+                'type' => 'texthtml',
+                'value' => $product
+            ]
+        ];
+        return Crud::create($inputs, $multilang);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -134,7 +184,8 @@ class ProductController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

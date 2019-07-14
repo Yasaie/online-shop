@@ -20,7 +20,10 @@ class CountryController extends BaseController
      */
     public function __construct()
     {
-        view()->share(['title' => 'کشورها']);
+        view()->share([
+            'title' => 'کشورها',
+            'route' => 'admin.address.country'
+        ]);
         parent::__construct();
     }
 
@@ -65,7 +68,13 @@ class CountryController extends BaseController
      */
     public function create()
     {
-        //
+        $inputs = [
+            [
+                'name' => 'name',
+                'type' => 'input',
+            ]
+        ];
+        return Crud::create($inputs);
     }
 
     /**
@@ -119,7 +128,15 @@ class CountryController extends BaseController
      */
     public function edit($id)
     {
-        //
+        $country = Country::find($id);
+        $inputs = [
+            [
+                'name' => 'name',
+                'type' => 'input',
+                'value' => $country->name
+            ]
+        ];
+        return Crud::create($inputs);
     }
 
     /**

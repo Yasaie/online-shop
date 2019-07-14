@@ -1,0 +1,28 @@
+.select2 {
+	&-selection {
+		height: 38px !important;
+		border: 1px solid #d2d6de !important;
+
+		&__arrow {
+			top: 6px !important;
+		}
+
+		&__rendered {
+			margin-top: -1px !important;
+		}
+
+		&__choice {
+			background-color: #007bff !important;
+			border-color: #006fe6 !important;
+			padding: 1px 10px !important;
+
+			&__remove {
+				margin-left: 5px !important;
+				color: rgba(255,255,255,.7) !important;
+			}
+		}
+	}
+}
+.form-group:last-child {
+	margin-bottom: 0;
+}

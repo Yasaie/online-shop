@@ -21,7 +21,10 @@ class StateController extends BaseController
      */
     public function __construct()
     {
-        view()->share(['title' => 'استان‌ها']);
+        view()->share([
+            'title' => 'استان‌ها',
+            'route' => 'admin.address.state'
+        ]);
         parent::__construct();
     }
 
@@ -69,7 +72,21 @@ class StateController extends BaseController
      */
     public function create()
     {
-        //
+        $inputs = [
+            [
+                'name' => 'name',
+                'type' => 'input',
+            ],
+            [
+                'name' => 'country',
+                'type' => 'select',
+                'content' => [
+                    'all' => Country::all(),
+                    'name' => 'name',
+                ],
+            ]
+        ];
+        return Crud::create($inputs);
     }
 
     /**
@@ -123,7 +140,24 @@ class StateController extends BaseController
      */
     public function edit($id)
     {
-        //
+        $item = State::find($id);
+        $inputs = [
+            [
+                'name' => 'name',
+                'type' => 'input',
+                'value' => $item->name
+            ],
+            [
+                'name' => 'country',
+                'type' => 'select',
+                'content' => [
+                    'all' => Country::all(),
+                    'name' => 'name',
+                ],
+                'value' => $item->country_id
+            ]
+        ];
+        return Crud::create($inputs);
     }
 
     /**

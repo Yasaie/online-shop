@@ -72,3 +72,14 @@ if (!function_exists('a2o')) {
         return collect(json_decode(json_encode($array, 1)));
     }
 }
+
+if (!function_exists('isRTL')) {
+    function isRTL($bool = true)
+    {
+        $rtl = ['fa', 'ar'];
+        return in_array(app()->getLocale(), $rtl)
+            ? ($bool ? true : 'rtl')
+            : ($bool ? false : 'ltr');
+
+    }
+}

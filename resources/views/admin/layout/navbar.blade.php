@@ -9,7 +9,7 @@
         </li>
     </ul>
 
-    <ul class="navbar-nav {{app()->getLocale() == 'fa' ? 'mr-auto' : 'ml-auto'}}">
+    <ul class="navbar-nav {{isRTL() ? 'mr-auto' : 'ml-auto'}}">
 
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">

@@ -11,6 +11,6 @@ return [
     'langs' => [
         'fa' => new Language('fa'),
         'en' => new Language('en'),
-        'tr' => new Language('tr')
+        'tr' => new Language('tr'),
     ],
 ];

@@ -4063,12 +4063,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yasaie/laravel-cruder.git",
-                "reference": "68833b01a3761a3e89ab7e1ac6cc9840478a5f9c"
+                "reference": "fb81d60670f09972f88d2c3146f1ba7f357a93cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Yasaie/laravel-cruder/zipball/68833b01a3761a3e89ab7e1ac6cc9840478a5f9c",
-                "reference": "68833b01a3761a3e89ab7e1ac6cc9840478a5f9c",
+                "url": "https://api.github.com/repos/Yasaie/laravel-cruder/zipball/fb81d60670f09972f88d2c3146f1ba7f357a93cf",
+                "reference": "fb81d60670f09972f88d2c3146f1ba7f357a93cf",
                 "shasum": ""
             },
             "require": {
@@ -4094,7 +4094,7 @@
                 "source": "https://github.com/Yasaie/laravel-cruder/tree/master",
                 "issues": "https://github.com/Yasaie/laravel-cruder/issues"
             },
-            "time": "2019-07-13T06:30:37+00:00"
+            "time": "2019-07-14T11:34:34+00:00"
         },
         {
             "name": "yasaie/laravel-dictionary",
@@ -4102,12 +4102,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Yasaie/laravel-dictionary.git",
-                "reference": "c03995ee432402db9300f91ef67934c9efbc42d2"
+                "reference": "59bf72958f907f4b6a4bd3aeb1659640eb6933b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Yasaie/laravel-dictionary/zipball/c03995ee432402db9300f91ef67934c9efbc42d2",
-                "reference": "c03995ee432402db9300f91ef67934c9efbc42d2",
+                "url": "https://api.github.com/repos/Yasaie/laravel-dictionary/zipball/59bf72958f907f4b6a4bd3aeb1659640eb6933b4",
+                "reference": "59bf72958f907f4b6a4bd3aeb1659640eb6933b4",
                 "shasum": ""
             },
             "type": "library",
@@ -4142,7 +4142,7 @@
                 "source": "https://github.com/Yasaie/laravel-dictionary/tree/master",
                 "issues": "https://github.com/Yasaie/laravel-dictionary/issues"
             },
-            "time": "2019-07-13T11:46:53+00:00"
+            "time": "2019-07-14T09:11:17+00:00"
         },
         {
             "name": "yasaie/laravel-helper",

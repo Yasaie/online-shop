@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\City;
+use App\State;
 use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
 
@@ -14,7 +15,10 @@ class CityController extends BaseController
      */
     public function __construct()
     {
-        view()->share(['title' => 'شهرها']);
+        view()->share([
+            'title' => 'شهرها',
+            'route' => 'admin.address.city'
+        ]);
         parent::__construct();
     }
 
@@ -62,7 +66,21 @@ class CityController extends BaseController
      */
     public function create()
     {
-        //
+        $inputs = [
+            [
+                'name' => 'name',
+                'type' => 'input',
+            ],
+            [
+                'name' => 'state',
+                'type' => 'select',
+                'content' => [
+                    'all' => State::all(),
+                    'name' => 'name',
+                ],
+            ]
+        ];
+        return Crud::create($inputs);
     }
 
     /**
@@ -116,7 +134,24 @@ class CityController extends BaseController
      */
     public function edit($id)
     {
-        //
+        $item = City::find($id);
+        $inputs = [
+            [
+                'name' => 'name',
+                'type' => 'input',
+                'value' => $item->name
+            ],
+            [
+                'name' => 'state',
+                'type' => 'select',
+                'content' => [
+                    'all' => State::all(),
+                    'name' => 'name',
+                ],
+                'value' => $item->state_id
+            ]
+        ];
+        return Crud::create($inputs);
     }
 
     /**
