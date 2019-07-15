@@ -31,9 +31,11 @@
                                          id="{{$lang->getId()}}-tab">
                                         @foreach($multilang as $input)
                                             <div class="form-group">
-                                                <label for="{{$input['name']}}[{{$lang->getId()}}]">@lang('model.'. $input['name'])</label>
+                                                <label
+                                                    for="{{$input['name']}}[{{$lang->getId()}}]">@lang('model.'. $input['name'])</label>
                                                 @if(isset($input['value']))
-                                                @php($input['value'] = $input['value']->getTranslate($input['name'], $lang->getId()))
+                                                    @php($input['get'] = isset($input['get']) ? $input['get'] : $input['name'])
+                                                    @php($input['value'] = $input['value']->getTranslate($input['get'], $lang->getId()))
                                                 @endif
                                                 @php($input['name'] = $input['name'] . '[' . $lang->getId() . ']')
                                                 @include('admin.crud.inc.' . $input['type'], $input)
@@ -95,7 +97,7 @@
             language: '{{app()->getLocale()}}',
         });
         tinymce.init({
-            selector:'textarea.text-html',
+            selector: 'textarea.text-html',
             height: 300,
             theme: "modern",
             plugins: [
@@ -105,7 +107,7 @@
             ],
             toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | print | forecolor backcolor",
             content_css: '{{asset('assets/admin/css/tinymce-reset.css')}}',
-            directionality : '{{isRTL(0)}}',
+            directionality: '{{isRTL(0)}}',
             language: '{{app()->getLocale()}}',
         });
     </script>

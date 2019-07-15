@@ -237,6 +237,7 @@ return [
         'Image' => Intervention\Image\Facades\Image::class, # http://image.intervention.io
         'Verta' => Hekmatinasser\Verta\Facades\Verta::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class, # https://github.com/barryvdh/laravel-debugbar
+        'Y' => \Yasaie\Helper\Y::class,
     ],
 
 ];

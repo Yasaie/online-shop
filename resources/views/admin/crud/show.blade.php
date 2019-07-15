@@ -23,7 +23,7 @@
                             @php($head['get'] = isset($head['get']) ? $head['get'] : $head['name'])
                             <tr>
                                 <th class="col-xs-3 col-lg-2">@lang('model.' . $head['name'])</th>
-                                <td class="col-xs-9 col-lg-10">{{ \Yasaie\Helper\Y::dotObject($item, $head['get']) }}</td>
+                                <td class="col-xs-9 col-lg-10">{!! Y::dotObject($item, $head['get'], 1) !!}</td>
                             </tr>
                         @endforeach
                         </tbody>

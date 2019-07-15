@@ -13,29 +13,34 @@ class SettingsTableSeeder extends Seeder
     {
         $array = [
             [
-                'section'   => 'site',
-                'key'       => 'title',
-                'value'     => null
+                'section' => 'site',
+                'key' => 'title',
+                'type' => 'text',
+                'value' => null
             ],
             [
-                'section'   => 'footer',
-                'key'       => 'block1.title',
-                'value'     => null
+                'section' => 'footer',
+                'key' => 'block1.title',
+                'type' => 'text',
+                'value' => null
             ],
             [
-                'section'   => 'footer',
-                'key'       => 'block1.body',
-                'value'     => null
+                'section' => 'footer',
+                'key' => 'block1.body',
+                'type' => 'texthtml',
+                'value' => null
             ],
             [
-                'section'   => 'footer',
-                'key'       => 'block2.title',
-                'value'     => null
+                'section' => 'footer',
+                'key' => 'block2.title',
+                'type' => 'text',
+                'value' => null
             ],
             [
-                'section'   => 'footer',
-                'key'       => 'block2.body',
-                'value'     => null
+                'section' => 'footer',
+                'key' => 'block2.body',
+                'type' => 'texthtml',
+                'value' => null
             ],
         ];
 

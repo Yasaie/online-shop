@@ -69,7 +69,7 @@ class CityController extends BaseController
         $inputs = [
             [
                 'name' => 'name',
-                'type' => 'input',
+                'type' => 'text',
             ],
             [
                 'name' => 'state',
@@ -138,7 +138,7 @@ class CityController extends BaseController
         $inputs = [
             [
                 'name' => 'name',
-                'type' => 'input',
+                'type' => 'text',
                 'value' => $item->name
             ],
             [

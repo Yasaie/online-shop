@@ -16,4 +16,9 @@ class DetailKey extends Model
         return $this->belongsTo(DetailCategory::class);
     }
 
+    public function detailValues()
+    {
+        return $this->hasMany(DetailValue::class);
+    }
+
 }

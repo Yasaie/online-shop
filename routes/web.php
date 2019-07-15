@@ -22,21 +22,34 @@ Route::namespace('Admin')
     ->prefix('admin')
     ->name('admin.')
     ->group(function ()
-{
-
-    Route::get('/', 'HomeController@index')->name('home');
-    # Product
-    Route::resource('product', 'ProductController');
-    # Addresses
-    Route::name('address.')
-        ->group(function ()
     {
-        Route::resource('country', 'CountryController');
-        Route::resource('state', 'StateController');
-        Route::resource('city', 'CityController');
+        Route::get('/', 'HomeController@index')->name('home');
+        # Product
+        Route::resource('product', 'ProductController');
+        # Addresses
+        Route::name('address.')
+            ->group(function ()
+            {
+                Route::resource('country', 'CountryController');
+                Route::resource('state', 'StateController');
+                Route::resource('city', 'CityController');
+            });
+        # Settings
+        Route::name('setting.')
+            ->prefix('setting')
+            ->group(function ()
+            {
+                Route::get('global', 'SettingController@global')->name('global');
+            });
+        # Product Details
+        Route::name('detail.')
+            ->prefix('detail')
+            ->group(function ()
+            {
+                Route::resource('category', 'DetailCategoryController');
+                Route::resource('value', 'DetailsController');
+            });
     });
-
-});
 
 Route::get('lang/{id}', 'PublicController@lang');
 Route::get('currency/{id}', 'PublicController@currency');

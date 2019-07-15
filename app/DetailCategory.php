@@ -11,4 +11,9 @@ class DetailCategory extends Model
 
     protected $dictionary = ['title'];
 
+    public function detailKey()
+    {
+        return $this->hasMany(DetailKey::class);
+    }
+
 }

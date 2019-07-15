@@ -122,7 +122,7 @@ class StateController extends BaseController
             ],
             [
                 'name' => 'cities',
-                'get' => 'city.count()',
+                'get' => 'city.name',
             ],
         ];
 

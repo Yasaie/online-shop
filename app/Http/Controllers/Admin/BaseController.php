@@ -23,8 +23,6 @@ class BaseController extends Controller
                 'base'  => 'admin.home',
                 'route' =>  '',
             ],
-
-            #=========================================
             [
                 'name'  => 'محصولات',
                 'icon'  => 'gift',
@@ -42,25 +40,51 @@ class BaseController extends Controller
                 ]
             ],
             [
+                'name' => 'خصوصیات',
+                'icon' => 'asterisk',
+                'base' => 'admin.detail.',
+                'child' => [
+                    [
+                        'name' => 'دسته‌بندی',
+                        'route' => 'category.index',
+                    ],
+                    [
+                        'name' => 'مشخصه‌‌ها',
+                        'route' => 'value.index',
+                    ]
+                ]
+            ],
+            [
                 'name' => 'آدرس‌ها',
                 'icon' => 'map',
                 'base' => 'admin.address.',
                 'child' => [
                     [
                         'name' => 'کشور',
-                        'route' => 'country.index'
+                        'route' => 'country.index',
                     ],
                     [
                         'name' => 'استان',
-                        'route' => 'state.index'
+                        'route' => 'state.index',
                     ],
                     [
                         'name' => 'شهر',
-                        'route' => 'city.index'
+                        'route' => 'city.index',
                     ],
 
                 ]
             ],
+            [
+                'name' => 'تنظیمات',
+                'icon' => 'gear',
+                'base' => 'admin.setting.',
+                'child' => [
+                    [
+                        'name' => 'عمومی',
+                        'route' => 'global'
+                    ]
+                ]
+            ]
 
 //            #=========================================
 //            [

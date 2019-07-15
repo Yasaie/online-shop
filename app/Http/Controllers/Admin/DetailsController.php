@@ -2,27 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Country;
-use App\Product;
-use function compact;
-use function flattenItems;
+use App\DetailCategory;
+use App\DetailKey;
 use Illuminate\Http\Request;
-use function paginate;
-use const SORT_NATURAL;
-use function view;
 use Yasaie\Cruder\Crud;
+use Yasaie\Helper\Y;
 
-class CountryController extends BaseController
+class DetailsController extends BaseController
 {
-
-    /**
-     * ProductController constructor.
-     */
     public function __construct()
     {
         view()->share([
-            'title' => 'کشورها',
-            'route' => 'admin.address.country'
+            'title' => 'مشخصات',
+            'route' => 'admin.detail.value'
         ]);
         parent::__construct();
     }
@@ -40,25 +32,20 @@ class CountryController extends BaseController
                 'name' => 'id',
             ],
             [
-                'name' => 'name',
+                'name' => 'title',
                 'visible' => 1
             ],
             [
-                'name' => 'states',
-                'get' => 'state.count()',
-                'visible' => 1,
-            ],
-            [
-                'name' => 'cities',
-                'get' => 'city.count()',
-                'visible' => 1,
+                'name' => 'category',
+                'get' => 'detailCategory.title',
+                'visible' => 1
             ],
         ];
         # Load items for send to view
-        $items = Country::get()
-            ->load(['state', 'city']);
+        $items = DetailKey::get()
+            ->load(['detailCategory']);
 
-        return Crud::index($items,$heads, $request, 'id', $this->perPage);
+        return Crud::index($items, $heads, $request, 'updated_at', $this->perPage);
     }
 
     /**
@@ -68,13 +55,7 @@ class CountryController extends BaseController
      */
     public function create()
     {
-        $inputs = [
-            [
-                'name' => 'name',
-                'type' => 'text',
-            ]
-        ];
-        return Crud::create($inputs);
+        //
     }
 
     /**
@@ -102,20 +83,20 @@ class CountryController extends BaseController
                 'name' => 'id',
             ],
             [
-                'name' => 'name',
+                'name' => 'title',
             ],
             [
-                'name' => 'states',
-                'get' => 'state.name',
+                'name' => 'category',
+                'get' => 'detailCategory.title',
             ],
             [
-                'name' => 'cities',
-                'get' => 'city.count()',
-            ],
+                'name' => 'values',
+                'get' => 'detailValues.title'
+            ]
         ];
-
-        $item = Country::find($id)
-            ->load(['state', 'city']);
+        # Load items for send to view
+        $item = DetailKey::find($id)
+            ->load(['detailCategory', 'detailValues']);
 
         return Crud::show($item, $heads);
     }
@@ -128,15 +109,28 @@ class CountryController extends BaseController
      */
     public function edit($id)
     {
-        $country = Country::find($id);
+        $item = DetailKey::find($id)
+            ->load(['detailCategory']);
+
         $inputs = [
             [
-                'name' => 'name',
-                'type' => 'text',
-                'value' => $country->name
+                'name' => 'category',
+                'type' => 'select',
+                'content' => [
+                    'all' => DetailCategory::all(),
+                    'name' => 'title',
+                ],
+                'value' => $item->detailCategory->id
             ]
         ];
-        return Crud::create($inputs);
+        $multilang = [
+            [
+                'name' => 'title',
+                'type' => 'text',
+                'value' => $item
+            ],
+        ];
+        return Crud::create($inputs, $multilang);
     }
 
     /**

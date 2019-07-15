@@ -75,7 +75,7 @@ class ProductController extends BaseController
         $multilang = [
             [
                 'name' => 'title',
-                'type' => 'input'
+                'type' => 'text'
             ],
             [
                 'name' => 'description',
@@ -119,6 +119,9 @@ class ProductController extends BaseController
                 'get' => 'category.title',
             ],
             [
+                'name' => 'description',
+            ],
+            [
                 'name' => 'created_at',
             ],
             [
@@ -156,7 +159,7 @@ class ProductController extends BaseController
         $multilang = [
             [
                 'name' => 'title',
-                'type' => 'input',
+                'type' => 'text',
                 'value' => $product
             ],
             [

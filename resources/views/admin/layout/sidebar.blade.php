@@ -43,9 +43,12 @@
                     <ul class="nav nav-treeview">
                         @foreach($menu['child'] as $child)
                         <li class="nav-item">
-                            <a href="{{url()->route($menu['base'] . $child['route'])}}" class="nav-link {{Route::is($menu['base'] . $child['route']) ? 'active' : ''}}">
+                            <a href="{{url()->route($menu['base'] . $child['route'])}}" class="nav-link d-flex {{Route::is($menu['base'] . $child['route']) ? 'active' : ''}}">
                                 <i class="fa fa-circle-o nav-icon"></i>
-                                <p>{{$child['name']}}</p>
+                                <p class="flex-grow-1">{{$child['name']}}</p>
+                                @if(isset($child['count']))
+                                <span class="badge badge-info" style="margin: 3px 15px;">{{$child['count']}}</span>
+                                @endif
                             </a>
                         </li>
                         @endforeach
