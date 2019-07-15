@@ -69,7 +69,7 @@
                 </div>
             </div>
 
-            @include('admin.crud.inc.pagination')
+            @include('Paginate::pagination')
 
         </div>
     </div>

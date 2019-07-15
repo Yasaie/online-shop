@@ -82,6 +82,10 @@
     {
       "type": "github",
       "url": "git@github.com:Yasaie/laravel-cruder.git"
+    },
+    {
+      "type": "github",
+      "url": "git@github.com:Yasaie/laravel-paginate.git"
     }
   ]
 }
