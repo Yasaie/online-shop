@@ -10,11 +10,14 @@ class DetailCategoryController extends BaseController
 {
     public $route = 'admin.detail.category';
     public $title = 'دسته‌بندی مشخصات';
+    public $model = DetailCategory::class;
+    public $load = ['detailKey'];
 
     /**
-     * Display a listing of the resource.
+     * @package index
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -33,11 +36,8 @@ class DetailCategoryController extends BaseController
                 'visible' => 1
             ],
         ];
-        # Load items for send to view
-        $items = DetailCategory::get()
-            ->load(['detailKey']);
 
-        return Crud::index($items, $heads, 'updated_at', $this->perPage);
+        return Crud::index($this->model, $heads, 'updated_at', $this->perPage, $this->load);
     }
 
     /**
@@ -68,10 +68,12 @@ class DetailCategoryController extends BaseController
     }
 
     /**
-     * Display the specified resource.
+     * @package show
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function show($id)
     {
@@ -89,11 +91,7 @@ class DetailCategoryController extends BaseController
             ],
         ];
 
-        # Load items for send to view
-        $item = DetailCategory::find($id)
-            ->load(['detailKey']);
-
-        return Crud::show($item, $heads);
+        return Crud::show($id, $heads, $this->route, $this->model);
     }
 
     /**
@@ -135,6 +133,6 @@ class DetailCategoryController extends BaseController
      */
     public function destroy($id)
     {
-        //
+        return Crud::destroy($id, $this->model);
     }
 }

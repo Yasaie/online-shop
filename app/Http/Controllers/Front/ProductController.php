@@ -17,8 +17,7 @@ class ProductController extends BaseController
                 'sellers.currency',
                 'sellers.sellerService',
                 'sellers.user.products.rates',
-                'details.detailKey.detailCategory',
-                'details.detailValue',
+                'details.detailValue.detailKey.detailCategory',
             ]);
 
         $product_cats = collect();
@@ -34,17 +33,18 @@ class ProductController extends BaseController
         $product_details = [];
 
         foreach ($product->details as $detail) {
-            $detailKey = $detail->detailKey;
             $detailValue = $detail->detailValue;
+            $detailKey = $detail->detailKey;
             $detailCategory = $detailKey->detailCategory;
+            $category_id = $detailCategory ? $detailCategory->id : 0;
 
-            if (!isset($product_details[$detailCategory->id])) {
-                $product_details[$detailCategory->id] = collect();
-                $product_details[$detailCategory->id]->title = $detailCategory->title;
-                $product_details[$detailCategory->id]->children = [];
+            if (!isset($product_details[$category_id])) {
+                $product_details[$category_id] = collect();
+                $product_details[$category_id]->title = $category_id ? $detailCategory->title : '';
+                $product_details[$category_id]->children = [];
             }
 
-            $product_details[$detailCategory->id]->children[] = (object)[
+            $product_details[$category_id]->children[] = (object)[
                 'key'   => $detailKey->title,
                 'value' => $detailValue ? $detailValue->title : null,
             ];

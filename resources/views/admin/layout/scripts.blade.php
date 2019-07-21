@@ -1,5 +1,7 @@
 <!-- Plugin Scripts -->
 <script src="{{asset('assets/admin/js/jquery-ui.min.js')}}"></script>
+<script src="{{asset('assets/plugins/iziToast/js/iziToast.min.js')}}"></script>
+<script src="{{asset('assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('assets/admin/js/raphael-min.js')}}"></script>
 {{--<script src="{{asset('assets/plugins/morris/morris.min.js')}}"></script>--}}
@@ -18,6 +20,16 @@
 <!-- Inline Scripts -->
 <script>
     $.widget.bridge('uibutton', $.ui.button)
+</script>
+<script>
+    const iziToastConst = {
+        position: '{{ isRTL() ? 'bottomLeft' : 'bottomRight' }}',
+        timeout: 10000,
+        transitionIn: 'flipInX',
+        transitionOut: 'flipOutX',
+        maxWidth: '40vw',
+        rtl: {{isRTL()}}
+    };
 </script>
 <!-- /Inline Scripts -->
 

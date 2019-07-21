@@ -8,7 +8,7 @@ class ProductDetail extends Model
 {
     public function detailKey()
     {
-        return $this->belongsTo(DetailKey::class);
+        return $this->detailValue ? $this->detailValue->detailKey() : null;
     }
 
     public function detailValue()

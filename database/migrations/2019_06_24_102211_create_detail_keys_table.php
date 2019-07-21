@@ -18,7 +18,10 @@ class CreateDetailKeysTable extends Migration
             $table->unsignedInteger('detail_category_id')->nullable();
             $table->timestamps();
 
-            $table->foreign('detail_category_id')->references('id')->on('detail_categories');
+            $table->foreign('detail_category_id')
+                ->references('id')
+                ->on('detail_categories')
+                ->onDelete('set null');
         });
     }
 

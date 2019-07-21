@@ -15,10 +15,12 @@ class CreateDetailValuesTable extends Migration
     {
         Schema::create('detail_values', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->unsignedInteger('detail_key_id')->nullable();
+            $table->unsignedInteger('detail_key_id');
             $table->timestamps();
 
-            $table->foreign('detail_key_id')->references('id')->on('detail_keys');
+            $table->foreign('detail_key_id')
+                ->references('id')
+                ->on('detail_keys');
         });
     }
 

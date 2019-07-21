@@ -1,3 +1,5 @@
+@import "variable";
+@import "font";
 @import "../../plugins/font-awesome/css/font-awesome.min";
 @import "../../plugins/iCheck/flat/blue";
 @import "../../plugins/morris/morris";
@@ -6,6 +8,6 @@
 @import "../../plugins/daterangepicker/daterangepicker-bs3";
 @import "../../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min";
 @import "../../plugins/datatables/jquery.dataTables";
-@import "font";
+@import "../../plugins/iziToast/css/iziToast";
 @import "adminlte";
 @import "custom";

@@ -11,6 +11,8 @@ class DetailValue extends Model
 
     protected $locales = ['title'];
 
+    protected $guarded = [];
+
     public function detailKey()
     {
         return $this->belongsTo(DetailKey::class);

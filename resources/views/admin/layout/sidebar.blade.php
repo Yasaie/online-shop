@@ -27,7 +27,7 @@
 
                 @foreach($menu_items as $menu)
                 <li class="nav-item {{isset($menu['child']) ? 'has-treeview' : ''}} {{Route::is($menu['base'] . '*') ? 'menu-open' : ''}}">
-                    <a href="{{isset($menu['route']) ? url()->route($menu['base'] . $menu['route']) : '#' }}" class="nav-link d-flex">
+                    <a href="{{isset($menu['route']) ? route($menu['base'] . $menu['route']) : '#' }}" class="nav-link d-flex">
                         <i class="nav-icon fa fa-{{$menu['icon']}}"></i>
                         <p class="flex-grow-1">
                         @if(! isset($menu['route']))

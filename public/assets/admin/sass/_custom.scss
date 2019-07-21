@@ -18,14 +18,16 @@
 
 			&__remove {
 				margin-left: 5px !important;
-				color: rgba(255,255,255,.7) !important;
+				color: rgba(255, 255, 255, .7) !important;
 			}
 		}
 	}
 }
+
 .form-group:last-child {
 	margin-bottom: 0;
 }
+
 .dropzone {
 	border: 1px solid rgba(136, 136, 136, 0.3);
 	border-radius: 5px;
@@ -36,5 +38,17 @@
 		border-radius: 5px;
 		width: 68px;
 		margin: 11px auto;
+	}
+}
+
+.iziToast {
+	@include font-family;
+
+	&-wrapper-bottomLeft {
+		bottom: 20px;
+	}
+
+	&-wrapper-bottomRight {
+		bottom: 20px;
 	}
 }

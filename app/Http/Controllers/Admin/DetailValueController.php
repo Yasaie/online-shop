@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\DetailKey;
 use App\DetailValue;
+use App\Http\Requests\DetailValueRequest;
 use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
 
@@ -11,11 +12,14 @@ class DetailValueController extends BaseController
 {
     public $route = 'admin.detail.value';
     public $title = 'مقادیر مشخصات';
+    public $model = DetailValue::class;
+    public $load = ['detailKey.detailCategory'];
 
     /**
-     * Display a listing of the resource.
+     * @package index
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -39,11 +43,8 @@ class DetailValueController extends BaseController
                 'visible' => 1
             ]
         ];
-        # Load items for send to view
-        $items = DetailValue::get()
-            ->load(['detailKey.detailCategory']);
 
-        return Crud::index($items, $heads, 'updated_at', $this->perPage);
+        return Crud::index($this->model, $heads, 'updated_at', $this->perPage, $this->load);
     }
 
     /**
@@ -73,21 +74,41 @@ class DetailValueController extends BaseController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @package store
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param DetailValueRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(DetailValueRequest $request)
     {
-        //
+        $result = DetailValue::create([
+            'detail_key_id' => $request->detail
+        ]);
+
+        $result->dictionary()->createLocale('title', $request->title);
+//        foreach ($request->title as $lang => $title) {
+//            if ($title) {
+//                $result->dictionary()->create([
+//                    'key' => 'title',
+//                    'value' => $title,
+//                    'language_id' => $lang
+//                ]);
+//            }
+//        }
+
+
+        return redirect()->route($this->route . '.index');
     }
 
     /**
-     * Display the specified resource.
+     * @package show
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function show($id)
     {
@@ -111,11 +132,8 @@ class DetailValueController extends BaseController
                 'visible' => 1
             ]
         ];
-        # Load items for send to view
-        $item = DetailValue::find($id)
-            ->load(['detailKey.detailCategory']);
 
-        return Crud::show($item, $heads);
+        return Crud::show($id, $heads, $this->route, $this->model);
     }
 
     /**
@@ -170,6 +188,6 @@ class DetailValueController extends BaseController
      */
     public function destroy($id)
     {
-        //
+        return Crud::destroy($id, $this->model);
     }
 }

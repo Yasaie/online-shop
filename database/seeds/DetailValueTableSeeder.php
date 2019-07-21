@@ -15,7 +15,7 @@ class DetailValueTableSeeder extends Seeder
             ['id' => 1, 'detail_key_id' => 1],
             ['id' => 2, 'detail_key_id' => 1],
             ['id' => 3, 'detail_key_id' => 2],
-            ['id' => 4, 'detail_key_id' => null],
+            ['id' => 4, 'detail_key_id' => 3],
         ];
 
         DB::table('detail_values')->insert($array);

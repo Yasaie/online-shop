@@ -78,8 +78,8 @@ if (!function_exists('isRTL')) {
     {
         $rtl = ['fa', 'ar'];
         return in_array(app()->getLocale(), $rtl)
-            ? ($bool ? true : 'rtl')
-            : ($bool ? false : 'ltr');
+            ? ($bool ? 1 : 'rtl')
+            : ($bool ? 0 : 'ltr');
 
     }
 }

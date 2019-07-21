@@ -3,7 +3,9 @@
 @section('title', $title)
 
 @section('body')
-    <form action="">
+
+    <form method="post" action="{{route($route . '.index')}}">
+        @csrf
         @if(isset($multilang))
             <div class="row">
                 <div class="col-12">
@@ -37,6 +39,9 @@
                                                     @php($input['get'] = isset($input['get']) ? $input['get'] : $input['name'])
                                                     @php($input['value'] = $input['value']->getTranslate($input['get'], $lang->getId()))
                                                 @endif
+                                                @if(isset(old($input['name'])[$lang->getId()]))
+                                                    @php($input['value'] = old($input['name'])[$lang->getId()])
+                                                @endif
                                                 @php($input['name'] = $input['name'] . '[' . $lang->getId() . ']')
                                                 @include('admin.crud.inc.' . $input['type'], $input)
                                             </div>
@@ -58,6 +63,9 @@
 
                     <div class="card-body">
                         @foreach($inputs as $input)
+                            @if(old($input['name']) !== null)
+                                @php($input['value'] = old($input['name']))
+                            @endif
                             <div class="form-group">
                                 <label for="{{$input['name']}}">@lang('model.'. $input['name'])</label>
                                 @include('admin.crud.inc.' . $input['type'], $input)
@@ -120,7 +128,13 @@
                 directionality: '{{isRTL(0)}}',
                 language: '{{app()->getLocale()}}',
             });
-
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+            iziToast.error(Object.assign({}, iziToastConst, {
+                message: '{{ $error }}'
+            }));
+                @endforeach
+            @endif
         });
     </script>
 @endsection

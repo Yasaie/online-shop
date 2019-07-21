@@ -16,14 +16,18 @@ class CreateProductDetailsTable extends Migration
         Schema::create('product_details', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->unsignedInteger('product_id');
-            $table->unsignedInteger('detail_key_id');
-            $table->unsignedInteger('detail_value_id')->nullable();
+            $table->unsignedInteger('detail_value_id');
             $table->boolean('highlighted')->default(0);
             $table->timestamps();
 
-            $table->foreign('product_id')->references('id')->on('products');
-            $table->foreign('detail_key_id')->references('id')->on('detail_keys');
-            $table->foreign('detail_value_id')->references('id')->on('detail_values');
+            $table->foreign('product_id')
+                ->references('id')
+                ->on('products')
+                ->onDelete('cascade');
+
+            $table->foreign('detail_value_id')
+                ->references('id')
+                ->on('detail_values');
         });
     }
 

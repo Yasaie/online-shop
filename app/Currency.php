@@ -45,13 +45,4 @@ class Currency extends Model
         return (float)$value;
     }
 
-    public function delete()
-    {
-        $parent = parent::delete();
-
-        if ($parent) {
-            $this->dictionary
-        }
-    }
-
 }

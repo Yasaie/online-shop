@@ -9,11 +9,13 @@ class CommentController extends BaseController
 {
     public $route = 'admin.comment';
     public $title = 'نظرات';
+    public $model = Comment::class;
 
     /**
-     * Display a listing of the resource.
+     * @package index
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -36,17 +38,17 @@ class CommentController extends BaseController
                 'visible' => 1,
             ]
         ];
-        # Load items for send to view
-        $items = Comment::get();
 
-        return Crud::index($items, $heads, 'updated_at', $this->perPage);
+        return Crud::index($this->model, $heads, 'updated_at', $this->perPage);
     }
 
     /**
-     * Display the specified resource.
+     * @package show
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function show($id)
     {
@@ -69,10 +71,8 @@ class CommentController extends BaseController
                 'visible' => 1,
             ]
         ];
-        # Load item for send to view
-        $item = Comment::find($id);
 
-        return Crud::show($item, $heads);
+        return Crud::show($id, $heads, $this->route, $this->model);
     }
 
     /**
@@ -83,6 +83,6 @@ class CommentController extends BaseController
      */
     public function destroy($id)
     {
-        //
+        return Crud::destroy($id, $this->model);
     }
 }

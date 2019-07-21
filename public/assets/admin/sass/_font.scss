@@ -119,3 +119,7 @@
 	url('../fonts/Vazir-FD/Vazir-Black-FD.ttf') format('truetype');
 	font-weight: 900;
 }
+
+body {
+	@include font-family;
+}
