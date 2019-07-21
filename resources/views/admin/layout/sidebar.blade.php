@@ -1,6 +1,6 @@
 <aside class="main-sidebar elevation-4 sidebar-dark-info">
 
-    <a href="index3.html" class="brand-link bg-info">
+    <a href="/admin" class="brand-link bg-info">
         <img src="{{asset('assets/admin/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
              class="brand-image img-circle elevation-3"
              style="opacity: .8">

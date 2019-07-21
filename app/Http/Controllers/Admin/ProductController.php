@@ -9,25 +9,18 @@ use Yasaie\Cruder\Crud;
 
 class ProductController extends BaseController
 {
+    public $title = 'محصولات';
+    public $route = 'admin.product';
+    public $model = Product::class;
+    public $load = ['category'];
 
     /**
-     * ProductController constructor.
-     */
-    public function __construct()
-    {
-        view()->share([
-            'title' => 'محصولات',
-            'route' => 'admin.product'
-        ]);
-        parent::__construct();
-    }
-
-    /**
-     * Display a listing of the resource.
+     * @package index
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index()
     {
         # table headers
         $heads = [
@@ -48,11 +41,8 @@ class ProductController extends BaseController
                 'visible' => 1
             ]
         ];
-        # Load items for send to view
-        $items = Product::get()
-            ->load(['category']);
 
-        return Crud::index($items, $heads, $request, 'updated_at', $this->perPage);
+        return Crud::index($this->model, $heads, 'updated_at', $this->perPage, $this->load);
     }
 
     /**
@@ -70,6 +60,11 @@ class ProductController extends BaseController
                     'all' => Category::all(),
                     'name' => 'title',
                 ]
+            ],
+            [
+                'name' => 'files',
+                'get' => 'images',
+                'type' => 'file',
             ]
         ];
         $multilang = [
@@ -98,11 +93,12 @@ class ProductController extends BaseController
     }
 
     /**
-     * Display the specified resource.
+     * @package show
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  int $id
+     * @param $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function show($id)
     {
@@ -129,10 +125,7 @@ class ProductController extends BaseController
             ]
         ];
 
-        $item = Product::find($id)
-            ->load('category');
-
-        return Crud::show($item, $heads);
+        return Crud::show($id, $heads, $this->model);
     }
 
     /**
@@ -154,6 +147,12 @@ class ProductController extends BaseController
                     'name' => 'title',
                 ],
                 'value' => $product->category_id
+            ],
+            [
+                'name' => 'files',
+                'get' => 'images',
+                'type' => 'file',
+                'value' => $product
             ]
         ];
         $multilang = [
@@ -193,6 +192,6 @@ class ProductController extends BaseController
      */
     public function destroy($id)
     {
-        //
+        return $id;
     }
 }

@@ -6,25 +6,18 @@ use App\DetailCategory;
 use App\DetailKey;
 use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
-use Yasaie\Helper\Y;
 
-class DetailsController extends BaseController
+class DetailKeyController extends BaseController
 {
-    public function __construct()
-    {
-        view()->share([
-            'title' => 'مشخصات',
-            'route' => 'admin.detail.value'
-        ]);
-        parent::__construct();
-    }
+    public $route = 'admin.detail.key';
+    public $title = 'مشخصه‌ها';
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         # table headers
         $heads = [
@@ -40,12 +33,17 @@ class DetailsController extends BaseController
                 'get' => 'detailCategory.title',
                 'visible' => 1
             ],
+            [
+                'name' => 'values',
+                'get' => 'detailValues.count()',
+                'visible' => 1
+            ]
         ];
         # Load items for send to view
         $items = DetailKey::get()
             ->load(['detailCategory']);
 
-        return Crud::index($items, $heads, $request, 'updated_at', $this->perPage);
+        return Crud::index($items, $heads, 'updated_at', $this->perPage);
     }
 
     /**
@@ -55,7 +53,23 @@ class DetailsController extends BaseController
      */
     public function create()
     {
-        //
+        $inputs = [
+            [
+                'name' => 'category',
+                'type' => 'select',
+                'content' => [
+                    'all' => DetailCategory::all(),
+                    'name' => 'title',
+                ],
+            ]
+        ];
+        $multilang = [
+            [
+                'name' => 'title',
+                'type' => 'text',
+            ],
+        ];
+        return Crud::create($inputs, $multilang);
     }
 
     /**
@@ -91,7 +105,12 @@ class DetailsController extends BaseController
             ],
             [
                 'name' => 'values',
-                'get' => 'detailValues.title'
+                'get' => 'detailValues.count()',
+                'link' => [
+                    'search' => 'title',
+                    'column' => 'detail',
+                    'route' => 'admin.detail.value.index'
+                ]
             ]
         ];
         # Load items for send to view

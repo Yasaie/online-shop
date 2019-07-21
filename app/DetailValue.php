@@ -9,6 +9,11 @@ class DetailValue extends Model
 {
     use HasDictionary;
 
-    protected $dictionary = ['title'];
+    protected $locales = ['title'];
+
+    public function detailKey()
+    {
+        return $this->belongsTo(DetailKey::class);
+    }
 
 }

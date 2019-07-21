@@ -11,7 +11,7 @@ class Setting extends Model
 
     protected $appends = ['data'];
 
-    protected $dictionary = ['value'];
+    protected $locales = ['value'];
 
     public function getDataAttribute()
     {

@@ -26,6 +26,17 @@ Route::namespace('Admin')
         Route::get('/', 'HomeController@index')->name('home');
         # Product
         Route::resource('product', 'ProductController');
+        # Product Details
+        Route::name('detail.')
+            ->prefix('detail')
+            ->group(function ()
+            {
+                Route::resource('category', 'DetailCategoryController');
+                Route::resource('key', 'DetailKeyController');
+                Route::resource('value', 'DetailValueController');
+            });
+        # Currency
+        Route::resource('currency', 'CurrencyController');
         # Addresses
         Route::name('address.')
             ->group(function ()
@@ -34,20 +45,15 @@ Route::namespace('Admin')
                 Route::resource('state', 'StateController');
                 Route::resource('city', 'CityController');
             });
+        # Comments
+        Route::resource('comment', 'CommentController')
+            ->only(['index', 'show', 'destroy']);
         # Settings
         Route::name('setting.')
             ->prefix('setting')
             ->group(function ()
             {
                 Route::get('global', 'SettingController@global')->name('global');
-            });
-        # Product Details
-        Route::name('detail.')
-            ->prefix('detail')
-            ->group(function ()
-            {
-                Route::resource('category', 'DetailCategoryController');
-                Route::resource('value', 'DetailsController');
             });
     });
 
@@ -60,3 +66,4 @@ Route::get('currency/{id}', 'PublicController@currency');
 //Route::get('/file/{model}/{model_id}/{file_id}/{file_area}/{file_name}', 'PublicController@file');
 
 //Route::get('/storage', '')
+

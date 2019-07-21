@@ -6,6 +6,10 @@
     <title>پنل مدیریت | @yield('title')</title>
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{csrf_token()}}">
+    @if(isset($route) and $route)
+    <meta name="route" content="{{route($route . '.index')}}">
+    @endif
 
 @include('admin.layout.styles')
 

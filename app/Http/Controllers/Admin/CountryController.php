@@ -3,36 +3,23 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Country;
-use App\Product;
-use function compact;
-use function flattenItems;
 use Illuminate\Http\Request;
-use function paginate;
-use const SORT_NATURAL;
-use function view;
 use Yasaie\Cruder\Crud;
 
 class CountryController extends BaseController
 {
+    public $route = 'admin.address.country';
+    public $title = 'کشورها';
+    public $model = Country::class;
+    public $load = ['state', 'city'];
 
     /**
-     * ProductController constructor.
-     */
-    public function __construct()
-    {
-        view()->share([
-            'title' => 'کشورها',
-            'route' => 'admin.address.country'
-        ]);
-        parent::__construct();
-    }
-
-    /**
-     * Display a listing of the resource.
+     * @package index
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index()
     {
         # table headers
         $heads = [
@@ -54,11 +41,8 @@ class CountryController extends BaseController
                 'visible' => 1,
             ],
         ];
-        # Load items for send to view
-        $items = Country::get()
-            ->load(['state', 'city']);
 
-        return Crud::index($items,$heads, $request, 'id', $this->perPage);
+        return Crud::index($this->model, $heads, 'id', $this->perPage, $this->load);
     }
 
     /**
@@ -89,10 +73,12 @@ class CountryController extends BaseController
     }
 
     /**
-     * Display the specified resource.
+     * @package show
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function show($id)
     {
@@ -114,10 +100,7 @@ class CountryController extends BaseController
             ],
         ];
 
-        $item = Country::find($id)
-            ->load(['state', 'city']);
-
-        return Crud::show($item, $heads);
+        return Crud::show($id, $heads, $this->route, $this->model, $this->load);
     }
 
     /**
@@ -159,6 +142,6 @@ class CountryController extends BaseController
      */
     public function destroy($id)
     {
-        //
+        return Crud::destroy($id, $this->model);
     }
 }

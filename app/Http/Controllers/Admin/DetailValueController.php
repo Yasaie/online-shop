@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DetailCategory;
+use App\DetailKey;
+use App\DetailValue;
 use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
 
-class DetailCategoryController extends BaseController
+class DetailValueController extends BaseController
 {
-    public $route = 'admin.detail.category';
-    public $title = 'دسته‌بندی مشخصات';
+    public $route = 'admin.detail.value';
+    public $title = 'مقادیر مشخصات';
 
     /**
      * Display a listing of the resource.
@@ -28,14 +29,19 @@ class DetailCategoryController extends BaseController
                 'visible' => 1
             ],
             [
-                'name' => 'details',
-                'get' => 'detailKey.count()',
+                'name' => 'detail',
+                'get' => 'detailKey.title',
                 'visible' => 1
             ],
+            [
+                'name' => 'category',
+                'get' => 'detailKey.detailCategory.title',
+                'visible' => 1
+            ]
         ];
         # Load items for send to view
-        $items = DetailCategory::get()
-            ->load(['detailKey']);
+        $items = DetailValue::get()
+            ->load(['detailKey.detailCategory']);
 
         return Crud::index($items, $heads, 'updated_at', $this->perPage);
     }
@@ -47,13 +53,23 @@ class DetailCategoryController extends BaseController
      */
     public function create()
     {
+        $inputs = [
+            [
+                'name' => 'detail',
+                'type' => 'select',
+                'content' => [
+                    'all' => DetailKey::all(),
+                    'name' => 'title',
+                ],
+            ]
+        ];
         $multilang = [
             [
                 'name' => 'title',
                 'type' => 'text',
-            ]
+            ],
         ];
-        return Crud::create([], $multilang);
+        return Crud::create($inputs, $multilang);
     }
 
     /**
@@ -82,16 +98,22 @@ class DetailCategoryController extends BaseController
             ],
             [
                 'name' => 'title',
+                'visible' => 1
             ],
             [
-                'name' => 'details',
-                'get' => 'detailKey.count()',
+                'name' => 'detail',
+                'get' => 'detailKey.title',
+                'visible' => 1
             ],
+            [
+                'name' => 'category',
+                'get' => 'detailKey.detailCategory.title',
+                'visible' => 1
+            ]
         ];
-
         # Load items for send to view
-        $item = DetailCategory::find($id)
-            ->load(['detailKey']);
+        $item = DetailValue::find($id)
+            ->load(['detailKey.detailCategory']);
 
         return Crud::show($item, $heads);
     }
@@ -104,15 +126,28 @@ class DetailCategoryController extends BaseController
      */
     public function edit($id)
     {
-        $item = DetailCategory::find($id);
+        $item = DetailValue::find($id)
+            ->load(['detailKey']);
+
+        $inputs = [
+            [
+                'name' => 'detail',
+                'type' => 'select',
+                'content' => [
+                    'all' => DetailKey::all(),
+                    'name' => 'title',
+                ],
+                'value' => $item->detailKey ? $item->detailKey->id : null
+            ]
+        ];
         $multilang = [
             [
                 'name' => 'title',
                 'type' => 'text',
                 'value' => $item
-            ]
+            ],
         ];
-        return Crud::create([], $multilang);
+        return Crud::create($inputs, $multilang);
     }
 
     /**

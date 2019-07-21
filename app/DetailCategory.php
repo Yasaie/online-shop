@@ -9,7 +9,7 @@ class DetailCategory extends Model
 {
     use HasDictionary;
 
-    protected $dictionary = ['title'];
+    protected $locales = ['title'];
 
     public function detailKey()
     {

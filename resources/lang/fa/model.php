@@ -26,7 +26,23 @@ return [
     'country' => 'کشور',
 
     'details' => 'مشخصه‌ها',
+    'detail' => 'مشخصه',
     'values' => 'مقادیر',
+
+    'ratio' => 'ضریب',
+    'symbol' => 'سمبل',
+    'places' => 'رقم اعشار',
+    'default_language' => 'زبان پیش فرض',
+    'key' => 'کلید',
+
+    'files' => 'فایل‌ها',
+
+    'product' => [
+        'title' => 'عنوان محصول',
+    ],
+
+    'body' => 'محتوا',
+    'sent_date' => 'تاریخ ارسال',
 
     'site' => [
         'title' => 'عنوان سایت'

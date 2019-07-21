@@ -31,7 +31,7 @@ class Product extends BaseModel implements HasMedia
 
     protected $appends = ['product_rate'];
 
-    protected $dictionary = ['title', 'description'];
+    protected $locales = ['title', 'description'];
 
     public function getProductRateAttribute()
     {

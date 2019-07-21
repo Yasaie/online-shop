@@ -24,17 +24,34 @@ class Currency extends Model
 {
     use HasDictionary;
 
-    protected $appends = ['title'];
+    protected $appends = ['title', 'default_language'];
 
-    protected $dictionary = ['name'];
+    protected $locales = ['name'];
 
     public function getTitleAttribute()
     {
-        return $this->symbol ?: $this->locale('name');
+        return $this->symbol ?: $this->name;
     }
 
-    public function language()
+    public function getDefaultLanguageAttribute()
     {
-        return $this->belongsTo(Language::class);
+        return $this->language_id
+            ? config('global.langs.' . $this->language_id)->getNativeName()
+            : null;
     }
+
+    public function getRatioAttribute($value)
+    {
+        return (float)$value;
+    }
+
+    public function delete()
+    {
+        $parent = parent::delete();
+
+        if ($parent) {
+            $this->dictionary
+        }
+    }
+
 }

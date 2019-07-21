@@ -15,28 +15,19 @@ use Yasaie\Cruder\Crud;
 
 class StateController extends BaseController
 {
-
-    /**
-     * ProductController constructor.
-     */
-    public function __construct()
-    {
-        view()->share([
-            'title' => 'استان‌ها',
-            'route' => 'admin.address.state'
-        ]);
-        parent::__construct();
-    }
+    public $route = 'admin.address.state';
+    public $title = 'استان‌ها';
+    public $model = State::class;
+    public $load = ['country', 'city'];
 
     /**
      * @package index
      * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param Request $request
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index()
     {
         # table headers
         $heads = [
@@ -58,11 +49,8 @@ class StateController extends BaseController
                 'visible' => 1
             ],
         ];
-        # Load items for send to view
-        $items = State::get()
-            ->load(['country', 'city']);
 
-        return Crud::index($items, $heads, $request, 'id', $this->perPage);
+        return Crud::index($this->model, $heads, 'id', $this->perPage, $this->load);
     }
 
     /**
@@ -75,7 +63,7 @@ class StateController extends BaseController
         $inputs = [
             [
                 'name' => 'name',
-                'type' => 'input',
+                'type' => 'text',
             ],
             [
                 'name' => 'country',
@@ -101,10 +89,12 @@ class StateController extends BaseController
     }
 
     /**
-     * Display the specified resource.
+     * @package show
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function show($id)
     {
@@ -126,10 +116,7 @@ class StateController extends BaseController
             ],
         ];
 
-        $item = State::find($id)
-            ->load(['country', 'city']);
-
-        return Crud::show($item, $heads);
+        return Crud::show($id, $heads, $this->route, $this->model, $this->load);
     }
 
     /**
@@ -144,7 +131,7 @@ class StateController extends BaseController
         $inputs = [
             [
                 'name' => 'name',
-                'type' => 'input',
+                'type' => 'text',
                 'value' => $item->name
             ],
             [
@@ -173,13 +160,15 @@ class StateController extends BaseController
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @package destroy
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     *
+     * @return mixed
      */
     public function destroy($id)
     {
-        //
+        return Crud::destroy($id, $this->model);
     }
 }

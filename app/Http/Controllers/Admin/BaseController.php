@@ -7,15 +7,28 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Comment;
+use App\Currency;
 use App\Http\Controllers\Controller;
 use App\Product;
 
-class BaseController extends Controller
+abstract class BaseController extends Controller
 {
     protected $perPage = 15;
+    protected $crud;
+
+    public $route = '';
+    public $title = '';
 
     public function __construct()
     {
+        $this->crud = [
+            'create' => method_exists($this, 'create'),
+            'show' => method_exists($this, 'show'),
+            'edit' => method_exists($this, 'edit'),
+            'destroy' => method_exists($this, 'destroy'),
+        ];
+
         $menu_items = [
             [
                 'name'  =>  'داشبورد',
@@ -50,7 +63,27 @@ class BaseController extends Controller
                     ],
                     [
                         'name' => 'مشخصه‌‌ها',
+                        'route' => 'key.index',
+                    ],
+                    [
+                        'name' => 'مقادیر',
                         'route' => 'value.index',
+                    ]
+                ]
+            ],
+            [
+                'name' => 'واحد پول',
+                'icon' => 'money',
+                'base' => 'admin.currency.',
+                'count' => Currency::count(),
+                'child' => [
+                    [
+                        'name' => 'همه',
+                        'route' => 'index'
+                    ],
+                    [
+                        'name' => 'ایجاد',
+                        'route' => 'create',
                     ]
                 ]
             ],
@@ -72,6 +105,18 @@ class BaseController extends Controller
                         'route' => 'city.index',
                     ],
 
+                ]
+            ],
+            [
+                'name' => 'نظرات',
+                'icon' => 'comment',
+                'base' => 'admin.comment.',
+                'count' => Comment::count(),
+                'child' => [
+                    [
+                        'name' => 'همه',
+                        'route' => 'index'
+                    ]
                 ]
             ],
             [
@@ -171,39 +216,7 @@ class BaseController extends Controller
 //                ]
 //            ],
 //
-//            #=========================================
-//            [
-//                'name' => 'نظرات',
-//                'icon' => 'gift',
-//                // 'count' => Product::count(),
-//                'base' => 'admin.product.',
-//                'child' => [
-//                    [
-//                        'name' => 'همه',
-//                        'route' => 'index'
-//                    ]
-//
-//                ]
-//            ],
-//
-//            #=========================================
-//            [
-//                'name' => 'واحد پول',
-//                'icon' => 'gift',
-//                // 'count' => Product::count(),
-//                'base' => 'admin.product.',
-//                'child' => [
-//                    [
-//                        'name' => 'همه',
-//                        'route' => 'index'
-//                    ],
-//                    [
-//                        'name' => 'ایجاد',
-//                        'route' => 'index'
-//                    ]
-//
-//                ]
-//            ],
+//            #========================================
 //
 //            #=========================================
 //            [
@@ -228,6 +241,12 @@ class BaseController extends Controller
 
 
         ];
-        view()->share(compact('menu_items'));
+
+        view()->share([
+            'menu_items' => $menu_items,
+            'crud' => $this->crud,
+            'route' => $this->route,
+            'title' => $this->title
+        ]);
     }
 }

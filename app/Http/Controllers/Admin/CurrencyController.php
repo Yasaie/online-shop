@@ -2,23 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\City;
-use App\State;
+use App\Currency;
 use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
 
-class CityController extends BaseController
+class CurrencyController extends BaseController
 {
-    public $route = 'admin.address.city';
-    public $title = 'شهرها';
-    public $model = City::class;
-    public $load = ['state', 'state.country'];
+    public $route = 'admin.currency';
+    public $title = 'واحد پول';
+    public $model = Currency::class;
 
     /**
      * @package index
      * @author  Payam Yasaie <payam@yasaie.ir>
-     *
-     * @param Request $request
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -34,18 +30,16 @@ class CityController extends BaseController
                 'visible' => 1
             ],
             [
-                'name' => 'state_name',
-                'get' => 'state.name',
+                'name' => 'symbol',
                 'visible' => 1
             ],
             [
-                'name' => 'country_name',
-                'get' => 'state.country.name',
+                'name' => 'ratio',
                 'visible' => 1
-            ],
+            ]
         ];
 
-        return Crud::index($this->model, $heads, 'id', $this->perPage, $this->load);
+        return Crud::index($this->model, $heads, 'updated_at', $this->perPage);
     }
 
     /**
@@ -57,19 +51,40 @@ class CityController extends BaseController
     {
         $inputs = [
             [
-                'name' => 'name',
+                'name' => 'symbol',
                 'type' => 'text',
             ],
             [
-                'name' => 'state',
+                'name' => 'key',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'ratio',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'places',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'default_language',
                 'type' => 'select',
                 'content' => [
-                    'all' => State::all(),
-                    'name' => 'name',
+                    'all' => config('global.langs'),
+                    'name' => 'getNativeName()',
+                    'id' => 'getId()'
                 ],
             ]
         ];
-        return Crud::create($inputs);
+
+        $multilang = [
+            [
+                'name' => 'name',
+                'type' => 'text',
+            ]
+        ];
+
+        return Crud::create($inputs, $multilang);
     }
 
     /**
@@ -102,13 +117,20 @@ class CityController extends BaseController
                 'name' => 'name',
             ],
             [
-                'name' => 'state_name',
-                'get' => 'state.name',
+                'name' => 'symbol',
             ],
             [
-                'name' => 'country_name',
-                'get' => 'state.country.name',
+                'name' => 'key',
             ],
+            [
+                'name' => 'ratio',
+            ],
+            [
+                'name' => 'places',
+            ],
+            [
+                'name' => 'default_language',
+            ]
         ];
 
         return Crud::show($id, $heads, $this->model);
@@ -122,24 +144,50 @@ class CityController extends BaseController
      */
     public function edit($id)
     {
-        $item = City::find($id);
+        $item = Currency::find($id);
+
         $inputs = [
+            [
+                'name' => 'symbol',
+                'type' => 'text',
+                'value' => $item->symbol
+            ],
+            [
+                'name' => 'key',
+                'type' => 'text',
+                'value' => $item->key
+            ],
+            [
+                'name' => 'ratio',
+                'type' => 'text',
+                'value' => $item->ratio
+            ],
+            [
+                'name' => 'places',
+                'type' => 'text',
+                'value' => $item->places
+            ],
+            [
+                'name' => 'default_language',
+                'type' => 'select',
+                'content' => [
+                    'all' => config('global.langs'),
+                    'name' => 'getNativeName()',
+                    'id' => 'getId()'
+                ],
+                'value' => $item->language_id
+            ]
+        ];
+
+        $multilang = [
             [
                 'name' => 'name',
                 'type' => 'text',
-                'value' => $item->name
-            ],
-            [
-                'name' => 'state',
-                'type' => 'select',
-                'content' => [
-                    'all' => State::all(),
-                    'name' => 'name',
-                ],
-                'value' => $item->state_id
+                'value' => $item
             ]
         ];
-        return Crud::create($inputs);
+
+        return Crud::create($inputs, $multilang);
     }
 
     /**
@@ -155,12 +203,10 @@ class CityController extends BaseController
     }
 
     /**
-     * @package destroy
-     * @author  Payam Yasaie <payam@yasaie.ir>
+     * Remove the specified resource from storage.
      *
-     * @param $id
-     *
-     * @return mixed
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {

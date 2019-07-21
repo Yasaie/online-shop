@@ -10,8 +10,10 @@
             <div class="card">
 
                 <div class="card-header">
+                    @if($crud['create'])
                     <a href="{{route("$route.create")}}" class="btn btn-success btn-sm"><i class="fa fa-file"></i> ایجاد</a>
-
+                    @endif
+                        <br>
                     <div class="card-tools">
                         <form class="input-group input-group-sm" style="width: 200px;">
                             <input type="text" name="search" class="form-control float-right"
@@ -51,16 +53,22 @@
                             <tr>
                                 @foreach($heads as $head)
                                     @if(isset($head['visible']) and $head['visible'])
-                                        <td>{{ $item->{$head['name']} }}</td>
+                                        <td>{{ $item->{$head['name']} ?: '-' }}</td>
                                     @endif
                                 @endforeach
                                 <td class="text-center">
                                     @php($current_route = str_replace('index', '', Route::currentRouteName()))
+                                    @if($crud['show'])
                                     <a href="{{route($current_route . 'show', $item->id)}}"
                                        class="btn btn-info btn-sm fa fa-eye"></a>
+                                    @endif
+                                    @if($crud['edit'])
                                     <a href="{{route($current_route . 'edit', $item->id)}}"
                                        class="btn btn-success btn-sm fa fa-pencil"></a>
-                                    <a href="" class="btn btn-danger btn-sm fa fa-trash"></a>
+                                    @endif
+                                    @if($crud['destroy'])
+                                    <button onclick="deleteItem({{$item->id}})" class="btn btn-danger btn-sm fa fa-trash"></button>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -74,4 +82,8 @@
         </div>
     </div>
 
+@endsection
+
+@section('script')
+    <script type="text/javascript" src="{{asset('assets/admin/js/custom.min.js')}}"></script>
 @endsection

@@ -9,6 +9,6 @@ class SellerService extends Model
 {
     use HasDictionary;
 
-    protected $dictionary = ['title'];
+    protected $locales = ['title'];
 
 }
