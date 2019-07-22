@@ -7,6 +7,7 @@ use Yasaie\Cruder\Crud;
 
 class SettingController extends BaseController
 {
+    public $route = 'admin.setting.global';
     /**
      * Display a listing of the resource.
      *
@@ -40,6 +41,11 @@ class SettingController extends BaseController
             ];
         }
 
-        return Crud::create([], $multilang);
+        return Crud::create([], $multilang, 'store');
+    }
+
+    public function globalStore()
+    {
+
     }
 }

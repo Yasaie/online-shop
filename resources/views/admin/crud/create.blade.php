@@ -4,10 +4,10 @@
 
 @section('body')
 
-    <form method="post" action="{{Request::route()->parameters() ? route($route . '.update', current(Request::route()->parameters())) : route($route . '.index')}}">
+    <form method="post" action="{{route("$route.$form_action", $form_id)}}">
         @csrf
-        @if(Request::route()->parameters())
-            @method('PATCH')
+        @if($form_id)
+            @method('PUT')
         @endif
         @if(isset($multilang))
             <div class="row">
@@ -59,6 +59,7 @@
             </div>
         @endif
 
+        @if($inputs)
         <div class="row">
             <div class="col-12">
 
@@ -79,13 +80,14 @@
                 </div>
             </div>
         </div>
+        @endif
 
         <div class="row">
             <div class="col-12">
                 <div class="card">
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-info" onsubmit="dropZone()">ذخیره</button>
-                        <a href="{{url()->previous()}}" class="btn btn-default float-left">بازگشت</a>
+                        <button type="submit" class="btn btn-info" onsubmit="dropZone()">@lang('crud.save')</button>
+                        <a href="{{url()->previous()}}" class="btn btn-default float-left">@lang('crud.return')</a>
                     </div>
                 </div>
             </div>

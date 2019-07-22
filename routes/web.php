@@ -24,6 +24,8 @@ Route::namespace('Admin')
     ->group(function ()
     {
         Route::get('/', 'HomeController@index')->name('home');
+        # Category
+        Route::resource('category', 'CategoryController');
         # Product
         Route::resource('product', 'ProductController');
         # Product Details
@@ -35,6 +37,10 @@ Route::namespace('Admin')
                 Route::resource('key', 'DetailKeyController');
                 Route::resource('value', 'DetailValueController');
             });
+        # Sellers
+        Route::resource('seller', 'SellerController');
+        # Users
+        Route::resource('user', 'UserController');
         # Currency
         Route::resource('currency', 'CurrencyController');
         # Addresses
@@ -53,7 +59,8 @@ Route::namespace('Admin')
             ->prefix('setting')
             ->group(function ()
             {
-                Route::get('global', 'SettingController@global')->name('global');
+                Route::get('global', 'SettingController@global')->name('global.index');
+                Route::post('global', 'SettingController@globalStore')->name('global.store');
             });
     });
 

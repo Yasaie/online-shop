@@ -13,11 +13,11 @@
                     <div class="form-group float-left">
                         @if($crud['edit'])
                             <a href="{{route("$route.edit", $item->id)}}" class="btn btn-success btn-sm"><i
-                                    class="fa fa-pencil"></i> ویرایش</a>
+                                    class="fa fa-pencil"></i> @lang('crud.edit')</a>
                         @endif
                         @if($crud['destroy'])
                             <button onclick="deleteItem({{$item->id}})" class="btn btn-danger btn-sm"><i
-                                    class="fa fa-trash"></i> حذف</button>
+                                    class="fa fa-trash"></i> @lang('crud.delete')</button>
                         @endif
                     </div>
                 </div>

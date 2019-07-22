@@ -11,13 +11,13 @@
 
                 <div class="card-header">
                     @if($crud['create'])
-                    <a href="{{route("$route.create")}}" class="btn btn-success btn-sm"><i class="fa fa-file"></i> ایجاد</a>
+                    <a href="{{route("$route.create")}}" class="btn btn-success btn-sm"><i class="fa fa-file"></i> @lang('crud.add')</a>
                     @endif
                         <br>
                     <div class="card-tools">
                         <form class="input-group input-group-sm" style="width: 200px;">
                             <input type="text" name="search" class="form-control float-right"
-                                   placeholder="جستجو" value="{{$search}}">
+                                   placeholder="@lang('crud.search')" value="{{$search}}">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-default"><i class="fa fa-search"></i>
                                 </button>
@@ -44,7 +44,7 @@
                                         @endif
                                     </th>
                                     @endforeach
-                                    <th class="text-center">عملیات</th>
+                                    <th class="text-center">@lang('crud.actions')</th>
                         </tr>
                         </thead>
 

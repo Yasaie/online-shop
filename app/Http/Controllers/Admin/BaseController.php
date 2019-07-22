@@ -8,9 +8,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Comment;
-use App\Currency;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\User;
 
 abstract class BaseController extends Controller
 {
@@ -37,7 +37,18 @@ abstract class BaseController extends Controller
                 'route' =>  '',
             ],
             [
-                'name'  => 'محصولات',
+                'name' => __('model.category'),
+                'icon' => 'bars',
+                'base' => 'admin.category.',
+                'child' => [
+                    [
+                        'name' => 'همه',
+                        'route' => 'index'
+                    ]
+                ]
+            ],
+            [
+                'name'  => __('model.products'),
                 'icon'  => 'gift',
                 'count' => Product::count(),
                 'base'  => 'admin.product.',
@@ -72,10 +83,32 @@ abstract class BaseController extends Controller
                 ]
             ],
             [
+                'name' => 'فروشندگان',
+                'icon' => 'tag',
+                'base' => 'admin.seller.',
+                'child' => [
+                    [
+                        'name' => 'همه',
+                        'route' => 'index'
+                    ]
+                ]
+            ],
+            [
+                'name' => 'کاربران',
+                'icon' => 'user',
+                'base' => 'admin.user.',
+                'count' => User::count(),
+                'child' => [
+                    [
+                        'name' => 'همه',
+                        'route' => 'index'
+                    ]
+                ]
+            ],
+            [
                 'name' => 'واحد پول',
                 'icon' => 'money',
                 'base' => 'admin.currency.',
-                'count' => Currency::count(),
                 'child' => [
                     [
                         'name' => 'همه',
@@ -84,6 +117,33 @@ abstract class BaseController extends Controller
                     [
                         'name' => 'ایجاد',
                         'route' => 'create',
+                    ]
+                ]
+            ],
+            [
+                'name'  =>  'سفارشات',
+                'icon'  => 'shopping-cart',
+                'base'  => 'admin.home',
+                'child' => [
+                    [
+                        'name' => 'همه',
+                        'route' => ''
+                    ],
+                    [
+                        'name' => 'ارسال نشده',
+                        'route' => ''
+                    ],
+                ]
+            ],
+            [
+                'name' => 'نظرات',
+                'icon' => 'comment',
+                'base' => 'admin.comment.',
+                'count' => Comment::count(),
+                'child' => [
+                    [
+                        'name' => 'همه',
+                        'route' => 'index'
                     ]
                 ]
             ],
@@ -108,15 +168,18 @@ abstract class BaseController extends Controller
                 ]
             ],
             [
-                'name' => 'نظرات',
-                'icon' => 'comment',
-                'base' => 'admin.comment.',
-                'count' => Comment::count(),
+                'name'  =>  'گزارشات',
+                'icon'  => 'signal',
+                'base'  => 'admin.home',
                 'child' => [
                     [
-                        'name' => 'همه',
-                        'route' => 'index'
-                    ]
+                        'name' => 'بازدید',
+                        'route' => ''
+                    ],
+                    [
+                        'name' => 'فروش',
+                        'route' => ''
+                    ],
                 ]
             ],
             [
@@ -126,7 +189,7 @@ abstract class BaseController extends Controller
                 'child' => [
                     [
                         'name' => 'عمومی',
-                        'route' => 'global'
+                        'route' => 'global.index'
                     ]
                 ]
             ]

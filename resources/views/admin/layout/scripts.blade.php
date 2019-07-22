@@ -4,7 +4,6 @@
 <script src="{{asset('assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('assets/admin/js/raphael-min.js')}}"></script>
-{{--<script src="{{asset('assets/plugins/morris/morris.min.js')}}"></script>--}}
 <script src="{{asset('assets/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
 <script src="{{asset('assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
 <script src="{{asset('assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
