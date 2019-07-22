@@ -4,8 +4,11 @@
 
 @section('body')
 
-    <form method="post" action="{{route($route . '.index')}}">
+    <form method="post" action="{{Request::route()->parameters() ? route($route . '.update', current(Request::route()->parameters())) : route($route . '.index')}}">
         @csrf
+        @if(Request::route()->parameters())
+            @method('PATCH')
+        @endif
         @if(isset($multilang))
             <div class="row">
                 <div class="col-12">

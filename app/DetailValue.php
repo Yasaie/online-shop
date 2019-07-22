@@ -5,6 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Yasaie\Dictionary\Traits\HasDictionary;
 
+/**
+ * @mixin \Eloquent
+ */
 class DetailValue extends Model
 {
     use HasDictionary;

@@ -17,12 +17,9 @@ function deleteItem(id) {
                         _token: _token
                     },
                     success: function (d) {
-                        if (d.result) {
-                            window.location.replace(route);
-                        }
+                        window.location.replace(route);
                     },
                     error: function (d) {
-                        console.log(iziToastConst);
                         iziToast.error(Object.assign({}, iziToastConst, {
                             title: 'خطا',
                             message: d.responseJSON.message,
@@ -30,7 +27,6 @@ function deleteItem(id) {
                     }
                 });
                 instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');
-
             }, true],
             ['<button>خیر</button>', function (instance, toast) {
                 instance.hide({ transitionOut: 'fadeOut' }, toast, 'button');

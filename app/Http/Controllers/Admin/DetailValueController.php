@@ -87,19 +87,9 @@ class DetailValueController extends BaseController
             'detail_key_id' => $request->detail
         ]);
 
-        $result->dictionary()->createLocale('title', $request->title);
-//        foreach ($request->title as $lang => $title) {
-//            if ($title) {
-//                $result->dictionary()->create([
-//                    'key' => 'title',
-//                    'value' => $title,
-//                    'language_id' => $lang
-//                ]);
-//            }
-//        }
+        $result->createLocale('title', $request->title);
 
-
-        return redirect()->route($this->route . '.index');
+        return redirect()->route($this->route . '.show', $result->id);
     }
 
     /**
@@ -119,17 +109,20 @@ class DetailValueController extends BaseController
             ],
             [
                 'name' => 'title',
-                'visible' => 1
             ],
             [
                 'name' => 'detail',
                 'get' => 'detailKey.title',
-                'visible' => 1
             ],
             [
                 'name' => 'category',
                 'get' => 'detailKey.detailCategory.title',
-                'visible' => 1
+            ],
+            [
+                'name' => 'created_at',
+            ],
+            [
+                'name' => 'updated_at'
             ]
         ];
 
@@ -169,15 +162,21 @@ class DetailValueController extends BaseController
     }
 
     /**
-     * Update the specified resource in storage.
+     * @package update
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param DetailValueRequest $request
+     * @param $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(DetailValueRequest $request, $id)
     {
-        //
+        $item = DetailValue::find($id);
+        $item->detail_key_id = $request->detail;
+        $item->save();
+
+        return redirect()->route($this->route . '.show', $id);
     }
 
     /**
