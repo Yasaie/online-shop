@@ -16,18 +16,20 @@ class Locale
      */
     public function handle($request, Closure $next)
     {
-        $lang = session('lang', \Config::get('app.locale'));
+        $lang = session('lang', config('app.locale'));
         app()->setLocale($lang);
 
         $currencies = \Cache::rememberForever("app.currencies", function () {
             return Currency::get();
         });
         $lang_currency = $currencies->firstWhere('language_id', $lang);
-        $lang_currency_key = $lang_currency ? $lang_currency->key : \Config::get('app.currency');
+        $lang_currency_key = $lang_currency
+            ? $lang_currency->key
+            : $currencies->firstWhere('ratio', 1);
 
         $user_currency = session('currency', $lang_currency_key);
         \Config::set('app.current_currency', $currencies->firstWhere('key', $user_currency));
-        \Config::set('app.currency', $user_currency);
+//        \Config::set('app.currency', $user_currency);
 
         view()->share(compact('currencies'));
 

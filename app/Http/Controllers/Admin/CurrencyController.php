@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Currency;
+use App\Http\Requests\CurrencyRequest;
 use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
 
@@ -88,14 +89,29 @@ class CurrencyController extends BaseController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @package store
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CurrencyRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function store(Request $request)
+    public function store(CurrencyRequest $request)
     {
-        //
+        $item = Currency::create([
+            'language_id' => $request->default_language,
+            'key' => $request->key,
+            'symbol' => $request->symbol,
+            'ratio' => $request->ratio,
+            'places' => $request->places
+        ]);
+
+        $item->createLocale('name', $request->name);
+
+        \Cache::delete('app.currencies');
+
+        return redirect()->route($this->route . '.show', $item->id);
     }
 
     /**
@@ -130,10 +146,16 @@ class CurrencyController extends BaseController
             ],
             [
                 'name' => 'default_language',
+            ],
+            [
+                'name' => 'created_at',
+            ],
+            [
+                'name' => 'updated_at'
             ]
         ];
 
-        return Crud::show($id, $heads, $this->model);
+        return Crud::show($id, $heads, $this->route, $this->model);
     }
 
     /**
@@ -191,15 +213,32 @@ class CurrencyController extends BaseController
     }
 
     /**
-     * Update the specified resource in storage.
+     * @package update
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param CurrencyRequest $request
+     * @param $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function update(Request $request, $id)
+    public function update(CurrencyRequest $request, $id)
     {
-        //
+        $item = Currency::find($id);
+
+        $item->language_id = $request->default_language;
+        $item->key = $request->key;
+        $item->symbol = $request->symbol;
+        $item->ratio = $request->ratio;
+        $item->places = $request->places;
+
+        $item->save();
+
+        $item->updateLocale('name', $request->name);
+
+        \Cache::delete('app.currencies');
+
+        return redirect()->route($this->route . '.show', $id);
     }
 
     /**

@@ -32,7 +32,7 @@ if (! function_exists('userPrice')) {
     function userPrice($price, $ratio)
     {
         $base_price = $price * $ratio;
-        $currency = \Config::get('app.current_currency');
+        $currency = config('app.current_currency');
 
         return number_format($base_price / $currency->ratio, $currency->places);
     }

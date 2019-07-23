@@ -24,7 +24,7 @@ class BaseRequest extends FormRequest
     public function rules()
     {
         return [
-            'title.' . \Config::get('app.fallback_locale') => 'required'
+            'title.' . config('app.fallback_locale') => 'required'
         ];
     }
 }

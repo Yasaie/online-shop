@@ -28,7 +28,7 @@ class SellerController extends BaseController
             ],
             [
                 'name' => 'seller',
-                'get' => 'user.last_name',
+                'get' => 'user.full_name',
                 'visible' => 1
             ],
             [
@@ -82,7 +82,37 @@ class SellerController extends BaseController
      */
     public function show($id)
     {
-        //
+        # table headers
+        $heads = [
+            [
+                'name' => 'id',
+            ],
+            [
+                'name' => 'seller',
+                'get' => 'user.full_name',
+            ],
+            [
+                'name' => 'product.title',
+            ],
+            [
+                'name' => 'price',
+            ],
+            [
+                'name' => 'prev_price',
+            ],
+            [
+                'name' => 'currency',
+                'get' => 'currency.name',
+            ],
+            [
+                'name' => 'created_at'
+            ],
+            [
+                'name' => 'updated_at'
+            ]
+        ];
+
+        return Crud::show($id, $heads, $this->route, $this->model);
     }
 
     /**

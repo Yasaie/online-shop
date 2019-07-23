@@ -19,10 +19,13 @@ use Yasaie\Dictionary\Traits\HasDictionary;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Currency whereRatio($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DictionaryTrait dictionary()
  * @mixin \Eloquent
+ * @mixin HasDictionary
  */
 class Currency extends Model
 {
     use HasDictionary;
+
+    protected $guarded = [];
 
     protected $appends = ['title', 'default_language'];
 

@@ -20,7 +20,8 @@ class CreateCurrenciesTable extends Migration
             $table->string('symbol', 10)->nullable();
             # name fetch from dictionary
             $table->decimal('ratio', 18, 9);
-            $table->unsignedTinyInteger('places');
+            $table->unsignedTinyInteger('places')->default(0);
+            $table->timestamps();
 
             $table->unique('key');
         });
