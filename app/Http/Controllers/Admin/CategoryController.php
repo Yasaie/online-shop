@@ -3,9 +3,17 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
 
+/**
+ * @author Payam Yasaie <payam@yasaie.ir>
+ *
+ * Class CategoryController
+ * @package App\Http\Controllers\Admin
+ * @mixin Crud
+ */
 class CategoryController extends BaseController
 {
     public $route = 'admin.category';
@@ -31,7 +39,7 @@ class CategoryController extends BaseController
                 'visible' => 1
             ],
             [
-                'name' => 'category',
+                'name' => 'parent',
                 'get' => 'parent.title',
                 'visible' => 1
             ],
@@ -52,7 +60,22 @@ class CategoryController extends BaseController
      */
     public function create()
     {
-        //
+        $inputs = [
+            [
+                'name' => 'parent',
+                'type' => 'select',
+                'content' => [
+                    'all' => Category::all(),
+                ],
+            ]
+        ];
+        $multilang = [
+            [
+                'name' => 'title',
+                'type' => 'text',
+            ],
+        ];
+        return Crud::create($inputs, $multilang);
     }
 
     /**
@@ -61,53 +84,133 @@ class CategoryController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
+        $item = Category::create([
+            'parent_id' => $request->parent ?: null
+        ]);
+
+        $item->createLocale('title', $request->title);
+
+        return redirect()->route($this->route . '.show', $item->id);
     }
 
     /**
-     * Display the specified resource.
+     * @package show
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function show($id)
     {
-        //
+        # table headers
+        $heads = [
+            [
+                'name' => 'id',
+            ],
+            [
+                'name' => 'title',
+            ],
+            [
+                'name' => 'parent',
+                'get' => 'parent.title',
+                'link' => [
+                    'search' => 'parent.title',
+                    'column' => 'title',
+                    'route' => 'admin.category.index'
+                ]
+            ],
+            [
+                'name' => 'products',
+                'get' => 'products.count()',
+                'link' => [
+                    'search' => 'title',
+                    'column' => 'category',
+                    'route' => 'admin.product.index'
+                ]
+            ],
+            [
+                'name' => 'created_at',
+            ],
+            [
+                'name' => 'updated_at'
+            ]
+        ];
+
+        return Crud::show($id, $heads, $this->route, $this->model);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * @package edit
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
-        //
+        $empty = (new Category())->fill([
+            'id' => 10,
+            'title' => __('model.main')
+        ]);
+
+        $all = Category::all()->prepend($empty);
+        $item = $all->find($id);
+
+        $inputs = [
+            [
+                'name' => 'parent',
+                'type' => 'select',
+                'content' => [
+                    'all' => $all->where('id', '<>' ,$item->id),
+                ],
+                'value' => $item->parent_id
+            ]
+        ];
+        $multilang = [
+            [
+                'name' => 'title',
+                'type' => 'text',
+                'value' => $item
+            ],
+        ];
+        return Crud::create($inputs, $multilang);
     }
 
     /**
-     * Update the specified resource in storage.
+     * @package update
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function update(Request $request, $id)
     {
-        //
+        $item = Category::find($id);
+        $item->parent_id = $request->parent;
+        $item->save();
+
+        $item->updateLocale('title', $request->title);
+
+        return redirect()->route($this->route . '.show', $id);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @package destroy
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     *
+     * @return mixed
      */
     public function destroy($id)
     {
-        //
+        return Crud::destroy($id, $this->model);
     }
 }

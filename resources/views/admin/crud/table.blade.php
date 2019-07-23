@@ -36,7 +36,7 @@
                                         @php
                                             $sorting = $query;
                                             $sorting['sort'] = $head['name'];
-                                            $sorting['desc'] = $desc ? null : 1;
+                                            $sorting['desc'] = ($sort == $head['name']) ? ($desc ? null : 1) : ($desc ? 1 : null);
                                         @endphp
                                         <a href="?{{http_build_query($sorting)}}">
                                             @lang('model.' . $head['name'])
@@ -53,7 +53,7 @@
                             <tr>
                                 @foreach($heads as $head)
                                     @if(isset($head['visible']) and $head['visible'])
-                                        <td>{{ $item->{$head['name']} ?: '-' }}</td>
+                                        <td>{{ $item->{$head['name']} !== null ? $item->{$head['name']} : '-' }}</td>
                                     @endif
                                 @endforeach
                                 <td class="text-center">

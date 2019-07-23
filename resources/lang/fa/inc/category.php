@@ -6,6 +6,7 @@
  */
 
 return [
-    'category_title' => 'دسته‌بندی',
     'category' => 'دسته‌بندی',
+    'parent' => 'والد',
+    'main' => 'اصلی'
 ];

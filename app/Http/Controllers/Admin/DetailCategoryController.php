@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\DetailCategory;
+use App\Http\Requests\DetailCategoryRequest;
 use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
 
@@ -57,14 +58,20 @@ class DetailCategoryController extends BaseController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @package store
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param DetailCategoryRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(DetailCategoryRequest $request)
     {
-        //
+        $item = DetailCategory::create([]);
+
+        $item->createLocale('title', $request->title);
+
+        return redirect()->route($this->route . '.show', $item->id);
     }
 
     /**
@@ -88,7 +95,18 @@ class DetailCategoryController extends BaseController
             [
                 'name' => 'details',
                 'get' => 'detailKey.count()',
+                'link' => [
+                    'search' => 'title',
+                    'column' => 'category',
+                    'route' => 'admin.detail.key.index'
+                ]
             ],
+            [
+                'name' => 'created_at',
+            ],
+            [
+                'name' => 'updated_at'
+            ]
         ];
 
         return Crud::show($id, $heads, $this->route, $this->model);
@@ -114,15 +132,23 @@ class DetailCategoryController extends BaseController
     }
 
     /**
-     * Update the specified resource in storage.
+     * @package update
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param DetailCategoryRequest $request
+     * @param $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function update(Request $request, $id)
+    public function update(DetailCategoryRequest $request, $id)
     {
-        //
+        $item = DetailCategory::find($id);
+        $item->touch();
+
+        $item->updateLocale('title', $request->title);
+
+        return redirect()->route($this->route . '.show', $id);
     }
 
     /**

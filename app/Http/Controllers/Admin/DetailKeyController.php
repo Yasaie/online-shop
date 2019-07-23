@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\DetailCategory;
 use App\DetailKey;
+use App\Http\Requests\DetailKeyRequest;
 use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
 
@@ -37,6 +38,10 @@ class DetailKeyController extends BaseController
                 'visible' => 1
             ],
             [
+                'name' => 'highlighted',
+                'visible' => 1
+            ],
+            [
                 'name' => 'values',
                 'get' => 'detailValues.count()',
                 'visible' => 1
@@ -59,7 +64,6 @@ class DetailKeyController extends BaseController
                 'type' => 'select',
                 'content' => [
                     'all' => DetailCategory::all(),
-                    'name' => 'title',
                 ],
             ]
         ];
@@ -73,14 +77,23 @@ class DetailKeyController extends BaseController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @package store
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param DetailKeyRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(DetailKeyRequest $request)
     {
-        //
+        $item = DetailKey::create([
+            'detail_category_id' => $request->category,
+            'highlighted' => $request->highlighted
+        ]);
+
+        $item->createLocale('title', $request->title);
+
+        return redirect()->route($this->route . '.show', $item->id);
     }
 
     /**
@@ -106,6 +119,10 @@ class DetailKeyController extends BaseController
                 'get' => 'detailCategory.title',
             ],
             [
+                'name' => 'highlighted',
+                'visible' => 1
+            ],
+            [
                 'name' => 'values',
                 'get' => 'detailValues.count()',
                 'link' => [
@@ -113,6 +130,12 @@ class DetailKeyController extends BaseController
                     'column' => 'detail',
                     'route' => 'admin.detail.value.index'
                 ]
+            ],
+            [
+                'name' => 'created_at',
+            ],
+            [
+                'name' => 'updated_at'
             ]
         ];
 
@@ -136,9 +159,19 @@ class DetailKeyController extends BaseController
                 'type' => 'select',
                 'content' => [
                     'all' => DetailCategory::all(),
-                    'name' => 'title',
                 ],
                 'value' => $item->detailCategory->id
+            ],
+            [
+                'name' => 'highlighted',
+                'type' => 'select',
+                'content' => [
+                    'all' => [
+                        ['id' => 0, 'title' => 'خیر'],
+                        ['id' => 1, 'title' => 'بلی'],
+                    ],
+                ],
+                'value' => $item->highlighted
             ]
         ];
         $multilang = [
@@ -152,15 +185,25 @@ class DetailKeyController extends BaseController
     }
 
     /**
-     * Update the specified resource in storage.
+     * @package update
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param DetailKeyRequest $request
+     * @param $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function update(Request $request, $id)
+    public function update(DetailKeyRequest $request, $id)
     {
-        //
+        $item = DetailKey::find($id);
+        $item->detail_category_id = $request->category;
+        $item->highlighted = $request->highlighted;
+        $item->save();
+
+        $item->updateLocale('title', $request->title);
+
+        return redirect()->route($this->route . '.show', $id);
     }
 
     /**

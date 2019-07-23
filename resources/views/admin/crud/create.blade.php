@@ -9,6 +9,30 @@
         @if($form_id)
             @method('PUT')
         @endif
+
+        @if($inputs)
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card">
+
+                        <div class="card-body">
+                            @foreach($inputs as $input)
+                                @if(old($input['name']) !== null)
+                                    @php($input['value'] = old($input['name']))
+                                @endif
+                                <div class="form-group">
+                                    <label for="{{$input['name']}}">@lang('model.'. $input['name'])</label>
+                                    @include('admin.crud.inc.' . $input['type'], $input)
+                                </div>
+                            @endforeach
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        @endif
+
         @if(isset($multilang))
             <div class="row">
                 <div class="col-12">
@@ -59,29 +83,6 @@
             </div>
         @endif
 
-        @if($inputs)
-        <div class="row">
-            <div class="col-12">
-
-                <div class="card">
-
-                    <div class="card-body">
-                        @foreach($inputs as $input)
-                            @if(old($input['name']) !== null)
-                                @php($input['value'] = old($input['name']))
-                            @endif
-                            <div class="form-group">
-                                <label for="{{$input['name']}}">@lang('model.'. $input['name'])</label>
-                                @include('admin.crud.inc.' . $input['type'], $input)
-                            </div>
-                        @endforeach
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        @endif
-
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -118,6 +119,7 @@
             $('.select2').select2({
                 dir: '{{isRTL(0)}}',
                 language: '{{app()->getLocale()}}',
+                minimumResultsForSearch: 5
             });
             tinymce.init({
                 selector: 'textarea.text-html',
@@ -134,11 +136,11 @@
                 language: '{{app()->getLocale()}}',
             });
             @if ($errors->any())
-                @foreach ($errors->all() as $error)
+            @foreach ($errors->all() as $error)
             iziToast.error(Object.assign({}, iziToastConst, {
                 message: '{{ $error }}'
             }));
-                @endforeach
+            @endforeach
             @endif
         });
     </script>

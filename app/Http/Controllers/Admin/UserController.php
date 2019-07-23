@@ -38,6 +38,12 @@ class UserController extends BaseController
                 'name' => 'email',
                 'visible' => 1
             ],
+            [
+                'name' => 'role',
+                'get' => 'getRoleNames().toArray()',
+                'string' => true,
+                'visible' => 1
+            ]
         ];
 
         return Crud::index($this->model, $heads, 'id', $this->perPage, $this->load);

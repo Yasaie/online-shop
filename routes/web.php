@@ -21,6 +21,7 @@ Route::namespace('Front')->group(function () {
 Route::namespace('Admin')
     ->prefix('admin')
     ->name('admin.')
+    ->middleware(['auth', 'role:admin'])
     ->group(function ()
     {
         Route::get('/', 'HomeController@index')->name('home');
@@ -74,3 +75,7 @@ Route::get('currency/{id}', 'PublicController@currency');
 
 //Route::get('/storage', '')
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

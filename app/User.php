@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * App\User
@@ -30,10 +31,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUsersId($value)
  * @mixin \Eloquent
+ * @mixin HasRoles
  */
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,
+        HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -62,6 +65,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = ['full_name'];
+
     public function products()
     {
         return $this->belongsToMany(Product::class, 'sellers');
@@ -70,5 +75,10 @@ class User extends Authenticatable
     public function sellers()
     {
         return $this->hasMany(Seller::class);
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
     }
 }

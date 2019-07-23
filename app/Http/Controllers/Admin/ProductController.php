@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\DetailValue;
 use App\Product;
+use App\ProductDetail;
 use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
 
@@ -32,7 +34,7 @@ class ProductController extends BaseController
                 'visible' => 1
             ],
             [
-                'name' => 'category_title',
+                'name' => 'category',
                 'get' => 'category.title',
                 'visible' => 1
             ],
@@ -58,14 +60,21 @@ class ProductController extends BaseController
                 'type' => 'select',
                 'content' => [
                     'all' => Category::all(),
-                    'name' => 'title',
+                ]
+            ],
+            [
+                'name' => 'details',
+                'type' => 'multiselect',
+                'content' => [
+                    'all' => DetailValue::all(),
+                    'name' => 'key_value'
                 ]
             ],
             [
                 'name' => 'files',
                 'get' => 'images',
                 'type' => 'file',
-            ]
+            ],
         ];
         $multilang = [
             [
@@ -144,9 +153,17 @@ class ProductController extends BaseController
                 'type' => 'select',
                 'content' => [
                     'all' => Category::all(),
-                    'name' => 'title',
                 ],
                 'value' => $product->category_id
+            ],
+            [
+                'name' => 'details',
+                'type' => 'multiselect',
+                'content' => [
+                    'all' => DetailValue::all(),
+                    'name' => 'key_value'
+                ],
+                'value' => $product->details->pluck('detail_value_id')->toArray()
             ],
             [
                 'name' => 'files',
@@ -167,6 +184,7 @@ class ProductController extends BaseController
                 'value' => $product
             ]
         ];
+
         return Crud::create($inputs, $multilang);
     }
 

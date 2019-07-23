@@ -36,5 +36,13 @@
                 <a href="#" class="dropdown-item dropdown-footer">مشاهده همه نوتیفیکیشن</a>
             </div>
         </li>
+        <li>
+            <form action="{{route('logout')}}" method="post">
+                @csrf
+                <button class="nav-link btn btn-link" style="color: #fff;">
+                    خروج
+                </button>
+            </form>
+        </li>
     </ul>
 </nav>

@@ -48,9 +48,10 @@ class DetailValueController extends BaseController
     }
 
     /**
-     * Show the form for creating a new resource.
+     * @package create
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -60,7 +61,6 @@ class DetailValueController extends BaseController
                 'type' => 'select',
                 'content' => [
                     'all' => DetailKey::all(),
-                    'name' => 'title',
                 ],
             ]
         ];
@@ -83,13 +83,13 @@ class DetailValueController extends BaseController
      */
     public function store(DetailValueRequest $request)
     {
-        $result = DetailValue::create([
+        $item = DetailValue::create([
             'detail_key_id' => $request->detail
         ]);
 
-        $result->createLocale('title', $request->title);
+        $item->createLocale('title', $request->title);
 
-        return redirect()->route($this->route . '.show', $result->id);
+        return redirect()->route($this->route . '.show', $item->id);
     }
 
     /**
@@ -130,10 +130,12 @@ class DetailValueController extends BaseController
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * @package edit
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
@@ -146,7 +148,6 @@ class DetailValueController extends BaseController
                 'type' => 'select',
                 'content' => [
                     'all' => DetailKey::all(),
-                    'name' => 'title',
                 ],
                 'value' => $item->detailKey ? $item->detailKey->id : null
             ]
@@ -175,6 +176,8 @@ class DetailValueController extends BaseController
         $item = DetailValue::find($id);
         $item->detail_key_id = $request->detail;
         $item->save();
+
+        $item->updateLocale('title', $request->title);
 
         return redirect()->route($this->route . '.show', $id);
     }

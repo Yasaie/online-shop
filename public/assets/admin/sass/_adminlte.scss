@@ -2969,19 +2969,6 @@ input[type="button"].btn-block {
 	border-top: 1px solid #e9ecef;
 }
 
-.dropdown-item {
-	display: block;
-	width: 100%;
-	padding: 0.25rem 1rem;
-	clear: both;
-	font-weight: 400;
-	color: #212529;
-	text-align: inherit;
-	white-space: nowrap;
-	background-color: transparent;
-	border: 0;
-}
-
 .dropdown-item:hover, .dropdown-item:focus {
 	color: #16181b;
 	text-decoration: none;
@@ -13050,6 +13037,22 @@ a.text-muted:hover {
 
 .elevation-5 {
 	box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.dropdown-item {
+	display: block;
+	width: 100%;
+	padding: 0.25rem 1rem;
+	clear: both;
+	font-weight: 400;
+	text-align: inherit;
+	white-space: nowrap;
+	background-color: transparent;
+	border: 0
+}
+
+a.dropdown-item {
+	color: #212529 !important;
 }
 
 /*# sourceMappingURL=adminlte.css.map */

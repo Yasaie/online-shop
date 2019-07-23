@@ -70,7 +70,6 @@ class StateController extends BaseController
                 'type' => 'select',
                 'content' => [
                     'all' => Country::all(),
-                    'name' => 'name',
                 ],
             ]
         ];
