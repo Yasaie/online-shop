@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Country;
+use App\Http\Requests\StateRequest;
 use App\State;
 use function compact;
 use function flattenItems;
@@ -39,7 +40,7 @@ class StateController extends BaseController
                 'visible' => 1
             ],
             [
-                'name' => 'country_name',
+                'name' => 'country',
                 'get' => 'country.name',
                 'visible' => 1
             ],
@@ -70,6 +71,7 @@ class StateController extends BaseController
                 'type' => 'select',
                 'content' => [
                     'all' => Country::all(),
+                    'name' => 'name'
                 ],
             ]
         ];
@@ -77,14 +79,21 @@ class StateController extends BaseController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @package store
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StateRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(StateRequest $request)
     {
-        //
+        $item = State::create([
+            'name' => $request->name,
+            'country_id' => $request->country,
+        ]);
+
+        return redirect()->route($this->route . '.show', $item->id);
     }
 
     /**
@@ -106,7 +115,7 @@ class StateController extends BaseController
                 'name' => 'name',
             ],
             [
-                'name' => 'country_name',
+                'name' => 'country',
                 'get' => 'country.name',
             ],
             [
@@ -147,15 +156,22 @@ class StateController extends BaseController
     }
 
     /**
-     * Update the specified resource in storage.
+     * @package update
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param StateRequest $request
+     * @param $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(StateRequest $request, $id)
     {
-        //
+        $item = State::find($id);
+        $item->name = $request->name;
+        $item->country_id = $request->country;
+        $item->save();
+
+        return redirect()->route($this->route . '.show', $id);
     }
 
     /**

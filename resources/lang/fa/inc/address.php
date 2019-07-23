@@ -10,8 +10,6 @@ return [
 
     'states' => 'استان‌ها',
     'state' => 'استان',
-    'state_name' => 'نام استان',
 
-    'country_name' => 'نام کشور',
     'country' => 'کشور',
 ];

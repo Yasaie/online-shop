@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Country;
+use App\Http\Requests\CountryRequest;
 use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
 
@@ -62,14 +63,20 @@ class CountryController extends BaseController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @package store
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CountryRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CountryRequest $request)
     {
-        //
+        $item = Country::create([
+            'name' => $request->name
+        ]);
+
+        return redirect()->route($this->route . '.show', $item->id);
     }
 
     /**
@@ -123,15 +130,21 @@ class CountryController extends BaseController
     }
 
     /**
-     * Update the specified resource in storage.
+     * @package update
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param CountryRequest $request
+     * @param $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(CountryRequest $request, $id)
     {
-        //
+        $item = Country::find($id);
+        $item->name = $request->name;
+        $item->save();
+
+        return redirect()->route($this->route . '.show', $id);
     }
 
     /**

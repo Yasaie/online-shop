@@ -11,6 +11,8 @@ class Seller extends Model
 
     protected $appends = ['current_price'];
 
+    protected $guarded = [];
+
     public function getCurrentPriceAttribute()
     {
         return userPrice($this->price, $this->currency->ratio);

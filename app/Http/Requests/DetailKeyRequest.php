@@ -2,20 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
-
-class DetailKeyRequest extends FormRequest
+class DetailKeyRequest extends BaseRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -23,12 +11,9 @@ class DetailKeyRequest extends FormRequest
      */
     public function rules()
     {
-        $langs = \Config::get('global.langs');
-
-        return [
-            'title.' . current($langs)->getId() => 'required',
+        return array_merge(parent::rules(), [
             'category' => 'required|exists:detail_categories,id',
             'highlighted' => 'required|boolean'
-        ];
+        ]);
     }
 }

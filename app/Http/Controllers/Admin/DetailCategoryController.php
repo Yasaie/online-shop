@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\DetailCategory;
+use App\Http\Requests\BaseRequest;
 use App\Http\Requests\DetailCategoryRequest;
 use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
@@ -61,11 +62,11 @@ class DetailCategoryController extends BaseController
      * @package store
      * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param DetailCategoryRequest $request
+     * @param BaseRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(DetailCategoryRequest $request)
+    public function store(BaseRequest $request)
     {
         $item = DetailCategory::create([]);
 
@@ -135,13 +136,13 @@ class DetailCategoryController extends BaseController
      * @package update
      * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param DetailCategoryRequest $request
+     * @param BaseRequest $request
      * @param $id
      *
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function update(DetailCategoryRequest $request, $id)
+    public function update(BaseRequest $request, $id)
     {
         $item = DetailCategory::find($id);
         $item->touch();

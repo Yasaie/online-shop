@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\City;
+use App\Http\Requests\CityRequest;
 use App\State;
 use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
@@ -34,12 +35,12 @@ class CityController extends BaseController
                 'visible' => 1
             ],
             [
-                'name' => 'state_name',
+                'name' => 'state',
                 'get' => 'state.name',
                 'visible' => 1
             ],
             [
-                'name' => 'country_name',
+                'name' => 'country',
                 'get' => 'state.country.name',
                 'visible' => 1
             ],
@@ -73,14 +74,21 @@ class CityController extends BaseController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @package store
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CityRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CityRequest $request)
     {
-        //
+        $item = City::create([
+            'name' => $request->name,
+            'state_id' => $request->state,
+        ]);
+
+        return redirect()->route($this->route . '.show', $item->id);
     }
 
     /**
@@ -102,16 +110,16 @@ class CityController extends BaseController
                 'name' => 'name',
             ],
             [
-                'name' => 'state_name',
+                'name' => 'state',
                 'get' => 'state.name',
             ],
             [
-                'name' => 'country_name',
+                'name' => 'country',
                 'get' => 'state.country.name',
             ],
         ];
 
-        return Crud::show($id, $heads, $this->model);
+        return Crud::show($id, $heads, $this->route, $this->model);
     }
 
     /**
@@ -143,15 +151,22 @@ class CityController extends BaseController
     }
 
     /**
-     * Update the specified resource in storage.
+     * @package update
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param CityRequest $request
+     * @param $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(CityRequest $request, $id)
     {
-        //
+        $item = City::find($id);
+        $item->name = $request->name;
+        $item->state_id = $request->state;
+        $item->save();
+
+        return redirect()->route($this->route . '.show', $id);
     }
 
     /**
