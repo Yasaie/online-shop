@@ -23,11 +23,15 @@ use Yasaie\Dictionary\Traits\HasDictionary;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Product whereModifiedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|DictionaryTrait dictionary()
  * @mixin \Eloquent
+ * @mixin HasDictionary
+ * @mixin HasMediaTrait
  */
 class Product extends BaseModel implements HasMedia
 {
     use HasDictionary,
         HasMediaTrait;
+
+    protected $guarded = [];
 
     protected $appends = ['product_rate'];
 

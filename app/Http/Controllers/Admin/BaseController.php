@@ -29,6 +29,8 @@ abstract class BaseController extends Controller
             'destroy' => method_exists($this, 'destroy'),
         ];
 
+        $comment = Comment::get();
+
         $menu_items = [
             [
                 'name'  =>  'داشبورد',
@@ -139,11 +141,16 @@ abstract class BaseController extends Controller
                 'name' => 'نظرات',
                 'icon' => 'comment',
                 'base' => 'admin.comment.',
-                'count' => Comment::count(),
+                'count' => $comment->count(),
                 'child' => [
                     [
                         'name' => 'همه',
                         'route' => 'index'
+                    ],
+                    [
+                        'name' => 'خوانده نشده',
+                        'count' => $comment->where('is_changed', false)->count(),
+                        'route' => 'unread'
                     ]
                 ]
             ],

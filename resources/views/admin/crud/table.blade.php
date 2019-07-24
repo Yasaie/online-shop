@@ -35,8 +35,8 @@
                                     <th class="sorting{{$sort == $head['name'] ? ($desc ? '_desc' : '_asc') : ''}}">
                                         @php
                                             $sorting = $query;
-                                            $sorting['sort'] = $head['name'];
-                                            $sorting['desc'] = ($sort == $head['name']) ? ($desc ? null : 1) : ($desc ? 1 : null);
+                                            $sorting['sort'] = $head['name'] .
+                                                (($sort == $head['name']) ? ($desc ? null : '_desc') : ($desc ? '_desc' : null));
                                         @endphp
                                         <a href="?{{http_build_query($sorting)}}">
                                             @lang('model.' . $head['name'])
@@ -57,13 +57,12 @@
                                     @endif
                                 @endforeach
                                 <td class="text-center">
-                                    @php($current_route = str_replace('index', '', Route::currentRouteName()))
                                     @if($crud['show'])
-                                    <a href="{{route($current_route . 'show', $item->id)}}"
+                                    <a href="{{route($route . '.show', $item->id)}}"
                                        class="btn btn-info btn-sm fa fa-eye"></a>
                                     @endif
                                     @if($crud['edit'])
-                                    <a href="{{route($current_route . 'edit', $item->id)}}"
+                                    <a href="{{route($route . '.edit', $item->id)}}"
                                        class="btn btn-success btn-sm fa fa-pencil"></a>
                                     @endif
                                     @if($crud['destroy'])

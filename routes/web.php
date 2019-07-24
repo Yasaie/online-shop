@@ -53,6 +53,7 @@ Route::namespace('Admin')
                 Route::resource('city', 'CityController');
             });
         # Comments
+        Route::get('comment/unread', 'CommentController@unread')->name('comment.unread');
         Route::resource('comment', 'CommentController')
             ->only(['index', 'show', 'destroy']);
         # Settings

@@ -27,11 +27,7 @@ class UserController extends BaseController
                 'name' => 'id',
             ],
             [
-                'name' => 'first_name',
-                'visible' => 1
-            ],
-            [
-                'name' => 'last_name',
+                'name' => 'full_name',
                 'visible' => 1
             ],
             [
@@ -71,14 +67,37 @@ class UserController extends BaseController
     }
 
     /**
-     * Display the specified resource.
+     * @package show
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function show($id)
     {
-        //
+        # table headers
+        $heads = [
+            [
+                'name' => 'id',
+            ],
+            [
+                'name' => 'first_name',
+            ],
+            [
+                'name' => 'last_name',
+            ],
+            [
+                'name' => 'email',
+            ],
+            [
+                'name' => 'role',
+                'get' => 'getRoleNames().toArray()',
+                'string' => true,
+            ]
+        ];
+
+        return Crud::show($id, $heads, $this->route, $this->model);
     }
 
     /**

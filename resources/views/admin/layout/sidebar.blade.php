@@ -35,7 +35,7 @@
                         @endif
                             <span>{{$menu['name']}}</span>
                         </p>
-                        @if(isset($menu['count']))
+                        @if(isset($menu['count']) and $menu['count'])
                         <span class="badge badge-danger" style="margin: 3px 15px;">{{$menu['count']}}</span>
                         @endif
                     </a>
@@ -46,7 +46,7 @@
                             <a href="{{url()->route($menu['base'] . $child['route'])}}" class="nav-link d-flex {{Route::is($menu['base'] . $child['route']) ? 'active' : ''}}">
                                 <i class="fa fa-circle-o nav-icon"></i>
                                 <p class="flex-grow-1">{{$child['name']}}</p>
-                                @if(isset($child['count']))
+                                @if(isset($child['count']) and $child['count'])
                                 <span class="badge badge-info" style="margin: 3px 15px;">{{$child['count']}}</span>
                                 @endif
                             </a>

@@ -43,7 +43,7 @@ class CountryController extends BaseController
             ],
         ];
 
-        return Crud::index($this->model, $heads, 'id', $this->perPage, $this->load);
+        return Crud::index($this->model, $heads, 'name', $this->perPage, $this->load);
     }
 
     /**

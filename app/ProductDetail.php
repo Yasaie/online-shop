@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class ProductDetail extends Model
 {
+    protected $guarded = [];
+
     protected $appends = ['highlighted'];
 
     public function detailKey()

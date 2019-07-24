@@ -1,4 +1,4 @@
-<select name="{{$name}}" id="{{$name}}" multiple class="form-control select2"
+<select name="{{$name}}[]" id="{{$name}}" multiple class="form-control select2"
         style="width: 100%"
         data-placeholder="">
     @foreach($content['all'] as $c)

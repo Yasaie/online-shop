@@ -46,7 +46,7 @@ class CityController extends BaseController
             ],
         ];
 
-        return Crud::index($this->model, $heads, 'id', $this->perPage, $this->load);
+        return Crud::index($this->model, $heads, 'name', $this->perPage, $this->load);
     }
 
     /**
@@ -162,6 +162,7 @@ class CityController extends BaseController
     public function update(CityRequest $request, $id)
     {
         $item = City::find($id);
+
         $item->name = $request->name;
         $item->state_id = $request->state;
         $item->save();

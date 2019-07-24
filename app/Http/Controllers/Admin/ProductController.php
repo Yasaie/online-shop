@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\DetailValue;
+use App\Http\Requests\ProductRequest;
 use App\Product;
 use App\ProductDetail;
 use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
+use Yasaie\Helper\Y;
 
 class ProductController extends BaseController
 {
@@ -44,7 +46,7 @@ class ProductController extends BaseController
             ]
         ];
 
-        return Crud::index($this->model, $heads, 'updated_at', $this->perPage, $this->load);
+        return Crud::index($this->model, $heads, 'updated_at_desc', $this->perPage, $this->load);
     }
 
     /**
@@ -90,15 +92,25 @@ class ProductController extends BaseController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @package store
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request $request
+     * @param ProductRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        //
+        $item = Product::create([
+            'category_id' => $request->category,
+        ]);
+
+        Y::addAndRemove($item->details(), 'detail_value_id', $request->details);
+
+        $item->createLocale('title', $request->title);
+        $item->createLocale('description', $request->description);
+
+        return redirect()->route($this->route . '.show', $item->id);
     }
 
     /**
@@ -120,11 +132,15 @@ class ProductController extends BaseController
                 'name' => 'title',
             ],
             [
-                'name' => 'category_title',
+                'name' => 'category',
                 'get' => 'category.title',
             ],
             [
                 'name' => 'description',
+            ],
+            [
+                'name' => 'details',
+                'get' => 'details.detailValue.key_value',
             ],
             [
                 'name' => 'created_at',
@@ -189,16 +205,27 @@ class ProductController extends BaseController
     }
 
     /**
-     * Update the specified resource in storage.
+     * @package update
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  int $id
+     * @param ProductRequest $request
+     * @param $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
-        //
+        $item = Product::find($id);
+
+        $item->category_id = $request->category;
+
+        Y::addAndRemove($item->details(), 'detail_value_id', $request->details);
+
+        $item->updateLocale('title', $request->title);
+        $item->updateLocale('description', $request->description);
+
+        return redirect()->route($this->route . '.show', $id);
     }
 
     /**

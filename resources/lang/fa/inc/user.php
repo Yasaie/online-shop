@@ -8,6 +8,8 @@
 return [
     'first_name' => 'نام',
     'last_name' => 'نام خانوادگی',
+    'full_name' => 'نام کامل',
     'email' => 'ایمیل',
     'role' => 'نقش',
+    'user' => 'کاربر'
 ];

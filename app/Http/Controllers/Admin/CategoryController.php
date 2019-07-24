@@ -193,6 +193,7 @@ class CategoryController extends BaseController
     public function update(Request $request, $id)
     {
         $item = Category::find($id);
+
         $item->parent_id = $request->parent;
         $item->save();
 

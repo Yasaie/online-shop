@@ -15,6 +15,7 @@ class CommentTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'product_id' => 1,
+                'title' => 'درباره محصول',
                 'body' => 'سلام خوبی؟',
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),
@@ -22,9 +23,10 @@ class CommentTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'product_id' => 1,
+                'title' => 'تشکر',
                 'body' => 'مرسی خوبم',
-                'created_at' => \Carbon\Carbon::now(),
-                'updated_at' => \Carbon\Carbon::now(),
+                'created_at' => \Carbon\Carbon::now()->addDay(1),
+                'updated_at' => \Carbon\Carbon::now()->addDay(1),
             ],
         ];
 
