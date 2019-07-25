@@ -64,7 +64,7 @@ class CityController extends BaseController
             [
                 'name' => 'state',
                 'type' => 'select',
-                'content' => [
+                'option' => [
                     'all' => State::all(),
                     'name' => 'name',
                 ],
@@ -140,7 +140,7 @@ class CityController extends BaseController
             [
                 'name' => 'state',
                 'type' => 'select',
-                'content' => [
+                'option' => [
                     'all' => State::all(),
                     'name' => 'name',
                 ],
@@ -163,10 +163,12 @@ class CityController extends BaseController
     {
         $item = City::find($id);
 
-        $item->name = $request->name;
-        $item->state_id = $request->state;
-        $item->save();
+        $item->update([
+            'name' => $request->name,
+            'state_id' => $request->state
+        ]);
 
+        $item->touch();
         return redirect()->route($this->route . '.show', $id);
     }
 

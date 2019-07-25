@@ -64,7 +64,7 @@ class CategoryController extends BaseController
             [
                 'name' => 'parent',
                 'type' => 'select',
-                'content' => [
+                'option' => [
                     'all' => Category::all(),
                 ],
             ]
@@ -164,7 +164,7 @@ class CategoryController extends BaseController
             [
                 'name' => 'parent',
                 'type' => 'select',
-                'content' => [
+                'option' => [
                     'all' => $all->where('id', '<>' ,$item->id),
                 ],
                 'value' => $item->parent_id
@@ -194,11 +194,13 @@ class CategoryController extends BaseController
     {
         $item = Category::find($id);
 
-        $item->parent_id = $request->parent;
-        $item->save();
+        $item->update([
+            'parent_id' => $request->parent
+        ]);
 
         $item->updateLocale('title', $request->title);
 
+        $item->touch();
         return redirect()->route($this->route . '.show', $id);
     }
 

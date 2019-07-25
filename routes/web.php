@@ -11,12 +11,15 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')
+    ->name('home');
 
-Route::namespace('Front')->group(function () {
-    Route::get('product/{id}/{slag?}', 'ProductController@index');
-    Route::get('product_t/{id}/{slag?}', 'ProductController@index_t');
-});
+Route::namespace('Front')
+    ->group(function ()
+    {
+        Route::get('product/{id}/{slag?}', 'ProductController@index');
+        Route::get('product_t/{id}/{slag?}', 'ProductController@index_t');
+    });
 
 Route::namespace('Admin')
     ->prefix('admin')
@@ -24,10 +27,22 @@ Route::namespace('Admin')
     ->middleware(['auth', 'role:admin'])
     ->group(function ()
     {
-        Route::get('/', 'HomeController@index')->name('home');
+        Route::get('/', 'HomeController@index')
+            ->name('home');
+        # Media Upload and Unlink
+        Route::name('media.')
+            ->group(function ()
+            {
+                Route::post('media/upload/{collection}', 'MediaController@upload')
+                    ->name('upload');
+                Route::delete('media/unlink/{id?}', 'MediaController@unlink')
+                    ->name('unlink');
+            });
         # Category
         Route::resource('category', 'CategoryController');
         # Product
+        Route::post('product/upload', 'ProductController@upload')
+            ->name('product.upload');
         Route::resource('product', 'ProductController');
         # Product Details
         Route::name('detail.')
@@ -53,7 +68,8 @@ Route::namespace('Admin')
                 Route::resource('city', 'CityController');
             });
         # Comments
-        Route::get('comment/unread', 'CommentController@unread')->name('comment.unread');
+        Route::get('comment/unread', 'CommentController@unread')
+            ->name('comment.unread');
         Route::resource('comment', 'CommentController')
             ->only(['index', 'show', 'destroy']);
         # Settings
@@ -61,22 +77,16 @@ Route::namespace('Admin')
             ->prefix('setting')
             ->group(function ()
             {
-                Route::get('global', 'SettingController@global')->name('global.index');
-                Route::post('global', 'SettingController@globalStore')->name('global.store');
+                Route::get('global', 'SettingController@global')
+                    ->name('global.index');
+                Route::post('global', 'SettingController@globalStore')
+                    ->name('global.store');
             });
     });
 
 Route::get('lang/{id}', 'PublicController@lang');
 Route::get('currency/{id}', 'PublicController@currency');
-
-
-//Route::get('/image/{image}.{ext}', 'PublicController@image');
-
-//Route::get('/file/{model}/{model_id}/{file_id}/{file_area}/{file_name}', 'PublicController@file');
-
-//Route::get('/storage', '')
-
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/image/{image}.{ext}', 'PublicController@image');
+//Route::get('/file/{model}/{model_id}/{file_id}/{file_area}/{file_name}', 'PublicController@file');

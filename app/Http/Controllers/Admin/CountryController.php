@@ -141,9 +141,12 @@ class CountryController extends BaseController
     public function update(CountryRequest $request, $id)
     {
         $item = Country::find($id);
-        $item->name = $request->name;
-        $item->save();
 
+        $item->update([
+            'name' => $request->name
+        ]);
+
+        $item->touch();
         return redirect()->route($this->route . '.show', $id);
     }
 

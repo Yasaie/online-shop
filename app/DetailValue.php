@@ -7,6 +7,7 @@ use Yasaie\Dictionary\Traits\HasDictionary;
 
 /**
  * @mixin \Eloquent
+ * @mixin HasDictionary
  */
 class DetailValue extends Model
 {

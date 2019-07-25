@@ -5,6 +5,9 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\MediaLibrary\File;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\Permission\Traits\HasRoles;
 
 /**
@@ -32,11 +35,13 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUsersId($value)
  * @mixin \Eloquent
  * @mixin HasRoles
+ * @mixin HasMediaTrait
  */
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
     use Notifiable,
-        HasRoles;
+        HasRoles,
+        HasMediaTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -80,5 +85,18 @@ class User extends Authenticatable
     public function getFullNameAttribute()
     {
         return "{$this->first_name} {$this->last_name}";
+    }
+
+    public function registerMediaCollections()
+    {
+        $this->addMediaCollection('product_temp')
+            ->acceptsFile(function (File $file) {
+                $acceptable = [
+                    'image/jpeg',
+                    'image/png',
+                    'image/gif',
+                ];
+                return in_array($file->mimeType, $acceptable);
+            });
     }
 }

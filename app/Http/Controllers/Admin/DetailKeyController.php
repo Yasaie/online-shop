@@ -62,7 +62,7 @@ class DetailKeyController extends BaseController
             [
                 'name' => 'category',
                 'type' => 'select',
-                'content' => [
+                'option' => [
                     'all' => DetailCategory::all(),
                 ],
             ]
@@ -157,7 +157,7 @@ class DetailKeyController extends BaseController
             [
                 'name' => 'category',
                 'type' => 'select',
-                'content' => [
+                'option' => [
                     'all' => DetailCategory::all(),
                 ],
                 'value' => $item->detailCategory->id
@@ -165,7 +165,7 @@ class DetailKeyController extends BaseController
             [
                 'name' => 'highlighted',
                 'type' => 'select',
-                'content' => [
+                'option' => [
                     'all' => [
                         ['id' => 0, 'title' => 'خیر'],
                         ['id' => 1, 'title' => 'بلی'],
@@ -197,12 +197,15 @@ class DetailKeyController extends BaseController
     public function update(DetailKeyRequest $request, $id)
     {
         $item = DetailKey::find($id);
-        $item->detail_category_id = $request->category;
-        $item->highlighted = $request->highlighted;
-        $item->save();
+
+        $item->update([
+            'detail_category_id' => $request->category,
+            'highlighted' => $request->highlighted,
+        ]);
 
         $item->updateLocale('title', $request->title);
 
+        $item->touch();
         return redirect()->route($this->route . '.show', $id);
     }
 

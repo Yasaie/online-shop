@@ -59,7 +59,7 @@ class DetailValueController extends BaseController
             [
                 'name' => 'detail',
                 'type' => 'select',
-                'content' => [
+                'option' => [
                     'all' => DetailKey::all(),
                 ],
             ]
@@ -146,7 +146,7 @@ class DetailValueController extends BaseController
             [
                 'name' => 'detail',
                 'type' => 'select',
-                'content' => [
+                'option' => [
                     'all' => DetailKey::all(),
                 ],
                 'value' => $item->detailKey ? $item->detailKey->id : null
@@ -170,15 +170,19 @@ class DetailValueController extends BaseController
      * @param $id
      *
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function update(DetailValueRequest $request, $id)
     {
         $item = DetailValue::find($id);
-        $item->detail_key_id = $request->detail;
-        $item->save();
+
+        $item->update([
+            'detail_key_id' => $request->detail
+        ]);
 
         $item->updateLocale('title', $request->title);
 
+        $item->touch();
         return redirect()->route($this->route . '.show', $id);
     }
 

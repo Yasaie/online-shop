@@ -145,10 +145,10 @@ class DetailCategoryController extends BaseController
     public function update(BaseRequest $request, $id)
     {
         $item = DetailCategory::find($id);
-        $item->touch();
 
         $item->updateLocale('title', $request->title);
 
+        $item->touch();
         return redirect()->route($this->route . '.show', $id);
     }
 

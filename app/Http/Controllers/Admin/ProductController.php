@@ -56,18 +56,20 @@ class ProductController extends BaseController
      */
     public function create()
     {
+        \Auth::user()->clearMediaCollection('product_temp');
+
         $inputs = [
             [
                 'name' => 'category',
                 'type' => 'select',
-                'content' => [
+                'option' => [
                     'all' => Category::all(),
                 ]
             ],
             [
                 'name' => 'details',
                 'type' => 'multiselect',
-                'content' => [
+                'option' => [
                     'all' => DetailValue::all(),
                     'name' => 'key_value'
                 ]
@@ -76,6 +78,9 @@ class ProductController extends BaseController
                 'name' => 'files',
                 'get' => 'images',
                 'type' => 'file',
+                'option' => [
+                    'temp' => 'product_temp'
+                ]
             ],
         ];
         $multilang = [
@@ -88,6 +93,7 @@ class ProductController extends BaseController
                 'type' => 'texthtml'
             ]
         ];
+
         return Crud::create($inputs, $multilang);
     }
 
@@ -109,6 +115,10 @@ class ProductController extends BaseController
 
         $item->createLocale('title', $request->title);
         $item->createLocale('description', $request->description);
+
+        foreach (\Auth::user()->getMedia('product_temp') as $file) {
+            $file->move($item, 'images');
+        }
 
         return redirect()->route($this->route . '.show', $item->id);
     }
@@ -162,12 +172,14 @@ class ProductController extends BaseController
      */
     public function edit($id)
     {
+        \Auth::user()->clearMediaCollection('product_temp');
+
         $product = Product::find($id);
         $inputs = [
             [
                 'name' => 'category',
                 'type' => 'select',
-                'content' => [
+                'option' => [
                     'all' => Category::all(),
                 ],
                 'value' => $product->category_id
@@ -175,7 +187,7 @@ class ProductController extends BaseController
             [
                 'name' => 'details',
                 'type' => 'multiselect',
-                'content' => [
+                'option' => [
                     'all' => DetailValue::all(),
                     'name' => 'key_value'
                 ],
@@ -185,6 +197,9 @@ class ProductController extends BaseController
                 'name' => 'files',
                 'get' => 'images',
                 'type' => 'file',
+                'option' => [
+                    'temp' => 'product_temp'
+                ],
                 'value' => $product
             ]
         ];
@@ -218,13 +233,20 @@ class ProductController extends BaseController
     {
         $item = Product::find($id);
 
-        $item->category_id = $request->category;
+        $item->update([
+            'category_id' => $request->category
+        ]);
 
         Y::addAndRemove($item->details(), 'detail_value_id', $request->details);
 
         $item->updateLocale('title', $request->title);
         $item->updateLocale('description', $request->description);
 
+        foreach (\Auth::user()->getMedia('product_temp') as $file) {
+            $file->move($item, 'images');
+        }
+
+        $item->touch();
         return redirect()->route($this->route . '.show', $id);
     }
 
@@ -237,6 +259,7 @@ class ProductController extends BaseController
      */
     public function destroy($id)
     {
-        return $id;
+        return Crud::destroy($id, $this->model);
     }
+
 }

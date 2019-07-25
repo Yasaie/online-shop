@@ -19,6 +19,16 @@ class CreateRatesTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('rate');
             $table->timestamps();
+
+            $table->foreign('product_id')
+                ->references('id')
+                ->on('products')
+                ->onDelete('cascade');
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

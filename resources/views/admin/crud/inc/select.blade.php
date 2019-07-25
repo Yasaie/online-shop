@@ -2,13 +2,13 @@
         style="width: 100%"
         data-placeholder="">
     <option></option>
-    @foreach($content['all'] as $c)
-        @php($id = isset($content['id'])
-            ? Y::dotObject($c, $content['id'])
+    @foreach($option['all'] as $c)
+        @php($id = isset($option['id'])
+            ? Y::dotObject($c, $option['id'])
             : Y::dotObject($c, 'id')
         )
-        @php($title = isset($content['name'])
-            ? Y::dotObject($c, $content['name'])
+        @php($title = isset($option['name'])
+            ? Y::dotObject($c, $option['name'])
             : Y::dotObject($c, 'title')
         )
     <option value="{{$id}}"

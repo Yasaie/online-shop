@@ -69,7 +69,7 @@ class StateController extends BaseController
             [
                 'name' => 'country',
                 'type' => 'select',
-                'content' => [
+                'option' => [
                     'all' => Country::all(),
                     'name' => 'name'
                 ],
@@ -145,7 +145,7 @@ class StateController extends BaseController
             [
                 'name' => 'country',
                 'type' => 'select',
-                'content' => [
+                'option' => [
                     'all' => Country::all(),
                     'name' => 'name',
                 ],
@@ -167,10 +167,13 @@ class StateController extends BaseController
     public function update(StateRequest $request, $id)
     {
         $item = State::find($id);
-        $item->name = $request->name;
-        $item->country_id = $request->country;
-        $item->save();
 
+        $item->update([
+            'name' => $request->name,
+            'country_id' => $request->country
+        ]);
+
+        $item->touch();
         return redirect()->route($this->route . '.show', $id);
     }
 

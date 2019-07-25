@@ -26,7 +26,12 @@ class CreateSellersTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('product_id')->references('id')->on('products');
+
+            $table->foreign('product_id')
+                ->references('id')
+                ->on('products')
+                ->onDelete('cascade');
+
             $table->foreign('currency_id')->references('id')->on('currencies');
             $table->foreign('seller_service_id')->references('id')->on('seller_services');
         });

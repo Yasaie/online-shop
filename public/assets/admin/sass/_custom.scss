@@ -51,6 +51,14 @@
 			&-progress {
 				top: 38%;
 			}
+
+			&-image {
+				img {
+					width: 120px;
+					height: 120px;
+					object-fit: cover;
+				}
+			}
 		}
 	}
 }

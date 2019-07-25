@@ -70,7 +70,7 @@ class CurrencyController extends BaseController
             [
                 'name' => 'default_language',
                 'type' => 'select',
-                'content' => [
+                'option' => [
                     'all' => config('global.langs'),
                     'name' => 'getNativeName()',
                     'id' => 'getId()'
@@ -192,7 +192,7 @@ class CurrencyController extends BaseController
             [
                 'name' => 'default_language',
                 'type' => 'select',
-                'content' => [
+                'option' => [
                     'all' => config('global.langs'),
                     'name' => 'getNativeName()',
                     'id' => 'getId()'
@@ -226,18 +226,19 @@ class CurrencyController extends BaseController
     {
         $item = Currency::find($id);
 
-        $item->language_id = $request->default_language;
-        $item->key = $request->key;
-        $item->symbol = $request->symbol;
-        $item->ratio = $request->ratio;
-        $item->places = $request->places;
-
-        $item->save();
+        $item->update([
+            'language_id' => $request->default_language,
+            'key' => $request->key,
+            'symbol' => $request->symbol,
+            'ratio' => $request->ratio,
+            'places' => $request->places
+        ]);
 
         $item->updateLocale('name', $request->name);
 
         \Cache::delete('app.currencies');
 
+        $item->touch();
         return redirect()->route($this->route . '.show', $id);
     }
 
