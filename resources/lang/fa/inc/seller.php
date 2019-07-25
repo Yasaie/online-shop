@@ -9,4 +9,7 @@ return [
     'seller' => 'فروشنده',
     'price' => 'قیمت',
     'prev_price' => 'قیمت بدون تخفیف',
+    'off_percent' => 'درصد تخفیف',
+    'current_price' => 'به واحد فعلی',
+
 ];

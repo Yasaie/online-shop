@@ -101,8 +101,16 @@ class SellerController extends BaseController
                 'name' => 'prev_price',
             ],
             [
+                'name' => 'off_percent',
+                'append' => ' %'
+            ],
+            [
                 'name' => 'currency',
                 'get' => 'currency.name',
+            ],
+            [
+                'name' => 'current_price',
+                'append' => ' ' . config('app.current_currency')->title
             ],
             [
                 'name' => 'created_at'

@@ -9,7 +9,11 @@ class Seller extends Model
 {
     use SoftDeletes;
 
-    protected $appends = ['current_price'];
+    protected $appends = [
+        'current_price',
+        'previous_price',
+        'off_percent'
+    ];
 
     protected $guarded = [];
 
@@ -21,6 +25,14 @@ class Seller extends Model
     public function getPreviousPriceAttribute()
     {
         return userPrice($this->prev_price, $this->currency->ratio);
+    }
+
+    public function getOffPercentAttribute()
+    {
+        $previous = filter_var($this->previous_price, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $current = filter_var($this->current_price, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+
+        return $previous ? floor((100 - (($current * 100) / $previous))) : 0;
     }
 
     public function user()
