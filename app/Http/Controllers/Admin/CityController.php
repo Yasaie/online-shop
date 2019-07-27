@@ -64,7 +64,7 @@ class CityController extends BaseController
             [
                 'name' => 'state',
                 'type' => 'select',
-                'option' => [
+                'options' => [
                     'all' => State::all(),
                     'name' => 'name',
                 ],
@@ -140,7 +140,7 @@ class CityController extends BaseController
             [
                 'name' => 'state',
                 'type' => 'select',
-                'option' => [
+                'options' => [
                     'all' => State::all(),
                     'name' => 'name',
                 ],

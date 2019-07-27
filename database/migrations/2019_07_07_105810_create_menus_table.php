@@ -15,13 +15,14 @@ class CreateMenusTable extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->unsignedInteger('category_id');
             $table->unsignedInteger('parent_id')->nullable();
             $table->unsignedInteger('sort')->nullable();
             $table->timestamps();
 
-            $table->foreign('category_id')->references('id')->on('categories');
-            $table->foreign('parent_id')->references('id')->on('menus');
+            $table->foreign('parent_id')
+                ->references('id')
+                ->on('menus')
+                ->onDelete('cascade');
         });
     }
 

@@ -19,6 +19,7 @@ class CreateSettingsTable extends Migration
             $table->string('key');
             $table->string('type')->default('text');
             $table->string('value')->nullable();
+            $table->text('options')->nullable();
             $table->timestamps();
         });
     }

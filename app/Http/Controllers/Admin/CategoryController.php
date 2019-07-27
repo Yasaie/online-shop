@@ -44,6 +44,11 @@ class CategoryController extends BaseController
                 'visible' => 1
             ],
             [
+                'name' => 'trees',
+                'get' => 'panelLinks()',
+                'visible' => 1
+            ],
+            [
                 'name' => 'products',
                 'get' => 'products.count()',
                 'visible' => 1
@@ -64,7 +69,7 @@ class CategoryController extends BaseController
             [
                 'name' => 'parent',
                 'type' => 'select',
-                'option' => [
+                'options' => [
                     'all' => Category::all(),
                 ],
             ]
@@ -79,18 +84,29 @@ class CategoryController extends BaseController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @package store
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CategoryRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Psr\SimpleCache\InvalidArgumentException
      */
     public function store(CategoryRequest $request)
     {
+        $path = Category::find($request->parent);
+        $path = $path ? $path->path : '';
+
         $item = Category::create([
-            'parent_id' => $request->parent ?: null
+            'parent_id' => $request->parent ?: null,
         ]);
+        $item->path = $path . '/' . $item->id;
+        $item->save();
 
         $item->createLocale('title', $request->title);
+
+        \Cache::delete('app.categories');
+        \Cache::delete('app.categories.tree');
 
         return redirect()->route($this->route . '.show', $item->id);
     }
@@ -118,9 +134,13 @@ class CategoryController extends BaseController
                 'get' => 'parent.title',
                 'link' => [
                     'search' => 'parent.title',
-                    'column' => 'title',
+                    'column' => 'parent',
                     'route' => 'admin.category.index'
                 ]
+            ],
+            [
+                'name' => 'trees',
+                'get' => 'panelLinks()'
             ],
             [
                 'name' => 'products',
@@ -164,8 +184,8 @@ class CategoryController extends BaseController
             [
                 'name' => 'parent',
                 'type' => 'select',
-                'option' => [
-                    'all' => $all->where('id', '<>' ,$item->id),
+                'options' => [
+                    'all' => $all->where('id', '<>', $item->id),
                 ],
                 'value' => $item->parent_id
             ]
@@ -192,13 +212,20 @@ class CategoryController extends BaseController
      */
     public function update(Request $request, $id)
     {
+        $path = Category::find($request->parent);
+        $path = $path ? $path->path : '';
+
         $item = Category::find($id);
 
         $item->update([
-            'parent_id' => $request->parent
+            'parent_id' => $request->parent,
+            'path' => $path . '/' . $item->id
         ]);
 
         $item->updateLocale('title', $request->title);
+
+        \Cache::delete('app.categories');
+        \Cache::delete('app.categories.tree');
 
         $item->touch();
         return redirect()->route($this->route . '.show', $id);

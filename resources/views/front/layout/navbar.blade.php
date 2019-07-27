@@ -1,9 +1,9 @@
 <ul>
-@foreach($menus as $menu)
+@foreach($categories as $category)
     <li>
-        <a href="/category/{{$menu->category->id}}">{{$menu->category->title}}</a>
-        @if(isset($menu->children))
-            @include('front.layout.navbar', ['menus' => $menu->children])
+        <a href="/category/{{$category->id}}">{{$category->title}}</a>
+        @if(isset($category->children))
+            @include('front.layout.navbar', ['categories' => $category->children])
         @endif
     </li>
 @endforeach

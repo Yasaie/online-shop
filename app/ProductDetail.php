@@ -8,7 +8,7 @@ class ProductDetail extends Model
 {
     protected $guarded = [];
 
-    protected $appends = ['highlighted'];
+    protected $appends = ['highlighted', 'key_value'];
 
     public function detailKey()
     {
@@ -23,5 +23,10 @@ class ProductDetail extends Model
     public function getHighlightedAttribute()
     {
         return $this->detailKey->highlighted;
+    }
+
+    public function getKeyValueAttribute()
+    {
+        return "{$this->detailKey->title}: {$this->detailValue->title}";
     }
 }

@@ -33,13 +33,28 @@ class Product extends BaseModel implements HasMedia
 
     protected $guarded = [];
 
-    protected $appends = ['product_rate'];
+    protected $appends = ['product_rate', 'visitors'];
 
     protected $locales = ['title', 'description'];
 
     public function getProductRateAttribute()
     {
         return $this->rates->avg('rate');
+    }
+
+    public function getVisitorsAttribute()
+    {
+        return $this->getVisits()->count(\DB::raw('DISTINCT ip_address'));
+    }
+
+    public function getVisitsAttribute()
+    {
+        return $this->getVisits()->count();
+    }
+
+    protected function getVisits()
+    {
+        return Tracker::where('path', 'product/' . $this->id);
     }
 
     public function comments()

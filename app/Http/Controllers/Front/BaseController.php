@@ -21,9 +21,12 @@ class BaseController extends Controller
         $this->categories = collect(\Cache::rememberForever('app.categories', function () {
             return Category::get();
         }));
+        $categories = \Cache::rememberForever('app.categories.tree', function () {
+            return Y::buildTree($this->categories);
+        });
         $menus = \Cache::rememberForever('app.menus', function () {
             return Y::buildTree(Menu::with('category')->get()->sortBy('sort'));
         });
-        view()->share(compact('menus'));
+        view()->share(compact('categories'));
     }
 }

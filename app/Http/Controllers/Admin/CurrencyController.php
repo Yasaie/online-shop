@@ -70,7 +70,7 @@ class CurrencyController extends BaseController
             [
                 'name' => 'default_language',
                 'type' => 'select',
-                'option' => [
+                'options' => [
                     'all' => config('global.langs'),
                     'name' => 'getNativeName()',
                     'id' => 'getId()'
@@ -192,7 +192,7 @@ class CurrencyController extends BaseController
             [
                 'name' => 'default_language',
                 'type' => 'select',
-                'option' => [
+                'options' => [
                     'all' => config('global.langs'),
                     'name' => 'getNativeName()',
                     'id' => 'getId()'

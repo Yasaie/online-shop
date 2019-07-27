@@ -59,7 +59,7 @@ class DetailValueController extends BaseController
             [
                 'name' => 'detail',
                 'type' => 'select',
-                'option' => [
+                'options' => [
                     'all' => DetailKey::all(),
                 ],
             ]
@@ -146,7 +146,7 @@ class DetailValueController extends BaseController
             [
                 'name' => 'detail',
                 'type' => 'select',
-                'option' => [
+                'options' => [
                     'all' => DetailKey::all(),
                 ],
                 'value' => $item->detailKey ? $item->detailKey->id : null

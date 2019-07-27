@@ -53,7 +53,7 @@
                             <tr>
                                 @foreach($heads as $head)
                                     @if(isset($head['visible']) and $head['visible'])
-                                        <td>{{ $item->{$head['name']} !== null ? $item->{$head['name']} : '-' }}</td>
+                                        <td>{!! $item->{$head['name']} !== null ? $item->{$head['name']} : '-' !!}</td>
                                     @endif
                                 @endforeach
                                 <td class="text-center">

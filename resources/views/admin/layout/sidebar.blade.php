@@ -16,7 +16,7 @@
                      class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="{{route('admin.user.show', Auth::id() ?: 0)}}" class="d-block">{{Auth::user() ? Auth::user()->full_name : 'Guest'}}</a>
+                <a href="{{route('admin.user.user.show', Auth::id() ?: 0)}}" class="d-block">{{Auth::user() ? Auth::user()->full_name : 'Guest'}}</a>
             </div>
         </div>
 

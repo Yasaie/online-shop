@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Seller;
+use App\Profile;
 use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
 
-class SellerController extends BaseController
+class ProfileController extends BaseController
 {
-    public $route = 'admin.seller';
-    public $title = 'فروشندگان';
-    public $model = Seller::class;
-    public $load = ['user', 'product', 'currency'];
+    public $route = 'admin.user.profile';
+    public $title = 'پروفایل';
+    public $model = Profile::class;
+    public $load = [];
 
     /**
      * @package index
@@ -27,29 +27,15 @@ class SellerController extends BaseController
                 'name' => 'id',
             ],
             [
-                'name' => 'seller',
-                'get' => 'user.full_name',
+                'name' => 'name',
                 'visible' => 1
             ],
             [
-                'name' => 'product.title',
+                'name' => 'title',
                 'visible' => 1
             ],
             [
-                'name' => 'amount',
-                'visible' => 1
-            ],
-            [
-                'name' => 'price',
-                'visible' => 1
-            ],
-            [
-                'name' => 'prev_price',
-                'visible' => 1
-            ],
-            [
-                'name' => 'currency',
-                'get' => 'currency.name',
+                'name' => 'type',
                 'visible' => 1
             ]
         ];
@@ -64,7 +50,33 @@ class SellerController extends BaseController
      */
     public function create()
     {
-        //
+        $inputs = [
+            [
+                'name' => 'name',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'type',
+                'type' => 'select',
+                'options' => [
+                    'all' => [
+                        ['id' => 1, 'title' => 'متن']
+                    ]
+                ]
+            ],
+        ];
+        $multilang = [
+            [
+                'name' => 'title',
+                'type' => 'text'
+            ],
+            [
+                'name' => 'value',
+                'type' => 'textarea'
+            ],
+        ];
+
+        return Crud::create($inputs, $multilang);
     }
 
     /**
@@ -86,51 +98,7 @@ class SellerController extends BaseController
      */
     public function show($id)
     {
-        # table headers
-        $heads = [
-            [
-                'name' => 'id',
-            ],
-            [
-                'name' => 'seller',
-                'get' => 'user.full_name',
-            ],
-            [
-                'name' => 'product.title',
-            ],
-            [
-                'name' => 'amount',
-            ],
-            [
-                'name' => 'price',
-            ],
-            [
-                'name' => 'prev_price',
-            ],
-            [
-                'name' => 'off_percent',
-                'append' => ' %'
-            ],
-            [
-                'name' => 'currency',
-                'get' => 'currency.name',
-            ],
-            [
-                'name' => 'current_price',
-                'append' => ' ' . config('app.current_currency')->title
-            ],
-            [
-                'name' => 'post_price'
-            ],
-            [
-                'name' => 'created_at'
-            ],
-            [
-                'name' => 'updated_at'
-            ]
-        ];
-
-        return Crud::show($id, $heads, $this->route, $this->model);
+        //
     }
 
     /**

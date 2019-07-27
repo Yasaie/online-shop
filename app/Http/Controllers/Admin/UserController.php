@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\User;
 use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
+use Yasaie\Helper\Y;
 
 class UserController extends BaseController
 {
-    public $route = 'admin.user';
+    public $route = 'admin.user.user';
     public $title = 'کاربران';
     public $model = User::class;
     public $load = [];
@@ -94,10 +95,19 @@ class UserController extends BaseController
                 'name' => 'role',
                 'get' => 'getRoleNames().toArray()',
                 'string' => true,
-            ]
+            ],
         ];
 
-        return Crud::show($id, $heads, $this->route, $this->model);
+        $item = User::find($id);
+        foreach ($item->profile as $profile) {
+            $heads[] = [
+                'name' => $profile->name,
+                'get' => 'profile.pivot.data',
+                'translate' => $profile->title
+            ];
+        }
+
+        return Crud::show($item, $heads, $this->route);
     }
 
     /**

@@ -1,4 +1,5 @@
-<div action="{{route('admin.media.upload', $option['temp'])}}" class="dropzone" id="{{$name}}"></div>
+<div action="{{route('admin.media.upload')}}" class="dropzone" id="{{$name}}"></div>
+<input type="hidden" name="{{$name}}" id="{{$name}}">
 <script>
     $(document).ready(function () {
 
@@ -13,6 +14,11 @@
             },
             success: function (file, response) {
                 file.id = response;
+                var array = [];
+                Object.values(this.files).forEach(function (e) {
+                    array.push(e.id)
+                });
+                $("input#{{$name}}").val(array);
             },
             removedfile: function (file) {
                 file.previewElement.remove();

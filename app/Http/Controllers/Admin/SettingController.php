@@ -64,4 +64,15 @@ class SettingController extends BaseController
 
         return redirect()->route('admin.setting.global.index');
     }
+
+    /**
+     * @package clearCache
+     * @author  Payam Yasaie <payam@yasaie.ir>
+     *
+     */
+    public function clearCache()
+    {
+        \Cache::clear();
+        return back();
+    }
 }

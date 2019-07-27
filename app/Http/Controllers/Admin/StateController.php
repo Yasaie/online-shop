@@ -69,7 +69,7 @@ class StateController extends BaseController
             [
                 'name' => 'country',
                 'type' => 'select',
-                'option' => [
+                'options' => [
                     'all' => Country::all(),
                     'name' => 'name'
                 ],
@@ -145,7 +145,7 @@ class StateController extends BaseController
             [
                 'name' => 'country',
                 'type' => 'select',
-                'option' => [
+                'options' => [
                     'all' => Country::all(),
                     'name' => 'name',
                 ],

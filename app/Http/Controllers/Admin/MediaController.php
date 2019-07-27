@@ -13,10 +13,10 @@ class MediaController extends Controller
      * @author  Payam Yasaie <payam@yasaie.ir>
      *
      */
-    public function upload($collection)
+    public function upload()
     {
         return \Auth::user()->addMediaFromRequest('file')
-            ->toMediaCollection($collection)->id;
+            ->toMediaCollection('draft')->id;
     }
 
     /**

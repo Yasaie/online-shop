@@ -11,5 +11,7 @@ return [
     'prev_price' => 'قیمت بدون تخفیف',
     'off_percent' => 'درصد تخفیف',
     'current_price' => 'به واحد فعلی',
+    'amount' => 'موجودی',
+    'post_price' => 'هزینه ارسال',
 
 ];

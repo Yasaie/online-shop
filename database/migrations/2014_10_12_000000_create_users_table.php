@@ -23,6 +23,33 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
         });
+
+        Schema::create('profiles', function (Blueprint $table) {
+            $table->increments('id')->unsigned();
+            $table->string('name')->unique();
+            $table->string('type');
+            $table->text('value')->nullable();
+            $table->text('options')->nullable();
+            $table->timestamps();
+        });
+
+        Schema::create('user_profiles', function (Blueprint $table) {
+            $table->increments('id')->unsigned();
+            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('profile_id');
+            $table->text('data')->nullable();
+            $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
+
+            $table->foreign('profile_id')
+                ->references('id')
+                ->on('profiles')
+                ->onDelete('cascade');
+        });
     }
 
     /**
@@ -32,6 +59,8 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::dropIfExists('user_profiles');
+        Schema::dropIfExists('profiles');
         Schema::dropIfExists('users');
     }
 }

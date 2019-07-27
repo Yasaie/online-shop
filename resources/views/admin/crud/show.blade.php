@@ -28,7 +28,13 @@
                         @foreach($heads as $head)
                             @php($head['get'] = isset($head['get']) ? $head['get'] : $head['name'])
                             <tr>
-                                <th class="col-xs-3 col-lg-2">@lang('model.' . $head['name'])</th>
+                                <th class="col-xs-3 col-lg-2">
+                                    @if(isset($head['translate']))
+                                        {{$head['translate']}}
+                                    @else
+                                        @lang('model.' . $head['name'])
+                                    @endif
+                                </th>
                                 @php($text = (Y::dotObject($item, $head['get'], 1) . (isset($head['append']) ? $head['append'] : '')) ?: '-')
                                 @if(isset($head['link']))
                                     @php($head['link']['search'] = Y::dotObject($item, $head['link']['search']))

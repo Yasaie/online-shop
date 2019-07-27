@@ -47,7 +47,7 @@
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
                 </div>
-                <a href="{{route('admin.user.index')}}" class="small-box-footer">اطلاعات بیشتر <i
+                <a href="{{route('admin.user.user.index')}}" class="small-box-footer">اطلاعات بیشتر <i
                             class="fa fa-arrow-circle-left"></i></a>
             </div>
         </div>

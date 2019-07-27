@@ -103,7 +103,11 @@ abstract class BaseController extends Controller
                 'child' => [
                     [
                         'name' => 'همه',
-                        'route' => 'index'
+                        'route' => 'user.index'
+                    ],
+                    [
+                        'name' => 'پروفایل',
+                        'route' => 'profile.index'
                     ]
                 ]
             ],
@@ -197,6 +201,10 @@ abstract class BaseController extends Controller
                     [
                         'name' => 'عمومی',
                         'route' => 'global.index'
+                    ],
+                    [
+                        'name' => 'پاکسازی کش‌ها',
+                        'route' => 'clear-cache'
                     ]
                 ]
             ]

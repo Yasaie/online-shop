@@ -72,6 +72,11 @@ class User extends Authenticatable implements HasMedia
 
     protected $appends = ['full_name'];
 
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
     public function products()
     {
         return $this->belongsToMany(Product::class, 'sellers');
@@ -82,14 +87,15 @@ class User extends Authenticatable implements HasMedia
         return $this->hasMany(Seller::class);
     }
 
-    public function getFullNameAttribute()
+    public function profile()
     {
-        return "{$this->first_name} {$this->last_name}";
+        return $this->belongsToMany(Profile::class, 'user_profiles')
+            ->withPivot('data');
     }
 
     public function registerMediaCollections()
     {
-        $this->addMediaCollection('product_temp')
+        $this->addMediaCollection('draft')
             ->acceptsFile(function (File $file) {
                 $acceptable = [
                     'image/jpeg',

@@ -15,8 +15,7 @@ Route::get('/', 'HomeController@index')
     ->name('home');
 
 Route::namespace('Front')
-    ->group(function ()
-    {
+    ->group(function () {
         Route::get('product/{id}/{slag?}', 'ProductController@index');
         Route::get('product_t/{id}/{slag?}', 'ProductController@index_t');
     });
@@ -25,30 +24,24 @@ Route::namespace('Admin')
     ->prefix('admin')
     ->name('admin.')
     ->middleware(['auth', 'role:admin'])
-    ->group(function ()
-    {
+    ->group(function () {
         Route::get('/', 'HomeController@index')
             ->name('home');
         # Media Upload and Unlink
         Route::name('media.')
-            ->group(function ()
-            {
-                Route::post('media/upload/{collection}', 'MediaController@upload')
+            ->group(function () {
+                Route::post('media/upload', 'MediaController@upload')
                     ->name('upload');
                 Route::delete('media/unlink/{id?}', 'MediaController@unlink')
                     ->name('unlink');
             });
         # Category
         Route::resource('category', 'CategoryController');
-        # Product
-        Route::post('product/upload', 'ProductController@upload')
-            ->name('product.upload');
         Route::resource('product', 'ProductController');
         # Product Details
         Route::name('detail.')
             ->prefix('detail')
-            ->group(function ()
-            {
+            ->group(function () {
                 Route::resource('category', 'DetailCategoryController');
                 Route::resource('key', 'DetailKeyController');
                 Route::resource('value', 'DetailValueController');
@@ -56,13 +49,16 @@ Route::namespace('Admin')
         # Sellers
         Route::resource('seller', 'SellerController');
         # Users
-        Route::resource('user', 'UserController');
+        Route::name('user.')
+            ->group(function () {
+                Route::resource('user', 'UserController');
+                Route::resource('profile', 'ProfileController');
+            });
         # Currency
         Route::resource('currency', 'CurrencyController');
         # Addresses
         Route::name('address.')
-            ->group(function ()
-            {
+            ->group(function () {
                 Route::resource('country', 'CountryController');
                 Route::resource('state', 'StateController');
                 Route::resource('city', 'CityController');
@@ -75,12 +71,14 @@ Route::namespace('Admin')
         # Settings
         Route::name('setting.')
             ->prefix('setting')
-            ->group(function ()
-            {
+            ->group(function () {
                 Route::get('global', 'SettingController@global')
                     ->name('global.index');
                 Route::post('global', 'SettingController@globalStore')
                     ->name('global.store');
+
+                Route::get('clear-cache', 'SettingController@clearCache')
+                    ->name('clear-cache');
             });
     });
 

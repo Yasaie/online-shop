@@ -13,7 +13,7 @@ class DetailKeyController extends BaseController
     public $route = 'admin.detail.key';
     public $title = 'مشخصه‌ها';
     public $model = DetailKey::class;
-    public $load = ['detailCategory'];
+    public $load = ['detailCategory', 'detailValues'];
 
     /**
      * @package index
@@ -62,7 +62,7 @@ class DetailKeyController extends BaseController
             [
                 'name' => 'category',
                 'type' => 'select',
-                'option' => [
+                'options' => [
                     'all' => DetailCategory::all(),
                 ],
             ]
@@ -157,7 +157,7 @@ class DetailKeyController extends BaseController
             [
                 'name' => 'category',
                 'type' => 'select',
-                'option' => [
+                'options' => [
                     'all' => DetailCategory::all(),
                 ],
                 'value' => $item->detailCategory->id
@@ -165,7 +165,7 @@ class DetailKeyController extends BaseController
             [
                 'name' => 'highlighted',
                 'type' => 'select',
-                'option' => [
+                'options' => [
                     'all' => [
                         ['id' => 0, 'title' => 'خیر'],
                         ['id' => 1, 'title' => 'بلی'],
