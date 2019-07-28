@@ -2,8 +2,6 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * @author Payam Yasaie <payam@yasaie.ir>
  *
@@ -11,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @package App
  * @mixin \Eloquent
  */
-class Tracker extends Model
+class Tracker extends BaseModel
 {
     protected $casts = [
         'parameters' => 'object',

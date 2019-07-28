@@ -72,6 +72,13 @@ class CategoryController extends BaseController
                 'options' => [
                     'all' => Category::all(),
                 ],
+            ],
+            [
+                'name' => 'image',
+                'type' => 'file',
+                'options' => [
+                    'thumb' => 'image'
+                ]
             ]
         ];
         $multilang = [
@@ -104,6 +111,8 @@ class CategoryController extends BaseController
         $item->save();
 
         $item->createLocale('title', $request->title);
+
+        Crud::upload($item, $request->image, 'image');
 
         \Cache::delete('app.categories');
         \Cache::delete('app.categories.tree');
@@ -188,6 +197,14 @@ class CategoryController extends BaseController
                     'all' => $all->where('id', '<>', $item->id),
                 ],
                 'value' => $item->parent_id
+            ],
+            [
+                'name' => 'image',
+                'type' => 'file',
+                'value' => $item,
+                'options' => [
+                    'thumb' => 'image'
+                ]
             ]
         ];
         $multilang = [
@@ -204,13 +221,13 @@ class CategoryController extends BaseController
      * @package update
      * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param Request $request
+     * @param CategoryRequest $request
      * @param $id
      *
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
         $path = Category::find($request->parent);
         $path = $path ? $path->path : '';
@@ -223,6 +240,8 @@ class CategoryController extends BaseController
         ]);
 
         $item->updateLocale('title', $request->title);
+
+        Crud::upload($item, $request->image, 'image');
 
         \Cache::delete('app.categories');
         \Cache::delete('app.categories.tree');

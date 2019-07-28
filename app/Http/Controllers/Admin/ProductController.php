@@ -191,7 +191,6 @@ class ProductController extends BaseController
             ],
             [
                 'name' => 'images',
-                'get' => 'images',
                 'type' => 'file',
                 'value' => $product
             ]

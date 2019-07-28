@@ -181,16 +181,13 @@ abstract class BaseController extends Controller
             [
                 'name'  =>  'گزارشات',
                 'icon'  => 'signal',
-                'base'  => 'admin.home',
+                'base'  => 'admin.report.',
                 'child' => [
                     [
                         'name' => 'بازدید',
-                        'route' => ''
+                        'route' => 'index'
                     ],
-                    [
-                        'name' => 'فروش',
-                        'route' => ''
-                    ],
+
                 ]
             ],
             [

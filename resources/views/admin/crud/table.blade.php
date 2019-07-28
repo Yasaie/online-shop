@@ -11,9 +11,10 @@
 
                 <div class="card-header">
                     @if($crud['create'])
-                    <a href="{{route("$route.create")}}" class="btn btn-success btn-sm"><i class="fa fa-file"></i> @lang('crud.add')</a>
+                        <a href="{{route("$route.create")}}" class="btn btn-success btn-sm"><i
+                                class="fa fa-file"></i> @lang('crud.add')</a>
                     @endif
-                        <br>
+                    <br>
                     <div class="card-tools">
                         <form class="input-group input-group-sm" style="width: 200px;">
                             <input type="text" name="search" class="form-control float-right"
@@ -41,10 +42,12 @@
                                         <a href="?{{http_build_query($sorting)}}">
                                             @lang('model.' . $head['name'])
                                         </a>
-                                        @endif
                                     </th>
-                                    @endforeach
-                                    <th class="text-center">@lang('crud.actions')</th>
+                                @endif
+                            @endforeach
+                            @if($crud['show'] or $crud['edit'] or $crud['destroy'])
+                                <th class="text-center">@lang('crud.actions')</th>
+                            @endif
                         </tr>
                         </thead>
 
@@ -53,22 +56,32 @@
                             <tr>
                                 @foreach($heads as $head)
                                     @if(isset($head['visible']) and $head['visible'])
-                                        <td>{!! $item->{$head['name']} !== null ? $item->{$head['name']} : '-' !!}</td>
+                                        @php
+                                            $text = $item->{$head['name']};
+                                            if(isset($head['options']['translate_get'])) :
+                                                $text = __('model.' . $text);
+                                            endif;
+                                            $text = $text !== null ? $text : '-'
+                                        @endphp
+                                        <td>{!! $text !!}</td>
                                     @endif
                                 @endforeach
-                                <td class="text-center">
-                                    @if($crud['show'])
-                                    <a href="{{route($route . '.show', $item->id)}}"
-                                       class="btn btn-info btn-sm fa fa-eye"></a>
-                                    @endif
-                                    @if($crud['edit'])
-                                    <a href="{{route($route . '.edit', $item->id)}}"
-                                       class="btn btn-success btn-sm fa fa-pencil"></a>
-                                    @endif
-                                    @if($crud['destroy'])
-                                    <button onclick="deleteItem({{$item->id}})" class="btn btn-danger btn-sm fa fa-trash"></button>
-                                    @endif
-                                </td>
+                                @if($crud['show'] or $crud['edit'] or $crud['destroy'])
+                                    <td class="text-center">
+                                        @if($crud['show'])
+                                            <a href="{{route($route . '.show', $item->id)}}"
+                                               class="btn btn-info btn-sm fa fa-eye"></a>
+                                        @endif
+                                        @if($crud['edit'])
+                                            <a href="{{route($route . '.edit', $item->id)}}"
+                                               class="btn btn-success btn-sm fa fa-pencil"></a>
+                                        @endif
+                                        @if($crud['destroy'])
+                                            <button onclick="deleteItem({{$item->id}})"
+                                                    class="btn btn-danger btn-sm fa fa-trash"></button>
+                                        @endif
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                         </tbody>

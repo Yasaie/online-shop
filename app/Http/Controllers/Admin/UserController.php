@@ -39,6 +39,9 @@ class UserController extends BaseController
                 'name' => 'role',
                 'get' => 'getRoleNames().toArray()',
                 'string' => true,
+                'options' => [
+                    'translate_get' => true
+                ],
                 'visible' => 1
             ]
         ];
@@ -94,16 +97,20 @@ class UserController extends BaseController
             [
                 'name' => 'role',
                 'get' => 'getRoleNames().toArray()',
-                'string' => true,
+                'options' => [
+                    'translate_get' => true
+                ]
             ],
         ];
 
         $item = User::find($id);
         foreach ($item->profile as $profile) {
             $heads[] = [
-                'name' => $profile->name,
+                'name' => $profile->title,
                 'get' => 'profile.pivot.data',
-                'translate' => $profile->title
+                'options' => [
+                    'translate_name' => false
+                ]
             ];
         }
 

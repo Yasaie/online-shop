@@ -80,6 +80,12 @@ Route::namespace('Admin')
                 Route::get('clear-cache', 'SettingController@clearCache')
                     ->name('clear-cache');
             });
+        # Report
+        Route::name('report.')
+            ->group(function () {
+                Route::get('index', 'ReportController@index')
+                    ->name('index');
+            });
     });
 
 Route::get('lang/{id}', 'PublicController@lang');

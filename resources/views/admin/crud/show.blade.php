@@ -29,13 +29,21 @@
                             @php($head['get'] = isset($head['get']) ? $head['get'] : $head['name'])
                             <tr>
                                 <th class="col-xs-3 col-lg-2">
-                                    @if(isset($head['translate']))
-                                        {{$head['translate']}}
+                                    @if(isset($head['options']['translate_name']) and !$head['options']['translate_name'])
+                                        {{$head['name']}}
                                     @else
                                         @lang('model.' . $head['name'])
                                     @endif
                                 </th>
-                                @php($text = (Y::dotObject($item, $head['get'], 1) . (isset($head['append']) ? $head['append'] : '')) ?: '-')
+                                @php($text = Y::dotObject($item, $head['get'], 1))
+
+                                @if(isset($head['options']['translate_get']) and $head['options']['translate_get'])
+                                    @php($text = __('model.' . $text))
+                                @endif
+
+                                @php($text .= isset($head['append']) ? $head['append'] : '')
+                                @php($text = $text ?: '-')
+
                                 @if(isset($head['link']))
                                     @php($head['link']['search'] = Y::dotObject($item, $head['link']['search']))
                                     <td class="col-xs-9 col-lg-10">{!! Y::makeRoute($head['link'], $text) !!}</td>

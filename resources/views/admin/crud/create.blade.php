@@ -4,7 +4,7 @@
 
 @section('body')
 
-    <form method="post" action="{{route("$route.$form_action", $form_id)}}">
+    <form method="post" action="{{route("$route.$form_action", $form_id)}}" id="create">
         @csrf
         @if($form_id)
             @method('PUT')
@@ -109,11 +109,6 @@
     <script src="{{asset('assets/plugins/dropzone/i18n/fa.js')}}"></script>
     <script>
         Dropzone.autoDiscover = false;
-
-        function dropZone() {
-            myDropzone.processQueue();
-            $('form').submit();
-        }
 
         $(document).ready(function () {
             $('.select2').select2({

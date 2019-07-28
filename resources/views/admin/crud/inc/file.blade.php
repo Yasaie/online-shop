@@ -2,11 +2,9 @@
 <input type="hidden" name="{{$name}}" id="{{$name}}">
 <script>
     $(document).ready(function () {
-
-        var _token = "{{ csrf_token() }}";
-        var {{$name}}Dropzone = new Dropzone('.dropzone', {
+        var _token = $('[name=csrf-token]').attr('content');
+        var {{$name}}Dropzone = new Dropzone('div#{{$name}}', {
             addRemoveLinks: true,
-            // autoProcessQueue: false,
             parallelUploads: 10,
             acceptedFiles: '.jpg, .png, .gif',
             sending: function(file, xhr, formData) {
@@ -14,11 +12,6 @@
             },
             success: function (file, response) {
                 file.id = response;
-                var array = [];
-                Object.values(this.files).forEach(function (e) {
-                    array.push(e.id)
-                });
-                $("input#{{$name}}").val(array);
             },
             removedfile: function (file) {
                 file.previewElement.remove();
@@ -30,25 +23,18 @@
                     }
                 });
             },
-            renameFile: function (file) {
-                // var mimes = {
-                //     'image/jpeg': '.jpg',
-                //     'image/png': '.png',
-                //     'image/gif': '.gif',
-                //                     };
-                // return Date.now() + mimes[file.type];
-            }
         });
 
         @if(isset($value))
         @php($get = isset($get) ? $get : $name)
         @php($library = $value->getMedia($get))
         @php($dropzone_data = collect())
+        @php($thumb_name = isset($options['thumb']) ? $options['thumb'] : 'small')
         @foreach($library as $lib)
         @php($dropzone_data[] = [
             'name' => $lib->getAttribute('file_name'),
             'size' => $lib->getAttribute('size'),
-            'thumb' => $lib->getFullUrl('small'),
+            'thumb' => $lib->getFullUrl($thumb_name),
             'id' => $lib->id
         ])
         @endforeach
@@ -59,7 +45,17 @@
             {{$name}}Dropzone.emit("addedfile", existingFiles[i]);
             {{$name}}Dropzone.emit("thumbnail", existingFiles[i], existingFiles[i].thumb);
             {{$name}}Dropzone.emit("complete", existingFiles[i]);
+            {{$name}}Dropzone.files[i] = {id: existingFiles[i].id}
         }
         @endif
     });
+    $('form#create').on('submit', function (event) {
+        event.preventDefault(); //this will prevent the default submit
+        var array = [];
+        Object.values({{$name}}.dropzone.files).forEach(function (e) {
+            array.push(e.id)
+        });
+        $("input#{{$name}}").val(array);
+        $(this).unbind('submit').submit(); // continue the submit unbind preventDefault
+    })
 </script>

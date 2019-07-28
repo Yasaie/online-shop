@@ -3,6 +3,10 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\File;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Yasaie\Dictionary\Traits\HasDictionary;
 use Yasaie\Helper\Y;
 
@@ -14,9 +18,10 @@ use Yasaie\Helper\Y;
  * @mixin \Eloquent
  * @mixin HasDictionary
  */
-class Category extends Model
+class Category extends Model implements HasMedia
 {
-    use HasDictionary;
+    use HasDictionary,
+        HasMediaTrait;
 
     protected $guarded = [];
 
@@ -56,5 +61,20 @@ class Category extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function registerMediaCollections()
+    {
+        $this->addMediaCollection('image')
+            ->acceptsFile(function (File $file) {
+                $acceptable = [
+                    'image/jpeg',
+                    'image/png',
+                    'image/gif',
+                ];
+                return in_array($file->mimeType, $acceptable);
+            })->singleFile();
+        $this->addMediaConversion('image')
+            ->fit(Manipulations::FIT_CROP, 250, 250);
     }
 }
