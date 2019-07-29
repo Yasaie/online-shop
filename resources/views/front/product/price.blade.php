@@ -18,11 +18,10 @@
                 <span class="val_item">{{$sellers->first()->sellerService->title}}</span>
             </div>
         @endif
-
         <div class="money_product list_item">
             @if($sellers->first()->prev_price)
                 <div style="margin-bottom: 10px;">
-                    <del class="value">{{$sellers->first()->previous_price}}</del>
+                    <del class="value is_off">{{$sellers->first()->previous_price}}</del>
                     <span class="unit is_PR">{{$sellers->first()->off_percent}}%</span>
                 </div>
             @endif
