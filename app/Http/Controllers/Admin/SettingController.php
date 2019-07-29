@@ -50,6 +50,15 @@ class SettingController extends BaseController
         return Crud::create([], $multilang, 'store');
     }
 
+    /**
+     * @package globalStore
+     * @author  Payam Yasaie <payam@yasaie.ir>
+     *
+     * @param GlobalSettingRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     */
     public function globalStore(GlobalSettingRequest $request)
     {
         foreach ($this->global_gets as $get) {
@@ -61,6 +70,8 @@ class SettingController extends BaseController
                 ->first()
                 ->updateLocale('value', $request->$name);
         }
+
+        \Cache::delete('app.settings');
 
         return redirect()->route('admin.setting.global.index');
     }

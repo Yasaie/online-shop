@@ -29,7 +29,6 @@ class ProductController extends BaseController
         $rates = $product->product_rate;
         $related_products = $product_cats[0]->products;
         $sellers = $product->sellers->sortBy('current_price', SORT_NATURAL);
-        $first_seller = $sellers->first();
         $product_details = [];
 
         foreach ($product->details as $detail) {
@@ -53,7 +52,7 @@ class ProductController extends BaseController
         return view('front.product.index')
             ->with(compact(
                 'id', 'product', 'comments', 'product_details',
-                'product_cats', 'rates', 'related_products', 'sellers', 'first_seller'
+                'product_cats', 'rates', 'related_products', 'sellers'
             ));
     }
 

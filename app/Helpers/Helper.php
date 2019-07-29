@@ -21,10 +21,15 @@ if (! function_exists('setting')) {
         $settings = \Cache::rememberForever('app.settings', function () {
             return \App\Setting::get();
         });
-        $setting = $settings->where('section', $keys[0])
-            ->where('key', $keys[1])
-            ->first();
-        return $setting ? $setting->data : null;
+        $setting = $settings->where('section', $keys[0]);
+
+        if (isset($keys[1])) {
+            $setting = $setting->where('key', $keys[1]);
+        }
+
+        $setting = $setting->pluck('data', 'key');
+
+        return $setting->count() > 1 ? $setting : $setting->first();
     }
 }
 

@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Yasaie\Dictionary\Traits\HasDictionary;
 
 /**
@@ -13,9 +15,10 @@ use Yasaie\Dictionary\Traits\HasDictionary;
  * @mixin \Eloquent
  * @mixin HasDictionary
  */
-class Setting extends Model
+class Setting extends Model implements HasMedia
 {
-    use HasDictionary;
+    use HasDictionary,
+        HasMediaTrait;
 
     protected $appends = ['data'];
 

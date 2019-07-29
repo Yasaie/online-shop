@@ -35,11 +35,11 @@ class Category extends Model implements HasMedia
             return Category::get();
         });
         $path = preg_split('/\//', $this->path, 0, PREG_SPLIT_NO_EMPTY);
-        $names = [];
+        $cats = [];
         foreach ($path as $p) {
-            $names[$p] = $categories->find($p)->title;
+            $cats[$p] = $categories->find($p);
         }
-        return $names;
+        return $cats;
     }
 
     public function panelLinks()
@@ -48,7 +48,7 @@ class Category extends Model implements HasMedia
         $link = "<a href='$route?column=parent&search=%1\$s'>%1\$s</a> / ";
         $string = '';
         foreach ($this->tree as $key => $path) {
-            $string .= sprintf($link, $path);
+            $string .= sprintf($link, $path->title);
         }
         return substr($string, 0, -2);
     }

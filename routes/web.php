@@ -11,13 +11,13 @@
 |
 */
 
-Route::get('/', 'HomeController@index')
-    ->name('home');
-
 Route::namespace('Front')
     ->group(function () {
-        Route::get('product/{id}/{slag?}', 'ProductController@index');
-        Route::get('product_t/{id}/{slag?}', 'ProductController@index_t');
+        Route::get('/', 'HomeController@index')
+            ->name('home');
+
+        Route::get('product/{id}/{slag?}', 'ProductController@index')
+            ->name('product');
     });
 
 Route::namespace('Admin')
@@ -83,14 +83,13 @@ Route::namespace('Admin')
         # Report
         Route::name('report.')
             ->group(function () {
-                Route::get('index', 'ReportController@index')
-                    ->name('index');
+                Route::get('report/list', 'ReportController@index')
+                    ->name('list');
             });
     });
 
-Route::get('lang/{id}', 'PublicController@lang');
-Route::get('currency/{id}', 'PublicController@currency');
+Route::get('lang/{id}', 'PublicController@lang')
+    ->name('language');
+Route::get('currency/{id}', 'PublicController@currency')
+    ->name('currency');
 Auth::routes();
-
-//Route::get('/image/{image}.{ext}', 'PublicController@image');
-//Route::get('/file/{model}/{model_id}/{file_id}/{file_area}/{file_name}', 'PublicController@file');

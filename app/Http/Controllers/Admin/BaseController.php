@@ -29,14 +29,26 @@ abstract class BaseController extends Controller
             'destroy' => method_exists($this, 'destroy'),
         ];
 
+        $menu_items = $this->menuItems();
+
+        view()->share([
+            'menu_items' => $menu_items,
+            'crud' => $this->crud,
+            'route' => $this->route,
+            'title' => $this->title
+        ]);
+    }
+
+    protected function menuItems()
+    {
         $comment = Comment::get();
 
-        $menu_items = [
+        return [
             [
-                'name'  =>  'داشبورد',
-                'icon'  => 'dashboard',
-                'base'  => 'admin.home',
-                'route' =>  '',
+                'name' => 'داشبورد',
+                'icon' => 'dashboard',
+                'base' => 'admin.home',
+                'route' => '',
             ],
             [
                 'name' => __('model.category'),
@@ -50,18 +62,18 @@ abstract class BaseController extends Controller
                 ]
             ],
             [
-                'name'  => __('model.products'),
-                'icon'  => 'gift',
+                'name' => __('model.products'),
+                'icon' => 'gift',
                 'count' => Product::count(),
-                'base'  => 'admin.product.',
+                'base' => 'admin.product.',
                 'child' => [
                     [
-                        'name'  => 'همه محصولات',
-                        'route'   => 'index'
+                        'name' => 'همه محصولات',
+                        'route' => 'index'
                     ],
                     [
-                        'name'  => 'ایجاد',
-                        'route'   => 'create'
+                        'name' => 'ایجاد',
+                        'route' => 'create'
                     ]
                 ]
             ],
@@ -127,9 +139,9 @@ abstract class BaseController extends Controller
                 ]
             ],
             [
-                'name'  =>  'سفارشات',
-                'icon'  => 'shopping-cart',
-                'base'  => 'admin.home',
+                'name' => 'سفارشات',
+                'icon' => 'shopping-cart',
+                'base' => 'admin.home',
                 'child' => [
                     [
                         'name' => 'همه',
@@ -179,13 +191,13 @@ abstract class BaseController extends Controller
                 ]
             ],
             [
-                'name'  =>  'گزارشات',
-                'icon'  => 'signal',
-                'base'  => 'admin.report.',
+                'name' => 'گزارشات',
+                'icon' => 'signal',
+                'base' => 'admin.report.',
                 'child' => [
                     [
-                        'name' => 'بازدید',
-                        'route' => 'index'
+                        'name' => 'بازدیدها',
+                        'route' => 'list'
                     ],
 
                 ]
@@ -205,123 +217,6 @@ abstract class BaseController extends Controller
                     ]
                 ]
             ]
-
-//            #=========================================
-//            [
-//                'name' => 'دسته بندی',
-//                'icon' => 'gift',
-//                // 'count' => Product::count(),
-//                'base' => 'admin.product.',
-//                'child' => [
-//                    [
-//                        'name' => 'همه',
-//                        'route' => 'index'
-//                    ],
-//                    [
-//                        'name' => 'ایجاد',
-//                        'route' => 'create'
-//                    ]
-//                ]
-//            ],
-//
-//            #=========================================
-//            [
-//                'name' => 'کاربران',
-//                'icon' => 'gift',
-//                // 'count' => Product::count(),
-//                'base' => 'admin.product.',
-//                'child' => [
-//                    [
-//                        'name' => 'همه',
-//                        'route' => 'index'
-//                    ],
-//                    [
-//                        'name' => 'ایجاد',
-//                        'route' => 'create'
-//                    ]
-//                ]
-//            ],
-//
-//
-//            #=========================================
-//            [
-//                'name' => 'اطلاعیه ها',
-//                'icon' => 'gift',
-//                // 'count' => Product::count(),
-//                'base' => 'admin.product.',
-//                'child' => [
-//                    [
-//                        'name' => 'همه',
-//                        'route' => 'index'
-//                    ]
-//                ]
-//            ],
-//
-//            #=========================================
-//            [
-//                'name' => 'تنظیمات',
-//                'icon' => 'gift',
-//                // 'count' => Product::count(),
-//                'base' => 'admin.product.',
-//                'child' => [
-//                    [
-//                        'name' => 'اسلایدشوها',
-//                        'route' => 'index'
-//                    ],
-//                    [
-//                        'name' => 'محصولات صفحه اول',
-//                        'route' => 'index'
-//                    ],
-//                    [
-//                        'name' => 'عنوان سایت',
-//                        'route' => 'index'
-//                    ],
-//                    [
-//                        'name' => 'لوگوی سایت',
-//                        'route' => 'index'
-//                    ],
-//                    [
-//                        'name' => 'توضیحات سایت',
-//                        'route' => 'index'
-//                    ],
-//                    [
-//                        'name' => '4 بلاک فوتر',
-//                        'route' => 'index'
-//                    ],
-//                ]
-//            ],
-//
-//            #========================================
-//
-//            #=========================================
-//            [
-//                'name' => 'گزارش',
-//                'icon' => 'gift',
-//                // 'count' => Product::count(),
-//                'base' => 'admin.product.',
-//                'child' => [
-//                    [
-//                        'name' => 'فاکتورها',
-//                        'route' => 'index',
-//                          'child' => [
-//                         [
-//                            'name' => 'همه',
-//                            'route' => 'index'
-//                        ]
-//                        ]
-//        ]
-//
-//                ]
-//            ],
-
-
         ];
-
-        view()->share([
-            'menu_items' => $menu_items,
-            'crud' => $this->crud,
-            'route' => $this->route,
-            'title' => $this->title
-        ]);
     }
 }
