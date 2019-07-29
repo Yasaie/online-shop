@@ -16,6 +16,10 @@ class SettingController extends BaseController
         'footer.block1.body',
         'footer.block2.title',
         'footer.block2.body',
+        'footer.block3.title',
+        'footer.block3.body',
+        'footer.block4.title',
+        'footer.block4.body',
     ];
 
     /**
@@ -33,18 +37,25 @@ class SettingController extends BaseController
         $settings = Setting::all();
         $multilang = [];
 
+        $break = null;
         foreach ($this->global_gets as $get) {
             $parts = explode('.', $get, 2);
             $db = $settings->where('section', $parts[0])
                 ->where('key', $parts[1])
                 ->first();
 
+            $part2 = explode('.', $parts[1]);
+            if (count($part2) > 1 and $break != $part2[0]) {
+                $multilang[] = ['type' => 'break'];
+                $break = $part2[0];
+            }
             $multilang[] = [
                 'name' => $get,
                 'type' => $db->type,
                 'get' => 'value',
                 'value' => $db
             ];
+
         }
 
         return Crud::create([], $multilang, 'store');

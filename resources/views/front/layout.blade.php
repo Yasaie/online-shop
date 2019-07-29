@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta http-equiv=”Content-Type” content=”text/html; charset=utf-8″/>
+    <meta http-equiv=”content-type” content=”text/html; charset=utf-8″/>
     @hasSection ('robots')
         @yield('robots')
     @endif
@@ -26,7 +26,7 @@
     </title>
 
 </head>
-<body class="rtl home page-template-default page page-id-1125
+<body class="{{isRTL(0)}} home page-template-default page page-id-1125
     woocommerce-no-js yith-wcan-free emallshop-v-2.1.9 sticky-navigation
     sticky open-categories-menu wpb-js-composer js-comp-ver-5.7 vc_responsive">
 

@@ -60,8 +60,8 @@
                                          id="{{$lang->getId()}}-tab">
                                         @foreach($multilang as $input)
                                             <div class="form-group">
-                                                <label
-                                                    for="{{$input['name']}}[{{$lang->getId()}}]">@lang('model.'. $input['name'])</label>
+                                                @if(isset($input['name']) and $input['name'])
+                                                <label for="{{$input['name']}}[{{$lang->getId()}}]">@lang('model.'. $input['name'])</label>
                                                 @if(isset($input['value']))
                                                     @php($input['get'] = isset($input['get']) ? $input['get'] : $input['name'])
                                                     @php($input['value'] = $input['value']->getTranslate($input['get'], $lang->getId()))
@@ -70,6 +70,7 @@
                                                     @php($input['value'] = old($input['name'])[$lang->getId()])
                                                 @endif
                                                 @php($input['name'] = $input['name'] . '[' . $lang->getId() . ']')
+                                                @endif
                                                 @include('admin.crud.inc.' . $input['type'], $input)
                                             </div>
                                         @endforeach

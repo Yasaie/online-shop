@@ -42,6 +42,30 @@ class SettingsTableSeeder extends Seeder
                 'type' => 'texthtml',
                 'value' => null
             ],
+            [
+                'section' => 'footer',
+                'key' => 'block3.title',
+                'type' => 'text',
+                'value' => null
+            ],
+            [
+                'section' => 'footer',
+                'key' => 'block3.body',
+                'type' => 'texthtml',
+                'value' => null
+            ],
+            [
+                'section' => 'footer',
+                'key' => 'block4.title',
+                'type' => 'text',
+                'value' => null
+            ],
+            [
+                'section' => 'footer',
+                'key' => 'block4.body',
+                'type' => 'texthtml',
+                'value' => null
+            ],
         ];
 
         DB::table('settings')->insert($array);

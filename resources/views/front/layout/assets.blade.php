@@ -2,7 +2,9 @@
 <link rel='stylesheet' href='{{asset("assets/front/css/plugins_team.css")}}' type='text/css' media='all'/>
 
 <link href=" {{asset("assets/front/style.css")}}" rel="stylesheet">
+@if(isRTL())
 <link href=" {{asset("assets/front/rtl.css")}}" rel="stylesheet">
+@endif
 <link rel='stylesheet' id='rs-plugin-settings-css' href=' {{asset("assets/front/plugin/revslider/css/settings.css")}}'
       type='text/css' media='all'/>
 <link rel='stylesheet' id='emallshop-style-css' href=' {{asset("assets/front/css/style-inline-css.css")}}'/>
@@ -16,10 +18,6 @@
     }
 </style>
 
-<!-- ---style===================================================== -->
-
-<!-- برای باگ اولیه -->
-<!-- ===================================================== -->
 <script>
 
     (function (html) {
@@ -81,9 +79,7 @@
             console.log("Failure at Presize of Slider:" + d)
         }
     };
-</script>
 
-<script>
     jQuery(document).ready(function () {
 
 
@@ -109,10 +105,6 @@
 
 
     });
-</script>
-
-
-<script>
     (function () {
         function addEventListener(element, event, handler) {
             if (element.addEventListener) {
@@ -151,13 +143,11 @@
         }
 
     })();
-</script>
-<script type="text/javascript">
+
     var c = document.body.className;
     c = c.replace(/woocommerce-no-js/, 'woocommerce-js');
     document.body.className = c;
-</script>
-<script type="text/javascript">
+
     function revslider_showDoubleJqueryError(sliderID) {
         var errorMessage =
             "Revolution Slider Error: You have some jquery.js library include that comes after the revolution files js include.";
@@ -168,8 +158,6 @@
         errorMessage = "<span style='font-size:16px;color:#BC0C06;'>" + errorMessage + "</span>";
         jQuery(sliderID).show().html(errorMessage);
     }
-</script>
-<script type='text/javascript'>
     /* <![CDATA[ */
     var yith_wcwl_l10n = {
         "ajax_url": "\/demo\/emallshop\/wp-admin\/admin-ajax.php",
@@ -190,21 +178,6 @@
             "reload_wishlist_and_adding_elem_action": "reload_wishlist_and_adding_elem"
         }
     };
-    /* ]]> */
-</script>
-
-<!-- <script type='text/javascript'>
-    /* <![CDATA[ */
-    var wpcf7 = {
-        "apiSettings": {
-            "root": "http:\/\/i-wordpress.ir\/demo\/emallshop\/wp-json\/contact-form-7\/v1",
-            "namespace": "contact-form-7\/v1"
-        }
-    };
-    /* ]]> */
-</script> -->
-<!-- <script type='text/javascript' src='wp-content/plugins/contact-form-7/includes/js/scripts.js'></script> -->
-<script type='text/javascript'>
     /* <![CDATA[ */
     var cnArgs = {
         "ajaxurl": "http:\/\/i-wordpress.ir\/demo\/emallshop\/wp-admin\/admin-ajax.php",
@@ -218,9 +191,6 @@
         "cookieDomain": ""
     };
     /* ]]> */
-</script>
-
-<script type='text/javascript'>
     /* <![CDATA[ */
     var yith_woocompare = {
         "ajaxurl": "\/demo\/emallshop\/?wc-ajax=%%endpoint%%",
@@ -239,18 +209,8 @@
     /* ]]> */
 </script>
 
-
 <script type='text/javascript' src='{{asset("assets/front/js/plugins.js")}}'></script>
 <script type='text/javascript' src='{{asset("assets/front/js/jquery.autocomplete.min.js")}}'></script>
-<script type='text/javascript'>
-    /* <![CDATA[ */
-    var _wpUtilSettings = {
-        "ajax": {
-            "url": "\/demo\/emallshop\/wp-admin\/admin-ajax.php"
-        }
-    };
-    /* ]]> */
-</script>
 <script type='text/javascript'>
     /* <![CDATA[ */
     var wc_add_to_cart_variation_params = {
@@ -259,12 +219,7 @@
         "i18n_make_a_selection_text": "\u0644\u0637\u0641\u0627 \u0628\u0631\u062e\u06cc \u0627\u0632 \u06af\u0632\u06cc\u0646\u0647\u200c\u0647\u0627\u06cc \u0645\u062d\u0635\u0648\u0644 \u0631\u0627 \u0642\u0628\u0644 \u0627\u0632 \u0627\u0636\u0627\u0641\u0647 \u06a9\u0631\u062f\u0646 \u0622\u0646 \u0628\u0647 \u0633\u0628\u062f \u062e\u0631\u06cc\u062f\u060c \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f.",
         "i18n_unavailable_text": "\u0628\u0627 \u0639\u0631\u0636 \u067e\u0648\u0632\u0634\u060c \u0627\u06cc\u0646 \u0643\u0627\u0644\u0627 \u062f\u0631 \u062f\u0633\u062a\u0631\u0633 \u0646\u06cc\u0633\u062a. \u0644\u0637\u0641\u0627\u064b \u062a\u0631\u06a9\u06cc\u0628 \u062f\u06cc\u06af\u0631\u06cc \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f."
     };
-    /* ]]> */
-</script>
-<script type='text/javascript'>
-    /* <![CDATA[ */
-    //
-    //
+
     var emallshop_options = {
         "rtl": "1",
 
@@ -295,8 +250,6 @@
         "sticky_image_wrapper": "1",
         "sticky_summary_wrapper": "1"
     };
-    
-
 
     var emallshopOwlArg = {
         "productsCarousel": {
@@ -346,7 +299,6 @@
             }
         }
     };
-
 
     var pagination_settings = {
         "pagination_options": [{
@@ -417,20 +369,7 @@
     /* ]]> */
 </script>
 <script type='text/javascript' src='{{asset("assets/front/js/functions.js")}}'></script>
-<script type='text/javascript' src='{{asset("assets/front/plugin/js_composer/js/dist/js_composer_front.min.js")}}'>
-</script>
-<script type='text/javascript'>
-    /* <![CDATA[ */
-    var mc4wp_forms_config = [];
-    /* ]]> */
-</script>
-
-{{-- 
-<!-- <script type='text/javascript' src='wp-content/plugins/mailchimp-for-wp/assets/js/forms-api.min.js'></script> -->
-<!--[if lte IE 9]>
-<script type='text/javascript' src='http://i-wordpress.ir/demo/emallshop/wp-content/plugins/mailchimp-for-wp/assets/js/third-party/placeholders.min.js'></script>
-<![endif]--> --}}
-
+<script type='text/javascript' src='{{asset("assets/front/plugin/js_composer/js/dist/js_composer_front.min.js")}}'></script>
 
 <!-- ===================================================== -->
 <script src="{{asset('assets/front/plugin/zoom-master/jquery.zoom.min.js')}}"></script>
