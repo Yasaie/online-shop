@@ -8,7 +8,6 @@ use Spatie\MediaLibrary\File;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Yasaie\Dictionary\Traits\HasDictionary;
-use Yasaie\Helper\Y;
 
 /**
  * @author Payam Yasaie <payam@yasaie.ir>
@@ -34,12 +33,21 @@ class Category extends Model implements HasMedia
         $categories = \Cache::rememberForever('app.categories', function () {
             return Category::get();
         });
-        $path = preg_split('/\//', $this->path, 0, PREG_SPLIT_NO_EMPTY);
+        $path = explode('/', $this->path);
         $cats = [];
         foreach ($path as $p) {
             $cats[$p] = $categories->find($p);
         }
         return $cats;
+    }
+
+    public function setParentIdAttribute($value)
+    {
+        $this->attributes['parent_id'] = $value ?: null;
+        $path = $this->parent ? explode('/', $this->parent->path) : [];
+        $path[] = $this->id;
+        $this->attributes['depth'] = count($path);
+        $this->attributes['path'] = implode('/', $path);
     }
 
     public function panelLinks()

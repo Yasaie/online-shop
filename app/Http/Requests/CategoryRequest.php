@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Category;
+use Illuminate\Validation\Rule;
+
 class CategoryRequest extends BaseRequest
 {
     /**
@@ -12,7 +15,10 @@ class CategoryRequest extends BaseRequest
     public function rules()
     {
         return array_merge(parent::rules(), [
-            'parent' => 'nullable|exists:categories,id'
+            'parent' => [
+                'nullable',
+                Rule::in(Category::all()->pluck('id')->push(0))
+            ],
         ]);
     }
 }

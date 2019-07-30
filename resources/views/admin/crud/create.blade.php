@@ -33,7 +33,7 @@
             </div>
         @endif
 
-        @if(isset($multilang))
+        @if(isset($multilang) and $multilang)
             <div class="row">
                 <div class="col-12">
 
@@ -115,7 +115,7 @@
             $('.select2').select2({
                 dir: '{{isRTL(0)}}',
                 language: '{{app()->getLocale()}}',
-                minimumResultsForSearch: 5
+                minimumResultsForSearch: 5,
             });
             tinymce.init({
                 selector: 'textarea.text-html',

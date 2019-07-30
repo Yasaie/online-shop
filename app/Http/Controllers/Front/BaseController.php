@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Front;
 use App\Category;
 use App\Http\Controllers\Controller;
 use App\Menu;
+use Illuminate\Database\Eloquent\Model;
 use Yasaie\Helper\Y;
 
 class BaseController extends Controller
@@ -21,12 +22,13 @@ class BaseController extends Controller
         $this->categories = collect(\Cache::rememberForever('app.categories', function () {
             return Category::get();
         }));
-        $categories = \Cache::rememberForever('app.categories.tree', function () {
+        $categories = $this->categories;
+        $category_tree = \Cache::rememberForever('app.categories.tree', function () {
             return Y::buildTree($this->categories);
         });
         $menus = \Cache::rememberForever('app.menus', function () {
             return Y::buildTree(Menu::with('category')->get()->sortBy('sort'));
         });
-        view()->share(compact('categories'));
+        view()->share(compact('categories', 'category_tree'));
     }
 }

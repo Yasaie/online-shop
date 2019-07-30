@@ -65,19 +65,27 @@ class CategoryController extends BaseController
      */
     public function create()
     {
+        $empty = (new Category())->fill([
+            'id' => null,
+            'title' => __('model.main')
+        ]);
+
+        $all = Category::all()->prepend($empty);
+
         $inputs = [
             [
                 'name' => 'parent',
                 'type' => 'select',
                 'options' => [
-                    'all' => Category::all(),
+                    'all' => $all,
                 ],
             ],
             [
                 'name' => 'image',
                 'type' => 'file',
                 'options' => [
-                    'thumb' => 'image'
+                    'thumb' => 'image',
+                    'max_files' => 1
                 ]
             ]
         ];
@@ -101,14 +109,9 @@ class CategoryController extends BaseController
      */
     public function store(CategoryRequest $request)
     {
-        $path = Category::find($request->parent);
-        $path = $path ? $path->path : '';
-
         $item = Category::create([
             'parent_id' => $request->parent ?: null,
         ]);
-        $item->path = $path . '/' . $item->id;
-        $item->save();
 
         $item->createLocale('title', $request->title);
 
@@ -182,7 +185,7 @@ class CategoryController extends BaseController
     public function edit($id)
     {
         $empty = (new Category())->fill([
-            'id' => 10,
+            'id' => 0,
             'title' => __('model.main')
         ]);
 
@@ -203,7 +206,8 @@ class CategoryController extends BaseController
                 'type' => 'file',
                 'value' => $item,
                 'options' => [
-                    'thumb' => 'image'
+                    'thumb' => 'image',
+                    'max_files' => 1
                 ]
             ]
         ];
@@ -229,14 +233,10 @@ class CategoryController extends BaseController
      */
     public function update(CategoryRequest $request, $id)
     {
-        $path = Category::find($request->parent);
-        $path = $path ? $path->path : '';
-
         $item = Category::find($id);
 
         $item->update([
             'parent_id' => $request->parent,
-            'path' => $path . '/' . $item->id
         ]);
 
         $item->updateLocale('title', $request->title);

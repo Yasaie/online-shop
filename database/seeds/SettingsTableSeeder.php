@@ -11,13 +11,15 @@ class SettingsTableSeeder extends Seeder
      */
     public function run()
     {
-        $array = [
+        $site = [
             [
                 'section' => 'site',
                 'key' => 'title',
                 'type' => 'text',
                 'value' => null
             ],
+        ];
+        $footer = [
             [
                 'section' => 'footer',
                 'key' => 'block1.title',
@@ -67,6 +69,22 @@ class SettingsTableSeeder extends Seeder
                 'value' => null
             ],
         ];
+        $slider = [
+            [
+                'section' => 'front',
+                'key' => 'slider.1',
+                'type' => 'select',
+                'value' => 1
+            ],
+            [
+                'section' => 'front',
+                'key' => 'slider.2',
+                'type' => 'select',
+                'value' => 4
+            ],
+        ];
+
+        $array = array_merge($site, $footer, $slider);
 
         DB::table('settings')->insert($array);
     }

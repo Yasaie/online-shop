@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->increments('id')->unsigned();
             $table->unsignedInteger('parent_id')->nullable();
             $table->string('path')->nullable();
+            $table->unsignedTinyInteger('depth')->nullable();
             $table->timestamps();
 
             $table->foreign('parent_id')

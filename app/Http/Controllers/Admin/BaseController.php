@@ -212,10 +212,14 @@ abstract class BaseController extends Controller
                         'route' => 'global.index'
                     ],
                     [
+                        'name' => 'اسلایدر',
+                        'route' => 'slider.index'
+                    ],
+                    [
                         'name' => 'پاکسازی کش‌ها',
                         'route' => 'clear-cache'
                     ]
-                ]
+                ],
             ]
         ];
     }

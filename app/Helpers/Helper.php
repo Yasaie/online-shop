@@ -5,6 +5,8 @@
  * @copyright   2019-06-18
  */
 
+use Illuminate\Database\Eloquent\Model;
+
 if (! function_exists('gdate')) {
     function gdate($date)
     {
@@ -17,14 +19,17 @@ if (! function_exists('gdate')) {
 if (! function_exists('setting')) {
     function setting($key)
     {
-        $keys = explode('.', $key, 2);
+        $keys = explode('.', $key);
         $settings = \Cache::rememberForever('app.settings', function () {
             return \App\Setting::get();
         });
-        $setting = $settings->where('section', $keys[0]);
+        $section = array_shift($keys);
+        $setting = $settings->where('section', $section);
 
-        if (isset($keys[1])) {
-            $setting = $setting->where('key', $keys[1]);
+        if ($keys) {
+            $setting = $setting->filter(function ($item) use ($keys) {
+                return strpos($item->key, implode('.', $keys)) !== false;
+            });
         }
 
         $setting = $setting->pluck('data', 'key');
@@ -86,5 +91,22 @@ if (!function_exists('isRTL')) {
             ? ($bool ? 1 : 'rtl')
             : ($bool ? 0 : 'ltr');
 
+    }
+}
+
+if (!function_exists('catsProducts')) {
+    function catsProducts($id)
+    {
+        $categories = collect(\Cache::rememberForever('app.categories', function () {
+            return \App\Category::get();
+        }));
+
+        $filtered = $categories->filter(function (Model $item) use ($id) {
+            return preg_match('/(^|\/)' . $id . '($|\/)/', $item->path);
+        });
+
+        return $filtered->flatMap(function ($item) {
+            return $item->products;
+        });
     }
 }

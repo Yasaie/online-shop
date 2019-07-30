@@ -18,6 +18,9 @@ Route::namespace('Front')
 
         Route::get('product/{id}/{slag?}', 'ProductController@index')
             ->name('product');
+
+        Route::get('category/{id}', 'CategoryController@index')
+            ->name('category');
     });
 
 Route::namespace('Admin')
@@ -76,6 +79,9 @@ Route::namespace('Admin')
                     ->name('global.index');
                 Route::post('global', 'SettingController@globalStore')
                     ->name('global.store');
+
+                Route::get('slider', 'SettingController@slider')
+                    ->name('slider.index');
 
                 Route::get('clear-cache', 'SettingController@clearCache')
                     ->name('clear-cache');

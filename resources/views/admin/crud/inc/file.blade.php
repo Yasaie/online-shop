@@ -7,6 +7,9 @@
             addRemoveLinks: true,
             parallelUploads: 10,
             acceptedFiles: '.jpg, .png, .gif',
+            @if(isset($options['max_files']))
+            maxFiles: {{$options['max_files']}},
+            @endif
             sending: function(file, xhr, formData) {
                 formData.append("_token", _token);
             },

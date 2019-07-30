@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Requests\GlobalSettingRequest;
 use App\Setting;
+use App\User;
+use Spatie\MediaLibrary\Models\Media;
 use Yasaie\Cruder\Crud;
 
 class SettingController extends BaseController
@@ -87,6 +90,33 @@ class SettingController extends BaseController
         return redirect()->route('admin.setting.global.index');
     }
 
+    public function slider()
+    {
+        view()->share([
+            'title' => 'تنظیمات اسلایدرها',
+        ]);
+
+        $settings = Setting::where('section', 'front')
+            ->where('key', 'like', 'slider%')
+            ->get();
+        $inputs = [];
+
+        $categories = Category::all();
+        foreach ($settings as $slider) {
+            $inputs[] = [
+                'name' => $slider->key,
+                'type' => $slider->type,
+                'get' => 'value',
+                'value' => $slider->data,
+                'options' => [
+                    'all' => $categories
+                ]
+            ];
+        }
+
+        return Crud::create($inputs, [], 'store');
+    }
+
     /**
      * @package clearCache
      * @author  Payam Yasaie <payam@yasaie.ir>
@@ -95,6 +125,7 @@ class SettingController extends BaseController
     public function clearCache()
     {
         \Cache::clear();
+        User::all()->each->clearMediaCollection('draft');
         return back();
     }
 }
