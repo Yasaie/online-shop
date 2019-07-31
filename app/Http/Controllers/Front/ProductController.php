@@ -15,7 +15,6 @@ class ProductController extends BaseController
                 'rates',
                 'comments.user',
                 'sellers.currency',
-                'sellers.sellerService',
                 'sellers.user.products.rates',
                 'details.detailValue.detailKey.detailCategory',
             ]);

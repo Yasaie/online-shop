@@ -4,10 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Yasaie\Dictionary\Traits\HasDictionary;
 
+/**
+ * @author Payam Yasaie <payam@yasaie.ir>
+ *
+ * Class Seller
+ * @package App
+ * @mixin HasDictionary
+ * @mixin \Eloquent
+ */
 class Seller extends Model
 {
-    use SoftDeletes;
+    use HasDictionary;
 
     protected $appends = [
         'current_price',
@@ -16,6 +25,8 @@ class Seller extends Model
     ];
 
     protected $guarded = [];
+
+    protected $locales = ['service'];
 
     public function getCurrentPriceAttribute()
     {
@@ -43,11 +54,6 @@ class Seller extends Model
     public function currency()
     {
         return $this->belongsTo(Currency::class);
-    }
-
-    public function sellerService()
-    {
-        return $this->belongsTo(SellerService::class);
     }
 
     public function products()

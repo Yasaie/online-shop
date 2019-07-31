@@ -145,6 +145,15 @@ class ProductController extends BaseController
                 'get' => 'details.key_value',
             ],
             [
+                'name' => 'sellers',
+                'get' => 'sellers.count()',
+                'link' => [
+                    'route' => 'admin.seller.index',
+                    'search' => 'title',
+                    'column' => 'product'
+                ]
+            ],
+            [
                 'name' => 'visitors',
             ],
             [

@@ -18,12 +18,10 @@ class CreateSellersTable extends Migration
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('product_id');
             $table->unsignedInteger('currency_id');
-            $table->unsignedInteger('seller_service_id')->nullable();
             $table->decimal('price', 12, 2);
             $table->decimal('prev_price', 12, 2)->nullable();
             $table->decimal('post_price', 12, 2)->default(0);
             $table->unsignedTinyInteger('amount')->default(0);
-            $table->softDeletes();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
@@ -34,7 +32,6 @@ class CreateSellersTable extends Migration
                 ->onDelete('cascade');
 
             $table->foreign('currency_id')->references('id')->on('currencies');
-            $table->foreign('seller_service_id')->references('id')->on('seller_services');
         });
     }
 

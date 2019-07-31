@@ -26,7 +26,8 @@ class CommentController extends BaseController
                 'name' => 'id',
             ],
             [
-                'name' => 'product.title',
+                'name' => 'product',
+                'get' => 'product.title',
                 'visible' => 1
             ],
             [
@@ -58,7 +59,8 @@ class CommentController extends BaseController
                 'name' => 'id',
             ],
             [
-                'name' => 'product.title',
+                'name' => 'product',
+                'get' => 'product.title',
                 'visible' => 1
             ],
             [
@@ -103,7 +105,8 @@ class CommentController extends BaseController
                 'name' => 'id',
             ],
             [
-                'name' => 'product.title',
+                'name' => 'product',
+                'get' => 'product.title',
             ],
             [
                 'name' => 'user',

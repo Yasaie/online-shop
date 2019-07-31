@@ -19,10 +19,10 @@
                     <div style="margin-top: 10px" class="rateYo_saler" data-rateyo-rating="{{$seller->rates}}"></div>
                 </span>
 
-                @if($seller->sellerService)
+                @if($seller->service)
                     <span class="col-md-3 list_salers">
                         <i class="fa fa-pie-chart" aria-hidden="true"></i>
-                        {{$seller->sellerService->title}}
+                        {{$seller->service}}
                     </span>
                 @endif
                 <div>
@@ -54,10 +54,10 @@
             </a>
         </span>
 
-            @if($seller->sellerService)
+            @if($seller->service)
                 <span class="col-md-3 list_salers">
                     <i class="fa fa-pie-chart" aria-hidden="true"></i>
-                    {{$seller->sellerService->title}}
+                    {{$seller->service}}
                 </span>
             @endif
             <span class="col-md-3 list_salers">

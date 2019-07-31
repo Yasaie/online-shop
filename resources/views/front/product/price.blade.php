@@ -11,11 +11,11 @@
             <div style="margin-top: 10px" class="rateYo_saler" data-rateyo-rating="{{$sellers->first()->rates}}"></div>
         </div>
 
-        @if($sellers->first()->sellerService)
+        @if($sellers->first()->service)
             <div class="list_item">
                 <i class="fa fa-share" aria-hidden="true"></i>
                 <span class="titel_item">  خدمات :  </span>
-                <span class="val_item">{{$sellers->first()->sellerService->title}}</span>
+                <span class="val_item">{{$sellers->first()->service}}</span>
             </div>
         @endif
         <div class="money_product list_item">

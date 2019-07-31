@@ -38,7 +38,7 @@
                                     <div class="product-entry">
 
                                         <div class="product-image product-image-style2">
-                                            <a href="product.html"
+                                            <a href="{{route('product', ['id' => $rp->id, 'slag' => $rp->title])}}"
                                                class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
                                                     <img width="300" height="354"
                                                          src="{{$rp->getFirstMedia('images') ? $rp->getFirstMedia('images')->getFullUrl('small') : asset('assets/front/image/no-default-thumbnail.png')}}"
@@ -52,7 +52,7 @@
 
                                             <div class="product-title-rating">
                                                 <a class="product-title"
-                                                   href="/product/{{$rp->id}}/{{$rp->title}}">
+                                                   href="{{route('product', ['id' => $rp->id, 'slag' => $rp->title])}}">
                                                     <h3>
                                                         {{$rp->title}}
                                                     </h3>
@@ -84,8 +84,7 @@
                                                     <a href="product.html" data-quantity="1"
                                                        class="button product_type_variable add_to_cart_button"
                                                        data-product_id="979" data-product_sku=""
-                                                       rel="nofollow">انتخاب
-                                                        گزینه&zwnj;ها</a>
+                                                       rel="nofollow">افزودن به سبد خرید</a>
                                                 </div>
                                             </div>
 

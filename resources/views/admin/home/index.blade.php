@@ -24,14 +24,14 @@
 
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>53<sup style="font-size: 20px">%</sup></h3>
+                    <h3>{{ $sellers_count }}<sup style="font-size: 20px"></sup></h3>
 
-                    <p>افزایش امتیاز</p>
+                    <p>تعداد فروشندگان</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="#" class="small-box-footer">اطلاعات بیشتر <i
+                <a href="{{route('admin.user.user.index')}}/?search=seller&column=role" class="small-box-footer">اطلاعات بیشتر <i
                             class="fa fa-arrow-circle-left"></i></a>
             </div>
         </div>
@@ -40,7 +40,7 @@
 
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>{{ App\User::count() }}</h3>
+                    <h3>{{ $users_count }}</h3>
 
                     <p>کاربران ثبت شده</p>
                 </div>
@@ -56,14 +56,14 @@
 
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3>65</h3>
+                    <h3>{{$products_visits}}</h3>
 
-                    <p>بازدید جدید</p>
+                    <p>بازدید از کالاها</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="#" class="small-box-footer">اطلاعات بیشتر <i
+                <a href="{{route('admin.report.list')}}" class="small-box-footer">اطلاعات بیشتر <i
                             class="fa fa-arrow-circle-left"></i></a>
             </div>
         </div>
