@@ -69,26 +69,24 @@ class SettingsTableSeeder extends Seeder
                 'value' => null
             ],
         ];
+
         $slider = [
             [
                 'section' => 'front',
                 'key' => 'carousel',
                 'type' => 'file',
                 'value' => null
-            ],
-            [
+            ]
+        ];
+
+        for ($i = 1; $i <= 10; $i++) {
+            $slider[] = [
                 'section' => 'front',
-                'key' => 'slider.1',
+                'key' => 'slider.' . $i,
                 'type' => 'select',
                 'value' => 1
-            ],
-            [
-                'section' => 'front',
-                'key' => 'slider.2',
-                'type' => 'select',
-                'value' => 4
-            ],
-        ];
+            ];
+        }
 
         $array = array_merge($site, $footer, $slider);
 

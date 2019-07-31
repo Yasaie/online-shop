@@ -42,19 +42,64 @@
                 <div class="col-lg-4 col-sm-6 col-md-8 text-right info_head_left">
 
                     <div class="topbar-right">
-                        <span class="user-login ">
-                            <a href="cart">
-                                <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                                <span>سبد خرید (4)</span>
-                            </a>
-                        </span>
 
-                        <span class="user-login ">
-                            <a href="login">
-                                <i class="fa fa-lock"></i>
-                                <span>ورود / ثبت نام</span>
-                            </a>
-                        </span>
+                        @if(Auth::check())
+                            <span class="user-login user_popup">
+
+                                    <a href="login"><i class="fa fa-user-o" aria-hidden="true"></i>
+                                    <span>{{Auth::user()->full_name}}</span>
+                                    </a>
+
+                                    <span class="user_popu_menu">
+                                        <span class="pop_head"><i class="fa fa-caret-up" aria-hidden="true"></i></span>
+                                        <div class="pop_body">
+
+                                                @role('admin')
+                                                    <a href="{{route('admin.home')}}" class="method">
+                                                        <i class="fa fa-dashboard" aria-hidden="true"></i>
+                                                        <span>پنل مدیریت</span>
+                                                    </a>
+                                                @endrole
+
+                                                <a href="{{route('profile')}}" class="method">
+                                                    <i class="fa fa-user-o" aria-hidden="true"></i>
+                                                     <span>پروفایل</span>
+                                                </a>
+
+                                                 <a class="method">
+                                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                                    <span>همه سفارش ها</span>
+                                                 </a>
+
+                                                <form action="{{route('logout')}}" method="post">
+                                                    @csrf
+                                                    <button type="submit" class="btn-link btn method" style="width: 100%">
+                                                        <i class="fa fa-share" aria-hidden="true"></i>
+                                                        <span>خروج</span>
+                                                    </button>
+                                                </form>
+
+                                        </div>
+
+
+                                    </span>
+                            </span>
+
+                            <span class="user-login ">
+                                <a href="{{route("cart.index")}}">
+                                    <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                                    <span>سبد خرید (4)</span>
+                                </a>
+                            </span>
+                        @else
+                            <span class="user-login ">
+                                <a href="{{route('login')}}">
+                                    <i class="fa fa-lock"></i>
+                                    <span>ورود / ثبت نام</span>
+                                </a>
+                            </span>
+                        @endif
+
                     </div>
 
                 </div>
@@ -79,7 +124,7 @@
                                 </li>
 
                                 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1261 emallshop-dropdown-menu  main-dropdown-menu">
-                                    <a href="{{route('category')}}">دسته بندی محصولات </a>
+                                    <a href="{{route('category.index')}}">دسته بندی محصولات </a>
                                     <div class="min_menu">
                                         <div class="head_icon">
                                             <i class="fa fa-caret-up" aria-hidden="true"></i>

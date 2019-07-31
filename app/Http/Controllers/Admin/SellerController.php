@@ -174,6 +174,7 @@ class SellerController extends BaseController
             ],
             [
                 'name' => 'product',
+                'get' => 'product.title'
             ],
             [
                 'name' => 'service'

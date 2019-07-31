@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('home', function () {
+    return redirect()->route('home');
+});
+
 Route::namespace('Front')
     ->group(function () {
         Route::get('/', 'HomeController@index')
@@ -19,8 +23,17 @@ Route::namespace('Front')
         Route::get('product/{id}/{slag?}', 'ProductController@index')
             ->name('product');
 
-        Route::get('category/{id?}', 'CategoryController@index')
+        Route::get('category/{id}', 'CategoryController@filter')
             ->name('category');
+        Route::get('category', 'CategoryController@index')
+            ->name('category.index');
+
+
+        Route::get('profile', 'ProfileController@index')
+            ->name('profile');
+
+        Route::get('cart', 'CartController@index')
+            ->name('cart.index');
     });
 
 Route::namespace('Admin')

@@ -6,12 +6,13 @@ use App\Category;
 
 class CategoryController extends BaseController
 {
-    public function index($id = null)
+    public function index()
     {
-        if ($id) {
-            return view('front.category.filter');
-        } else {
-            return view('front.category.index');
-        }
+        return view('front.category.index');
+    }
+
+    public function filter($id)
+    {
+        return view('front.category.filter');
     }
 }
