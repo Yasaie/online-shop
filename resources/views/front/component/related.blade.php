@@ -26,7 +26,10 @@
                 <ul class="products product-style1 product-carousel owl-carousel"
                     data-navigation="0" data-pagination="0">
                     @foreach($product_list as $rp)
-                        @php($rp->seller = $rp->sellers->sortBy('current_price', SORT_NATURAL)->first())
+                        @php($rp->seller = $rp->sellers
+                            ->where('amount', '>', 0)
+                            ->sortBy('current_price', SORT_NATURAL)
+                            ->first())
                         <li class="slide-row">
                             <ul>
                                 <li class="col-xs-6 col-sm-6 col-md-4 col-lg-3 product type-product post-979
@@ -61,20 +64,20 @@
                                             </div>
                                             @if($rp->seller)
                                                 <div class="product-loop-price">
-                                                                                <span class="price">
-                                                                                    <span class="woocommerce-Price-amount amount">
-                                                                                        @if($rp->seller->prev_price)
-                                                                                            <del>{{$rp->seller->previous_price}} {{Config::get('app.current_currency')->title}}</del>
-                                                                                            -
-                                                                                            <span>{{getPercentage($rp->seller->previous_price, $rp->seller->current_price)}}%</span>
-                                                                                            -
-                                                                                        @endif
-                                                                                        {{$rp->seller->current_price}}
-                                                                                        <span class="woocommerce-Price-currencySymbol">
-                                                                                            {{Config::get('app.current_currency')->title}}
-                                                                                        </span>
-                                                                                    </span>
-                                                                                </span>
+                                                    <span class="price">
+                                                        <span class="woocommerce-Price-amount amount">
+                                                            @if($rp->seller->prev_price)
+                                                                <del>{{$rp->seller->previous_price}} {{Config::get('app.current_currency')->title}}</del>
+                                                                -
+                                                                <span>{{getPercentage($rp->seller->previous_price, $rp->seller->current_price)}}%</span>
+                                                                -
+                                                            @endif
+                                                            {{$rp->seller->current_price}}
+                                                            <span class="woocommerce-Price-currencySymbol">
+                                                                {{Config::get('app.current_currency')->title}}
+                                                            </span>
+                                                        </span>
+                                                    </span>
                                                 </div>
                                             @endif
 

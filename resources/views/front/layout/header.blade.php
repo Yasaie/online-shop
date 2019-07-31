@@ -130,7 +130,7 @@
                                             <i class="fa fa-caret-up" aria-hidden="true"></i>
                                         </div>
                                         <div class="_body">
-                                            @foreach($category_tree as $category)
+                                            @foreach($categories->where('depth', 1) as $category)
                                                 <a href="{{route('category', $category->id)}}">{{$category->title}}</a>
                                             @endforeach
                                         </div>

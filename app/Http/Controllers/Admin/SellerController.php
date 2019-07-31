@@ -232,7 +232,7 @@ class SellerController extends BaseController
 
         $inputs = [
             [
-                'name' => 'products',
+                'name' => 'product',
                 'type' => 'select',
                 'options' => [
                     'all' => Product::all()

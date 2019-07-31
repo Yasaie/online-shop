@@ -21,7 +21,7 @@
 
         <div class="row grid_">
 
-            @foreach($category_tree as $category)
+            @foreach($categories->where('depth', 1) as $category)
                 <div class="col-lg-4 category_item">
 
                     <div class="category_item_body">

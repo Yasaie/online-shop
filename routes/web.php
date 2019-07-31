@@ -31,6 +31,8 @@ Route::namespace('Front')
 
         Route::get('profile', 'ProfileController@index')
             ->name('profile');
+        Route::get('profile/orders', 'ProfileController@orders')
+            ->name('profile.orders');
 
         Route::get('cart', 'CartController@index')
             ->name('cart.index');

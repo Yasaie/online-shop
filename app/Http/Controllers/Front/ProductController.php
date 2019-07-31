@@ -27,7 +27,9 @@ class ProductController extends BaseController
         $comments = $product->comments;
         $rates = $product->product_rate;
         $related_products = $product_cats[0]->products;
-        $sellers = $product->sellers->sortBy('current_price', SORT_NATURAL);
+        $sellers = $product->sellers
+            ->where('amount', '>', 0)
+            ->sortBy('current_price', SORT_NATURAL);
         $product_details = [];
 
         foreach ($product->details as $detail) {

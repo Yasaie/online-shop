@@ -19,16 +19,15 @@ class BaseController extends Controller
 
     public function __construct()
     {
-        $this->categories = collect(\Cache::rememberForever('app.categories', function () {
-            return Category::get();
-        }));
-        $categories = $this->categories;
-        $category_tree = \Cache::rememberForever('app.categories.tree', function () {
-            return Y::buildTree($this->categories);
+        $this->categories = \Cache::rememberForever('app.categories', function () {
+            return Category::with(['children', 'parent'])->get();
         });
+
+        $categories = $this->categories;
+
         $menus = \Cache::rememberForever('app.menus', function () {
             return Y::buildTree(Menu::with('category')->get()->sortBy('sort'));
         });
-        view()->share(compact('categories', 'category_tree'));
+        view()->share(compact('categories'));
     }
 }

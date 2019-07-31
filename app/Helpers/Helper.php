@@ -97,18 +97,24 @@ if (!function_exists('isRTL')) {
 }
 
 if (!function_exists('catsProducts')) {
-    function catsProducts($id)
+    function catsProducts($id, $return_cat = false)
     {
-        $categories = collect(\Cache::rememberForever('app.categories', function () {
-            return \App\Category::get();
-        }));
+        $categories = \Cache::rememberForever('app.categories', function () {
+            return \App\Category::with(['children', 'parent'])->get();
+        });
+        $categories = $categories->load(['children', 'parent', 'products.sellers.currency']);
 
         $filtered = $categories->filter(function (Model $item) use ($id) {
             return preg_match('/(^|\/)' . $id . '($|\/)/', $item->path);
         });
 
+        if ($return_cat) {
+            return $filtered;
+        }
+
         return $filtered->flatMap(function ($item) {
             return $item->products;
         });
+
     }
 }
