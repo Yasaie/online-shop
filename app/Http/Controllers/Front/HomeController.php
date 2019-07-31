@@ -11,6 +11,10 @@ class HomeController extends BaseController
      */
     public function index()
     {
-        return view('front.home.index');
+        $carousels = setting('front.carousel', 0)->getMedia('carousel');
+        $sliders = setting('front.slider');
+
+        return view('front.home.index')
+            ->with(compact('carousels', 'sliders'));
     }
 }

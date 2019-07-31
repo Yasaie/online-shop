@@ -7,6 +7,7 @@ use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\File;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\Models\Media;
 use Yasaie\Dictionary\Traits\HasDictionary;
 
 /**
@@ -82,7 +83,13 @@ class Category extends Model implements HasMedia
                 ];
                 return in_array($file->mimeType, $acceptable);
             })->singleFile();
-        $this->addMediaConversion('image')
-            ->fit(Manipulations::FIT_CROP, 250, 250);
+    }
+
+    public function registerMediaConversions(Media $media = null)
+    {
+        $this->addMediaConversion('small')
+            ->quality(80)
+            ->fit(Manipulations::FIT_CROP, 350, 200)
+            ->shouldBePerformedOn('image');
     }
 }

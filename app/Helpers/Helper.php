@@ -7,7 +7,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-if (! function_exists('gdate')) {
+if (!function_exists('gdate')) {
     function gdate($date)
     {
         return app()->getLocale() == 'fa'
@@ -16,8 +16,8 @@ if (! function_exists('gdate')) {
     }
 }
 
-if (! function_exists('setting')) {
-    function setting($key)
+if (!function_exists('setting')) {
+    function setting($key, $object = true)
     {
         $keys = explode('.', $key);
         $settings = \Cache::rememberForever('app.settings', function () {
@@ -32,13 +32,15 @@ if (! function_exists('setting')) {
             });
         }
 
-        $setting = $setting->pluck('data', 'key');
+        if ($object) {
+            $setting = $setting->pluck('data', 'key');
+        }
 
         return $setting->count() > 1 ? $setting : $setting->first();
     }
 }
 
-if (! function_exists('userPrice')) {
+if (!function_exists('userPrice')) {
     function userPrice($price, $ratio)
     {
         $base_price = $price * $ratio;
@@ -48,7 +50,7 @@ if (! function_exists('userPrice')) {
     }
 }
 
-if (! function_exists('getPercentage')) {
+if (!function_exists('getPercentage')) {
     function getPercentage($previous, $current)
     {
         $previous = filter_var($previous, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
@@ -58,7 +60,7 @@ if (! function_exists('getPercentage')) {
     }
 }
 
-if (! function_exists('filterItems')) {
+if (!function_exists('filterItems')) {
     function filterItems($object, $contexts, $searchable, $search)
     {
         $dictionary = \Yasaie\Dictionary\Dictionary::whereIn('context_type', $contexts)

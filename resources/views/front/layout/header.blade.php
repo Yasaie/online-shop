@@ -8,25 +8,25 @@
                     <div class="customer-support">
 
                         <div class="customer-support-email">
-                            <select onchange="window.location.href = this.value"
-                                    class="form-control select_form_con" id="sel1">
+                            <select onchange="window.location.href = this.value" class="form-control select_form_con"
+                                    id="sel1">
                                 @foreach($currencies as $currency)
-                                <option value="{{route('currency', $currency->key)}}"
-                                    {{config('app.current_currency') == $currency ? 'selected' : ''}}>
-                                    {{$currency->name}}
-                                </option>
+                                    <option value="{{route('currency', $currency->key)}}"
+                                            {{config('app.current_currency') == $currency ? 'selected' : ''}}>
+                                        {{$currency->name}}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="customer-support-call">
-                            <select onchange="window.location.href = this.value"
-                                    class="form-control select_form_con" id="sel1">
+                            <select onchange="window.location.href = this.value" class="form-control select_form_con"
+                                    id="sel1">
                                 @foreach(config('global.langs') as $lang)
-                                <option value="{{route('language', $lang->getId())}}"
-                                    {{config('app.locale') == $lang->getId() ? 'selected' : ''}}>
-                                    {{$lang->getNativeName()}}
-                                </option>
+                                    <option value="{{route('language', $lang->getId())}}"
+                                            {{config('app.locale') == $lang->getId() ? 'selected' : ''}}>
+                                        {{$lang->getNativeName()}}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -73,18 +73,20 @@
 
                             <ul id="menu-primary-menu-1" class="emallshop-horizontal-menu main-navigation">
                                 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1261 emallshop-dropdown-menu">
-                                    <img src="/asset/image/2016/09/logo.png" style="height: 46px; ">
+                                    <a href="{{route('home')}}" style="padding: 0">
+                                        <img src="/asset/image/2016/09/logo.png" style="height: 46px; ">
+                                    </a>
                                 </li>
 
                                 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1261 emallshop-dropdown-menu  main-dropdown-menu">
-                                    <a href="shop.html">دسته بندی محصولات </a>
+                                    <a href="{{route('category')}}">دسته بندی محصولات </a>
                                     <div class="min_menu">
                                         <div class="head_icon">
                                             <i class="fa fa-caret-up" aria-hidden="true"></i>
                                         </div>
                                         <div class="_body">
                                             @foreach($category_tree as $category)
-                                            <a href="{{route('category', $category->id)}}">{{$category->title}}</a>
+                                                <a href="{{route('category', $category->id)}}">{{$category->title}}</a>
                                             @endforeach
                                         </div>
                                     </div>

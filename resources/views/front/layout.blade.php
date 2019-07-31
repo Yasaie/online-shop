@@ -4,24 +4,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv=”content-type” content=”text/html; charset=utf-8″/>
-    @hasSection ('robots')
-        @yield('robots')
-    @endif
-
-    @hasSection ('description')
-        @yield('description')
-    @endif
-
-    @hasSection ('keywords')
-        @yield('keywords')
-    @endif
+    @yield('robots')
+    @yield('description')
+    @yield('keywords')
 
     @include('front.layout.assets')
+    @yield('header_include')
 
     <title>
-        {{setting('site.title')}}
         @hasSection ('title')
-             - @yield('page-title')
+            {{setting('site.title')}} - @yield('page-title')
+        @else
+            {{setting('site.title')}}
         @endif
     </title>
 
@@ -42,5 +36,6 @@
     </div>
 </div>
 
+@yield('footer_include')
 </body>
 </html>

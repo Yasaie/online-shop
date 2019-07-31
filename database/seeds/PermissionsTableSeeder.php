@@ -15,8 +15,9 @@ class PermissionsTableSeeder extends Seeder
     {
         $permission = Permission::create(['name' => 'product.view']);
 
-        $admin = Role::create(['name' => 'admin']);
+        $customer = Role::create(['name' => 'customer']);
         $seller = Role::create(['name' => 'seller']);
+        $admin = Role::create(['name' => 'admin']);
 
         $users = \App\User::all();
 

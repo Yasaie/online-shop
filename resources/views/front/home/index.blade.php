@@ -14,41 +14,18 @@
                             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                                 <!-- Indicators -->
                                 <ol class="carousel-indicators">
-                                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                                    <li data-target="#myCarousel" data-slide-to="1"></li>
-                                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                                    @foreach($carousels as $carousel)
+                                    <li data-target="#myCarousel" data-slide-to="{{$carousel->id}}" class="{{$carousels->first() == $carousel ? 'active' : ''}}"></li>
+                                    @endforeach
                                 </ol>
 
                                 <!-- Wrapper for slides -->
                                 <div class="carousel-inner">
-                                    <div class="item active">
-                                        <img src="https://dkstatics-public-2.digikala.com/digikala-adservice-banners/1000005426.jpg"
-                                             alt="Los Angeles">
+                                    @foreach($carousels as $carousel)
+                                    <div class="item {{$carousels->first() == $carousel ? 'active' : ''}}">
+                                        <img src="{{$carousel->getFullUrl()}}">
                                     </div>
-
-                                    <div class="item">
-                                        <img src="https://dkstatics-public.digikala.com/digikala-adservice-banners/1000007143.jpg"
-                                             alt="Chicago">
-                                    </div>
-
-
-                                    <div class="item">
-                                        <img src="https://dkstatics-public.digikala.com/digikala-adservice-banners/1000007139.jpg"
-                                             alt="Chicago">
-                                    </div>
-
-
-                                    <div class="item">
-                                        <img src="https://dkstatics-public.digikala.com/digikala-adservice-banners/1000007141.jpg"
-                                             alt="Chicago">
-                                    </div>
-
-
-                                    <div class="item">
-                                        <img src="https://dkstatics-public-2.digikala.com/digikala-adservice-banners/1000003803.jpg"
-                                             alt="New York">
-                                    </div>
-
+                                    @endforeach
 
                                 </div>
 
@@ -67,7 +44,7 @@
 
                             <div class="row" style="margin-top: 20px">
                                 <div class="col-sm-9 col-sm-pull-3">
-                                    @foreach(setting('front.slider') as $slider)
+                                    @foreach($sliders as $slider)
                                         @include(
                                             'front.component.related',
                                             [

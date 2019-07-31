@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Front;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Category;
 
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
-    public function index($id)
+    public function index($id = null)
     {
-        return view('');
+        if ($id) {
+            return view('');
+        } else {
+            return view('front.category.index');
+        }
     }
 }

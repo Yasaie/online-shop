@@ -206,7 +206,6 @@ class CategoryController extends BaseController
                 'type' => 'file',
                 'value' => $item,
                 'options' => [
-                    'thumb' => 'image',
                     'max_files' => 1
                 ]
             ]
@@ -241,7 +240,7 @@ class CategoryController extends BaseController
 
         $item->updateLocale('title', $request->title);
 
-        Crud::upload($item, $request->image, 'image');
+        Crud::upload($item, $request->image, 'small');
 
         \Cache::delete('app.categories');
         \Cache::delete('app.categories.tree');

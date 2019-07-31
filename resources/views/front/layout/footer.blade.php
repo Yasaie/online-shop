@@ -22,13 +22,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
-                    <p>کپی رایت - تمامی حقوق برای {{setting('site.title')}} محفوظ است. توسعه داده شده شده توسط : شرکت مهندسی شبکه
+                    <p style="margin: 0">کپی رایت - تمامی حقوق برای {{setting('site.title')}} محفوظ است. توسعه داده شده شده توسط : شرکت مهندسی شبکه
                         و فناوری اطلاعات تحلیلگران! </p>
-                </div>
-                <div hidden class="col-xs-12 col-sm-6 text-right">
-                    <div class="payments-method">
-                        <!-- <img src="asset/image/2017/11/897987.png" alt="Payments"> -->
-                    </div>
                 </div>
             </div>
         </div>

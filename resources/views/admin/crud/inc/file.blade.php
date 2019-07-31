@@ -1,5 +1,6 @@
-<div action="{{route('admin.media.upload')}}" class="dropzone" id="{{$name}}"></div>
-<input type="hidden" name="{{$name}}" id="{{$name}}">
+<div action="{{route('admin.media.upload')}}" class="dropzone" id="{{$name}}"></div><input type="hidden"
+                                                                                           name="{{$name}}"
+                                                                                           id="{{$name}}">
 <script>
     $(document).ready(function () {
         var _token = $('[name=csrf-token]').attr('content');
@@ -10,7 +11,7 @@
             @if(isset($options['max_files']))
             maxFiles: {{$options['max_files']}},
             @endif
-            sending: function(file, xhr, formData) {
+            sending: function (file, xhr, formData) {
                 formData.append("_token", _token);
             },
             success: function (file, response) {
@@ -55,7 +56,9 @@
     $('form#create').on('submit', function (event) {
         event.preventDefault(); //this will prevent the default submit
         var array = [];
-        Object.values({{$name}}.dropzone.files).forEach(function (e) {
+        Object.values({{$name}}.dropzone.files
+    ).
+        forEach(function (e) {
             array.push(e.id)
         });
         $("input#{{$name}}").val(array);

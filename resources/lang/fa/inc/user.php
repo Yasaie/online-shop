@@ -9,6 +9,8 @@ return [
     'first_name' => 'نام',
     'last_name' => 'نام خانوادگی',
     'full_name' => 'نام کامل',
+    'password' => 'رمزعبور',
+    'confirm_password' => 'تایید رمزعبور',
     'email' => 'ایمیل',
     'role' => 'نقش',
     'user' => 'کاربر',

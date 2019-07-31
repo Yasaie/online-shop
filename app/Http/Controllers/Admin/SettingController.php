@@ -6,13 +6,11 @@ use App\Category;
 use App\Http\Requests\GlobalSettingRequest;
 use App\Setting;
 use App\User;
-use Spatie\MediaLibrary\Models\Media;
+use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
 
 class SettingController extends BaseController
 {
-    public $route = 'admin.setting.global';
-
     protected $global_gets = [
         'site.title',
         'footer.block1.title',
@@ -35,6 +33,7 @@ class SettingController extends BaseController
     {
         view()->share([
             'title' => 'تنظیمات عمومی',
+            'route' => 'admin.setting.global'
         ]);
 
         $settings = Setting::all();
@@ -73,7 +72,7 @@ class SettingController extends BaseController
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Psr\SimpleCache\InvalidArgumentException
      */
-    public function globalStore(GlobalSettingRequest $request)
+    public function storeGlobal(GlobalSettingRequest $request)
     {
         foreach ($this->global_gets as $get) {
             $parts = explode('.', $get, 2);
@@ -90,23 +89,44 @@ class SettingController extends BaseController
         return redirect()->route('admin.setting.global.index');
     }
 
+    /**
+     * @package slider
+     * @author  Payam Yasaie <payam@yasaie.ir>
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function slider()
     {
         view()->share([
             'title' => 'تنظیمات اسلایدرها',
+            'route' => 'admin.setting.slider'
         ]);
 
         $settings = Setting::where('section', 'front')
             ->where('key', 'like', 'slider%')
             ->get();
-        $inputs = [];
+
+        $files = Setting::where('section', 'front')
+            ->where('key', 'carousel')
+            ->first();
+
+        $inputs = [
+            [
+                'name' => 'carousel',
+                'type' => 'file',
+                'get' => 'carousel',
+                'value' => $files,
+                'options' => [
+                    'max_files' => 5,
+                ],
+            ],
+        ];
 
         $categories = Category::all();
         foreach ($settings as $slider) {
             $inputs[] = [
                 'name' => $slider->key,
                 'type' => $slider->type,
-                'get' => 'value',
                 'value' => $slider->data,
                 'options' => [
                     'all' => $categories
@@ -115,6 +135,25 @@ class SettingController extends BaseController
         }
 
         return Crud::create($inputs, [], 'store');
+    }
+
+    /**
+     * @package storeSlider
+     * @author  Payam Yasaie <payam@yasaie.ir>
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function storeSlider(Request $request)
+    {
+        $item = Setting::where('section', 'front')
+            ->where('key', 'carousel')
+            ->first();
+
+        Crud::upload($item, $request->carousel, 'carousel');
+
+        return redirect()->route('admin.setting.slider.index');
     }
 
     /**

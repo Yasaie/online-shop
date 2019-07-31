@@ -72,6 +72,12 @@ class SettingsTableSeeder extends Seeder
         $slider = [
             [
                 'section' => 'front',
+                'key' => 'carousel',
+                'type' => 'file',
+                'value' => null
+            ],
+            [
+                'section' => 'front',
                 'key' => 'slider.1',
                 'type' => 'select',
                 'value' => 1

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\UserRequest;
 use App\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 use Yasaie\Cruder\Crud;
 use Yasaie\Helper\Y;
 
@@ -50,24 +52,61 @@ class UserController extends BaseController
     }
 
     /**
-     * Show the form for creating a new resource.
+     * @package create
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
-        //
+        $inputs = [
+            [
+                'name' => 'first_name',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'last_name',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'email',
+                'type' => 'text',
+            ],
+            [
+                'name' => 'password',
+                'type' => 'password',
+            ],
+            [
+                'name' => 'confirm_password',
+                'type' => 'password',
+            ],
+            [
+                'name' => 'role',
+                'type' => 'select',
+                'options' => [
+                    'all' => Role::all(),
+                    'name' => 'name'
+                ],
+                'value' => 1,
+            ]
+        ];
+
+        return Crud::create($inputs);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @package store
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param UserRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        $item = User::create($request->all());
+
+        return redirect()->route($this->route . '.show', $item->id);
     }
 
     /**
@@ -113,41 +152,100 @@ class UserController extends BaseController
                 ]
             ];
         }
+        $heads[] = [
+            'name' => 'created_at'
+        ];
+        $heads[] = [
+            'name' => 'updated_at'
+        ];
 
         return Crud::show($item, $heads, $this->route);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * @package edit
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit($id)
     {
-        //
+        $item = User::find($id);
+
+        $inputs = [
+            [
+                'name' => 'first_name',
+                'type' => 'text',
+                'value' => $item->first_name
+            ],
+            [
+                'name' => 'last_name',
+                'type' => 'text',
+                'value' => $item->last_name
+            ],
+            [
+                'name' => 'email',
+                'type' => 'text',
+                'value' => $item->email
+            ],
+            [
+                'name' => 'password',
+                'type' => 'password',
+            ],
+            [
+                'name' => 'confirm_password',
+                'type' => 'password',
+            ],
+            [
+                'name' => 'role',
+                'type' => 'select',
+                'options' => [
+                    'all' => Role::all(),
+                    'name' => 'name'
+                ],
+                'value' => $item->roles->first()->id,
+            ]
+        ];
+
+        return Crud::create($inputs);
     }
 
     /**
-     * Update the specified resource in storage.
+     * @package update
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param UserRequest $request
+     * @param $id
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        //
+        $item = User::find($id);
+
+        $fields = $request->only('first_name', 'last_name', 'email');
+        if ($request->password) {
+            $fields['password'] = $request->password;
+        }
+        $item->update($fields);
+
+        $item->touch();
+        return redirect()->route($this->route . '.show', $id);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @package destroy
+     * @author  Payam Yasaie <payam@yasaie.ir>
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     *
+     * @return bool|null
+     * @throws \Exception
      */
     public function destroy($id)
     {
-        //
+        return Crud::destroy($id, $this->model);
     }
 }

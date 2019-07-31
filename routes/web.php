@@ -19,7 +19,7 @@ Route::namespace('Front')
         Route::get('product/{id}/{slag?}', 'ProductController@index')
             ->name('product');
 
-        Route::get('category/{id}', 'CategoryController@index')
+        Route::get('category/{id?}', 'CategoryController@index')
             ->name('category');
     });
 
@@ -77,11 +77,13 @@ Route::namespace('Admin')
             ->group(function () {
                 Route::get('global', 'SettingController@global')
                     ->name('global.index');
-                Route::post('global', 'SettingController@globalStore')
+                Route::post('global', 'SettingController@storeGlobal')
                     ->name('global.store');
 
                 Route::get('slider', 'SettingController@slider')
                     ->name('slider.index');
+                Route::post('slider', 'SettingController@storeSlider')
+                    ->name('slider.store');
 
                 Route::get('clear-cache', 'SettingController@clearCache')
                     ->name('clear-cache');
