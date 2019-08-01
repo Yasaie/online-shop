@@ -54,7 +54,8 @@ class Product extends BaseModel implements HasMedia
 
     protected function getVisits()
     {
-        return Tracker::where('path', 'product/' . $this->id);
+        return Tracker::where('route', 'product')
+            ->where('parameters->id', $this->id);
     }
 
     public function comments()

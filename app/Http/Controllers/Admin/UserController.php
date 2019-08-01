@@ -105,6 +105,7 @@ class UserController extends BaseController
     public function store(UserRequest $request)
     {
         $item = User::create($request->all());
+        $item->assignRole($request->role);
 
         return redirect()->route($this->route . '.show', $item->id);
     }
@@ -226,10 +227,17 @@ class UserController extends BaseController
         $item = User::find($id);
 
         $fields = $request->only('first_name', 'last_name', 'email');
+
         if ($request->password) {
             $fields['password'] = $request->password;
         }
+
         $item->update($fields);
+
+        $item->roles()->each(function ($id) use ($item) {
+            $item->removeRole($id->id);
+        });
+        $item->assignRole($request->role);
 
         $item->touch();
         return redirect()->route($this->route . '.show', $id);
