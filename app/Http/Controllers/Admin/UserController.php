@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Country;
 use App\Http\Requests\UserRequest;
+use App\State;
 use App\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
@@ -88,6 +90,33 @@ class UserController extends BaseController
                     'name' => 'name'
                 ],
                 'value' => 1,
+            ],
+            [
+                'name' => 'country',
+                'get' => 'country.name',
+                'type' => 'select',
+                'options' => [
+                    'all' => Country::all(),
+                    'name' => 'name'
+                ],
+            ],
+            [
+                'name' => 'state',
+                'get' => 'state.name',
+                'type' => 'ajaxselect',
+                'options' => [
+                    'url' => route('api.address.state', 'country'),
+                    'check' => 'country'
+                ],
+            ],
+            [
+                'name' => 'city',
+                'get' => 'city.name',
+                'type' => 'ajaxselect',
+                'options' => [
+                    'url' => route('api.address.city', 'state'),
+                    'check' => 'state'
+                ],
             ]
         ];
 
@@ -104,7 +133,11 @@ class UserController extends BaseController
      */
     public function store(UserRequest $request)
     {
-        $item = User::create($request->all());
+        $item = User::create(array_merge($request->all(), [
+            'country_id' => $request->country,
+            'state_id' => $request->state,
+            'city_id' => $request->city,
+        ]));
         $item->assignRole($request->role);
 
         return redirect()->route($this->route . '.show', $item->id);
@@ -133,6 +166,18 @@ class UserController extends BaseController
             ],
             [
                 'name' => 'email',
+            ],
+            [
+                'name' => 'country',
+                'get' => 'country.name',
+            ],
+            [
+                'name' => 'state',
+                'get' => 'state.name'
+            ],
+            [
+                'name' => 'city',
+                'get' => 'city.name'
             ],
             [
                 'name' => 'role',
@@ -207,6 +252,36 @@ class UserController extends BaseController
                     'name' => 'name'
                 ],
                 'value' => $item->roles->first()->id,
+            ],
+            [
+                'name' => 'country',
+                'get' => 'country.name',
+                'type' => 'select',
+                'options' => [
+                    'all' => Country::all(),
+                    'name' => 'name'
+                ],
+                'value' => $item->country_id,
+            ],
+            [
+                'name' => 'state',
+                'get' => 'state.name',
+                'type' => 'ajaxselect',
+                'options' => [
+                    'url' => route('api.address.state', 'country'),
+                    'check' => 'country'
+                ],
+                'value' => $item->state_id,
+            ],
+            [
+                'name' => 'city',
+                'get' => 'city.name',
+                'type' => 'ajaxselect',
+                'options' => [
+                    'url' => route('api.address.city', 'state'),
+                    'check' => 'state'
+                ],
+                'value' => $item->city_id,
             ]
         ];
 
@@ -232,7 +307,11 @@ class UserController extends BaseController
             $fields['password'] = $request->password;
         }
 
-        $item->update($fields);
+        $item->update(array_merge($fields, [
+            'country_id' => $request->country,
+            'state_id' => $request->state,
+            'city_id' => $request->city,
+        ]));
 
         $item->roles()->each(function ($id) use ($item) {
             $item->removeRole($id->id);

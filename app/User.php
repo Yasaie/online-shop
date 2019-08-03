@@ -49,7 +49,13 @@ class User extends Authenticatable implements HasMedia
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password',
+        'first_name',
+        'last_name',
+        'email',
+        'password',
+        'country_id',
+        'state_id',
+        'city_id',
     ];
 
     /**
@@ -96,6 +102,26 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->belongsToMany(Profile::class, 'user_profiles')
             ->withPivot('data');
+    }
+
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    public function country()
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 
     public function requestedOrders()

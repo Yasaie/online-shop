@@ -1,5 +1,4 @@
 <!-- Styles -->
-@yield('style')
 
 <link rel="stylesheet" href="{{asset('assets/admin/css/main.css')}}">
 
@@ -9,3 +8,4 @@
 @endif
 <!-- /Styles -->
 <script src="{{asset('assets/plugins/jquery/jquery.min.js')}}"></script>
+@yield('style')

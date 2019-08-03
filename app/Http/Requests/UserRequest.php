@@ -21,7 +21,10 @@ class UserRequest extends BaseRequest
                 'email',
             ],
             'confirm_password' => 'same:password',
-            'role' => 'required|exists:roles,id'
+            'role' => 'required|exists:roles,id',
+            'country_id' => 'exists:countries,id',
+            'state_id' => 'exists:states,id',
+            'city_id' => 'exists:cities,id'
         ];
 
         # update

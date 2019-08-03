@@ -100,11 +100,18 @@
 @section('style')
     <link rel="stylesheet" href="{{asset('assets/plugins/select2/select2.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/plugins/dropzone/min/dropzone.min.css')}}">
+    <script src="{{asset('assets/plugins/select2/select2.full.min.js')}}"></script>
+    <script src="{{asset('assets/plugins/select2/i18n/' . app()->getLocale() . '.js')}}"></script>
+    <script>
+        var select2_array = {
+            dir: '{{isRTL(0)}}',
+            language: '{{app()->getLocale()}}',
+            minimumResultsForSearch: 5,
+        };
+    </script>
 @endsection
 
 @section('script')
-    <script src="{{asset('assets/plugins/select2/select2.full.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/select2/i18n/' . app()->getLocale() . '.js')}}"></script>
     <script src="{{asset('assets/plugins/tinymce/tinymce.min.js')}}"></script>
     <script src="{{asset('assets/plugins/dropzone/min/dropzone.min.js')}}"></script>
     <script src="{{asset('assets/plugins/dropzone/i18n/fa.js')}}"></script>
@@ -112,11 +119,7 @@
         Dropzone.autoDiscover = false;
 
         $(document).ready(function () {
-            $('.select2').select2({
-                dir: '{{isRTL(0)}}',
-                language: '{{app()->getLocale()}}',
-                minimumResultsForSearch: 5,
-            });
+            $('.select2').select2(select2_array);
             tinymce.init({
                 selector: 'textarea.text-html',
                 height: 300,

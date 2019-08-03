@@ -20,6 +20,19 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::namespace('Api')
     ->name('api.')
     ->group(function () {
+        # Category
         Route::get('category', 'CategoryController@index')
             ->name('category');
+
+        # Addresses
+        Route::name('address.')
+            ->group(function () {
+                Route::get('address/country', 'AddressController@country')
+                    ->name('country');
+                Route::get('address/state/{country}', 'AddressController@state')
+                    ->name('state');
+                Route::get('address/city/{state}', 'AddressController@city')
+                    ->name('city');
+            });
+
     });

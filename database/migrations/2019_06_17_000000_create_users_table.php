@@ -20,8 +20,26 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->unsignedInteger('country_id')->nullable();
+            $table->unsignedInteger('state_id')->nullable();
+            $table->unsignedInteger('city_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('country_id')
+                ->references('id')
+                ->on('countries')
+                ->onDelete('set null');
+
+            $table->foreign('state_id')
+                ->references('id')
+                ->on('states')
+                ->onDelete('set null');
+
+            $table->foreign('city_id')
+                ->references('id')
+                ->on('cities')
+                ->onDelete('set null');
         });
     }
 

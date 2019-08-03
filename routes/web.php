@@ -33,6 +33,8 @@ Route::namespace('Front')
             ->name('profile');
         Route::get('profile/orders', 'ProfileController@orders')
             ->name('profile.orders');
+        Route::get('profile/order/{id}', 'ProfileController@order')
+            ->name('profile.order');
         Route::get('profile/seller', 'ProfileController@seller')
             ->name('profile.seller');
 

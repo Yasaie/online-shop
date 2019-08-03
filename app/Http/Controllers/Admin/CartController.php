@@ -36,6 +36,9 @@ class CartController extends BaseController
             ],
             [
                 'name' => 'status',
+                'options' => [
+                    'translate_get' => true
+                ],
                 'visible' => 1
             ],
             [
@@ -73,6 +76,9 @@ class CartController extends BaseController
             ],
             [
                 'name' => 'status',
+                'options' => [
+                    'translate_get' => true
+                ],
                 'visible' => 1
             ],
             [
@@ -152,6 +158,9 @@ class CartController extends BaseController
             [
                 'name' => 'status',
                 'get' => 'cart.status',
+                'options' => [
+                    'translate_get' => true
+                ],
                 'visible' => 1
             ],
             [
