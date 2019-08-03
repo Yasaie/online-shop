@@ -242,7 +242,7 @@ class CategoryController extends BaseController
         $item->setDepth();
         $item->updateLocale('title', $request->title);
 
-        Crud::upload($item, $request->image, 'small');
+        Crud::upload($item, $request->image, 'image');
 
         \Cache::delete('app.categories');
         \Cache::delete('app.categories.tree');

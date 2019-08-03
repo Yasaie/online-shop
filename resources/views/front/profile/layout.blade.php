@@ -53,6 +53,11 @@
                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                     سبد خرید
                 </a>
+
+                <a href="{{route('profile.seller')}}" class="method">
+                    <i class="fa fa-handshake-o" aria-hidden="true"></i>
+                    فروشنده شوید
+                </a>
             </div>
 
         </section>

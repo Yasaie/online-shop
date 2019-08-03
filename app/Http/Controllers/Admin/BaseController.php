@@ -7,13 +7,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Cart;
 use App\Comment;
 use App\Http\Controllers\Controller;
+use App\Order;
 use App\Product;
 use App\User;
 
 abstract class BaseController extends Controller
 {
+    protected $user = null;
     protected $perPage = 15;
     protected $crud;
 
@@ -42,6 +45,8 @@ abstract class BaseController extends Controller
     protected function menuItems()
     {
         $comment = Comment::get();
+        $cart = Cart::where('status', 'success')
+            ->count();
 
         return [
             [
@@ -142,11 +147,22 @@ abstract class BaseController extends Controller
                 'name' => 'سفارشات',
                 'icon' => 'shopping-cart',
                 'base' => 'admin.cart.',
+                'count' => $cart,
                 'child' => [
                     [
                         'name' => 'همه',
                         'route' => 'index'
                     ],
+                    [
+                        'name' => 'جدید',
+                        'route' => 'new',
+                        'count' => $cart
+                    ],
+                    [
+                        'name' => 'درخواست‌های من',
+                        'route' => 'seller',
+                        'count' => 'requestedOrders().count()'
+                    ]
                 ]
             ],
             [

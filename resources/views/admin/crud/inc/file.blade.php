@@ -20,9 +20,10 @@
             removedfile: function (file) {
                 file.previewElement.remove();
                 $.ajax({
-                    type: 'delete',
+                    type: 'POST',
                     url: '{{route('admin.media.unlink')}}/' + file.id,
                     data: {
+                        _method: 'DELETE',
                         _token: _token
                     }
                 });

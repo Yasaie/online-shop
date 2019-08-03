@@ -153,6 +153,16 @@ class SettingController extends BaseController
 
         Crud::upload($item, $request->carousel, 'carousel');
 
+        $sliders = Setting::where('section', 'front')
+            ->where('key', 'like', 'slider%')
+            ->get();
+
+        foreach ($sliders as $slider) {
+            $name = str_replace('.', '_', $slider->key);
+            $slider->value = $request->$name;
+            $slider->save();
+        }
+
         return redirect()->route('admin.setting.slider.index');
     }
 

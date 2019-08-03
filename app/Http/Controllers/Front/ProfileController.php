@@ -20,4 +20,9 @@ class ProfileController extends BaseController
     {
         return view('front.profile.orders');
     }
+
+    public function seller()
+    {
+        return view('front.profile.seller');
+    }
 }

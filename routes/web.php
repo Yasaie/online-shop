@@ -33,6 +33,8 @@ Route::namespace('Front')
             ->name('profile');
         Route::get('profile/orders', 'ProfileController@orders')
             ->name('profile.orders');
+        Route::get('profile/seller', 'ProfileController@seller')
+            ->name('profile.seller');
 
         Route::get('cart', 'CartController@index')
             ->name('cart.index');
@@ -110,8 +112,12 @@ Route::namespace('Admin')
                     ->name('list');
             });
         # Cart
+        Route::get('cart/new', 'CartController@newOrders')
+            ->name('cart.new');
+        Route::get('cart/seller/{id?}', 'CartController@seller')
+            ->name('cart.seller');
         Route::resource('cart', 'CartController')
-            ->only(['index', 'show', 'edit']);
+            ->only(['index', 'show', 'edit', 'update']);
     });
 
 Route::get('lang/{id}', 'PublicController@lang')

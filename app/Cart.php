@@ -11,6 +11,8 @@ namespace App;
  */
 class Cart extends BaseModel
 {
+    protected $guarded = [];
+
     public function user()
     {
         return $this->belongsTo(User::class);

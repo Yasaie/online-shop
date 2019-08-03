@@ -98,6 +98,15 @@ class User extends Authenticatable implements HasMedia
             ->withPivot('data');
     }
 
+    public function requestedOrders()
+    {
+        return $this->sellers->flatMap(function ($q) {
+            return $q->orders()->whereHas('cart', function ($q) {
+                $q->where('status', 'success');
+            })->get();
+        });
+    }
+
     public function registerMediaCollections()
     {
         $this->addMediaCollection('draft')

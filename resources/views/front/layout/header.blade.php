@@ -66,7 +66,7 @@
                                                      <span>پروفایل</span>
                                                 </a>
 
-                                                 <a class="method">
+                                                 <a class="method"  href="{{route('profile.orders')}}">
                                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                                     <span>همه سفارش ها</span>
                                                  </a>

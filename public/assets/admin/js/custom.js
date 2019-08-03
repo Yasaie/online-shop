@@ -12,8 +12,9 @@ function deleteItem(id) {
             ['<button><b>بله</b></button>', function (instance, toast) {
                 $.ajax({
                     url: route + '/' + id,
-                    type: "delete",
+                    type: "POST",
                     data: {
+                        _method: 'DELETE',
                         _token: _token
                     },
                     success: function (d) {
