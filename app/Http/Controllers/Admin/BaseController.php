@@ -141,15 +141,11 @@ abstract class BaseController extends Controller
             [
                 'name' => 'سفارشات',
                 'icon' => 'shopping-cart',
-                'base' => 'admin.home',
+                'base' => 'admin.cart.',
                 'child' => [
                     [
                         'name' => 'همه',
-                        'route' => ''
-                    ],
-                    [
-                        'name' => 'ارسال نشده',
-                        'route' => ''
+                        'route' => 'index'
                     ],
                 ]
             ],

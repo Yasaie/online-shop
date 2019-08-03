@@ -15,5 +15,6 @@ return array_merge(
     __('inc/category'),
     __('inc/seller'),
     __('inc/detail'),
-    __('inc/report')
+    __('inc/report'),
+    __('inc/cart')
 );

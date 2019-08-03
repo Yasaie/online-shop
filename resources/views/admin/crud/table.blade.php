@@ -61,7 +61,11 @@
                                             if(isset($head['options']['translate_get'])) :
                                                 $text = __('model.' . $text);
                                             endif;
-                                            $text = !empty($text) ? $text : '-'
+                                            if(isset($head['append'])) :
+                                                $text .= $head['append'];
+                                            endif;
+                                            $text = !empty($text) ? $text : '-';
+
                                         @endphp
                                         <td>{!! $text !!}</td>
                                     @endif

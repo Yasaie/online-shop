@@ -109,6 +109,9 @@ Route::namespace('Admin')
                 Route::get('report/list', 'ReportController@index')
                     ->name('list');
             });
+        # Cart
+        Route::resource('cart', 'CartController')
+            ->only(['index', 'show', 'edit']);
     });
 
 Route::get('lang/{id}', 'PublicController@lang')

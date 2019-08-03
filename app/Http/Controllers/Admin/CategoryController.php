@@ -113,6 +113,7 @@ class CategoryController extends BaseController
             'parent_id' => $request->parent ?: null,
         ]);
 
+        $item->setDepth();
         $item->createLocale('title', $request->title);
 
         Crud::upload($item, $request->image, 'image');
@@ -238,6 +239,7 @@ class CategoryController extends BaseController
             'parent_id' => $request->parent,
         ]);
 
+        $item->setDepth();
         $item->updateLocale('title', $request->title);
 
         Crud::upload($item, $request->image, 'small');

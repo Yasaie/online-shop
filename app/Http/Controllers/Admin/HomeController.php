@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Tracker;
 use App\User;
-use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
 class HomeController extends BaseController

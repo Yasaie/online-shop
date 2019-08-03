@@ -42,13 +42,15 @@ class Category extends Model implements HasMedia
         return $cats;
     }
 
-    public function setParentIdAttribute($value)
+    public function setDepth()
     {
-        $this->attributes['parent_id'] = $value ?: null;
-        $path = $this->parent ? explode('/', $this->parent->path) : [];
+        $path = $this->parent
+            ? explode('/', $this->parent->path)
+            : [];
         $path[] = $this->id;
-        $this->attributes['depth'] = count($path);
-        $this->attributes['path'] = implode('/', $path);
+        $this->depth = count($path);
+        $this->path = implode('/', $path);
+        $this->save();
     }
 
     public function panelLinks()
