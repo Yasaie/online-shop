@@ -29,33 +29,28 @@ class SellerController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'seller',
                 'get' => 'user.full_name',
-                'visible' => 1
             ],
             [
                 'name' => 'product',
                 'get' => 'product.title',
-                'visible' => 1
             ],
             [
                 'name' => 'amount',
-                'visible' => 1
             ],
             [
                 'name' => 'price',
-                'visible' => 1
             ],
             [
                 'name' => 'prev_price',
-                'visible' => 1
             ],
             [
                 'name' => 'currency',
                 'get' => 'currency.name',
-                'visible' => 1
             ]
         ];
 
@@ -167,6 +162,7 @@ class SellerController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'seller',

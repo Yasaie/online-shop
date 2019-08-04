@@ -29,19 +29,17 @@ class ProductController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'title',
-                'visible' => 1
             ],
             [
                 'name' => 'category',
                 'get' => 'category.title',
-                'visible' => 1
             ],
             [
                 'name' => 'updated_at',
-                'visible' => 1
             ]
         ];
 
@@ -129,6 +127,7 @@ class ProductController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'title',

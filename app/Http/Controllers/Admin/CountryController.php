@@ -26,20 +26,18 @@ class CountryController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'name',
-                'visible' => 1
             ],
             [
                 'name' => 'states',
                 'get' => 'state.count()',
-                'visible' => 1,
             ],
             [
                 'name' => 'cities',
                 'get' => 'city.count()',
-                'visible' => 1,
             ],
         ];
 
@@ -93,6 +91,7 @@ class CountryController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'name',

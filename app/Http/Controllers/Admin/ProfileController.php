@@ -25,18 +25,16 @@ class ProfileController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'name',
-                'visible' => 1
             ],
             [
                 'name' => 'title',
-                'visible' => 1
             ],
             [
                 'name' => 'type',
-                'visible' => 1
             ]
         ];
 

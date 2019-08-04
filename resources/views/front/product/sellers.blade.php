@@ -33,7 +33,7 @@
                         </a>
                     </span>
                     <span class="btn_add_to_bag">
-                        <a class="btn_add_to">افزودن به سبد خرید</a>
+                        <a href="{{route('cart.add', $seller->id)}}" class="btn_add_to">افزودن به سبد خرید</a>
                     </span>
                 </div>
             </div>
@@ -73,7 +73,7 @@
             </a>
         </span>
             <span class="col-md-3 list_salers">
-            <a class="btn_add_to">افزودن به سبد خرید</a>
+            <a href="{{route('cart.add', $seller->id)}}" class="btn_add_to">افزودن به سبد خرید</a>
         </span>
         </div>
     @endforeach

@@ -88,7 +88,7 @@
                             <span class="user-login ">
                                 <a href="{{route("cart.index")}}">
                                     <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                                    <span>سبد خرید (4)</span>
+                                    <span>سبد خرید ({{Auth::user()->myOrders(0)->count()}})</span>
                                 </a>
                             </span>
                         @else

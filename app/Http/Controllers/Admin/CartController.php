@@ -28,34 +28,29 @@ class CartController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'full_name',
                 'get' => 'user.full_name',
-                'visible' => 1
             ],
             [
                 'name' => 'status',
                 'options' => [
                     'translate_get' => true
                 ],
-                'visible' => 1
             ],
             [
                 'name' => 'traceno',
-                'visible' => 1
             ],
             [
                 'name' => 'total',
-                'visible' => 1
             ],
             [
                 'name' => 'status_code',
-                'visible' => 1
             ],
             [
                 'name' => 'created_at',
-                'visible' => 1
             ],
         ];
 
@@ -68,34 +63,29 @@ class CartController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'full_name',
                 'get' => 'user.full_name',
-                'visible' => 1
             ],
             [
                 'name' => 'status',
                 'options' => [
                     'translate_get' => true
                 ],
-                'visible' => 1
             ],
             [
                 'name' => 'traceno',
-                'visible' => 1
             ],
             [
                 'name' => 'total',
-                'visible' => 1
             ],
             [
                 'name' => 'status_code',
-                'visible' => 1
             ],
             [
                 'name' => 'created_at',
-                'visible' => 1
             ],
         ];
 
@@ -138,22 +128,20 @@ class CartController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'product',
                 'get' => 'seller.product.title',
-                'visible' => 1
             ],
             [
                 'name' => 'service',
                 'get' => 'seller.service',
-                'visible' => 1
             ],
             [
                 'name' => 'price',
                 'get' => 'seller.current_price',
                 'append' => ' ' . config('app.current_currency')->title,
-                'visible' => 1
             ],
             [
                 'name' => 'status',
@@ -161,11 +149,9 @@ class CartController extends BaseController
                 'options' => [
                     'translate_get' => true
                 ],
-                'visible' => 1
             ],
             [
                 'name' => 'created_at',
-                'visible' => 1
             ]
         ];
 
@@ -212,31 +198,27 @@ class CartController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'seller',
                 'get' => 'seller.user.full_name',
-                'visible' => 1
             ],
             [
                 'name' => 'product',
                 'get' => 'seller.product.title',
-                'visible' => 1
             ],
             [
                 'name' => 'service',
                 'get' => 'seller.service',
-                'visible' => 1
             ],
             [
                 'name' => 'price',
                 'get' => 'seller.current_price',
                 'append' => ' ' . config('app.current_currency')->title,
-                'visible' => 1
             ],
             [
                 'name' => 'created_at',
-                'visible' => 1
             ]
         ];
 

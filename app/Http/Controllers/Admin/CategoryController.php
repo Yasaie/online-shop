@@ -33,25 +33,22 @@ class CategoryController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1,
             ],
             [
                 'name' => 'title',
-                'visible' => 1
             ],
             [
                 'name' => 'parent',
                 'get' => 'parent.title',
-                'visible' => 1
             ],
             [
                 'name' => 'trees',
                 'get' => 'panelLinks()',
-                'visible' => 1
             ],
             [
                 'name' => 'products',
                 'get' => 'products.count()',
-                'visible' => 1
             ]
         ];
 
@@ -138,6 +135,7 @@ class CategoryController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'title',

@@ -30,14 +30,13 @@ class UserController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'full_name',
-                'visible' => 1
             ],
             [
                 'name' => 'email',
-                'visible' => 1
             ],
             [
                 'name' => 'role',
@@ -46,7 +45,6 @@ class UserController extends BaseController
                 'options' => [
                     'translate_get' => true
                 ],
-                'visible' => 1
             ]
         ];
 
@@ -157,6 +155,7 @@ class UserController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'first_name',

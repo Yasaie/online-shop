@@ -145,4 +145,27 @@ class User extends Authenticatable implements HasMedia
                 return in_array($file->mimeType, $acceptable);
             });
     }
+
+    public function myCart()
+    {
+        return $this
+            ->carts()
+            ->where('status', '<=', 5)
+            ->firstOrCreate([
+                'status' => 'cart'
+            ]);
+    }
+
+    public function myOrders($all = true)
+    {
+        return $all
+            ? $this->myCart()->orders
+            : $this->myCart()->orders();
+    }
+
+    public function myOrder($id)
+    {
+        return $this->myOrders(false)
+            ->find($id);
+    }
 }

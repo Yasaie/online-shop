@@ -24,25 +24,22 @@ class CommentController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'product',
                 'get' => 'product.title',
-                'visible' => 1
             ],
             [
                 'name' => 'user',
                 'get' => 'user.full_name',
-                'visible' => 1
             ],
             [
                 'name' => 'title',
-                'visible' => 1
             ],
             [
                 'name' => 'sent_date',
                 'get' => 'created_at',
-                'visible' => 1,
             ]
         ];
 
@@ -57,25 +54,22 @@ class CommentController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'product',
                 'get' => 'product.title',
-                'visible' => 1
             ],
             [
                 'name' => 'user',
                 'get' => 'user.full_name',
-                'visible' => 1
             ],
             [
                 'name' => 'title',
-                'visible' => 1
             ],
             [
                 'name' => 'sent_date',
                 'get' => 'created_at',
-                'visible' => 1,
             ]
         ];
 
@@ -103,6 +97,7 @@ class CommentController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'product',

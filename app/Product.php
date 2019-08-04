@@ -102,4 +102,12 @@ class Product extends BaseModel implements HasMedia
             ->fit(Manipulations::FIT_MAX, 250, 250);
     }
 
+    public function firstThumb()
+    {
+        $media = $this->getFirstMedia('images');
+        return $media
+            ? $media->getFullUrl('small')
+            : null;
+    }
+
 }

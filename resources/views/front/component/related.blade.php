@@ -84,7 +84,7 @@
 
                                             <div class="product-buttons">
                                                 <div class="product-cart">
-                                                    <a href="product.html" data-quantity="1"
+                                                    <a href="{{route('cart.add', $rp->seller->id)}}" data-quantity="1"
                                                        class="button product_type_variable add_to_cart_button"
                                                        data-product_id="979" data-product_sku=""
                                                        rel="nofollow">افزودن به سبد خرید</a>

@@ -27,20 +27,18 @@ class DetailValueController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'title',
-                'visible' => 1
             ],
             [
                 'name' => 'detail',
                 'get' => 'detailKey.title',
-                'visible' => 1
             ],
             [
                 'name' => 'category',
                 'get' => 'detailKey.detailCategory.title',
-                'visible' => 1
             ]
         ];
 
@@ -106,6 +104,7 @@ class DetailValueController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'title',

@@ -29,20 +29,18 @@ class CityController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'name',
-                'visible' => 1
             ],
             [
                 'name' => 'state',
                 'get' => 'state.name',
-                'visible' => 1
             ],
             [
                 'name' => 'country',
                 'get' => 'state.country.name',
-                'visible' => 1
             ],
         ];
 
@@ -105,6 +103,7 @@ class CityController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'name',

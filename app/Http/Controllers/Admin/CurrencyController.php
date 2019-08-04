@@ -25,18 +25,16 @@ class CurrencyController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'name',
-                'visible' => 1
             ],
             [
                 'name' => 'symbol',
-                'visible' => 1
             ],
             [
                 'name' => 'ratio',
-                'visible' => 1
             ]
         ];
 
@@ -128,6 +126,7 @@ class CurrencyController extends BaseController
         $heads = [
             [
                 'name' => 'id',
+                'hidden' => 1
             ],
             [
                 'name' => 'name',

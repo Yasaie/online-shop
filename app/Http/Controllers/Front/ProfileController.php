@@ -26,7 +26,16 @@ class ProfileController extends BaseController
 
     public function order($id)
     {
-        return view('front.profile.order');
+        $cart = \Auth::user()
+            ->carts()
+            ->find($id);
+
+        if (! $cart) {
+            return abort(404);
+        }
+
+        return view('front.profile.order')
+            ->with(compact('cart'));
     }
 
     public function seller()

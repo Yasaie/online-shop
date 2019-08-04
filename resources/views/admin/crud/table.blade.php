@@ -32,7 +32,7 @@
                         <thead>
                         <tr>
                             @foreach($heads as $head)
-                                @if(isset($head['visible']) and $head['visible'])
+                                @if(!isset($head['hidden']) or !$head['hidden'])
                                     <th class="sorting{{$sort == $head['name'] ? ($desc ? '_desc' : '_asc') : ''}}">
                                         @php
                                             $sorting = $query;
@@ -55,7 +55,7 @@
                         @foreach($items as $item)
                             <tr>
                                 @foreach($heads as $head)
-                                    @if(isset($head['visible']) and $head['visible'])
+                                    @if(!isset($head['hidden']) or !$head['hidden'])
                                         @php
                                             $text = $item->{$head['name']};
                                             if(isset($head['options']['translate_get'])) :

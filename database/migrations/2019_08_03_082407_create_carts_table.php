@@ -45,7 +45,7 @@ class CreateCartsTable extends Migration
             $table->increments('id')->unsigned();
             $table->unsignedInteger('cart_id');
             $table->unsignedInteger('seller_id');
-            $table->unsignedTinyInteger('quantity');
+            $table->unsignedTinyInteger('quantity')->default(1);
             $table->timestamps();
 
             $table->foreign('cart_id')
