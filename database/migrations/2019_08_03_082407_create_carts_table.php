@@ -45,7 +45,10 @@ class CreateCartsTable extends Migration
             $table->increments('id')->unsigned();
             $table->unsignedInteger('cart_id');
             $table->unsignedInteger('seller_id');
+            $table->unsignedInteger('currency_id')->nullable();
             $table->unsignedTinyInteger('quantity')->default(1);
+            $table->decimal('price', 12, 2)->nullable();
+            $table->decimal('prev_price', 12, 2)->nullable();
             $table->timestamps();
 
             $table->foreign('cart_id')
@@ -57,6 +60,10 @@ class CreateCartsTable extends Migration
                 ->references('id')
                 ->on('sellers')
                 ->onDelete('cascade');
+
+            $table->foreign('currency_id')
+                ->references('id')
+                ->on('currencies');
         });
     }
 

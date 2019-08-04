@@ -46,11 +46,11 @@ class CartController extends BaseController
             ],
             [
                 'name' => 'price',
-                'get' => 'seller.current_price'
+                'get' => 'current_price_no'
             ],
             [
                 'name' => 'prev_price',
-                'get' => 'seller.previous_price'
+                'get' => 'previous_price_no'
             ],
             [
                 'name' => 'amount',

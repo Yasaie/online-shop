@@ -20,7 +20,9 @@ class Seller extends Model
 
     protected $appends = [
         'current_price',
+        'current_price_no',
         'previous_price',
+        'previous_price_no',
         'off_percent'
     ];
 
@@ -36,6 +38,16 @@ class Seller extends Model
     public function getPreviousPriceAttribute()
     {
         return userPrice($this->prev_price, $this->currency->ratio);
+    }
+
+    public function getCurrentPriceNoAttribute()
+    {
+        return str_replace(',', '', $this->current_price);
+    }
+
+    public function getPreviousPriceNoAttribute()
+    {
+        return str_replace(',', '', $this->previous_price);
     }
 
     public function getOffPercentAttribute()

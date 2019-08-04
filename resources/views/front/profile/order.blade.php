@@ -13,7 +13,7 @@
         <div class="method_body info_user row">
             <div class="col-lg-6 item">
                 <a class="block name">تحویل گیرنده:</a>
-                <a class="block val">پیام یاسایی</a>
+                <a class="block val">{{Auth::user()->full_name}}</a>
             </div>
 
             <div class="col-lg-6 item">
@@ -37,7 +37,7 @@
 
             <div class="col-lg-6 item">
                 <a class="block name"> تعداد مرسوله:</a>
-                <a class="block val">12</a>
+                <a class="block val">{{$cart->orders()->count()}}</a>
             </div>
 
             <div class="col-lg-6 item">
@@ -60,35 +60,15 @@
 
         <hr>
 
-
-
-
-
-
-
-
-            <script>
-                $(function(){
-                    var level=parseInt($(".route_product").attr("level"));
-                    alert(level)
-                    $(".level").each( function (indexInArray, valueOfElement) { 
-                        alert(indexInArray)
-                        if(indexInArray<=level)
-                         $("this").removeClass("disactive");
-                    });
-                    
-                });
-
-
-            </script>
-
-
-
-        <div class="method_body route_product" level=6>
+        <div class="method_body route_product" data-level="{{$cart->status_id - 5 > 1 ? $cart->status_id - 5 : 1}}">
 
         <span class="level disactive">
             <img src="{{asset('assets/front/image/order/user.svg')}}">
-            <a>لغو شد</a>
+            @if($cart->status_id > 6)
+                <a>@lang('inc/cart.success')</a>
+            @else
+            <a>@lang('inc/cart.' . $cart->status)</a>
+            @endif
         </span>
 
             <span class="level_betven disactive">
@@ -112,7 +92,7 @@
         </span>
 
             <span class="level_betven disactive">
-                <span> <i></i></span>
+                    <span> <i class="fa fa-check" aria-hidden="true"></i></span>
                
          </span>
 
@@ -123,7 +103,7 @@
 
 
             <span class="level_betven disactive">
-                            <span> <i></i></span>
+                    <span> <i class="fa fa-check" aria-hidden="true"></i></span>
                            
                      </span>
 
@@ -156,10 +136,9 @@
                 </tr>
                 </thead>
 
-
                 <tbody>
 
-
+                @foreach($cart->orders as $order)
                 <tr>
                     <td scope="row">
 
@@ -167,37 +146,47 @@
 
                             <img class="image_product"
                                  src="https://dkstatics-public.digikala.com/digikala-products/72264.jpg?x-oss-process=image/resize,m_lfit,h_115,w_115/quality,q_60">
-
-
-                            <div>
+                            <div style="font-size: 12px">
                                 <a><span class="name">نام محصول : </span><br>
-                                    کارت شبکه USB بی‌سیم تندا مدل W311M </a>
+                                    {{$order->product->title}} </a>
 
-                                <a><span class="name">ویژگی : </span><br>
-                                    گارانتی اصالت و سلامت فیزیکی کالا</a>
+                                @if($order->seller->service)
+                                <div><span class="name">ویژگی : </span><br>
+                                    {{$order->seller->service}}
+                                </div>
+                                @endif
 
-
-                                <a><span class="name">فروشنده : </span><br>
-                                    تورکان ایپک یولی</a>
+                                <div><span class="name">فروشنده : </span><br>
+                                    {{$order->seller->user->full_name}}
+                                </div>
 
 
                                 <hr class="name_min">
-                                <a class="name_min"><span class="name ">تعداد : </span><br>
-                                    ۱</a>
+                                <div class="name_min"><span class="name ">تعداد : </span><br>
+                                    {{$order->quantity}}
+                                </div>
 
-                                <a class="name_min"><span class="name "> قیمت واحد : </span><br>
-                                    ۲۹,۰۰۰ تومان </a>
-
-
-                                <a class="name_min"><span class="name ">قیمت کل : </span><br>
-                                    ۲۹,۰۰۰ تومان </a>
+                                <div class="name_min"><span class="name "> قیمت واحد : </span><br>
+                                    {{$order->current_price}} {{config('app.current_currency')->title}}
+                                </div>
 
 
-                                <a class="name_min"><span class="name ">تخفیف : </span><br>
-                                    ۱</a>
+                                <div class="name_min"><span class="name ">قیمت کل : </span><br>
+                                    {{number_format($order->current_price_no * $order->quantity)}} {{config('app.current_currency')->title}}
+                                </div>
 
-                                <a class="name_min"><span class="name ">تخفیف : </span><br>
-                                    قیمت نهایی</a>
+
+                                <div class="name_min"><span class="name ">تخفیف : </span><br>
+                                    @if($order->seller->previous_price_no)
+                                        {{number_format(($order->previous_price_no - $order->current_price_no) * $order->quantity)}}
+                                    @else
+                                        0
+                                    @endif
+                                </div>
+
+                                <div class="name_min"><span class="name ">قیمت نهایی : </span><br>
+                                    {{number_format($order->current_price_no * $order->quantity)}}
+                                </div>
 
 
                             </div>
@@ -207,246 +196,40 @@
 
 
                     <td>
-                        <div class="body">1</div>
+                        <div class="body">{{$order->quantity}}</div>
                     </td>
 
 
                     <td>
-                        <div class="body"> ۲۹,۰۰۰ تومان</div>
+                        <div class="body"> {{$order->previous_price ?: $order->current_price}} {{config('app.current_currency')->title}}</div>
                     </td>
 
                     <td>
-                        <div class="body">۲۹,۰۰۰ تومان</div>
-                    </td>
-
-                    <td>
-                        <div class="body">0</div>
-                    </td>
-
-
-                    <td>
-                        <div class="body">1</div>
-                    </td>
-
-
-                </tr>
-
-
-                <tr>
-                    <td scope="row">
-
                         <div class="body">
-
-                            <img class="image_product"
-                                 src="https://dkstatics-public.digikala.com/digikala-products/72264.jpg?x-oss-process=image/resize,m_lfit,h_115,w_115/quality,q_60">
-
-
-                            <div>
-                                <a><span class="name">نام محصول : </span><br>
-                                    کارت شبکه USB بی‌سیم تندا مدل W311M </a>
-
-                                <a><span class="name">ویژگی : </span><br>
-                                    گارانتی اصالت و سلامت فیزیکی کالا</a>
-
-
-                                <a><span class="name">فروشنده : </span><br>
-                                    تورکان ایپک یولی</a>
-
-
-                                <hr class="name_min">
-                                <a class="name_min"><span class="name ">تعداد : </span><br>
-                                    ۱</a>
-
-                                <a class="name_min"><span class="name "> قیمت واحد : </span><br>
-                                    ۲۹,۰۰۰ تومان </a>
-
-
-                                <a class="name_min"><span class="name ">قیمت کل : </span><br>
-                                    ۲۹,۰۰۰ تومان </a>
-
-
-                                <a class="name_min"><span class="name ">تخفیف : </span><br>
-                                    ۱</a>
-
-                                <a class="name_min"><span class="name ">تخفیف : </span><br>
-                                    قیمت نهایی</a>
-
-
-                            </div>
-
+                            {{number_format(($order->previous_price_no ?: $order->current_price) * $order->quantity)}} {{config('app.current_currency')->title}}
                         </div>
                     </td>
 
-
                     <td>
-                        <div class="body">1</div>
-                    </td>
-
-
-                    <td>
-                        <div class="body"> ۲۹,۰۰۰ تومان</div>
-                    </td>
-
-                    <td>
-                        <div class="body">۲۹,۰۰۰ تومان</div>
-                    </td>
-
-                    <td>
-                        <div class="body">0</div>
-                    </td>
-
-
-                    <td>
-                        <div class="body">1</div>
-                    </td>
-
-
-                </tr>
-
-
-                <tr>
-                    <td scope="row">
-
                         <div class="body">
-
-                            <img class="image_product"
-                                 src="https://dkstatics-public.digikala.com/digikala-products/72264.jpg?x-oss-process=image/resize,m_lfit,h_115,w_115/quality,q_60">
-
-
-                            <div>
-                                <a><span class="name">نام محصول : </span><br>
-                                    کارت شبکه USB بی‌سیم تندا مدل W311M </a>
-
-                                <a><span class="name">ویژگی : </span><br>
-                                    گارانتی اصالت و سلامت فیزیکی کالا</a>
-
-
-                                <a><span class="name">فروشنده : </span><br>
-                                    تورکان ایپک یولی</a>
-
-
-                                <hr class="name_min">
-                                <a class="name_min"><span class="name ">تعداد : </span><br>
-                                    ۱</a>
-
-                                <a class="name_min"><span class="name "> قیمت واحد : </span><br>
-                                    ۲۹,۰۰۰ تومان </a>
-
-
-                                <a class="name_min"><span class="name ">قیمت کل : </span><br>
-                                    ۲۹,۰۰۰ تومان </a>
-
-
-                                <a class="name_min"><span class="name ">تخفیف : </span><br>
-                                    ۱</a>
-
-                                <a class="name_min"><span class="name ">تخفیف : </span><br>
-                                    قیمت نهایی</a>
-
-
-                            </div>
-
+                            @if($order->previous_price_no)
+                            {{number_format(($order->previous_price_no - $order->current_price_no) * $order->quantity)}}
+                            @else
+                                0
+                            @endif
                         </div>
                     </td>
 
 
                     <td>
-                        <div class="body">1</div>
-                    </td>
-
-
-                    <td>
-                        <div class="body"> ۲۹,۰۰۰ تومان</div>
-                    </td>
-
-                    <td>
-                        <div class="body">۲۹,۰۰۰ تومان</div>
-                    </td>
-
-                    <td>
-                        <div class="body">0</div>
-                    </td>
-
-
-                    <td>
-                        <div class="body">1</div>
-                    </td>
-
-
-                </tr>
-
-
-                <tr>
-                    <td scope="row">
-
                         <div class="body">
-
-                            <img class="image_product"
-                                 src="https://dkstatics-public.digikala.com/digikala-products/72264.jpg?x-oss-process=image/resize,m_lfit,h_115,w_815/quality,q_60">
-
-
-                            <div>
-                                <a><span class="name">نام محصول : </span><br>
-                                    کارت شبکه USB بی‌سیم تندا مدل W311M </a>
-
-                                <a><span class="name">ویژگی : </span><br>
-                                    گارانتی اصالت و سلامت فیزیکی کالا</a>
-
-
-                                <a><span class="name">فروشنده : </span><br>
-                                    تورکان ایپک یولی</a>
-
-
-                                <hr class="name_min">
-                                <a class="name_min"><span class="name ">تعداد : </span><br>
-                                    ۱</a>
-
-                                <a class="name_min"><span class="name "> قیمت واحد : </span><br>
-                                    ۲۹,۰۰۰ تومان </a>
-
-
-                                <a class="name_min"><span class="name ">قیمت کل : </span><br>
-                                    ۲۹,۰۰۰ تومان </a>
-
-
-                                <a class="name_min"><span class="name ">تخفیف : </span><br>
-                                    ۱</a>
-
-                                <a class="name_min"><span class="name ">تخفیف : </span><br>
-                                    قیمت نهایی</a>
-
-
-                            </div>
-
+                            {{number_format($order->current_price_no * $order->quantity)}}
                         </div>
                     </td>
 
 
-                    <td>
-                        <div class="body">1</div>
-                    </td>
-
-
-                    <td>
-                        <div class="body"> ۲۹,۰۰۰ تومان</div>
-                    </td>
-
-                    <td>
-                        <div class="body">۲۹,۰۰۰ تومان</div>
-                    </td>
-
-                    <td>
-                        <div class="body">0</div>
-                    </td>
-
-
-                    <td>
-                        <div class="body">1</div>
-                    </td>
-
-
                 </tr>
-
+                @endforeach
 
                 </tbody>
             </table>
@@ -454,18 +237,31 @@
 
             <a name="" id="" class="btn btn-success" href="#" role="button" style="
                margin: 40px 20px;
-           ">خرید محصول</a>
+               float: left;
+           ">پرداخت</a>
         </div>
 
 
     </section>
 
-
 @endsection
 
-
-
-
 @section('footer_include')
+<script>
+        $(function(){
+            var level=parseInt($(".route_product").data("level"))-1;
+          
+            $(".level").each( function (indexInArray, valueOfElement) {
+                if(indexInArray<=level){
+                    $(this).removeClass("disactive");
+                }
+            });
 
+            $(".level_betven").each( function (indexInArray, valueOfElement) {
+               if(indexInArray<=level){
+                   $(this).removeClass("disactive");
+               }
+           });
+        });
+    </script>
 @endsection

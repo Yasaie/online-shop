@@ -51,11 +51,11 @@
 
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 info_cart">
+            <div class="col-lg-3 col-md-6 col-sm-6 info_cart" >
                 <div class="_body">
 
 
-                    <div class="box_1">
+                    <div class="box_1" >
                         <li class="list_item">
                     <span class="name_">
                             <i class="fa fa-credit-card" aria-hidden="true"></i>
@@ -78,7 +78,7 @@
                     </div>
 
 
-                    <div class="box_2">
+                    <div class="box_2" >
 
                         <p class="info">مبلغ قابل پرداخت:</p>
                         <p class="money">@{{ commaPrice(total.price) }} {{config('app.current_currency')->title}}</p>
@@ -89,21 +89,21 @@
 
 
                 </div>
-            </div>
 
+                <div class="_body _body_p" style="margin-top: 10px;">
 
-            <div class="col-lg-3 col-md-6 col-sm-6 info_cart">
-                <div class="_body _body_p">
-
-                    <p>
-                        محصولات موجود در سبد خرید شما تنها در صورت ثبت و پرداخت سفارش برای شما رزرو می&zwnj;شوند. در
-                        صورت عدم ثبت سفارش، تورکان ایپک یولی
-
-                        هیچگونه مسئولیتی در قبال تغییر قیمت یا موجودی این کالاها ندارد. </p>
-
+                        <p>
+                            محصولات موجود در سبد خرید شما تنها در صورت ثبت و پرداخت سفارش برای شما رزرو می&zwnj;شوند. در
+                            صورت عدم ثبت سفارش، تورکان ایپک یولی
+    
+                            هیچگونه مسئولیتی در قبال تغییر قیمت یا موجودی این کالاها ندارد. </p>
+    
                 </div>
 
+
             </div>
+
+
 
 
         </div>

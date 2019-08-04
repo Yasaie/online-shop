@@ -151,7 +151,7 @@ class User extends Authenticatable implements HasMedia
         return $this
             ->carts()
             ->where('status', '<=', 5)
-            ->firstOrCreate([
+            ->firstOrCreate([], [
                 'status' => 'cart'
             ]);
     }

@@ -8,7 +8,7 @@
             jQuery('.grid_').masonry({
                 itemSelector: '.category_item',
                 gutterWidth: 30,
-                originLeft: {{!isRTL()}}
+                originLeft: {{isRTL() ? 0 : 1}}
             });
 
         });
