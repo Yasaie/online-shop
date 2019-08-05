@@ -9,7 +9,7 @@
 
                     <h2 class="title-cart">سبد خرید</h2>
 
-                    <div class="list_body" >
+                    <div class="list_body" v-if="Object.keys(orders).length" >
 
                             <li class="list_product" v-for="order in orders">
                                 <a class="btn rm_btn btn-danger" href="javascript:;" @click="deleteOrder(order.id)">
@@ -30,24 +30,40 @@
                                         </div>
                                 </div>
 
-                                <div class="add_product" v-if="order.amount">
+                                <div class="add_product" v-if="order.amount" style="text-align: center">
                                     تعداد
                                     <select class="mdb-select md-form" v-model="order.quantity" @change="updateQuantity(order.id, order.quantity)">
                                         <option :value="option" v-for="option in order.amount">@{{ option }}</option>
                                     </select>
+                                    <div class="text-warning" style="margin-top: 10px" v-if="order.old_price != order.price">
+                                        قیمت این کالا تغییر کرده است.
+                                    </div>
                                 </div>
                                 <div class="text-danger" v-else>
                                     موجودی کافی نمی‌باشد
                                 </div>
 
                                 <div class="information_unit">
-                                    <span>@{{ commaPrice(order.price * order.quantity) }}</span>
+
+                                    <div class="price_off" v-if="order.prev_price > 0">
+                                        <del>@{{ commaPrice(order.prev_price * order.quantity) }} {{config('app.current_currency')->title}} </del><br>
+                                        <span class="text-danger">
+                                            تخفیف :
+                                            @{{ commaPrice((order.prev_price - order.price) * order.quantity) }} {{config('app.current_currency')->title}}
+                                        </span>
+                                    </div>
+
+                                    <span>@{{ commaPrice(order.price * order.quantity) }}
+                                   
+                                    </span>
                                     <span class="unit">{{config('app.current_currency')->title}}</span>
                                 </div>
                             </li>
 
                     </div>
-
+                    <div class="alert alert-warning" role="alert" v-else>
+                        <strong>سبد خرید شما خالی است</strong>
+                    </div>
 
                 </div>
             </div>
@@ -82,7 +98,7 @@
 
                         <p class="info">مبلغ قابل پرداخت:</p>
                         <p class="money">@{{ commaPrice(total.price) }} {{config('app.current_currency')->title}}</p>
-                        <a name="" id="" class="btn btn-success" href="#" role="button">ثبت سفارش</a>
+                        <a name="" id="" class="btn btn-info" :class="Object.keys(orders).length ? '' : 'disabled'" href="#" role="button">ثبت سفارش</a>
 
 
                     </div>
@@ -95,16 +111,11 @@
                         <p>
                             محصولات موجود در سبد خرید شما تنها در صورت ثبت و پرداخت سفارش برای شما رزرو می&zwnj;شوند. در
                             صورت عدم ثبت سفارش، تورکان ایپک یولی
-    
+
                             هیچگونه مسئولیتی در قبال تغییر قیمت یا موجودی این کالاها ندارد. </p>
-    
                 </div>
 
-
             </div>
-
-
-
 
         </div>
     </div>

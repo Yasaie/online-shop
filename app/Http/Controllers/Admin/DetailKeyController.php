@@ -62,6 +62,16 @@ class DetailKeyController extends BaseController
                 'options' => [
                     'all' => DetailCategory::all(),
                 ],
+            ],
+            [
+                'name' => 'highlighted',
+                'type' => 'select',
+                'options' => [
+                    'all' => [
+                        ['id' => 0, 'title' => 'خیر'],
+                        ['id' => 1, 'title' => 'بلی'],
+                    ],
+                ],
             ]
         ];
         $multilang = [

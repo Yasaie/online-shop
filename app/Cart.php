@@ -13,7 +13,10 @@ class Cart extends BaseModel
 {
     protected $guarded = [];
 
-    protected $appends = ['status_id'];
+    protected $appends = [
+        'status_id',
+        'status_locale'
+    ];
 
     public $status_list = [
         'cart',
@@ -32,6 +35,11 @@ class Cart extends BaseModel
     {
         $status = array_flip($this->status_list);
         return $status[$this->status] + 1;
+    }
+
+    public function getStatusLocaleAttribute()
+    {
+        return __('inc/cart.' . $this->status);
     }
 
     public function user()

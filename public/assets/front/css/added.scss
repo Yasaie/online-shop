@@ -386,6 +386,9 @@ padding-bottom: 10px;
         .parent{
             width: 100% !important;
         }
+
+        
+
             
         }
 
@@ -718,3 +721,42 @@ padding-bottom: 250px;
 }
 
 .zoom img::selection { background-color: transparent; }
+
+
+.notenough_alarm{
+
+    h4{
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        padding: 18px;
+    }
+
+
+    .line{
+        
+        display: block;
+        width: 90%;
+        height: 1px;
+        background: #dadada;
+        position: absolute;
+        z-index: 1;
+    }
+
+    .title{
+        position: relative;
+        z-index: 12;
+        background: #fdfdfd;
+        padding: 0px 12px;
+        color: #969696;
+    }
+
+
+    p{
+        padding: 10px 10px;
+        color: #988080;
+        }
+
+}

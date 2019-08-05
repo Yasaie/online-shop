@@ -150,15 +150,11 @@
 
     <div class="container-fluid">
         <div class="row product_main_box">
-            @if($product->getFirstMedia('images'))
-                @include('front.product.images')
-            @endif
+            @include('front.product.images')
 
             @include('front.product.summary')
 
-            @if($sellers->first())
-                @include('front.product.price')
-            @endif
+            @include('front.product.price')
         </div>
 
         @if (! $sellers->isEmpty())

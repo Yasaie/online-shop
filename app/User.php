@@ -128,7 +128,7 @@ class User extends Authenticatable implements HasMedia
     {
         return $this->sellers->flatMap(function ($q) {
             return $q->orders()->whereHas('cart', function ($q) {
-                $q->where('status', 'success');
+                $q->whereIn('status', ['success', 'checking']);
             })->get();
         });
     }

@@ -65,7 +65,6 @@
                                                 $text .= $head['append'];
                                             endif;
                                             $text = !empty($text) ? $text : '-';
-
                                         @endphp
                                         <td>{!! $text !!}</td>
                                     @endif

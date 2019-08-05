@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Cart;
-use App\Order;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Yasaie\Cruder\Crud;
@@ -36,9 +34,7 @@ class CartController extends BaseController
             ],
             [
                 'name' => 'status',
-                'options' => [
-                    'translate_get' => true
-                ],
+                'get' => 'status_locale',
             ],
             [
                 'name' => 'traceno',
@@ -57,7 +53,7 @@ class CartController extends BaseController
         return Crud::index($this->model, $heads, 'created_at_desc', $this->perPage, $this->load);
     }
 
-    public function newOrders()
+    public function byStatus($status)
     {
         # table headers
         $heads = [
@@ -71,9 +67,7 @@ class CartController extends BaseController
             ],
             [
                 'name' => 'status',
-                'options' => [
-                    'translate_get' => true
-                ],
+                'get' => 'status_locale',
             ],
             [
                 'name' => 'traceno',
@@ -89,87 +83,22 @@ class CartController extends BaseController
             ],
         ];
 
-        $items = Cart::where('status', 'success')
+        $items = Cart::where('status', $status)
             ->get()
             ->load($this->load);
 
         return Crud::index($items, $heads, 'created_at_desc', $this->perPage);
     }
 
-    public function seller($id = null)
+    public function success()
     {
-        $id = $id ?: \Auth::id();
-
-        $item = User::find($id);
-
-        if(! $item or ! $item->hasRole(['admin', 'seller']))
-            abort(404);
-
-        if(\Auth::id() != $id and !\Auth::user()->hasRole('admin'))
-            abort(401);
-
-        $items = $item->sellers->flatMap(function ($q) {
-            return $q->orders()->whereHas('cart', function ($q) {
-                $q->where('status', '>=', 6);
-            })->get();
-        });
-
-        view()->share([
-            'title' => 'درخواست‌های ' . $item->full_name,
-            'crud' => [
-                'show' => 0,
-                'edit' => 0,
-                'create' => 0,
-                'destroy' => 0
-            ]
-        ]);
-
-        # table headers
-        $heads = [
-            [
-                'name' => 'id',
-                'hidden' => 1
-            ],
-            [
-                'name' => 'product',
-                'get' => 'seller.product.title',
-            ],
-            [
-                'name' => 'service',
-                'get' => 'seller.service',
-            ],
-            [
-                'name' => 'price',
-                'get' => 'seller.current_price',
-                'append' => ' ' . config('app.current_currency')->title,
-            ],
-            [
-                'name' => 'status',
-                'get' => 'cart.status',
-                'options' => [
-                    'translate_get' => true
-                ],
-            ],
-            [
-                'name' => 'created_at',
-            ]
-        ];
-
-        return Crud::index($items, $heads, 'created_at_desc', $this->perPage);
+        return $this->byStatus('success');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function checking()
     {
-        //
+        return $this->byStatus('checking');
     }
-
 
     /**
      * @package show
@@ -218,6 +147,9 @@ class CartController extends BaseController
                 'append' => ' ' . config('app.current_currency')->title,
             ],
             [
+                'name' => 'confirmation'
+            ],
+            [
                 'name' => 'created_at',
             ]
         ];
@@ -240,19 +172,19 @@ class CartController extends BaseController
         $status = [
             [
                 'id' => 'checking',
-                'title' => 'checking'
+                'title' => __('inc/cart.checking')
             ],
             [
                 'id' => 'ready',
-                'title' => 'ready',
+                'title' => __('inc/cart.ready')
             ],
             [
                 'id' => 'sending',
-                'title' => 'sending',
+                'title' => __('inc/cart.sending')
             ],
             [
                 'id' => 'received',
-                'title' => 'received'
+                'title' => __('inc/cart.received')
             ]
         ];
 
@@ -301,7 +233,6 @@ class CartController extends BaseController
         ]);
 
         $item->touch();
-
         return redirect()->route($this->route . '.show', $id);
     }
 

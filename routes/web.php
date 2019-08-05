@@ -130,12 +130,21 @@ Route::namespace('Admin')
                     ->name('list');
             });
         # Cart
-        Route::get('cart/new', 'CartController@newOrders')
-            ->name('cart.new');
-        Route::get('cart/seller/{id?}', 'CartController@seller')
-            ->name('cart.seller');
-        Route::resource('cart', 'CartController')
-            ->only(['index', 'show', 'edit', 'update']);
+        Route::prefix('cart')
+            ->group(function () {
+                Route::get('success', 'CartController@success')
+                    ->name('cart.success');
+                Route::get('checking', 'CartController@checking')
+                    ->name('cart.checking');
+                Route::resource('cart', 'CartController')
+                    ->only(['index', 'show', 'edit', 'update']);
+            });
+        # Order
+        Route::name('cart.')
+            ->group(function () {
+                Route::resource('order', 'OrderController');
+            });
+
     });
 
 Route::get('lang/{id}', 'PublicController@lang')

@@ -154,31 +154,27 @@
                         <span class="title_form">اطلاعات تماس</span>
 
 
+                        <div class="form-group">
+                            <label for="">کشور</label>
+                            <select class="form-control" onchange="onchange_country()" name="" id="country_select">
 
-                       
+                            </select>
+                        </div>
 
 
                         <div class="form-group">
-                                <label for="">کشور</label>
-                                <select class="form-control" onchange="onchange_country()" name="" id="country_select">
-                               
-                                </select>
-                            </div>
-
-
-                        <div class="form-group" >
                             <label for="">استان</label>
-                            <select class="form-control" onchange="onchange_state()"  name="" id="state_select">
-                           
+                            <select class="form-control" onchange="onchange_state()" name="" id="state_select">
+
                             </select>
                         </div>
 
                         <div class="form-group">
-                                <label for="">شهر</label>
-                                <select class="form-control" name="" id="city_select">
-                               
-                                </select>
-                            </div>
+                            <label for="">شهر</label>
+                            <select class="form-control" name="" id="city_select">
+
+                            </select>
+                        </div>
 
 
                         <div class="form-group">
@@ -274,93 +270,107 @@
 
 
 @section('footer_include')
+
+
 <script>
+    function show_form(){
+      var chose=$('input[name=business]:checked').val();
+
+       if(chose=="company"){
+           $(".company_show").show(500);
+           $(".personal_show").hide(500);
+       }else{
+        $(".company_show").hide(500);
+        $(".personal_show").show(500);
+
+        
+       }
 
 
-        $(function() {
+
+    }
+
+
+
+
+
+</script>
+    <script>
+
+
+        $(function () {
 
             $.ajax({
                 type: "get",
                 url: app_url + "/api/address/country",
-               
-               
+
+
                 success: function (response) {
-                  
-                   
-                   for (let i = 0; i < response.length; i++) {
-                       
-                    
-                     
-                       $("#country_select").append(' <option value="'+response[i].id+'">'+response[i].name+'</option>');
-                      
-                   }
-                   
-                   onchange_country()
+
+
+                    for (let i = 0; i < response.length; i++) {
+
+
+                        $("#country_select").append(' <option value="' + response[i].id + '">' + response[i].name + '</option>');
+
+                    }
+
+                    onchange_country()
                 }
             });
-            
-        });
-        
 
-        function onchange_country(){
-           
+        });
+
+
+        function onchange_country() {
+
             $("#state_select").children().remove();
             $("#city_select").children().remove();
             $.ajax({
                 type: "get",
-                url: app_url + "/api/address/state/"+$('#country_select').find(":selected").val(),
-               
-               
+                url: app_url + "/api/address/state/" + $('#country_select').find(":selected").val(),
+
+
                 success: function (response) {
-                  
-                   
-                   for (let i = 0; i < response.length; i++) {
-                       
-                    
-                     
-                       $("#state_select").append(' <option value="'+response[i].id+'">'+response[i].name+'</option>');
-                      
-                   }
-                   
-                   onchange_state()
+
+
+                    for (let i = 0; i < response.length; i++) {
+
+
+                        $("#state_select").append(' <option value="' + response[i].id + '">' + response[i].name + '</option>');
+
+                    }
+
+                    onchange_state()
                 }
             });
 
-            } 
+        }
 
 
+        function onchange_state() {
 
 
-        function onchange_state(){
-           
-       
-                
             $("#city_select").children().remove();
             $.ajax({
                 type: "get",
-                url: app_url + "/api/address/city/"+$('#state_select').find(":selected").val(),
-               
-               
+                url: app_url + "/api/address/city/" + $('#state_select').find(":selected").val(),
+
+
                 success: function (response) {
-                   
-                  
+
+
                     $("#city_select").children().remove();
-                   for (let i = 0; i < response.length; i++) {
-                       
-                      
-                   
-                       $("#city_select").append(' <option value="'+response[i].id+'">'+response[i].name+'</option>');
-                       
-                   }
+                    for (let i = 0; i < response.length; i++) {
+
+                        $("#city_select").append(' <option value="' + response[i].id + '">' + response[i].name + '</option>');
+
+                    }
                 }
             });
 
 
-
-        
-            }
-
-         
+        }
 
 
     </script>

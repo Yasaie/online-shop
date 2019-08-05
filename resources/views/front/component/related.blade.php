@@ -23,8 +23,8 @@
         <div class="section-content woocommerce">
 
             <div class="product-items">
-                <ul class="products product-style1 product-carousel owl-carousel"
-                    data-navigation="0" data-pagination="0">
+                <ul class="products product-style1 product-carousel owl-carousel" data-navigation="0"
+                    data-pagination="0">
                     @foreach($product_list as $rp)
                         @php($rp->seller = $rp->sellers
                             ->where('amount', '>', 0)
@@ -43,10 +43,9 @@
                                         <div class="product-image product-image-style2">
                                             <a href="{{route('product', ['id' => $rp->id, 'slag' => $rp->title])}}"
                                                class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
-                                                    <img width="300" height="354"
-                                                         src="{{$rp->getFirstMedia('images') ? $rp->getFirstMedia('images')->getFullUrl('small') : asset('assets/front/image/no-default-thumbnail.png')}}"
-                                                         class="front-image wp-post-image"
-                                                         alt="{{$rp->title}}">
+                                                <img width="300" height="354"
+                                                     src="{{$rp->getFirstMedia('images') ? $rp->getFirstMedia('images')->getFullUrl('small') : asset('assets/front/image/no-default-thumbnail.png')}}"
+                                                     class="front-image wp-post-image" alt="{{$rp->title}}">
                                             </a>
 
                                         </div>
@@ -79,17 +78,16 @@
                                                         </span>
                                                     </span>
                                                 </div>
-                                            @endif
 
-
-                                            <div class="product-buttons">
-                                                <div class="product-cart">
-                                                    <a href="{{route('cart.add', $rp->seller->id)}}" data-quantity="1"
-                                                       class="button product_type_variable add_to_cart_button"
-                                                       data-product_id="979" data-product_sku=""
-                                                       rel="nofollow">افزودن به سبد خرید</a>
+                                                <div class="product-buttons">
+                                                    <div class="product-cart">
+                                                        <a href="{{route('cart.add', $rp->seller->id)}}" data-quantity="1"
+                                                           class="button product_type_variable add_to_cart_button"
+                                                           data-product_id="979" data-product_sku="" rel="nofollow">افزودن
+                                                            به سبد خرید</a>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            @endif
 
                                         </div>
                                     </div>

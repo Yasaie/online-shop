@@ -4,7 +4,7 @@
         <div class="container-fluid ">
             <div class="row flex_center">
 
-                <div class="col-lg-4 col-sm-6 col-md-4 text-left left_box-menu">
+                <div class="col-lg-3  col-md-3 col-sm-5 text-left left_box-menu">
                     <div class="customer-support">
 
                         <div class="customer-support-email">
@@ -34,12 +34,12 @@
                     </div>
                 </div>
 
-                <form class="col-lg-4 search_box_main">
+                <form class="col-lg-6 col-md-6 col-sm-2 search_box_main">
                     <button type="submit" class="btn_search"><i class="fa fa-search" aria-hidden="true"></i></button>
                     <input width="100%" placeholder="نام کالا، برند و یا دسته مورد نظر خود را جستجو کنید…">
                 </form>
 
-                <div class="col-lg-4 col-sm-6 col-md-8 text-right info_head_left">
+                <div class="col-lg-3 col-md-3 col-sm-5 col-md-8 text-right info_head_left">
 
                     <div class="topbar-right">
 

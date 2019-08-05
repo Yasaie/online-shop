@@ -2,7 +2,13 @@
 
 namespace App;
 
-
+/**
+ * @author Payam Yasaie <payam@yasaie.ir>
+ *
+ * Class Order
+ * @package App
+ * @mixin \Eloquent
+ */
 class Order extends BaseModel
 {
     protected $guarded = [];
@@ -12,7 +18,8 @@ class Order extends BaseModel
         'current_price_no',
         'previous_price',
         'previous_price_no',
-        'off_percent'
+        'off_percent',
+        'confirmation'
     ];
 
     /**
@@ -37,10 +44,13 @@ class Order extends BaseModel
     public function setSellerIdAttribute($value)
     {
         $this->attributes['seller_id'] = $value;
-        $seller = $this->seller;
-        $this->attributes['price'] = $seller->current_price_no;
-        $this->attributes['prev_price'] = $seller->previous_price_no;
-        $this->attributes['currency_id'] = config('app.current_currency')->id;
+        $this->updatePrice(0);
+    }
+
+    public function setQuantityAttribute($value)
+    {
+        $this->attributes['quantity'] = $value;
+        $this->updatePrice(0);
     }
 
     public function getCurrentPriceAttribute()
@@ -63,6 +73,17 @@ class Order extends BaseModel
         return str_replace(',', '', $this->previous_price);
     }
 
+    public function getConfirmationAttribute()
+    {
+        $text = '';
+        if ($this->confirmed !== null) {
+            $text = $this->confirmed
+                ? __('inc/cart.confirmed')
+                : __('inc/cart.unconfirmed');
+        }
+        return $text;
+    }
+
     public function cart()
     {
         return $this->belongsTo(Cart::class);
@@ -81,5 +102,16 @@ class Order extends BaseModel
     public function currency()
     {
         return $this->belongsTo(Currency::class);
+    }
+
+    public function updatePrice($save = true)
+    {
+        $seller = $this->seller;
+
+        $this->attributes['price'] = $seller->current_price_no;
+        $this->attributes['prev_price'] = $seller->previous_price_no;
+        $this->attributes['currency_id'] = config('app.current_currency')->id;
+
+        if ($save) $this->save();
     }
 }

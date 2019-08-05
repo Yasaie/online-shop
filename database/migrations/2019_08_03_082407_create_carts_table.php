@@ -47,6 +47,7 @@ class CreateCartsTable extends Migration
             $table->unsignedInteger('seller_id');
             $table->unsignedInteger('currency_id')->nullable();
             $table->unsignedTinyInteger('quantity')->default(1);
+            $table->boolean('confirmed')->nullable();
             $table->decimal('price', 12, 2)->nullable();
             $table->decimal('prev_price', 12, 2)->nullable();
             $table->timestamps();

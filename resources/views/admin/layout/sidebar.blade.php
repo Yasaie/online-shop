@@ -47,13 +47,16 @@
                                 <i class="fa fa-circle-o nav-icon"></i>
                                 <p class="flex-grow-1">{{$child['name']}}</p>
                                 @if(isset($child['count']) and $child['count'])
-                                    <span class="badge badge-info" style="margin: 3px 15px;">
-                                        @if(is_numeric($child['count']))
-                                            {{$child['count']}}
-                                        @else
-                                            {{Y::dotObject(Auth::user(), $child['count'])}}
-                                        @endif
-                                    </span>
+                                    @php
+                                        $count = is_numeric($child['count'])
+                                            ? $child['count']
+                                            : Y::dotObject(Auth::user(), $child['count']);
+                                    @endphp
+                                    @if($count)
+                                        <span class="badge badge-info" style="margin: 3px 15px;">
+                                            {{$count}}
+                                        </span>
+                                    @endif
                                 @endif
                             </a>
                         </li>

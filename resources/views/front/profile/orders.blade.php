@@ -25,7 +25,7 @@
                         <tr>
                             <td>1</td>
                             <td>{{$cart->id}}</td>
-                            <td>{{$cart->created_at}}</td>
+                            <td>{{$cart->created_at->format('l j F Y')}}</td>
                             <td class="text-{{$cart->status == 'fail' ? 'danger' : 'success'}}">{{__('inc/cart.' . $cart->status)}}</td>
                             <td>{{$cart->total ? number_format($cart->total) . ' ریال' : '-'}}</td>
                             <td>{{$cart->orders->count()}}</td>

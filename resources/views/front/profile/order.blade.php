@@ -5,8 +5,8 @@
     <section class="col-lg-9 left_box app_order">
 
         <div class="mb-2 title">
-            <h2 class="titel_method order_id">سفارش DKC-1137306</h2>
-            <span class="order_time">ثبت شده در تاریخ ۲۸ آذر ۱۳۹۲</span>
+            <h2 class="titel_method order_id">سفارش {{$cart->id}}</h2>
+            <span class="order_time">ثبت شده در تاریخ {{$cart->created_at->format('l j F Y')}}</span>
         </div>
 
 
@@ -78,7 +78,7 @@
 
             <span class="level disactive">
                 <img src="{{ asset('assets/front/image/order/check.svg') }}">
-                <a>چک کردن سفارش</a>
+                <a>@lang('inc/cart.checking')</a>
         </span>
 
             <span class="level_betven disactive">
@@ -88,7 +88,7 @@
 
             <span class="level disactive">
                 <img src="{{ asset('assets/front/image/order/prepare.svg') }}">
-                    <a>آماده سازی سفارش</a>
+                    <a>@lang('inc/cart.ready')</a>
         </span>
 
             <span class="level_betven disactive">
@@ -98,7 +98,7 @@
 
             <span class="level disactive">
                         <img src="{{ asset('assets/front/image/order/post.svg') }}">
-                        <a>ارسال سفارش به پست</a>
+                        <a>@lang('inc/cart.sending')</a>
                     </span>
 
 
@@ -109,7 +109,7 @@
 
             <span class="level disactive">
                     <img src="{{ asset('assets/front/image/order/clinet.svg') }}">
-                            <a>تحویل سفارش به مشتری</a>
+                            <a>@lang('inc/cart.received')</a>
                         </span>
 
 
@@ -178,14 +178,14 @@
 
                                 <div class="name_min"><span class="name ">تخفیف : </span><br>
                                     @if($order->seller->previous_price_no)
-                                        {{number_format(($order->previous_price_no - $order->current_price_no) * $order->quantity)}}
+                                        {{number_format(($order->previous_price_no - $order->current_price_no) * $order->quantity)}} {{config('app.current_currency')->title}}
                                     @else
                                         0
                                     @endif
                                 </div>
 
                                 <div class="name_min"><span class="name ">قیمت نهایی : </span><br>
-                                    {{number_format($order->current_price_no * $order->quantity)}}
+                                    {{number_format($order->current_price_no * $order->quantity)}} {{config('app.current_currency')->title}}
                                 </div>
 
 
@@ -213,7 +213,7 @@
                     <td>
                         <div class="body">
                             @if($order->previous_price_no)
-                            {{number_format(($order->previous_price_no - $order->current_price_no) * $order->quantity)}}
+                            {{number_format(($order->previous_price_no - $order->current_price_no) * $order->quantity)}} {{config('app.current_currency')->title}}
                             @else
                                 0
                             @endif
@@ -223,7 +223,7 @@
 
                     <td>
                         <div class="body">
-                            {{number_format($order->current_price_no * $order->quantity)}}
+                            {{number_format($order->current_price_no * $order->quantity)}} {{config('app.current_currency')->title}}
                         </div>
                     </td>
 
@@ -234,13 +234,13 @@
                 </tbody>
             </table>
 
-
+            @if($cart->status == 'factor')
             <a name="" id="" class="btn btn-success" href="#" role="button" style="
                margin: 40px 20px;
                float: left;
            ">پرداخت</a>
+            @endif
         </div>
-
 
     </section>
 

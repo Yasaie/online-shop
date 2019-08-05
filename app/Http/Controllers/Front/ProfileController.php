@@ -18,7 +18,9 @@ class ProfileController extends BaseController
 
     public function orders()
     {
-        $carts = \Auth::user()->carts;
+        $carts = \Auth::user()->carts()
+            ->orderBy('created_at','desc')
+            ->get();
 
         return view('front.profile.orders')
             ->with(compact('carts'));
@@ -29,6 +31,14 @@ class ProfileController extends BaseController
         $cart = \Auth::user()
             ->carts()
             ->find($id);
+
+        if ($cart->status_id <= 5) {
+            $cart->update([
+                'status' => 'factor',
+            ]);
+
+            $cart->orders->each->updatePrice();
+        }
 
         if (! $cart) {
             return abort(404);

@@ -154,13 +154,19 @@ abstract class BaseController extends Controller
                         'route' => 'index'
                     ],
                     [
-                        'name' => 'جدید',
-                        'route' => 'new',
+                        'name' => __('inc/cart.success'),
+                        'route' => 'success',
                         'count' => $cart
                     ],
                     [
+                        'name' => __('inc/cart.checking'),
+                        'route' => 'checking',
+                        'count' => Cart::where('status', 'checking')
+                            ->count()
+                    ],
+                    [
                         'name' => 'درخواست‌های من',
-                        'route' => 'seller',
+                        'route' => 'order.index',
                         'count' => 'requestedOrders().count()'
                     ]
                 ]
