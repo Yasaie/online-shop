@@ -397,7 +397,7 @@
     padding: 30px;
 
     .filter {
-        height: 700px;
+       min-height: 700px;
         padding: 0px;
 
 
@@ -727,6 +727,7 @@
                         img {
                             width: 85%;
                             object-fit: scale-down;
+                            min-height: 215px;
                         }
                     }
 

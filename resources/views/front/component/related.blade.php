@@ -32,16 +32,14 @@
                             ->first())
                         <li class="slide-row">
                             <ul>
-                                <li class="col-xs-6 col-sm-6 col-md-4 col-lg-3 product type-product post-979
-                                                                    status-publish first instock product_cat-93 product_tag-91 product_tag-90
-                                                                    has-post-thumbnail shipping-taxable purchasable product-type-variable"
+                                <li class="col-lg-3 col-md-4 col-sm-6 col-xs-6 product product_custom"
                                     data-postid="post-979">
 
 
                                     <div class="product-entry">
 
                                         <div class="product-image product-image-style2">
-                                            <a href="{{route('product', ['id' => $rp->id, 'slag' => $rp->title])}}"
+                                            <a href="{{route('product', ['id' => $rp->id, 'slag' => htmlspecialchars($rp->title)])}}"
                                                class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
                                                 <img width="300" height="354"
                                                      src="{{$rp->getFirstMedia('images') ? $rp->getFirstMedia('images')->getFullUrl('small') : asset('assets/front/image/no-default-thumbnail.png')}}"
@@ -65,13 +63,17 @@
                                                 <div class="product-loop-price">
                                                     <span class="price">
                                                         <span class="woocommerce-Price-amount amount">
-                                                            @if($rp->seller->prev_price)
-                                                                <del>{{$rp->seller->previous_price}} {{Config::get('app.current_currency')->title}}</del>
-                                                                -
-                                                                <span>{{getPercentage($rp->seller->previous_price, $rp->seller->current_price)}}%</span>
-                                                                -
+                                                            @if($rp->seller->prev_price - $rp->seller->price > 0)
+                                                                <del>{{$rp->seller->previous_price}} </del>
+
+                                                                <span class="off_custom">
+                                                                    {{getPercentage($rp->seller->previous_price, $rp->seller->current_price)}}%
+                                                                </span>
                                                             @endif
-                                                            {{$rp->seller->current_price}}
+
+                                                          <span class="product_price_custom">{{$rp->seller->current_price}}</span>  
+
+
                                                             <span class="woocommerce-Price-currencySymbol">
                                                                 {{Config::get('app.current_currency')->title}}
                                                             </span>
@@ -81,7 +83,8 @@
 
                                                 <div class="product-buttons">
                                                     <div class="product-cart">
-                                                        <a href="{{route('cart.add', $rp->seller->id)}}" data-quantity="1"
+                                                        <a href="{{route('cart.add', $rp->seller->id)}}"
+                                                           data-quantity="1"
                                                            class="button product_type_variable add_to_cart_button"
                                                            data-product_id="979" data-product_sku="" rel="nofollow">افزودن
                                                             به سبد خرید</a>
@@ -97,8 +100,11 @@
                             </ul>
                         </li>
                     @endforeach
+
+
                 </ul>
             </div>
         </div>
     </div>
 </div>
+

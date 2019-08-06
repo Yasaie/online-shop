@@ -231,7 +231,7 @@
 
 
                     <div>
-                        <span class="title_form">تصویر کارت ملی</span>
+                        <span class="title_form">مدارک</span>
 
                         <div class="form-group">
 
@@ -244,6 +244,19 @@
                             <input type="file" style="display:none;" id="file" name="file"/>
 
                         </div>
+
+                        <div class="form-group">
+
+                                <div id="loadFileXml" class="btn bg-success"
+                                     onclick="document.getElementById('file').click();">
+                                    <i class="fa fa-file-image-o" aria-hidden="true"></i>
+                                    بار گذاری قرار داد
+                                </div>
+    
+                                <input type="file" style="display:none;" id="file" name="file"/>
+    
+                            </div>
+                            
                         <hr>
                     </div>
 

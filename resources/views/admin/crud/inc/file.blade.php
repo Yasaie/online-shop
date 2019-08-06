@@ -2,9 +2,10 @@
                                                                                            name="{{$name}}"
                                                                                            id="{{$name}}">
 <script>
+    var {{$name}}Dropzone = null;
     $(document).ready(function () {
         var _token = $('[name=csrf-token]').attr('content');
-        var {{$name}}Dropzone = new Dropzone('div#{{$name}}', {
+        {{$name}}Dropzone = new Dropzone('div#{{$name}}', {
             addRemoveLinks: true,
             parallelUploads: 10,
             acceptedFiles: '.jpg, .png, .gif',
@@ -30,7 +31,7 @@
             },
         });
 
-        @if(isset($value))
+        @if(isset($value) and is_object($value))
         @php($get = isset($get) ? $get : $name)
         @php($library = $value->getMedia($get))
         @php($dropzone_data = collect())
@@ -57,9 +58,7 @@
     $('form#create').on('submit', function (event) {
         event.preventDefault(); //this will prevent the default submit
         var array = [];
-        Object.values({{$name}}.dropzone.files
-    ).
-        forEach(function (e) {
+        Object.values({{$name}}Dropzone.files).forEach(function (e) {
             array.push(e.id)
         });
         $("input#{{$name}}").val(array);

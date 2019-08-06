@@ -15,5 +15,6 @@ return [
     'role' => 'نقش',
     'user' => 'کاربر',
     'admin' => 'مدیر',
-    'customer' => 'مشتری'
+    'customer' => 'مشتری',
+    'writer' => 'نویسنده',
 ];

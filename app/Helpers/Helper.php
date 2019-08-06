@@ -56,7 +56,7 @@ if (!function_exists('getPercentage')) {
         $previous = filter_var($previous, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
         $current = filter_var($current, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
-        return floor((100 - (($current * 100) / $previous)));
+        return $previous ? floor(100 - (($current * 100) / $previous)) : 0;
     }
 }
 

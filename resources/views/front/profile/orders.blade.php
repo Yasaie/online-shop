@@ -10,7 +10,7 @@
 
                     <thead>
                     <tr>
-                        <th width="50px">#</th>
+                        
                         <th>شماره سفارش</th>
                         <th>تاریخ ثبت سفارش</th>
                         <th>وضعیت</th>
@@ -21,9 +21,13 @@
                     </tr>
                     </thead>
                     <tbody>
+                    
                     @foreach($carts as $cart)
                         <tr>
-                            <td>1</td>
+                            
+                           
+
+                           
                             <td>{{$cart->id}}</td>
                             <td>{{$cart->created_at->format('l j F Y')}}</td>
                             <td class="text-{{$cart->status == 'fail' ? 'danger' : 'success'}}">{{__('inc/cart.' . $cart->status)}}</td>

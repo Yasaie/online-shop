@@ -7,6 +7,45 @@
 @endif
 <link rel='stylesheet' id='emallshop-style-css' href=' {{asset("assets/front/css/style-inline-css.css")}}'/>
 
+<style>
+    .wiiide{width: 100% !important;}
+    .loding{ display: none;}
+    .loding--active{
+                background: #fff;
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                top: 0px;
+                left: 0px;
+                z-index: 500;
+                display: block !important;
+              }
+    .display_none{display: none !important;}
+    #loader {position: absolute;
+                left: 50%;
+                top: 50%;
+                z-index: 1;
+                margin: -75px 0 0 -75px;
+                border: 6px solid #debaba;
+                border-radius: 50%;
+                border-top: 6px solid #3498db;
+                width: 60px;
+                height: 60px;
+                -webkit-animation: spin 2s linear infinite;
+                animation: spin 2s linear infinite;}
+            
+            @-webkit-keyframes spin {
+              0% { -webkit-transform: rotate(0deg); }
+              100% { -webkit-transform: rotate(360deg); }
+            }
+            
+            @keyframes spin {
+              0% { transform: rotate(0deg); }
+              100% { transform: rotate(360deg); }
+            }
+</style>
+
+
 {{-- //--------------------------------------------------------- --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
 <script type="text/javascript" src="{{asset('assets/front/js/vue.js')}}"></script>

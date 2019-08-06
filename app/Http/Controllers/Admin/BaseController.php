@@ -14,6 +14,10 @@ use App\Order;
 use App\Product;
 use App\User;
 
+/**
+ * Class BaseController
+ * @package App\Http\Controllers\Admin
+ */
 abstract class BaseController extends Controller
 {
     protected $user = null;
@@ -42,6 +46,9 @@ abstract class BaseController extends Controller
         ]);
     }
 
+    /**
+     * @return array
+     */
     protected function menuItems()
     {
         $comment = Comment::get();
@@ -108,7 +115,15 @@ abstract class BaseController extends Controller
                 'child' => [
                     [
                         'name' => 'همه',
-                        'route' => 'index'
+                        'route' => 'index',
+                    ],
+                    [
+                        'name' => 'قیمت گذاری‌ها',
+                        'route' => 'pricing.index',
+                    ],
+                    [
+                        'name' => 'قیمت گذاری جدید',
+                        'route' => 'pricing.create'
                     ]
                 ]
             ],
@@ -120,12 +135,8 @@ abstract class BaseController extends Controller
                 'child' => [
                     [
                         'name' => 'همه',
-                        'route' => 'user.index'
+                        'route' => 'user.index',
                     ],
-                    [
-                        'name' => 'پروفایل',
-                        'route' => 'profile.index'
-                    ]
                 ]
             ],
             [
@@ -147,22 +158,21 @@ abstract class BaseController extends Controller
                 'name' => 'سفارشات',
                 'icon' => 'shopping-cart',
                 'base' => 'admin.cart.',
-                'count' => $cart,
                 'child' => [
                     [
                         'name' => 'همه',
-                        'route' => 'index'
+                        'route' => 'index',
                     ],
                     [
                         'name' => __('inc/cart.success'),
                         'route' => 'success',
-                        'count' => $cart
+                        'count' => $cart,
                     ],
                     [
                         'name' => __('inc/cart.checking'),
                         'route' => 'checking',
                         'count' => Cart::where('status', 'checking')
-                            ->count()
+                            ->count(),
                     ],
                     [
                         'name' => 'درخواست‌های من',

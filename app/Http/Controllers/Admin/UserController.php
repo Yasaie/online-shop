@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Country;
 use App\Http\Requests\UserRequest;
-use App\State;
+use App\Role;
 use App\User;
-use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 use Yasaie\Cruder\Crud;
-use Yasaie\Helper\Y;
 
+/**
+ * Class UserController
+ * @package App\Http\Controllers\Admin
+ */
 class UserController extends BaseController
 {
     public $route = 'admin.user.user';
@@ -40,11 +41,8 @@ class UserController extends BaseController
             ],
             [
                 'name' => 'role',
-                'get' => 'getRoleNames().toArray()',
+                'get' => 'getRoleLocales().toArray()',
                 'string' => true,
-                'options' => [
-                    'translate_get' => true
-                ],
             ]
         ];
 
@@ -82,12 +80,12 @@ class UserController extends BaseController
             ],
             [
                 'name' => 'role',
-                'type' => 'select',
+                'type' => 'multiselect',
                 'options' => [
                     'all' => Role::all(),
-                    'name' => 'name'
+                    'name' => 'getLocale()'
                 ],
-                'value' => 1,
+                'value' => [2],
             ],
             [
                 'name' => 'country',
@@ -180,10 +178,7 @@ class UserController extends BaseController
             ],
             [
                 'name' => 'role',
-                'get' => 'getRoleNames().toArray()',
-                'options' => [
-                    'translate_get' => true
-                ]
+                'get' => 'getRoleLocales().toArray()',
             ],
         ];
 
@@ -245,12 +240,12 @@ class UserController extends BaseController
             ],
             [
                 'name' => 'role',
-                'type' => 'select',
+                'type' => 'multiselect',
                 'options' => [
                     'all' => Role::all(),
-                    'name' => 'name'
+                    'name' => 'getLocale()'
                 ],
-                'value' => $item->roles->first()->id,
+                'value' => $item->roles()->pluck('id')->toArray(),
             ],
             [
                 'name' => 'country',

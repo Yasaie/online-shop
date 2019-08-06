@@ -81,3 +81,10 @@ hr.break-line {
 	border-bottom: 3px solid #17a2b8;
 	margin-top: 50px;
 }
+
+.show-table {
+	td, th {
+		border-right: #dfdfdf solid 1px;
+		border-left: #dfdfdf solid 1px;
+	}
+}

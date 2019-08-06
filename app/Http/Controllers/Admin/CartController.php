@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Yasaie\Cruder\Crud;
 
+/**
+ * Class CartController
+ * @package App\Http\Controllers\Admin
+ */
 class CartController extends BaseController
 {
     public $route = 'admin.cart';
@@ -53,6 +57,10 @@ class CartController extends BaseController
         return Crud::index($this->model, $heads, 'created_at_desc', $this->perPage, $this->load);
     }
 
+    /**
+     * @param $status
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function byStatus($status)
     {
         # table headers

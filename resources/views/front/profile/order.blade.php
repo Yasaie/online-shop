@@ -185,10 +185,9 @@
                                 </div>
 
                                 <div class="name_min"><span class="name ">قیمت نهایی : </span><br>
-                                    {{number_format($order->current_price_no * $order->quantity)}} {{config('app.current_currency')->title}}
+                                    {{number_format($order->current_price_no * $order->quantity)}}
+                                    {{config('app.current_currency')->title}}
                                 </div>
-
-
                             </div>
 
                         </div>
@@ -201,19 +200,24 @@
 
 
                     <td>
-                        <div class="body"> {{$order->previous_price ?: $order->current_price}} {{config('app.current_currency')->title}}</div>
-                    </td>
-
-                    <td>
                         <div class="body">
-                            {{number_format(($order->previous_price_no ?: $order->current_price) * $order->quantity)}} {{config('app.current_currency')->title}}
+                            {{$order->previous_price ?: $order->current_price}}
+                            {{config('app.current_currency')->title}}
                         </div>
                     </td>
 
                     <td>
                         <div class="body">
-                            @if($order->previous_price_no)
-                            {{number_format(($order->previous_price_no - $order->current_price_no) * $order->quantity)}} {{config('app.current_currency')->title}}
+                            {{number_format(($order->previous_price_no ?: $order->current_price_no) * $order->quantity)}}
+                            {{config('app.current_currency')->title}}
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="body">
+                            @if($order->prev_price)
+                            {{number_format(($order->previous_price_no - $order->current_price_no) * $order->quantity)}}
+                                {{config('app.current_currency')->title}}
                             @else
                                 0
                             @endif
@@ -223,7 +227,8 @@
 
                     <td>
                         <div class="body">
-                            {{number_format($order->current_price_no * $order->quantity)}} {{config('app.current_currency')->title}}
+                            {{number_format($order->current_price_no * $order->quantity)}}
+                            {{config('app.current_currency')->title}}
                         </div>
                     </td>
 

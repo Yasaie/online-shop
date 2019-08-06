@@ -30,7 +30,15 @@
     woocommerce-no-js yith-wcan-free emallshop-v-2.1.9 sticky-navigation
     sticky open-categories-menu wpb-js-composer js-comp-ver-5.7 vc_responsive">
 
-<div class="wrapper">
+
+
+    <div class="loding loding--active">
+        {{-- class=   --}}
+        <span id="loader">
+      </span></div>
+
+<div class="wrapper ">
+    {{-- class=display_none --}}
     <div class="main-container">
 
         @include('front.layout.header')
@@ -40,6 +48,18 @@
         @include('front.layout.footer')
 
     </div>
+
+    <script>
+
+        $(function(){
+
+            $(".loding").removeClass("loding--active");
+
+
+        });
+        
+         
+      </script>
 </div>
 
 @yield('footer_include')

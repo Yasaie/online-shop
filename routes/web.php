@@ -15,6 +15,12 @@ Route::get('home', function () {
     return redirect()->route('home');
 });
 
+Route::get('lang/{id}', 'PublicController@lang')
+    ->name('language');
+Route::get('currency/{id}', 'PublicController@currency')
+    ->name('currency');
+Auth::routes(['verify' => true]);
+
 Route::namespace('Front')
     ->group(function () {
         Route::get('/', 'HomeController@index')
@@ -61,94 +67,118 @@ Route::namespace('Front')
 Route::namespace('Admin')
     ->prefix('admin')
     ->name('admin.')
-    ->middleware(['auth', 'role:admin'])
+    ->middleware('auth')
     ->group(function () {
-        Route::get('/', 'HomeController@index')
-            ->name('home');
-        # Media Upload and Unlink
-        Route::name('media.')
-            ->group(function () {
-                Route::post('media/upload', 'MediaController@upload')
-                    ->name('upload');
-                Route::delete('media/unlink/{id?}', 'MediaController@unlink')
-                    ->name('unlink');
-            });
-        # Category
-        Route::resource('category', 'CategoryController');
-        Route::resource('product', 'ProductController');
-        # Product Details
-        Route::name('detail.')
-            ->prefix('detail')
-            ->group(function () {
-                Route::resource('category', 'DetailCategoryController');
-                Route::resource('key', 'DetailKeyController');
-                Route::resource('value', 'DetailValueController');
-            });
-        # Sellers
-        Route::resource('seller', 'SellerController');
-        # Users
-        Route::name('user.')
-            ->group(function () {
-                Route::resource('user', 'UserController');
-                Route::resource('profile', 'ProfileController');
-            });
-        # Currency
-        Route::resource('currency', 'CurrencyController');
-        # Addresses
-        Route::name('address.')
-            ->group(function () {
-                Route::resource('country', 'CountryController');
-                Route::resource('state', 'StateController');
-                Route::resource('city', 'CityController');
-            });
-        # Comments
-        Route::get('comment/unread', 'CommentController@unread')
-            ->name('comment.unread');
-        Route::resource('comment', 'CommentController')
-            ->only(['index', 'show', 'destroy']);
-        # Settings
-        Route::name('setting.')
-            ->prefix('setting')
-            ->group(function () {
-                Route::get('global', 'SettingController@global')
-                    ->name('global.index');
-                Route::post('global', 'SettingController@storeGlobal')
-                    ->name('global.store');
 
-                Route::get('slider', 'SettingController@slider')
-                    ->name('slider.index');
-                Route::post('slider', 'SettingController@storeSlider')
-                    ->name('slider.store');
-
-                Route::get('clear-cache', 'SettingController@clearCache')
-                    ->name('clear-cache');
-            });
-        # Report
-        Route::name('report.')
+        # Admin and seller
+        Route::middleware('role:admin|writer')
             ->group(function () {
-                Route::get('report/list', 'ReportController@index')
-                    ->name('list');
-            });
-        # Cart
-        Route::prefix('cart')
-            ->group(function () {
-                Route::get('success', 'CartController@success')
-                    ->name('cart.success');
-                Route::get('checking', 'CartController@checking')
-                    ->name('cart.checking');
-                Route::resource('cart', 'CartController')
-                    ->only(['index', 'show', 'edit', 'update']);
-            });
-        # Order
-        Route::name('cart.')
-            ->group(function () {
-                Route::resource('order', 'OrderController');
+                Route::name('product.')
+                    ->prefix('product')
+                    ->group(function () {
+                        Route::get('create', 'ProductController@create')
+                            ->name('create');
+                        Route::post('', 'ProductController@store')
+                            ->name('store');
+                    });
             });
 
+        # Admin, Seller And writers
+        Route::middleware('role:admin|seller|writer')
+            ->group(function () {
+                # Common for both Admin and Seller
+                Route::get('/', 'HomeController@index')
+                    ->name('home');
+                # Media Upload and Unlink
+                Route::name('media.')
+                    ->group(function () {
+                        Route::post('media/upload', 'MediaController@upload')
+                            ->name('upload');
+                        Route::delete('media/unlink/{id?}', 'MediaController@unlink')
+                            ->name('unlink');
+                    });
+                # Pricing
+                Route::name('seller.')
+                    ->group(function () {
+                        Route::resource('pricing', 'PricingController');
+                    });
+                # Order
+                Route::name('cart.')
+                    ->group(function () {
+                        Route::resource('order', 'OrderController');
+                    });
+            });
+
+        # Just ADMIN
+        Route::middleware('role:admin')
+            ->group(function () {
+                # Category
+                Route::resource('category', 'CategoryController');
+                # Product
+                Route::resource('product', 'ProductController')
+                    ->except(['create', 'store']);
+                # Product Details
+                Route::name('detail.')
+                    ->prefix('detail')
+                    ->group(function () {
+                        Route::resource('category', 'DetailCategoryController');
+                        Route::resource('key', 'DetailKeyController');
+                        Route::resource('value', 'DetailValueController');
+                    });
+                # Users
+                Route::name('user.')
+                    ->group(function () {
+                        Route::resource('user', 'UserController');
+                        Route::resource('profile', 'ProfileController');
+                    });
+                # Currency
+                Route::resource('currency', 'CurrencyController');
+                # Addresses
+                Route::name('address.')
+                    ->group(function () {
+                        Route::resource('country', 'CountryController');
+                        Route::resource('state', 'StateController');
+                        Route::resource('city', 'CityController');
+                    });
+                # Sellers
+                Route::resource('seller', 'SellerController');
+                # Comments
+                Route::get('comment/unread', 'CommentController@unread')
+                    ->name('comment.unread');
+                Route::resource('comment', 'CommentController')
+                    ->only(['index', 'show', 'destroy']);
+                # Report
+                Route::name('report.')
+                    ->group(function () {
+                        Route::get('report/list', 'ReportController@index')
+                            ->name('list');
+                    });
+                # Cart
+                Route::prefix('cart')
+                    ->group(function () {
+                        Route::get('success', 'CartController@success')
+                            ->name('cart.success');
+                        Route::get('checking', 'CartController@checking')
+                            ->name('cart.checking');
+                        Route::resource('cart', 'CartController')
+                            ->only(['index', 'show', 'edit', 'update']);
+                    });
+                # Settings
+                Route::name('setting.')
+                    ->prefix('setting')
+                    ->group(function () {
+                        Route::get('global', 'SettingController@global')
+                            ->name('global.index');
+                        Route::post('global', 'SettingController@storeGlobal')
+                            ->name('global.store');
+
+                        Route::get('slider', 'SettingController@slider')
+                            ->name('slider.index');
+                        Route::post('slider', 'SettingController@storeSlider')
+                            ->name('slider.store');
+
+                        Route::get('clear-cache', 'SettingController@clearCache')
+                            ->name('clear-cache');
+                    });
+            });
     });
-
-Route::get('lang/{id}', 'PublicController@lang')
-    ->name('language');
-Route::get('currency/{id}', 'PublicController@currency')
-    ->name('currency');
-Auth::routes();

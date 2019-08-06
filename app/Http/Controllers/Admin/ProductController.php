@@ -10,6 +10,10 @@ use Spatie\MediaLibrary\Models\Media;
 use Yasaie\Cruder\Crud;
 use Yasaie\Helper\Y;
 
+/**
+ * Class ProductController
+ * @package App\Http\Controllers\Admin
+ */
 class ProductController extends BaseController
 {
     public $title = 'محصولات';

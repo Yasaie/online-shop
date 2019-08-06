@@ -133,6 +133,10 @@
                 content_css: '{{asset('assets/admin/css/tinymce-reset.css')}}',
                 directionality: '{{isRTL(0)}}',
                 language: '{{app()->getLocale()}}',
+                extended_valid_elements: 'img[align<bottom?left?middle?right?top|alt|border|class|dir<ltr?rtl|height"\n' +
+                    '  +"|hspace|id|ismap<ismap|lang|longdesc|name|onclick|ondblclick|onkeydown"\n' +
+                    '  +"|onkeypress|onkeyup|onmousedown|onmousemove|onmouseout|onmouseover"\n' +
+                    '  +"|onmouseup|src|style|title|usemap|vspace|width]'
             });
             @if ($errors->any())
             @foreach ($errors->all() as $error)

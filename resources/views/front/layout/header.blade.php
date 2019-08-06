@@ -1,10 +1,27 @@
 <header id="header" class="header header-1">
+  
+  
+    <div  class="mobile_menu row">
+        <img class="col-sm-2 col-xs-4" src="{{ asset('assets/front/image/logo.png') }}">
+        <div class="btn_box col-sm-10 col-xs-8">
+
+           
+
+                
+                <i onclick="$('.header-topbar ,.header-navigation').toggle(600)" class="fa fa-bars" aria-hidden="true"></i>
+
+        </div>
+
+        
+    </div>
+
+
 
     <div class="header-topbar">
         <div class="container-fluid ">
-            <div class="row flex_center">
+            <div class="row flex_center " style="flex-wrap: wrap;">
 
-                <div class="col-lg-3  col-md-3 col-sm-5 text-left left_box-menu">
+                <div class="col-lg-3  col-md-3 col-sm-12 col-xs-12 text-left left_box-menu">
                     <div class="customer-support">
 
                         <div class="customer-support-email">
@@ -34,19 +51,20 @@
                     </div>
                 </div>
 
-                <form class="col-lg-6 col-md-6 col-sm-2 search_box_main">
+                <form class="col-lg-6 col-md-6 col-sm-12  col-xs-12 search_box_main">
                     <button type="submit" class="btn_search"><i class="fa fa-search" aria-hidden="true"></i></button>
                     <input width="100%" placeholder="نام کالا، برند و یا دسته مورد نظر خود را جستجو کنید…">
                 </form>
+                <a onclick="$('.mobild_category').toggle(500)" name="" id="" class="btn btn-success list_btn_show" href="#" role="button">دسته بندی ها</a>
 
-                <div class="col-lg-3 col-md-3 col-sm-5 col-md-8 text-right info_head_left">
+                <div class="col-lg-3 col-md-3 col-sm-12  col-xs-12  text-right info_head_left">
 
                     <div class="topbar-right">
 
                         @if(Auth::check())
                             <span class="user-login user_popup">
 
-                                    <a href="login"><i class="fa fa-user-o" aria-hidden="true"></i>
+                                    <a href="{{Auth::check() ? route("profile") : route("login")}}"><i class="fa fa-user-o" aria-hidden="true"></i>
                                     <span>{{Auth::user()->full_name}}</span>
                                     </a>
 
@@ -58,6 +76,13 @@
                                                     <a href="{{route('admin.home')}}" class="method">
                                                         <i class="fa fa-dashboard" aria-hidden="true"></i>
                                                         <span>پنل مدیریت</span>
+                                                    </a>
+                                                @endrole
+
+                                                @role('seller')
+                                                    <a href="{{route('admin.home')}}" class="method">
+                                                        <i class="fa fa-dashboard" aria-hidden="true"></i>
+                                                        <span>پنل فروشندگان</span>
                                                     </a>
                                                 @endrole
 
@@ -104,9 +129,17 @@
 
                 </div>
 
+
+
             </div>
         </div>
     </div>
+
+<div class="mobild_category" id="mobild_category">
+    <a class="close_list" onclick="$('.mobild_category').toggle(300)">بازگشت</a>
+    
+</div>
+
 
     <div class="header-navigation">
         <div class="container-fluid">
@@ -157,5 +190,31 @@
             </div>
         </div>
     </div>
+
+    
+
+
+
+    
+
+
+    <script>
+    
+    function name() {
+
+        let aa=$(".main-dropdown-menu .min_menu ._body");
+         return aa;
+    }
+    
+    $(function () {
+        
+        
+       
+        $(".mobild_category").append(name().html());
+
+
+
+    });</script>
+
 
 </header>

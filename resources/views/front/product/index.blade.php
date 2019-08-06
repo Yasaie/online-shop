@@ -2,117 +2,8 @@
 
 @section('content')
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
-    <script>
-        function load_image(url_image) {
-            $("#main_image_product").attr("src", url_image);
-
-            $('#ex1').zoom();
-            setTimeout(() => {
-                $('#ex1').zoom();
-
-            }, 1000);
-            setTimeout(() => {
-                $('#ex1').zoom();
-
-            }, 1000);
-        }
-        $(function () {
-            $('#ex1').zoom();
-            $(".im").click(function (e) {
-
-                load_image($(e.target).attr("src_big"));
-            });
-        });
-        $(function () {
-            $(".rateYo_saler").each(function (indexInArray, valueOfElement) {
-                $(this).rateYo({
-                    rating: parseFloat($(this).attr("number_of_star")),
-                    readOnly: true,
-                    starWidth: "15px",
-                    ratedFill: "#ffd700"
-                })
-            });
-            $("#rateYo_set_comment_star").rateYo({
-                rating: parseFloat($("#rateYo_set_comment_star").attr("number_of_star")),
-                starWidth: "50px",
-                ratedFill: "#ffd700",
-                fullStar: true,
-                onSet: function (rating, rateYoInstance) {
-                    $.ajax({
-                        url: "product.html",
-                        context: document.body
-                    }).done(function (data) {
-
-                        $('#comment_star').modal('hide');
-                    });
-                }
-            });
-            $("#rateYo_product").rateYo({
-                rating: parseFloat($("#rateYo_product").attr("number_of_star")),
-                readOnly: true,
-                starWidth: "30px",
-                ratedFill: "#ffd700"
-            });
-        });
-        function remove_salers_main_box_mobile() {
-            if (parseFloat(jQuery("html").width()) < 900) {
-                jQuery(".salers_main_box_mobile").toggle(200);
-            }
-        }
-        jQuery(function () {
-            $("#add_star_btn").click(function (e) {
-                e.preventDefault();
-                $('#comment_star').modal({show: true})
-
-            });
-
-            $(".disable_form").click(function (e) {
-                e.preventDefault();
-                $('#mod_login_war').modal({show: true})
-            });
-
-            jQuery("#sp_productt_b").removeClass("parent_m_btn_active");
-            jQuery("#info_productt_b").addClass("parent_m_btn_active");
-            jQuery("#comment_productt_b").removeClass("parent_m_btn_active");
-
-            jQuery("#info_productt").show(400);
-            jQuery("#comment_productt").hide(400);
-            jQuery("#sp_productt").hide(400);
-
-            jQuery("#sp_productt_b").click(function (e) {
-                jQuery("#sp_productt_b").addClass("parent_m_btn_active");
-                jQuery("#info_productt_b").removeClass("parent_m_btn_active");
-                jQuery("#comment_productt_b").removeClass("parent_m_btn_active");
-
-                jQuery("#info_productt").hide(400);
-                jQuery("#comment_productt").hide(400);
-                jQuery("#sp_productt").show(400);
-            });
-
-            jQuery("#info_productt_b").click(function (e) {
-                jQuery("#sp_productt_b").removeClass("parent_m_btn_active");
-                jQuery("#info_productt_b").addClass("parent_m_btn_active");
-                jQuery("#comment_productt_b").removeClass("parent_m_btn_active");
-                jQuery("#info_productt").show(400);
-                jQuery("#comment_productt").hide(400);
-                jQuery("#sp_productt").hide(400);
-            });
-
-            jQuery("#comment_productt_b").click(function (e) {
-                jQuery("#sp_productt_b").removeClass("parent_m_btn_active");
-                jQuery("#info_productt_b").removeClass("parent_m_btn_active");
-                jQuery("#comment_productt_b").addClass("parent_m_btn_active");
-                jQuery("#info_productt").hide(400);
-                jQuery("#comment_productt").show(400);
-                jQuery("#sp_productt").hide(400);
-            });
-        });
-
-        jQuery(function () {
-            jQuery("#add_from").addClass("colm_edit");
-        });
-    </script>
+    <script src="{{ asset('assets/front/plugin/rateYo/rateyp.js') }}"></script>
+   
 
     <!-- Modal -->
     <div class="modal fade" id="comment_star" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -193,4 +84,140 @@
         @include('front.component.related', ['product_list' => $related_products, 'component_title' => 'محصولات مرتبط'])
 
     </div>
+@endsection
+
+
+
+@section('footer_include')
+<script>
+
+ 
+    function load_image(url_image) {
+        $("#main_image_product").attr("src", url_image);
+
+        $('#ex1').zoom();
+        setTimeout(() => {
+            $('#ex1').zoom();
+
+        }, 1000);
+        setTimeout(() => {
+            $('#ex1').zoom();
+
+        }, 1000);
+    }
+
+
+    $(function () {
+       
+        $('#ex1').zoom();
+        $(".im").click(function (e) {
+           
+            load_image($(e.target).attr("src_big"));
+        });
+    });
+
+
+
+
+    $(function () {
+        $(".rateYo_saler").each(function (indexInArray, valueOfElement) {
+            $(this).rateYo({
+                rating: parseFloat($(this).attr("number_of_star")),
+                readOnly: true,
+                starWidth: "15px",
+                ratedFill: "#ffd700"
+            })
+        });
+
+
+        $("#rateYo_set_comment_star").rateYo({
+            rating: parseFloat($("#rateYo_set_comment_star").attr("number_of_star")),
+            starWidth: "50px",
+            ratedFill: "#ffd700",
+            fullStar: true,
+            onSet: function (rating, rateYoInstance) {
+                $.ajax({
+                    url: "product.html",
+                    context: document.body
+                }).done(function (data) {
+
+                    $('#comment_star').modal('hide');
+                });
+            }
+        });
+
+
+        $("#rateYo_product").rateYo({
+            rating: parseFloat($("#rateYo_product").attr("number_of_star")),
+            readOnly: true,
+            starWidth: "30px",
+            ratedFill: "#ffd700"
+        });
+
+    });
+
+
+    function remove_salers_main_box_mobile() {
+        if (parseFloat(jQuery("html").width()) < 900) {
+            jQuery(".salers_main_box_mobile").toggle(200);
+        }
+    }
+
+
+
+    jQuery(function () {
+        $("#add_star_btn").click(function (e) {
+            e.preventDefault();
+            $('#comment_star').modal({show: true})
+
+        });
+
+        $(".disable_form").click(function (e) {
+            e.preventDefault();
+            $('#mod_login_war').modal({show: true})
+        });
+
+        jQuery("#sp_productt_b").removeClass("parent_m_btn_active");
+        jQuery("#info_productt_b").addClass("parent_m_btn_active");
+        jQuery("#comment_productt_b").removeClass("parent_m_btn_active");
+
+        jQuery("#info_productt").show(400);
+        jQuery("#comment_productt").hide(400);
+        jQuery("#sp_productt").hide(400);
+
+        jQuery("#sp_productt_b").click(function (e) {
+            jQuery("#sp_productt_b").addClass("parent_m_btn_active");
+            jQuery("#info_productt_b").removeClass("parent_m_btn_active");
+            jQuery("#comment_productt_b").removeClass("parent_m_btn_active");
+
+            jQuery("#info_productt").hide(400);
+            jQuery("#comment_productt").hide(400);
+            jQuery("#sp_productt").show(400);
+        });
+
+        jQuery("#info_productt_b").click(function (e) {
+            jQuery("#sp_productt_b").removeClass("parent_m_btn_active");
+            jQuery("#info_productt_b").addClass("parent_m_btn_active");
+            jQuery("#comment_productt_b").removeClass("parent_m_btn_active");
+            jQuery("#info_productt").show(400);
+            jQuery("#comment_productt").hide(400);
+            jQuery("#sp_productt").hide(400);
+        });
+
+        jQuery("#comment_productt_b").click(function (e) {
+            jQuery("#sp_productt_b").removeClass("parent_m_btn_active");
+            jQuery("#info_productt_b").removeClass("parent_m_btn_active");
+            jQuery("#comment_productt_b").addClass("parent_m_btn_active");
+            jQuery("#info_productt").hide(400);
+            jQuery("#comment_productt").show(400);
+            jQuery("#sp_productt").hide(400);
+        });
+    });
+
+    jQuery(function () {
+        jQuery("#add_from").addClass("colm_edit");
+    });
+
+
+</script>
 @endsection

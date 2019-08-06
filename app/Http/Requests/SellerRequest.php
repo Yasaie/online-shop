@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class SellerRequest extends BaseRequest
+class SellerRequest extends PricingRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -11,13 +11,8 @@ class SellerRequest extends BaseRequest
      */
     public function rules()
     {
-        return [
-            'product' => 'required|exists:products,id',
+        return array_merge(parent::rules(), [
             'seller' => 'required|exists:users,id',
-            'amount' => 'required|numeric|min:0',
-            'price' => 'required|numeric|min:0',
-            'prev_price' => 'numeric|min:0',
-            'post_price' => 'numeric|min:0',
-        ];
+        ]);
     }
 }

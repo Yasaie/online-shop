@@ -16,7 +16,7 @@ class CreateTrackersTable extends Migration
         Schema::create('trackers', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->unsignedInteger('user_id')->nullable();
-            $table->string('path')->nullable(); # request()->path()
+            $table->text('path')->nullable(); # request()->path()
             $table->string('route')->nullable(); # request()->route()->getName()
             $table->text('parameters')->nullable(); # json_encode(request()->route()->parameters)
             $table->string('method')->nullable(); # request()->method()

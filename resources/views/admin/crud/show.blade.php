@@ -13,22 +13,22 @@
                     <div class="form-group float-left">
                         @if($crud['edit'])
                             <a href="{{route("$route.edit", $item->id)}}" class="btn btn-success btn-sm"><i
-                                    class="fa fa-pencil"></i> @lang('crud.edit')</a>
+                                        class="fa fa-pencil"></i> @lang('crud.edit')</a>
                         @endif
                         @if($crud['destroy'])
                             <button onclick="deleteItem({{$item->id}})" class="btn btn-danger btn-sm"><i
-                                    class="fa fa-trash"></i> @lang('crud.delete')</button>
+                                        class="fa fa-trash"></i> @lang('crud.delete')</button>
                         @endif
                     </div>
                 </div>
 
                 <div class="card-body">
-                    <table class="table table-bordered">
+                    <table class="table show-table">
                         <tbody>
                         @foreach($heads as $head)
                             @php($head['get'] = isset($head['get']) ? $head['get'] : $head['name'])
-                            <tr>
-                                <th class="col-xs-3 col-lg-2">
+                            <tr class="row">
+                                <th class="col-xs-3 col-sm-3">
                                     @if(isset($head['options']['translate_name']) and !$head['options']['translate_name'])
                                         {{$head['name']}}
                                     @else
@@ -44,12 +44,14 @@
                                 @php($text .= isset($head['append']) ? $head['append'] : '')
                                 @php($text = $text ?: '-')
 
-                                @if(isset($head['link']))
-                                    @php($head['link']['search'] = Y::dotObject($item, $head['link']['search']))
-                                    <td class="col-xs-9 col-lg-10">{!! Y::makeRoute($head['link'], $text) !!}</td>
-                                @else
-                                    <td class="col-xs-9 col-lg-10">{!! $text !!}</td>
-                                @endif
+                                <td class="col-xs-9 col-sm-9">
+                                    @if(isset($head['link']))
+                                        @php($head['link']['search'] = Y::dotObject($item, $head['link']['search']))
+                                        {!! Y::makeRoute($head['link'], $text) !!}
+                                    @else
+                                        {!! $text !!}
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>
