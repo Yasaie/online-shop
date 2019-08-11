@@ -34,33 +34,37 @@ Route::namespace('Front')
         Route::get('category', 'CategoryController@index')
             ->name('category.index');
 
-        # Profile
-        Route::name('profile')
-            ->prefix('profile')
+        # Need verification
+        Route::middleware('verified')
             ->group(function () {
-                Route::get('/', 'ProfileController@index');
-                Route::get('orders', 'ProfileController@orders')
-                    ->name('.orders');
-                Route::get('order/{id}', 'ProfileController@order')
-                    ->name('.order');
-                Route::get('seller', 'ProfileController@seller')
-                    ->name('.seller');
-            });
+                # Profile
+                Route::name('profile')
+                    ->prefix('profile')
+                    ->group(function () {
+                        Route::get('/', 'ProfileController@index');
+                        Route::get('orders', 'ProfileController@orders')
+                            ->name('.orders');
+                        Route::get('order/{id}', 'ProfileController@order')
+                            ->name('.order');
+                        Route::get('seller', 'ProfileController@seller')
+                            ->name('.seller');
+                    });
 
-        # Cart
-        Route::name('cart.')
-            ->prefix('cart')
-            ->group(function () {
-                Route::get('/', 'CartController@index')
-                    ->name('index');
-                Route::get('list', 'CartController@getList')
-                    ->name('list');
-                Route::post('quantity', 'CartController@quantity')
-                    ->name('quantity');
-                Route::delete('order/{id}', 'CartController@removeOrder')
-                    ->name('destroy');
-                Route::get('add/{id}', 'CartController@addToCart')
-                    ->name('add');
+                # Cart
+                Route::name('cart.')
+                    ->prefix('cart')
+                    ->group(function () {
+                        Route::get('/', 'CartController@index')
+                            ->name('index');
+                        Route::get('list', 'CartController@getList')
+                            ->name('list');
+                        Route::post('quantity', 'CartController@quantity')
+                            ->name('quantity');
+                        Route::delete('order/{id}', 'CartController@removeOrder')
+                            ->name('destroy');
+                        Route::get('add/{id}', 'CartController@addToCart')
+                            ->name('add');
+                    });
             });
     });
 

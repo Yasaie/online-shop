@@ -1,9 +1,13 @@
-@extends('layouts.app')
+@extends('front.layout')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+    <div class="container login">
+
+        <div class="row logo_box">
+            <img src="{{asset('asset/image/logo.png')}}">
+        </div>
+
+        <div class="row form_box">
             <div class="card">
                 <div class="card-header">{{ __('Verify Your Email Address') }}</div>
 
@@ -15,10 +19,10 @@
                     @endif
 
                     {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }}, <a href="{{ route('verification.resend') }}">{{ __('click here to request another') }}</a>.
+                    {{ __('If you did not receive the email') }}, <a
+                            href="{{ route('verification.resend') }}">{{ __('click here to request another') }}</a>.
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
