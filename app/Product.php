@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Str;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\File;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
@@ -33,7 +34,7 @@ class Product extends BaseModel implements HasMedia
 
     protected $guarded = [];
 
-    protected $appends = ['product_rate', 'visitors'];
+    protected $appends = ['product_rate', 'visitors', 'slag'];
 
     protected $locales = ['title', 'description'];
 
@@ -50,6 +51,11 @@ class Product extends BaseModel implements HasMedia
     public function getVisitsAttribute()
     {
         return $this->getVisits()->count();
+    }
+
+    public function getSlagAttribute()
+    {
+        return preg_replace('/[\s\/\\\\]+/', '-', $this->title);
     }
 
     protected function getVisits()

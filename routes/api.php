@@ -35,4 +35,7 @@ Route::namespace('Api')
                     ->name('city');
             });
 
+        Route::get('product.json', 'ProductController@index')
+            ->name('products');
+
     });

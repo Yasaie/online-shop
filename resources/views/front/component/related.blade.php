@@ -39,7 +39,7 @@
                                     <div class="product-entry">
 
                                         <div class="product-image product-image-style2">
-                                            <a href="{{route('product', ['id' => $rp->id, 'slag' => htmlspecialchars($rp->title)])}}"
+                                            <a href="{{route('product', ['id' => $rp->id, 'slag' => $rp->slag])}}"
                                                class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
                                                 <img width="300" height="354"
                                                      src="{{$rp->getFirstMedia('images') ? $rp->getFirstMedia('images')->getFullUrl('small') : asset('assets/front/image/no-default-thumbnail.png')}}"
@@ -52,7 +52,7 @@
 
                                             <div class="product-title-rating">
                                                 <a class="product-title"
-                                                   href="{{route('product', ['id' => $rp->id, 'slag' => $rp->title])}}">
+                                                   href="{{route('product', ['id' => $rp->id, 'slag' => $rp->slag])}}">
                                                     <h3>
                                                         {{$rp->title}}
                                                     </h3>
