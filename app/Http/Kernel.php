@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\Locale;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Yasaie\Tracker\Middleware\Tracker;
 
 class Kernel extends HttpKernel
 {
@@ -37,7 +38,7 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\Tracker::class
+            \Yasaie\Tracker\Middleware\Tracker::class,
         ],
 
         'api' => [

@@ -97,7 +97,6 @@ p {
 
 abbr[title],
 abbr[data-original-title] {
-	text-decoration: underline;
 	text-decoration: underline dotted;
 	cursor: help;
 	border-bottom: 0;
@@ -113,7 +112,8 @@ ol,
 ul,
 dl {
 	margin-top: 0;
-	margin-bottom: 1rem;
+	margin-bottom: 0;
+
 }
 
 ol ol,

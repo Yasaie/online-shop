@@ -27,13 +27,8 @@ class CategoryController extends BaseController
      */
     public function filter($id)
     {
-        $current_category = $this->categories->firstWhere('id', $id);
-
-        $products = catsProducts($id, 1);
-
-        $products = $products->flatMap(function ($d) {
-            return $d->products;
-        });
+        $current_category = $this->categories
+            ->firstWhere('id', $id) or abort(404);
 
         $filters = DetailKey::select(['detail_keys.id'])
             ->distinct()
@@ -47,6 +42,6 @@ class CategoryController extends BaseController
             ->get();
 
         return view('front.category.filter')
-            ->with(compact('current_category', 'products', 'filters', 'id'));
+            ->with(compact('current_category', 'filters', 'id'));
     }
 }

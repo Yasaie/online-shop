@@ -13,7 +13,7 @@ use Yasaie\Dictionary\Traits\HasDictionary;
  * @mixin \Eloquent
  * @mixin HasDictionary
  */
-class DetailCategory extends Model
+class DetailCategory extends BaseModel
 {
     use HasDictionary;
 

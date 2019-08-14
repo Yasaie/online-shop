@@ -62,7 +62,7 @@
             @endif
             <span class="col-md-3 list_salers">
             <a class="money_">
-                @if($seller->prev_price)
+                @if($seller->prev_price > 0)
                     <del>{{$seller->previous_price}} {{Config::get('app.current_currency')->title}}</del> -
                     <span>{{getPercentage($seller->previous_price, $seller->current_price)}}%</span> -
                 @endif

@@ -20,7 +20,9 @@
     "spatie/laravel-medialibrary": "^7.0.0",
     "spatie/laravel-permission": "^2.37",
     "yasaie/laravel-cruder": "dev-master",
-    "yasaie/laravel-dictionary": "dev-master"
+    "yasaie/laravel-dictionary": "dev-master",
+    "yasaie/laravel-tracker": "dev-master",
+    "yasaie/php-support": "dev-master"
   },
   "require-dev": {
     "barryvdh/laravel-debugbar": "^3.2",
@@ -89,6 +91,14 @@
     {
       "type": "github",
       "url": "git@github.com:Yasaie/laravel-paginate.git"
+    },
+    {
+      "type": "github",
+      "url": "git@github.com:Yasaie/php-support.git"
+    },
+    {
+      "type": "github",
+      "url": "git@github.com:Yasaie/laravel-tracker.git"
     }
   ]
 }

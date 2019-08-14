@@ -18,7 +18,7 @@
                     <div class="card-tools">
                         <form class="input-group input-group-sm" style="width: 200px;">
                             <input type="text" name="search" class="form-control float-right"
-                                   placeholder="@lang('crud.search')" value="{{$search}}">
+                                   placeholder="@lang('crud.search')" value="{{request()->search}}">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-default"><i class="fa fa-search"></i>
                                 </button>

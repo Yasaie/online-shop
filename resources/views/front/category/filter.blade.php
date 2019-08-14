@@ -85,7 +85,7 @@
 
 
             </div>
-            <div class="col-lg-10 col-md-10 col-sm-12 result">
+            <div class="col-lg-10 col-md-10 col-sm-12 result" id="results">
 
                 <div class="category_map">
                     <a href="{{route('home')}}">{{setting('site.title')}}</a> /
@@ -95,7 +95,7 @@
                             /
                         @endif
                     @endforeach
-                    <span class="sort_size">{{$products->count()}} کالا</span>
+                    <span class="sort_size">@{{Object.keys(products).length}} کالا</span>
                 </div>
 
                 <div class="result_body">
@@ -103,10 +103,10 @@
                     <div class="sort">
                         <i class="fa icon fa-sort-amount-asc" aria-hidden="true"></i>
                         <span class="sort_titel">مرتب سازی بر اساس : </span>
-                        <a class="sort_name active_sort_name">بیشترین تخفیف</a>
+                        <a class="sort_name active_sort_name">پربازدید ترین</a>
+                        <a class="sort_name">بیشترین تخفیف</a>
                         <a class="sort_name">ارزان ترین</a>
                         <a class="sort_name">گران ترین</a>
-                        <a class="sort_name">پربازدید ترین</a>
                     </div>
 
                     <div id="resalts" class="row">
@@ -121,7 +121,7 @@
                                 </div>
 
                                 <div v-if="product.price">
-                                    <div class="resalt_off" v-if="product.prev_price">
+                                    <div class="resalt_off" v-if="product.prev_price > 0">
                                         <span>@{{ product.off_percent }}%</span>
                                         <del>@{{ product.prev_price }}</del>
                                     </div>
@@ -149,7 +149,7 @@
 @section('footer_include')
     <script>
         new Vue({
-            el: '#resalts',
+            el: '#results',
             computed: {
                 products: function () {
                     var list = {};

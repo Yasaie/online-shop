@@ -49,7 +49,7 @@
                                             'front.component.related',
                                             [
                                                 'component_title' => $categories->firstWhere('id', $slider)->title,
-                                                'product_list' => catsProducts($slider)->take(10)
+                                                'product_list' => catsProducts($slider)->orderByDesc('updated_at')->take(10)->get()
                                             ]
                                         )
                                     @endforeach

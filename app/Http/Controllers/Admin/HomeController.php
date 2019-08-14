@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Tracker;
 use App\User;
 use Spatie\Permission\Models\Role;
+use Yasaie\Tracker\Model\Tracker;
 
 class HomeController extends BaseController
 {

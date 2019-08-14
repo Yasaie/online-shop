@@ -4,8 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Category;
 use App\Http\Requests\CategoryRequest;
+use App\Product;
 use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
+use Yasaie\Dictionary\Dictionary;
+use Yasaie\Helper\Y;
+use Yasaie\Paginate\Helper;
+use Yasaie\Support\Yalp;
 
 /**
  * @author Payam Yasaie <payam@yasaie.ir>
@@ -34,13 +39,15 @@ class CategoryController extends BaseController
             [
                 'name' => 'id',
                 'hidden' => 1,
+                'sortable' => true
             ],
             [
                 'name' => 'title',
+                'searchable' => 'title.title',
             ],
             [
                 'name' => 'parent',
-                'get' => 'parent.title',
+                'searchable' => 'parent.title',
             ],
             [
                 'name' => 'trees',
@@ -48,11 +55,32 @@ class CategoryController extends BaseController
             ],
             [
                 'name' => 'products',
-                'get' => 'products.count()',
+                'sortable' => true
             ]
         ];
 
-        return Crud::index($this->model, $heads, 'id', $this->perPage, $this->load);
+        # Get item joins
+        $products = Product::select([
+            \DB::raw('count(*) as products'),
+            'category_id'
+        ])->groupBy('category_id');
+
+        $category = Category::select();
+        $category = joinDictionary($category, Category::class);
+
+        # get items
+        $items = $category
+            ->leftJoinSub($category, 'parent', 'parent.id', 'categories.parent_id')
+            ->leftJoinSub($products, 'products', 'products.category_id', 'categories.id')
+            ->select([
+                'categories.id',
+                'categories.path',
+                'title.title',
+                'parent.title as parent',
+                'products'
+            ]);
+
+        return Crud::all($items, $heads, 'id', $this->perPage);
     }
 
     /**

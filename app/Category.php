@@ -8,6 +8,7 @@ use Spatie\MediaLibrary\File;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\Models\Media;
+use Yasaie\Dictionary\Dictionary;
 use Yasaie\Dictionary\Traits\HasDictionary;
 
 /**
@@ -99,4 +100,5 @@ class Category extends Model implements HasMedia
             ->fit(Manipulations::FIT_CROP, 350, 200)
             ->shouldBePerformedOn('image');
     }
+
 }

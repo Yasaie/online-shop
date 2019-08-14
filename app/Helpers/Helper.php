@@ -59,24 +59,24 @@ if (!function_exists('getPercentage')) {
         return $previous ? floor(100 - (($current * 100) / $previous)) : 0;
     }
 }
-
-if (!function_exists('filterItems')) {
-    function filterItems($object, $contexts, $searchable, $search)
-    {
-        $dictionary = \Yasaie\Dictionary\Dictionary::whereIn('context_type', $contexts)
-            ->where('value', 'like', '%' . $search . '%')
-            ->get()
-            ->pluck('full_path', 'id');
-
-        return $object->filter(function ($a) use ($dictionary, $contexts, $searchable) {
-            $found = [];
-            foreach ($contexts as $key => $context) {
-                $found[] = $dictionary->search($contexts[$key] . dotObject($a, $searchable[$key])) == true;
-            }
-            return in_array(1, $found);
-        });
-    }
-}
+//
+//if (!function_exists('filterItems')) {
+//    function filterItems($object, $contexts, $searchable, $search)
+//    {
+//        $dictionary = \Yasaie\Dictionary\Dictionary::whereIn('context_type', $contexts)
+//            ->where('value', 'like', '%' . $search . '%')
+//            ->get()
+//            ->pluck('full_path', 'id');
+//
+//        return $object->filter(function ($a) use ($dictionary, $contexts, $searchable) {
+//            $found = [];
+//            foreach ($contexts as $key => $context) {
+//                $found[] = $dictionary->search($contexts[$key] . dotObject($a, $searchable[$key])) == true;
+//            }
+//            return in_array(1, $found);
+//        });
+//    }
+//}
 
 if (!function_exists('a2o')) {
     function a2o($array)
@@ -97,12 +97,47 @@ if (!function_exists('isRTL')) {
 }
 
 if (!function_exists('catsProducts')) {
-    function catsProducts($id)
+    function catsProducts($id, $get = false)
     {
-        return \App\Product::join('categories', 'category_id', 'categories.id')
+        $products = \App\Product::select([
+            'products.id',
+            'products.created_at',
+            'products.updated_at',
+            'category_id',
+            'path',
+            'depth'
+        ])
+            ->join('categories', 'category_id', 'categories.id')
             ->where('categories.path', 'regexp', "(^|\/)$id($|\/)")
-            ->with(['sellers.currency', 'media'])
-            ->get();
+            ->with(['sellers.currency', 'media']);
 
+        if ($get) {
+            return $products->get();
+        }
+
+        return $products;
     }
+}
+
+function dot($object, $dots, $string = false)
+{
+    return \Yasaie\Support\Yalp::dot($object, $dots, $string);
+}
+
+function joinDictionary($item, $class)
+{
+    $instance = new $class;
+    $locales = $instance->getLocales();
+    $table = $instance->getTable();
+
+    foreach ($locales as $locale) {
+        $column = \Yasaie\Dictionary\Dictionary::select(["value as {$locale}", 'context_id'])
+            ->where('language_id', app()->getLocale())
+            ->where('context_type', $class)
+            ->where('key', $locale);
+
+        $item->joinSub($column, $locale, "{$locale}.context_id",  "{$table}.id");
+    }
+
+    return $item;
 }

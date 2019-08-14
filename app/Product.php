@@ -34,7 +34,7 @@ class Product extends BaseModel implements HasMedia
 
     protected $guarded = [];
 
-    protected $appends = ['product_rate', 'visitors', 'slag'];
+    protected $appends = ['product_rate', 'visitors', 'slug'];
 
     protected $locales = ['title', 'description'];
 
@@ -53,7 +53,7 @@ class Product extends BaseModel implements HasMedia
         return $this->getVisits()->count();
     }
 
-    public function getSlagAttribute()
+    public function getSlugAttribute()
     {
         return preg_replace('/[\s\/\\\\]+/', '-', $this->title);
     }
@@ -61,7 +61,7 @@ class Product extends BaseModel implements HasMedia
     protected function getVisits()
     {
         return Tracker::where('route', 'product')
-            ->where('parameters->id', $this->id);
+            ->where('param1', $this->id);
     }
 
     public function comments()

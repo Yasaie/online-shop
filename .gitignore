@@ -13,3 +13,7 @@ yarn-error.log
 .idea
 _ide_helper.php
 composer.lock
+.gitignore
+composer.json
+database/
+src/

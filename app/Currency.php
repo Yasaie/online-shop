@@ -21,7 +21,7 @@ use Yasaie\Dictionary\Traits\HasDictionary;
  * @mixin \Eloquent
  * @mixin HasDictionary
  */
-class Currency extends Model
+class Currency extends BaseModel
 {
     use HasDictionary;
 

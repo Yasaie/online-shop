@@ -10,7 +10,7 @@
                 <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                 <span class="titel_item">  فروشنده :  </span>
                 <span class="val_item">{{$seller->user->full_name}}</span>
-                <div style="margin-top: 10px" class="rateYo_saler" data-rateyo-rating="{{$seller->rates}}"></div>
+                <div style="margin-top: 10px" class="rateYo_saler" data-rateyo-rating="{{$seller->rates ?: 0}}"></div>
             </div>
 
             @if($seller->service)
@@ -21,7 +21,7 @@
                 </div>
             @endif
             <div class="money_product list_item">
-                @if($seller->prev_price)
+                @if($seller->prev_price > 0)
                     <div style="margin-bottom: 10px;">
                         <del class="value is_off">{{$seller->previous_price}}</del>
                         <span class="unit is_PR">{{$seller->off_percent}}%</span>

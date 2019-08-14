@@ -2,14 +2,13 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Yasaie\Dictionary\Traits\HasDictionary;
 
 /**
  * @mixin \Eloquent
  * @mixin HasDictionary
  */
-class DetailValue extends Model
+class DetailValue extends BaseModel
 {
     use HasDictionary;
 

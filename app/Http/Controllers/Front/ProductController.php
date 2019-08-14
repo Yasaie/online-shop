@@ -10,7 +10,7 @@ class ProductController extends BaseController
 
     public function index($id, $slag = null)
     {
-        $product = Product::find($id)
+        $product = Product::findOrFail($id)
             ->load([
                 'rates',
                 'comments.user',
