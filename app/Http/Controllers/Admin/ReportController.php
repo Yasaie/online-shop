@@ -32,35 +32,43 @@ class ReportController extends BaseController
             ],
             [
                 'name' => 'user',
-                'searchable' => "concat(users.first_name, ' ', users.last_name)"
+                'searchable' => "concat(users.first_name, ' ', users.last_name)",
+                'clickable' => true,
             ],
             [
                 'name' => 'method',
                 'searchable' => 'method',
+                'clickable' => true,
             ],
             [
                 'name' => 'path',
                 'searchable' => 'path',
+                'clickable' => true,
             ],
             [
                 'name' => 'ip_address',
                 'searchable' => 'ip_address',
+                'clickable' => true,
             ],
             [
                 'name' => 'platform',
                 'searchable' => 'platform',
+                'clickable' => true,
             ],
             [
                 'name' => 'browser',
                 'searchable' => 'browser',
+                'clickable' => true,
             ],
             [
                 'name' => 'device',
                 'searchable' => 'device',
+                'clickable' => true,
             ],
             [
                 'name' => 'robot',
                 'searchable' => 'robot',
+                'clickable' => true,
             ],
             [
                 'name' => 'created_at',

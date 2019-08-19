@@ -1,6 +1,7 @@
 var route = $('meta[name="route"]').attr('content');
 var _token = $('meta[name="csrf-token"]').attr('content');
 
+
 function deleteItem(id) {
     iziToast.question(Object.assign({}, iziToastConst, {
         close: false,

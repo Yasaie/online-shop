@@ -74,8 +74,7 @@ class ProductController extends BaseController
                 ]
             ],
             [
-                'name' => 'files',
-                'get' => 'images',
+                'name' => 'images',
                 'type' => 'file',
             ],
         ];

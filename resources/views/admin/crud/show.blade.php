@@ -64,5 +64,5 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="{{asset('assets/admin/js/custom.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/admin/js/delete.min.js')}}"></script>
 @endsection

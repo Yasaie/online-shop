@@ -48,6 +48,7 @@ class CategoryController extends BaseController
             [
                 'name' => 'parent',
                 'searchable' => 'parent.title',
+                'clickable' => true,
             ],
             [
                 'name' => 'trees',

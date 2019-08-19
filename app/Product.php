@@ -2,13 +2,13 @@
 
 namespace App;
 
-use Illuminate\Support\Str;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\File;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 use Spatie\MediaLibrary\Models\Media;
 use Yasaie\Dictionary\Traits\HasDictionary;
+use Yasaie\Tracker\Model\Tracker;
 
 /**
  * App\Product

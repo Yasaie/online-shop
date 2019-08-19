@@ -84,8 +84,14 @@
                                         @php
                                             $text = $item->{$head['name']};
                                             if ($text != '') :
-                                                if (isset($head['append'])):
+                                                if (isset($head['append'])) :
                                                     $text .= $head['append'];
+                                                endif;
+                                                if (isset($head['clickable'])) :
+                                                    $searching = request()->all();
+                                                    $searching['search'] = $text;
+                                                    $searching['column'] = $head['name'];
+                                                    $text = "<a href='?" . http_build_query($searching) . "'>{$text}</a>";
                                                 endif;
                                             else:
                                                 $text = '-';
@@ -130,4 +136,8 @@
         </div>
     </div>
 
+@endsection
+
+@section('script')
+    <script type="text/javascript" src="{{asset('assets/admin/js/delete.min.js')}}"></script>
 @endsection
