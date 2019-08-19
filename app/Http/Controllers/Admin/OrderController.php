@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Currency;
 use App\Order;
+use App\Product;
 use App\Seller;
 use App\User;
 use Illuminate\Http\Request;
@@ -38,14 +40,50 @@ class OrderController extends BaseController
             })->get();
         });
 
+        $product = Product::select();
+        $product = joinDictionary($product, Product::class);
+
+        $seller = Seller::select();
+        $seller = joinDictionary($seller, Seller::class);
+
+        $base_currency = Currency::whereRatio(1)->first()->id;
+
+        $items = Order::select([
+            'orders.id',
+            'orders.created_at',
+            'orders.confirmed as confirmation',
+            'orders.confirmed',
+            \DB::raw('orders.price * ratio AS price'),
+            \DB::raw($base_currency . ' as currency_id'),
+            'carts.status',
+            'seller.service',
+            'product.title as product',
+        ])
+            ->join('currencies', 'currencies.id', 'orders.currency_id')
+            ->join('carts', 'carts.id', 'orders.cart_id')
+            ->joinSub($seller, 'seller', 'seller.id', 'orders.seller_id')
+            ->joinSub($product, 'product', 'product.id', 'seller.product_id')
+            ->where('status', '>=', 6)
+            ->where('seller.user_id', $id);
+
+//        dd($items->get());
+//            ->select([
+//                'product.title as product',
+//                'sellers.*',
+//                \DB::raw('price * ratio AS price'),
+//                \DB::raw($currency . ' as currency_id')
+//            ])
+//            ->joinSub($product, 'product', 'product.id', 'sellers.product_id')
+//            ->join('currencies', 'currencies.id', 'sellers.currency_id');
+
         view()->share([
             'title' => 'درخواست‌های ' . $item->full_name,
-            'crud' => [
-                'show' => 0,
-                'edit' => 1,
-                'create' => 0,
-                'destroy' => 0
-            ]
+//            'crud' => [
+//                'show' => 0,
+//                'edit' => 1,
+//                'create' => 0,
+//                'destroy' => 0
+//            ]
         ]);
 
         # table headers
@@ -56,33 +94,34 @@ class OrderController extends BaseController
             ],
             [
                 'name' => 'product',
-                'get' => 'seller.product.title',
+                'searchable' => 'product.title'
             ],
             [
                 'name' => 'service',
-                'get' => 'seller.service',
+                'searchable' => 'sellers.service'
             ],
             [
                 'name' => 'price',
-                'get' => 'seller.current_price',
+                'get' => 'current_price',
                 'append' => ' ' . config('app.current_currency')->title,
+                'sortable' => true
             ],
             [
                 'name' => 'status',
-                'get' => 'cart.status',
-                'options' => [
-                    'translate_get' => true
-                ],
+                'get' => 'status_locale',
+                'sortable' => true
             ],
             [
                 'name' => 'confirmation',
+                'sortable' => true
             ],
             [
                 'name' => 'created_at',
+                'sortable' => true
             ]
         ];
 
-        return Crud::index($items, $heads, 'created_at_desc', $this->perPage);
+        return Crud::all($items, $heads, $this->perPage, 'created_at_desc');
     }
 
     /**
@@ -112,11 +151,11 @@ class OrderController extends BaseController
 
         $status = [
             [
-                'id' => 0,
+                'id' => 1,
                 'title' => __('inc/cart.confirmed')
             ],
             [
-                'id' => 1,
+                'id' => 0,
                 'title' => __('inc/cart.unconfirmed')
             ],
         ];

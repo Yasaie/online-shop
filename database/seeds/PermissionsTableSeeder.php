@@ -38,9 +38,14 @@ class PermissionsTableSeeder extends Seeder
 
         $seller->givePermissionTo([
             'admin.home',
+
             'admin.seller.pricing.index',
             'admin.seller.pricing.create',
-            'admin.cart.order.index'
+            'admin.seller.pricing.show',
+            'admin.seller.pricing.edit',
+
+            'admin.cart.order.index',
+            'admin.cart.order.edit',
         ]);
 
         $writer->givePermissionTo([

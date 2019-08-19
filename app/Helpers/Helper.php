@@ -131,12 +131,12 @@ function joinDictionary($item, $class)
     $table = $instance->getTable();
 
     foreach ($locales as $locale) {
-        $column = \Yasaie\Dictionary\Dictionary::select(["value as {$locale}", 'context_id'])
+        $column = \Yasaie\Dictionary\Dictionary::select(["value as {$locale}", "context_id as {$locale}_context_id"])
             ->where('language_id', app()->getLocale())
             ->where('context_type', $class)
             ->where('key', $locale);
 
-        $item->joinSub($column, $locale, "{$locale}.context_id",  "{$table}.id");
+        $item->leftJoinSub($column, $locale, "{$locale}_context_id",  "{$table}.id");
     }
 
     return $item;

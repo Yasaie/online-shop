@@ -32,16 +32,19 @@ class PricingController extends BaseController
             ],
             [
                 'name' => 'product',
-                'get' => 'product.title',
+                'searchable' => 'product.title'
             ],
             [
                 'name' => 'amount',
+                'sortable' => true
             ],
             [
                 'name' => 'price',
+                'sortable' => true
             ],
             [
                 'name' => 'prev_price',
+                'sortable' => true
             ],
             [
                 'name' => 'currency',
@@ -49,10 +52,17 @@ class PricingController extends BaseController
             ]
         ];
 
-        $items = \Auth::user()->sellers
-            ->load($this->load);
+        $product = Product::select();
+        $product = joinDictionary($product, Product::class);
 
-        return Crud::index($items, $heads, 'id', $this->perPage);
+        $items = \Auth::user()->sellers()
+            ->select([
+                'product.title as product',
+                'sellers.*'
+            ])
+            ->joinSub($product, 'product', 'product.id', 'sellers.product_id');
+
+        return Crud::all($items, $heads, $this->perPage);
     }
 
     /**

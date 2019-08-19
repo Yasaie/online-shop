@@ -24,7 +24,7 @@
 
                     <form class="input-group input-group-sm" style="width: 380px;">
 
-                        @if(isset($searchable))
+                        @if(isset($searchable) and $searchable->count() > 1)
                             <select name="column" class="form-control mx-1" style="max-width: 130px;">
                                 <option value="">@lang('crud.all')</option>
                                 @foreach($searchable as $key => $srb)
@@ -70,9 +70,9 @@
                                     @endif
                                 @endif
                             @endforeach
-                            @if($crud['show'] or $crud['edit'] or $crud['destroy'])
+                            @canany([$route . '.show', $route . '.edit', $route . '.destroy'])
                                 <th class="text-center">@lang('crud.actions')</th>
-                            @endif
+                            @endcanany
                         </tr>
                         </thead>
 
@@ -83,28 +83,34 @@
                                     @if(!isset($head['hidden']) or !$head['hidden'])
                                         @php
                                             $text = $item->{$head['name']};
-                                            $text = !empty($text) ? $text : '-';
+                                            if ($text != '') :
+                                                if (isset($head['append'])):
+                                                    $text .= $head['append'];
+                                                endif;
+                                            else:
+                                                $text = '-';
+                                            endif;
                                         @endphp
                                         <td>{!! $text !!}</td>
                                     @endif
                                 @endforeach
 
-                                @if($crud['show'] or $crud['edit'] or $crud['destroy'])
+                                @canany([$route . '.show', $route . '.edit', $route . '.destroy'])
                                     <td class="text-center">
-                                        @if($crud['show'])
+                                        @can($route . '.show')
                                             <a href="{{route($route . '.show', $item->id)}}"
                                                class="btn btn-info btn-sm fa fa-eye"></a>
-                                        @endif
-                                        @if($crud['edit'])
+                                        @endcan
+                                        @can($route . '.edit')
                                             <a href="{{route($route . '.edit', $item->id)}}"
                                                class="btn btn-success btn-sm fa fa-pencil"></a>
-                                        @endif
-                                        @if($crud['destroy'])
+                                        @endcan
+                                        @can($route . '.destroy')
                                             <button onclick="deleteItem({{$item->id}})"
                                                     class="btn btn-danger btn-sm fa fa-trash"></button>
-                                        @endif
+                                        @endcan
                                     </td>
-                                @endif
+                                @endcanany
 
                             </tr>
                         @endforeach

@@ -19,7 +19,8 @@ class Order extends BaseModel
         'previous_price',
         'previous_price_no',
         'off_percent',
-        'confirmation'
+        'confirmation',
+        'status_locale'
     ];
 
     /**
@@ -82,6 +83,11 @@ class Order extends BaseModel
                 : __('inc/cart.unconfirmed');
         }
         return $text;
+    }
+
+    public function getStatusLocaleAttribute()
+    {
+        return __('inc/cart.' . $this->status);
     }
 
     public function cart()

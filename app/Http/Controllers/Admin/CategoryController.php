@@ -80,7 +80,7 @@ class CategoryController extends BaseController
                 'products'
             ]);
 
-        return Crud::all($items, $heads, 'id', $this->perPage);
+        return Crud::all($items, $heads, $this->perPage);
     }
 
     /**
