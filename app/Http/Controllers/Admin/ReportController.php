@@ -77,6 +77,6 @@ class ReportController extends BaseController
             'title' => 'بازدیدها',
         ]);
 
-        return Crud::all($items, $heads, $this->perPage);
+        return Crud::all($items, $heads, $this->perPage, 'created_at_desc');
     }
 }
