@@ -18,11 +18,21 @@
                     </div>
 
                     <div class="badge badge-dark mx-3 py-2 px-sm-3">
-                        <span class="font-weight-normal">تعداد نتایج : </span>
+                        <span class="font-weight-normal">@lang("crud.results") : </span>
                         <span class="text-warning" style="font-size: 15px">{{$paginate->total()}}</span>
                     </div>
 
-                    <form class="input-group input-group-sm" style="width: 250px;">
+                    <form class="input-group input-group-sm" style="width: 380px;">
+
+                        @if(isset($searchable))
+                            <select name="column" class="form-control mx-1" style="max-width: 130px;">
+                                <option value="">@lang('crud.all')</option>
+                                @foreach($searchable as $key => $srb)
+                                    <option value="{{$key}}" {{ request()->column == $key ? 'selected' : '' }}>@lang('model.' . $key)</option>
+                                @endforeach
+                            </select>
+                        @endif
+
                         <input type="text" name="search" class="form-control float-right"
                                placeholder="@lang('crud.search')" value="{{request()->search}}">
                         <div class="input-group-append">
