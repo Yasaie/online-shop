@@ -162,7 +162,8 @@ class ProductController extends BaseController
             ],
             [
                 'name' => 'details',
-                'get' => 'details.key_value',
+                'get' => 'details.*.key_value',
+                'string' => true
             ],
             [
                 'name' => 'sellers',
