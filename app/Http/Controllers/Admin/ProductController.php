@@ -61,8 +61,7 @@ class ProductController extends BaseController
             'products.*',
             'title.title',
             'category.title as category_title'
-        ])
-            ->joinSub($category, 'category', 'category.id', 'products.category_id');
+        ])->joinSub($category, 'category', 'category.id', 'products.category_id');
 
         return Crud::all($items, $heads,$this->perPage, 'updated_at_desc');
     }
