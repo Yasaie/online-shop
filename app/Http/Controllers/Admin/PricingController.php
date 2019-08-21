@@ -201,7 +201,7 @@ class PricingController extends BaseController
             ]
         ];
 
-        return Crud::show($id, $heads, $this->route, $this->model);
+        return Crud::show($id, $heads, $this->model);
     }
 
     /**
@@ -307,6 +307,6 @@ class PricingController extends BaseController
      */
     public function destroy($id)
     {
-        return Crud::destroy($id, 'sellers', \Auth::user()->hasRole('admin'));
+        return Crud::destroy($id, $this->model);
     }
 }

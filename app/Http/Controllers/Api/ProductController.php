@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Api;
 use App\Product;
 use App\Rate;
 use App\Seller;
-use App\Tracker;
-use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Yasaie\Dictionary\Dictionary;
+use Yasaie\Tracker\Model\Tracker;
 
 /**
  * Class    ProductController
@@ -82,8 +81,6 @@ class ProductController extends Controller
             ->where('categories.path', 'regexp', "(^|\/){$request->category}($|\/)")
             ->orderBy('visitor', 'desc')
             ->get();
-
-//        dd($products->get());
 
 
         $products = $products->map(function ($p) {

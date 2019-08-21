@@ -1,9 +1,10 @@
-@extends('admin.layout')
+@extends('Cruder::layout')
 
 @section('title', 'داشبورد')
 
 @section('body')
     <div class="row">
+
         <div class="col-lg-3 col-6">
 
             <div class="small-box bg-info">
@@ -31,7 +32,8 @@
                 <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                 </div>
-                <a href="{{route('admin.user.user.index')}}/?search=seller&column=role" class="small-box-footer">اطلاعات بیشتر <i
+                <a href="{{route('admin.user.user.index')}}/?search=seller&column=role" class="small-box-footer">اطلاعات
+                    بیشتر <i
                             class="fa fa-arrow-circle-left"></i></a>
             </div>
         </div>
@@ -69,8 +71,4 @@
         </div>
 
     </div>
-@endsection
-
-@section('script')
-    <script src="{{asset('assets/plugins/morris/morris.min.js')}}"></script>
 @endsection

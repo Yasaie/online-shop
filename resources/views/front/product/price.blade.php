@@ -42,7 +42,7 @@
 
             </div>
 
-            @if(! $sellers->isEmpty() and $sellers->shift())
+            @if($sellers->count() and $sellers->shift() and $sellers->count())
                 <div class="list_item sho_more">
                     <a class="right">{{$sellers->count()}} فروشنده دیگر این کالا</a>
                     <a href="#salers_main_box-titel" id="show-salers_main_box" onclick="remove_salers_main_box_mobile()"

@@ -1,1 +1,0 @@
-<textarea name="{{$name}}" id="{{$name}}" class="form-control text-html" rows="8">{{isset($value) ? $value : ''}}</textarea>

@@ -179,6 +179,7 @@ class UserController extends BaseController
             [
                 'name' => 'role',
                 'get' => 'getRoleLocales().toArray()',
+                'string' => true
             ],
         ];
 
@@ -199,7 +200,7 @@ class UserController extends BaseController
             'name' => 'updated_at'
         ];
 
-        return Crud::show($item, $heads, $this->route);
+        return Crud::show($item, $heads);
     }
 
     /**

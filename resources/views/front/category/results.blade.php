@@ -21,7 +21,7 @@
                 </div>
 
                 <div v-if="product.price">
-                    <div class="resalt_off" v-if="product.prev_price > 0">
+                    <div class="resalt_off" v-if="product.off_percent > 0">
                         <span>@{{ product.off_percent }}%</span>
                         <del>@{{ product.prev_price }}</del>
                     </div>

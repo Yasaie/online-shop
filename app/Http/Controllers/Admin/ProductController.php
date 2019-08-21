@@ -10,6 +10,7 @@ use App\Product;
 use Spatie\MediaLibrary\Models\Media;
 use Yasaie\Cruder\Crud;
 use Yasaie\Helper\Y;
+use Yasaie\Support\Yalp;
 
 /**
  * Class ProductController
@@ -188,7 +189,9 @@ class ProductController extends BaseController
             ]
         ];
 
-        return Crud::show($id, $heads, $this->route, $this->model);
+
+
+        return Crud::show($id, $heads, $this->model);
     }
 
     /**

@@ -55,7 +55,7 @@
 
 
         </div>
-        <a style="margin-top: 20px;" name="" id="" class="btn btn-success" href="#" role="button">ویرایش اطلاعات تحویل
+        <a style="margin-top: 20px;" name="" id="" class="btn btn-success" href="{{route('profile')}}" role="button">ویرایش اطلاعات تحویل
             گیرنده</a>
 
         <hr>
@@ -145,10 +145,12 @@
                         <div class="body">
 
                             <img class="image_product"
-                                 src="https://dkstatics-public.digikala.com/digikala-products/72264.jpg?x-oss-process=image/resize,m_lfit,h_115,w_115/quality,q_60">
+                                 src="{{$order->product->firstThumb()}}">
                             <div style="font-size: 12px">
-                                <a><span class="name">نام محصول : </span><br>
-                                    {{$order->product->title}} </a>
+                                <a href="{{route('product', ['id' => $order->product->id, 'slug' => $order->product->slug])}}">
+                                    <span class="name">نام محصول : </span><br>
+                                    {{$order->product->title}}
+                                </a>
 
                                 @if($order->seller->service)
                                 <div><span class="name">ویژگی : </span><br>
@@ -177,7 +179,7 @@
 
 
                                 <div class="name_min"><span class="name ">تخفیف : </span><br>
-                                    @if($order->seller->previous_price_no)
+                                    @if($order->prev_price > 0)
                                         {{number_format(($order->previous_price_no - $order->current_price_no) * $order->quantity)}} {{config('app.current_currency')->title}}
                                     @else
                                         0
@@ -215,8 +217,8 @@
 
                     <td>
                         <div class="body">
-                            @if($order->prev_price)
-                            {{number_format(($order->previous_price_no - $order->current_price_no) * $order->quantity)}}
+                            @if($order->prev_price > 0)
+                                {{number_format(($order->previous_price_no - $order->current_price_no) * $order->quantity)}}
                                 {{config('app.current_currency')->title}}
                             @else
                                 0

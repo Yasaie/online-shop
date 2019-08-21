@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('Cruder::layout')
 
 @section('title', $title)
 
@@ -12,13 +12,13 @@
                 <div class="card-header">
                     @if($crud['create'])
                         <a href="{{route("$route.create")}}" class="btn btn-success btn-sm"><i
-                                class="fa fa-file"></i> @lang('crud.add')</a>
+                                class="fa fa-file"></i> @lang('Cruder::crud.add')</a>
                     @endif
                     <br>
                     <div class="card-tools">
                         <form class="input-group input-group-sm" style="width: 200px;">
                             <input type="text" name="search" class="form-control float-right"
-                                   placeholder="@lang('crud.search')" value="{{request()->search}}">
+                                   placeholder="@lang('Cruder::crud.search')" value="{{request()->search}}">
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-default"><i class="fa fa-search"></i>
                                 </button>
@@ -46,7 +46,7 @@
                                 @endif
                             @endforeach
                             @if($crud['show'] or $crud['edit'] or $crud['destroy'])
-                                <th class="text-center">@lang('crud.actions')</th>
+                                <th class="text-center">@lang('Cruder::crud.actions')</th>
                             @endif
                         </tr>
                         </thead>
@@ -100,5 +100,5 @@
 @endsection
 
 @section('script')
-    <script type="text/javascript" src="{{asset('assets/admin/js/delete.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('vendor/cruder/js/delete.min.js')}}"></script>
 @endsection

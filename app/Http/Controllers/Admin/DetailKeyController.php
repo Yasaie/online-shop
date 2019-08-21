@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\DetailCategory;
 use App\DetailKey;
+use App\DetailValue;
 use App\Http\Requests\DetailKeyRequest;
 use Illuminate\Http\Request;
 use Yasaie\Cruder\Crud;
@@ -31,21 +32,47 @@ class DetailKeyController extends BaseController
             ],
             [
                 'name' => 'title',
+                'searchable' => 'title.title'
             ],
             [
                 'name' => 'category',
-                'get' => 'detailCategory.title',
+                'searchable' => 'category.title'
             ],
             [
                 'name' => 'highlighted',
+                'sortable' => true
             ],
             [
-                'name' => 'values',
-                'get' => 'detailValues.count()',
+                'name' => 'detail_values',
+                'sortable' => true
+            ],
+            [
+                'name' => 'updated_at',
+                'sortable' => true
             ]
         ];
 
-        return Crud::index($this->model, $heads, 'updated_at', $this->perPage, $this->load);
+        $detail_category = DetailCategory::select();
+        $detail_category = joinDictionary($detail_category, DetailCategory::class);
+
+        $detail_value = DetailValue::select([
+                'detail_key_id',
+                \DB::raw('count(*) as detail_values')
+            ])->groupBy('detail_key_id');
+
+        $items = $this->model::select();
+        $items = joinDictionary($items, $this->model);
+
+        $items = $items->select([
+            'detail_keys.*',
+            'title.title',
+            'category.title as category',
+            'values.detail_values'
+        ])
+            ->joinSub($detail_category, 'category', 'category.id', 'detail_keys.detail_category_id')
+            ->joinSub($detail_value, 'values', 'values.detail_key_id', 'detail_keys.id');
+
+        return Crud::all($items, $heads, $this->perPage, 'updated_at_desc');
     }
 
     /**
@@ -131,12 +158,8 @@ class DetailKeyController extends BaseController
             ],
             [
                 'name' => 'values',
-                'get' => 'detailValues.count()',
-                'link' => [
-                    'search' => 'title',
-                    'column' => 'detail',
-                    'route' => 'admin.detail.value.index'
-                ]
+                'get' => 'detailValues.*.title',
+                'string' => true
             ],
             [
                 'name' => 'created_at',
@@ -146,7 +169,7 @@ class DetailKeyController extends BaseController
             ]
         ];
 
-        return Crud::show($id, $heads, $this->route, $this->model);
+        return Crud::show($id, $heads, $this->model);
     }
 
     /**

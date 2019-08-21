@@ -173,7 +173,7 @@ class CategoryController extends BaseController
                 'name' => 'parent',
                 'get' => 'parent.title',
                 'link' => [
-                    'search' => 'parent.title',
+                    'search' => 'parent',
                     'column' => 'parent',
                     'route' => 'admin.category.index'
                 ]
@@ -187,7 +187,7 @@ class CategoryController extends BaseController
                 'get' => 'products.count()',
                 'link' => [
                     'search' => 'title',
-                    'column' => 'category',
+                    'column' => 'category_title',
                     'route' => 'admin.product.index'
                 ]
             ],

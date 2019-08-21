@@ -154,7 +154,7 @@ class CurrencyController extends BaseController
             ]
         ];
 
-        return Crud::show($id, $heads, $this->route, $this->model);
+        return Crud::show($id, $heads, $this->model);
     }
 
     /**

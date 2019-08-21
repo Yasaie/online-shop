@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\City;
 use App\Country;
 use App\Http\Requests\StateRequest;
 use App\State;
@@ -38,18 +39,32 @@ class StateController extends BaseController
             ],
             [
                 'name' => 'name',
+                'searchable' => 'states.name'
             ],
             [
                 'name' => 'country',
-                'get' => 'country.name',
+                'searchable' => 'countries.name'
             ],
             [
                 'name' => 'cities',
-                'get' => 'city.count()',
+                'sortable' => true
             ],
         ];
 
-        return Crud::index($this->model, $heads, 'name', $this->perPage, $this->load);
+        $cities = City::select([
+            'state_id',
+            \DB::raw('count(*) as cities')
+        ])->groupBy('state_id');
+
+        $items = State::select([
+            'states.*',
+            'countries.name as country',
+            'cities.cities'
+        ])
+            ->join('countries', 'countries.id', 'states.country_id')
+            ->joinSub($cities, 'cities', 'cities.state_id', 'states.id');
+
+        return Crud::all($items, $heads, $this->perPage, 'name');
     }
 
     /**
@@ -119,11 +134,12 @@ class StateController extends BaseController
             ],
             [
                 'name' => 'cities',
-                'get' => 'city.name',
+                'get' => 'city.*.name',
+                'string' => true
             ],
         ];
 
-        return Crud::show($id, $heads, $this->route, $this->model, $this->load);
+        return Crud::show($id, $heads, $this->model, $this->load);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\DetailCategory;
+use App\DetailKey;
 use App\Http\Requests\BaseRequest;
 use App\Http\Requests\DetailCategoryRequest;
 use Illuminate\Http\Request;
@@ -31,14 +32,30 @@ class DetailCategoryController extends BaseController
             ],
             [
                 'name' => 'title',
+                'searchable' => 'title.title'
             ],
             [
                 'name' => 'details',
-                'get' => 'detailKey.count()',
+                'sortable' => true
             ],
+            [
+                'name' => 'updated_at',
+                'sortable' => true,
+            ]
         ];
 
-        return Crud::index($this->model, $heads, 'updated_at', $this->perPage, $this->load);
+        $items = $this->model::select();
+        $items = joinDictionary($items, $this->model);
+
+        $details = DetailKey::select([
+            'detail_category_id',
+            \DB::raw('count(*) as details'),
+        ])->groupBy('detail_category_id');
+
+        $items = $items
+            ->joinSub($details, 'details', 'details.detail_category_id', 'detail_categories.id');
+
+        return Crud::all($items, $heads, $this->perPage, 'updated_at_desc');
     }
 
     /**
@@ -110,7 +127,7 @@ class DetailCategoryController extends BaseController
             ]
         ];
 
-        return Crud::show($id, $heads, $this->route, $this->model);
+        return Crud::show($id, $heads, $this->model);
     }
 
     /**

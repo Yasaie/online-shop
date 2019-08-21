@@ -98,7 +98,8 @@ class CountryController extends BaseController
             ],
             [
                 'name' => 'states',
-                'get' => 'state.name',
+                'get' => 'state.*.name',
+                'string' => true
             ],
             [
                 'name' => 'cities',
@@ -106,7 +107,7 @@ class CountryController extends BaseController
             ],
         ];
 
-        return Crud::show($id, $heads, $this->route, $this->model, $this->load);
+        return Crud::show($id, $heads, $this->model, $this->load);
     }
 
     /**

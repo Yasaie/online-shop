@@ -9,5 +9,6 @@ return [
     'details' => 'مشخصه‌ها',
     'detail' => 'مشخصه',
     'values' => 'مقادیر',
+    'detail_values' => 'مقادیر',
     'highlighted' => 'ویژگی خاص'
 ];

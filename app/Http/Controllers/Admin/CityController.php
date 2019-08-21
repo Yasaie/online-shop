@@ -33,18 +33,27 @@ class CityController extends BaseController
             ],
             [
                 'name' => 'name',
+                'searchable' => 'cities.name'
             ],
             [
                 'name' => 'state',
-                'get' => 'state.name',
+                'searchable' => 'states.name'
             ],
             [
                 'name' => 'country',
-                'get' => 'state.country.name',
+                'searchable' => 'countries.name'
             ],
         ];
 
-        return Crud::index($this->model, $heads, 'name', $this->perPage, $this->load);
+        $items = City::select([
+            'cities.*',
+            'states.name as state',
+            'countries.name as country'
+        ])
+            ->join('states', 'states.id', 'cities.state_id')
+            ->join('countries', 'countries.id', 'states.country_id');
+
+        return Crud::all($items, $heads, $this->perPage, 'name');
     }
 
     /**
@@ -118,7 +127,7 @@ class CityController extends BaseController
             ],
         ];
 
-        return Crud::show($id, $heads, $this->route, $this->model);
+        return Crud::show($id, $heads, $this->model);
     }
 
     /**

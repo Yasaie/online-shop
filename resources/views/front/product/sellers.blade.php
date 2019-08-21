@@ -54,12 +54,12 @@
             </a>
         </span>
 
-            @if($seller->service)
-                <span class="col-md-3 list_salers">
+            <span class="col-md-3 list_salers">
+                @if($seller->service)
                     <i class="fa fa-pie-chart" aria-hidden="true"></i>
                     {{$seller->service}}
-                </span>
-            @endif
+                @endif
+            </span>
             <span class="col-md-3 list_salers">
             <a class="money_">
                 @if($seller->prev_price > 0)
