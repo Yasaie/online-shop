@@ -36,6 +36,14 @@
                         <input type="text" name="search" class="form-control float-right"
                                placeholder="@lang('crud.search')" value="{{request()->search}}">
                         <div class="input-group-append">
+                            @if(request()->search)
+                                @php
+                                    $cancel = array_filter(request()->except('search'));
+                                @endphp
+                                <a href="{{$cancel ? '?' . http_build_query($cancel) : url()->current()}}" type="submit" class="btn btn-default">
+                                    <i class="fa fa-remove"></i>
+                                </a>
+                            @endif
                             <button type="submit" class="btn btn-default">
                                 <i class="fa fa-search"></i>
                             </button>
@@ -53,7 +61,7 @@
                             @foreach($heads as $head)
                                 @if(!isset($head['hidden']) or !$head['hidden'])
                                     @if($sortable->contains($head['name']))
-                                        <th class="sorting{{$sort == $head['name'] ? ($desc ? '_desc' : '_asc') : ''}}">
+                                        <th class="sorting{{$sort == $head['name'] ? ($desc ? '_desc' : '_asc') : null}}">
                                             @php
                                                 $sorting = request()->all();
                                                 $sorting['sort'] = $head['name'] .
