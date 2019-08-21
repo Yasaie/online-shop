@@ -4,8 +4,7 @@
     <link href="{{ asset('assets/front/css/category.css') }}" rel="stylesheet">
 @endsection
 
-@section('page-title', $ca)
-
+@section('page-title', $current_category->title)
 
 @section('content')
 

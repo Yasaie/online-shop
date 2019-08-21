@@ -32,7 +32,6 @@
         });
     }
 
-
     check_{{$options['check']}}.on('change', function () {
         load_{{$name}}();
     });

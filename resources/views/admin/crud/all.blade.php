@@ -57,7 +57,7 @@
                                             @php
                                                 $sorting = request()->all();
                                                 $sorting['sort'] = $head['name'] .
-                                                    (($sort == $head['name']) ? ($desc ? null : '_desc') : ($desc ? '_desc' : null));
+                                                    (($sort == $head['name']) ? ($desc ? null : '_desc') : null);
                                             @endphp
                                             <a href="?{{http_build_query($sorting)}}">
                                                 @lang('model.' . $head['name'])

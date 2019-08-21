@@ -7,6 +7,7 @@
 
 return [
     'category' => 'دسته‌بندی',
+    'category_title' => 'دسته‌بندی',
     'parent' => 'والد',
     'main' => 'اصلی',
     'trees' => 'شاخه‌ها'

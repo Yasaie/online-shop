@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\DetailKey;
 use App\DetailValue;
 use App\Http\Requests\ProductRequest;
 use App\Product;
@@ -37,12 +38,12 @@ class ProductController extends BaseController
             ],
             [
                 'name' => 'title',
-                'searchable' => 'products.title'
+                'searchable' => 'title.title'
             ],
             [
-                'name' => 'category',
+                'name' => 'category_title',
                 'get' => 'category.panelLinks()',
-                'searchable' => 'category.title'
+                'searchable' => 'category.title',
             ],
             [
                 'name' => 'updated_at',
@@ -58,6 +59,7 @@ class ProductController extends BaseController
 
         $items = $product->select([
             'products.*',
+            'title.title',
             'category.title as category_title'
         ])
             ->joinSub($category, 'category', 'category.id', 'products.category_id');
@@ -77,7 +79,7 @@ class ProductController extends BaseController
                 'name' => 'category',
                 'type' => 'select',
                 'options' => [
-                    'all' => Category::all(),
+                    'all' => Category::get(),
                     'name' => 'slashes()'
                 ]
             ],
@@ -85,7 +87,8 @@ class ProductController extends BaseController
                 'name' => 'details',
                 'type' => 'multiselect',
                 'options' => [
-                    'all' => DetailValue::all(),
+                    'all' => DetailValue::get()
+                        ->load('detailKey'),
                     'name' => 'key_value'
                 ]
             ],
@@ -212,7 +215,8 @@ class ProductController extends BaseController
                 'name' => 'details',
                 'type' => 'multiselect',
                 'options' => [
-                    'all' => DetailValue::all(),
+                    'all' => DetailValue::get()
+                        ->load('detailKey'),
                     'name' => 'key_value'
                 ],
                 'value' => $product->details->pluck('detail_value_id')->toArray()
