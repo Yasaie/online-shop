@@ -18,7 +18,7 @@
     @yield('header_include')
 
     <title>
-        @hasSection ('title')
+        @hasSection ('page-title')
             {{setting('site.title')}} - @yield('page-title')
         @else
             {{setting('site.title')}}

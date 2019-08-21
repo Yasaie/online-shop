@@ -54,15 +54,21 @@ class Category extends Model implements HasMedia
         $this->save();
     }
 
+    public function slashes($text = ' %s /')
+    {
+        $string = '';
+        foreach ($this->tree as $key => $path) {
+            $string .= sprintf($text, $path->title);
+        }
+        return substr($string, 0, -2);
+    }
+
     public function panelLinks()
     {
         $route = route('admin.category.index');
         $link = "<a href='$route?column=parent&search=%1\$s'>%1\$s</a> / ";
-        $string = '';
-        foreach ($this->tree as $key => $path) {
-            $string .= sprintf($link, $path->title);
-        }
-        return substr($string, 0, -2);
+
+        return $this->slashes($link);
     }
 
     public function parent()

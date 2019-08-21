@@ -38,7 +38,6 @@ class ReportController extends BaseController
             [
                 'name' => 'method',
                 'searchable' => 'method',
-                'clickable' => true,
             ],
             [
                 'name' => 'path',

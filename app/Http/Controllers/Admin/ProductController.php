@@ -37,17 +37,32 @@ class ProductController extends BaseController
             ],
             [
                 'name' => 'title',
+                'searchable' => 'products.title'
             ],
             [
                 'name' => 'category',
-                'get' => 'category.title',
+                'get' => 'category.panelLinks()',
+                'searchable' => 'category.title'
             ],
             [
                 'name' => 'updated_at',
-            ]
+                'sortable' => true
+            ],
         ];
 
-        return Crud::index($this->model, $heads, 'updated_at_desc', $this->perPage, $this->load);
+        $product = Product::select();
+        $product = joinDictionary($product, Product::class);
+
+        $category = Category::select();
+        $category = joinDictionary($category, Category::class);
+
+        $items = $product->select([
+            'products.*',
+            'category.title as category_title'
+        ])
+            ->joinSub($category, 'category', 'category.id', 'products.category_id');
+
+        return Crud::all($items, $heads,$this->perPage, 'updated_at_desc');
     }
 
     /**
@@ -63,6 +78,7 @@ class ProductController extends BaseController
                 'type' => 'select',
                 'options' => [
                     'all' => Category::all(),
+                    'name' => 'slashes()'
                 ]
             ],
             [
@@ -137,7 +153,7 @@ class ProductController extends BaseController
             ],
             [
                 'name' => 'category',
-                'get' => 'category.title',
+                'get' => 'category.panelLinks()',
             ],
             [
                 'name' => 'description',
@@ -188,6 +204,7 @@ class ProductController extends BaseController
                 'type' => 'select',
                 'options' => [
                     'all' => Category::all(),
+                    'name' => 'slashes()'
                 ],
                 'value' => $product->category_id
             ],

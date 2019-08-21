@@ -1,5 +1,7 @@
 @extends('front.layout')
 
+@section('page-title', $product->title)
+
 @section('content')
 
     <script src="{{ asset('assets/front/plugin/rateYo/rateyp.js') }}"></script>
