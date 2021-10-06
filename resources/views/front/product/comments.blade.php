@@ -1,23 +1,46 @@
 <div class="row body_comments" id="comment_productt">
 
+    @if($errors->any())
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div class="col-lg-12 titel_comments">
         <i class="fa fa-comments-o" aria-hidden="true"></i>
         نظرات کاربران
-        (<span>12</span>)
+        (<span>{{ $comments->count() }}</span>)
     </div>
 
-    <form class="disable_form" action="" method="GET" style="margin: 40px 0px">
+    <form action="{{route('product.comment')}}" method="POST" style="margin: 40px 0px" id="recaptcha-form"
+          class="col-lg-5 col-md-7 col-sm-9 col-xs-12 {{ ! Auth::check() ? 'disable_form' : '' }}">
 
-        <div class="form-group  col-lg-5 col-md-7 col-sm-9 col-xs-12">
-            <input style="margin: 10px;" disabled type="text" class="form-control link_f" id="link_f"
-                   name="title" id="title" aria-describedby="helpId" placeholder="عنوان ">
+        @csrf
+        <input type="hidden" name="product" value="{{ $product->id }}">
+        <div class="form-group">
+            <label for="title" class="screen-reader-text">عنوان</label>
+            <input type="text" class="form-control" name="title" id="title"
+                   placeholder="عنوان" required>
+        </div>
+        <div class="form-group">
+            <label for="text" class="screen-reader-text">نظرات خود را وارد کنید</label>
+            <textarea style="min-height: 200px" name="text" id="text"
+                      placeholder="نظرات خود را وارد کنید"
+                      class="form-control" rows="3" required></textarea>
+        </div>
 
-            <textarea style="margin: 10px; min-height: 200px" name="comment" disabled
-                      placeholder="نظرات خود را وارد کنید" style="min-height: 200px"
-                      class="form-control link_f" id="exampleFormControlTextarea1" rows="3"></textarea>
-
-            <input disabled style="margin: 10px;" name="sub" class="btn link_f btn-success" type="submit"
-                   value="ارسال دیدگاه">
+        <div class="form-group">
+            {!! htmlFormButton('ارسال دیدگاه') !!}
         </div>
 
     </form>

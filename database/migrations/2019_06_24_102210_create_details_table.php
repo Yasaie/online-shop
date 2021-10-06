@@ -15,6 +15,7 @@ class CreateDetailsTable extends Migration
     {
         Schema::create('detail_categories', function (Blueprint $table) {
             $table->increments('id')->unsigned();
+            $table->unsignedInteger('weight')->nullable();
             $table->timestamps();
         });
 

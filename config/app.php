@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'debug' => env('APP_DEBUG', false),
+    'debug' => (getenv('REMOTE_ADDR') == env('APP_DEBUG_IP', '127.0.0.1') ? true : false),
 
     /*
     |--------------------------------------------------------------------------
@@ -169,8 +169,8 @@ return [
          */
         Intervention\Image\ImageServiceProvider::class,
         Hekmatinasser\Verta\VertaServiceProvider::class,
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
+//        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+//        Barryvdh\Debugbar\ServiceProvider::class,
         # medialibrary https://docs.spatie.be
 
         /*
@@ -238,6 +238,8 @@ return [
         'Verta' => Hekmatinasser\Verta\Facades\Verta::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class, # https://github.com/barryvdh/laravel-debugbar
         'Y' => \Yasaie\Helper\Y::class,
+        'Yalp' => Yasaie\Support\Yalp::class,
+        'ReCaptcha' => Biscolab\ReCaptcha\Facades\ReCaptcha::class,
     ],
 
 ];

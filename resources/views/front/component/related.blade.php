@@ -1,15 +1,15 @@
 @php($section_id = 'section_' . (microtime(1) * 10000))
 <script>
-    emallshopOwlArg.productsCarousel.{{$section_id}} = {
+    shopOwlArg.productsCarousel.{{$section_id}} = {
         "autoplay": "true",
         "loop": "true",
         "navigation": "true",
         "dots": "true",
-        "rp_desktop": "5",
-        "rp_small_desktop": "5",
-        "rp_tablet": "4",
-        "rp_mobile": "3",
-        "rp_small_mobile": "1"
+        "rp_desktop": {{ isset($count) ? $count : 5 }},
+        "rp_small_desktop": {{ isset($count) ? $count : 5 }},
+        "rp_tablet": {{ isset($count) ? ceil($count / 2) : 2 }},
+        "rp_mobile": 1,
+        "rp_small_mobile": 1
     }
 </script>
 
@@ -20,7 +20,7 @@
                 <h3>{{$component_title}}</h3>
             </div>
         </div>
-        <div class="section-content woocommerce">
+        <div class="section-content shop">
 
             <div class="product-items">
                 <ul class="products product-style1 product-carousel owl-carousel" data-navigation="0"
@@ -32,15 +32,13 @@
                             ->first())
                         <li class="slide-row">
                             <ul>
-                                <li class="col-lg-3 col-md-4 col-sm-6 col-xs-6 product product_custom"
-                                    data-postid="post-979">
-
+                                <li class="col-lg-3 col-md-4 col-sm-6 col-xs-6 product product_custom">
 
                                     <div class="product-entry">
 
                                         <div class="product-image product-image-style2">
                                             <a href="{{route('product', $rp->only('id', 'slug'))}}"
-                                               class="woocommerce-LoopProduct-link woocommerce-loop-product__link">
+                                               class="shop-LoopProduct-link shop-loop-product__link">
                                                 <img width="300" height="354"
                                                      src="{{$rp->getFirstMedia('images') ? $rp->getFirstMedia('images')->getFullUrl('small') : asset('assets/front/image/no-default-thumbnail.png')}}"
                                                      class="front-image wp-post-image" alt="{{$rp->title}}">
@@ -62,7 +60,7 @@
                                             @if($rp->seller)
                                                 <div class="product-loop-price">
                                                     <span class="price">
-                                                        <span class="woocommerce-Price-amount amount">
+                                                        <span class="shop-Price-amount amount">
                                                             @if($rp->seller->prev_price - $rp->seller->price > 0)
                                                                 <del>{{$rp->seller->previous_price}} </del>
 
@@ -73,8 +71,7 @@
 
                                                           <span class="product_price_custom">{{$rp->seller->current_price}}</span>  
 
-
-                                                            <span class="woocommerce-Price-currencySymbol">
+                                                            <span class="shop-Price-currencySymbol">
                                                                 {{Config::get('app.current_currency')->title}}
                                                             </span>
                                                         </span>
@@ -82,12 +79,10 @@
                                                 </div>
 
                                                 <div class="product-buttons">
-                                                    <div class="product-cart">
-                                                        <a href="{{route('cart.add', $rp->seller->id)}}"
-                                                           data-quantity="1"
-                                                           class="button product_type_variable add_to_cart_button"
-                                                           data-product_id="979" data-product_sku="" rel="nofollow">افزودن
-                                                            به سبد خرید</a>
+                                                    <div class="product-cart btn btn-xs btn-primary">
+                                                        <a href="{{route('cart.add', $rp->seller->id)}}" rel="nofollow">
+                                                            افزودن به سبد خرید
+                                                        </a>
                                                     </div>
                                                 </div>
                                             @endif
@@ -95,12 +90,10 @@
                                         </div>
                                     </div>
 
-
                                 </li>
                             </ul>
                         </li>
                     @endforeach
-
 
                 </ul>
             </div>

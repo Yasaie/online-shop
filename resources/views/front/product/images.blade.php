@@ -7,7 +7,7 @@
     )
 
     <div class="image_main" id='ex1'>
-        <img id="main_image_product"
+        <img id="main_image_product" alt="{{ $product->title }}"
              src="{{$image}}">
     </div>
 
@@ -15,7 +15,7 @@
     <div class="mini_img_box">
         @foreach($medias as $media)
             <a class="im" src_big="{{$media->getFullUrl()}}">
-                <img src="{{$media->getFullUrl('small')}}">
+                <img src="{{$media->getFullUrl('small')}}" alt="{{ $product->title }}">
             </a>
         @endforeach
     </div>

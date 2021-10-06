@@ -5,7 +5,7 @@
     </div>
 
     <div class="col-lg-2 image_box">
-        <img src="https://www.digikala.com/static/files/025314f5.svg" alt="">
+        <img src="{{ asset('assets/front/image/pen.svg') }}" >
     </div>
 
     <div class="col-lg-10 ">

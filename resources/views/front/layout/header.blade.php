@@ -1,21 +1,14 @@
 <header id="header" class="header header-1">
-  
-  
-    <div  class="mobile_menu row">
+
+    <div class="mobile_menu row">
         <img class="col-sm-2 col-xs-4" src="{{ asset('assets/front/image/logo.png') }}">
         <div class="btn_box col-sm-10 col-xs-8">
 
-           
-
-                
-                <i onclick="$('.header-topbar ,.header-navigation').toggle(600)" class="fa fa-bars" aria-hidden="true"></i>
+            <i onclick="$('.header-topbar ,.header-navigation').toggle(600)" class="fa fa-bars" aria-hidden="true"></i>
 
         </div>
 
-        
     </div>
-
-
 
     <div class="header-topbar">
         <div class="container-fluid ">
@@ -51,11 +44,18 @@
                     </div>
                 </div>
 
-                <form class="col-lg-6 col-md-6 col-sm-12  col-xs-12 search_box_main">
-                    <button type="submit" class="btn_search"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    <input width="100%" placeholder="نام کالا، برند و یا دسته مورد نظر خود را جستجو کنید…">
+                <form class="col-lg-6 col-md-6 col-sm-12  col-xs-12 search_box_main"
+                      action="https://www.google.com/search">
+                    <input type="hidden" name="hl" value="{{ app()->getLocale() }}">
+                    <input type="hidden" name="sitesearch" value="{{ url('/') }}">
+
+                    <button type="submit" class="btn_search">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </button>
+                    <input name="q" width="100%" placeholder="نام کالا، برند و یا دسته مورد نظر خود را جستجو کنید…">
                 </form>
-                <a onclick="$('.mobild_category').toggle(500)" name="" id="" class="btn btn-success list_btn_show" href="#" role="button">دسته بندی ها</a>
+                <a onclick="$('.mobild_category').toggle(500)" class="btn btn-success list_btn_show"
+                   href="#" role="button">دسته بندی ها</a>
 
                 <div class="col-lg-3 col-md-3 col-sm-12  col-xs-12  text-right info_head_left">
 
@@ -64,7 +64,8 @@
                         @if(Auth::check())
                             <span class="user-login user_popup">
 
-                                    <a href="{{Auth::check() ? route("profile") : route("login")}}"><i class="fa fa-user-o" aria-hidden="true"></i>
+                                    <a href="{{Auth::check() ? route("profile") : route("login")}}"><i
+                                                class="fa fa-user-o" aria-hidden="true"></i>
                                     <span>{{Auth::user()->full_name}}</span>
                                     </a>
 
@@ -91,21 +92,21 @@
                                                      <span>پروفایل</span>
                                                 </a>
 
-                                                 <a class="method"  href="{{route('profile.orders')}}">
+                                                 <a class="method" href="{{route('profile.orders')}}">
                                                     <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                                     <span>همه سفارش ها</span>
                                                  </a>
 
                                                 <form action="{{route('logout')}}" method="post">
                                                     @csrf
-                                                    <button type="submit" class="btn-link btn method" style="width: 100%">
+                                                    <button type="submit" class="btn-link btn method"
+                                                            style="width: 100%">
                                                         <i class="fa fa-share" aria-hidden="true"></i>
                                                         <span>خروج</span>
                                                     </button>
                                                 </form>
 
                                         </div>
-
 
                                     </span>
                             </span>
@@ -129,17 +130,14 @@
 
                 </div>
 
-
-
             </div>
         </div>
     </div>
 
-<div class="mobild_category" id="mobild_category">
-    <a class="close_list" onclick="$('.mobild_category').toggle(300)">بازگشت</a>
-    
-</div>
+    <div class="mobild_category" id="mobild_category">
+        <a class="close_list" onclick="$('.mobild_category').toggle(300)">بازگشت</a>
 
+    </div>
 
     <div class="header-navigation">
         <div class="container-fluid">
@@ -147,16 +145,16 @@
 
                 <div class="col-xs-6 col-sm-7 col-md-9">
                     <div class="header-main-navigation" role="navigation">
-                        <div class="emallshop-main-menu hidden-xs hidden-sm">
+                        <div class="shop-main-menu hidden-xs hidden-sm">
 
-                            <ul id="menu-primary-menu-1" class="emallshop-horizontal-menu main-navigation">
-                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1261 emallshop-dropdown-menu">
+                            <ul id="menu-primary-menu-1" class="shop-horizontal-menu main-navigation">
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1261 shop-dropdown-menu">
                                     <a href="{{route('home')}}" style="padding: 0">
-                                        <img src="/asset/image/2016/09/logo.png" style="height: 46px; ">
+                                        <img src="{{ asset('assets/front/image/logo.png') }}" style="height: 46px; ">
                                     </a>
                                 </li>
 
-                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1261 emallshop-dropdown-menu  main-dropdown-menu">
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1261 shop-dropdown-menu  main-dropdown-menu">
                                     <a href="{{route('category.index')}}">دسته بندی محصولات </a>
                                     <div class="min_menu">
                                         <div class="head_icon">
@@ -170,15 +168,15 @@
                                     </div>
                                 </li>
 
-                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1261 emallshop-dropdown-menu">
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1261 shop-dropdown-menu">
                                     <a href="http://turkanipekyolu.com/blog">فرهنگ و اقتصاد</a>
                                 </li>
 
-                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1261 emallshop-dropdown-menu">
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1261 shop-dropdown-menu">
                                     <a href="http://turkanipekyolu.com/b2b">تجارت و بازرگانی</a>
                                 </li>
 
-                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1261 emallshop-dropdown-menu">
+                                <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1261 shop-dropdown-menu">
                                     <a href="http://turkanipekyolu.com/service">خدمات فرهنگی و گردشگری </a>
                                 </li>
                             </ul>
@@ -191,30 +189,18 @@
         </div>
     </div>
 
-    
-
-
-
-    
-
-
     <script>
-    
-    function name() {
 
-        let aa=$(".main-dropdown-menu .min_menu ._body");
-         return aa;
-    }
-    
-    $(function () {
-        
-        
-       
-        $(".mobild_category").append(name().html());
+        function name() {
 
+            let aa = $(".main-dropdown-menu .min_menu ._body");
+            return aa;
+        }
 
+        $(function () {
 
-    });</script>
+            $(".mobild_category").append(name().html());
 
+        });</script>
 
 </header>

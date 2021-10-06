@@ -33,10 +33,10 @@ class MediaTableSeeder extends Seeder
 
         $carousel->addMedia(base_path('resources/dummy/img/1000003803.jpg'))
             ->preservingOriginal()
-            ->toMediaCollection('carousel');
+            ->toMediaCollection('image');
 
         $carousel->addMedia(base_path('resources/dummy/img/1000005426.jpg'))
             ->preservingOriginal()
-            ->toMediaCollection('carousel');
+            ->toMediaCollection('image');
     }
 }

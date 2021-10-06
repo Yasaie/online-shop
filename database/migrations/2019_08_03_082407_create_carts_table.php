@@ -29,10 +29,13 @@ class CreateCartsTable extends Migration
 
             $table->increments('id')->unsigned();
             $table->unsignedInteger('user_id');
+            $table->string('transaction_id')->nullable();
             $table->string('traceno')->nullable();
             $table->enum('status', $status)->nullable();
             $table->smallInteger('status_code')->nullable();
-            $table->decimal('total', 12, 2)->nullable();
+            $table->decimal('total_price', 12, 2)->default(0);
+            $table->decimal('additional_price', 12, 2)->default(0);
+            $table->decimal('payable_price', 12, 2)->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')

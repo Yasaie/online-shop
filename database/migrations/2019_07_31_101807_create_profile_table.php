@@ -24,7 +24,6 @@ class CreateProfileTable extends Migration
         });
 
         Schema::create('user_profiles', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('profile_id');
             $table->text('data')->nullable();

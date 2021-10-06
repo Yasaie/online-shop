@@ -15,7 +15,6 @@
     <div style="margin-top: 10px" id="rateYo_product" data-rateyo-rating="{{$rates ?: 0}}"></div>
     <div class="category_product  small" id="add_star_btn"><a>ثبت ستاره به محصول</a></div>
 
-
     @if(! ($highlightes = $product->details->where('highlighted', 1))->isEmpty())
         <ul class="property_list">
             <span class="titlee"> ویژگی محصول</span>

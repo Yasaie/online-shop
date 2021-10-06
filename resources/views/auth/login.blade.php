@@ -5,7 +5,7 @@
     <div class="container login">
 
         <div class="row logo_box">
-            <img src="{{asset('asset/image/logo.png')}}">
+            <img src="{{asset('assets/front/image/logo.png')}}">
         </div>
 
         <div class="row form_box">

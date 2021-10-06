@@ -2,7 +2,7 @@
 
     <div class="col-lg-12 title_sp"> مشخصات فنی</div>
 
-    @foreach($product_details as $detail)
+    @foreach($product_details->sortBy('weight') as $detail)
         <div class="sp_item col-lg-12 row">
 
             <h4 class="col-lg-12  title_sp_min">{{$detail->title}} </h4>

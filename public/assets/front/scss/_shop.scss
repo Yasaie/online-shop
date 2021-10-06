@@ -1,0 +1,2762 @@
+//colors
+$color_strikemaster_approx: hsl(312.19, 26.02%, 51.76%);
+$white: hsl(0, 0%, 100%);
+$black_20: hsla(0, 0%, 0%, .2);
+$black_75: hsla(0, 0%, 0%, .75);
+$red: hsl(0, 100%, 50%);
+$color_black_haze_approx: hsl(300, 5.88%, 96.67%);
+$color_fuscous_gray_approx: hsl(0, 0%, 31.76%);
+$color_citron_approx: hsl(72.65, 73.13%, 39.41%);
+$color_eastern_blue_approx: hsl(201.38, 72.73%, 43.14%);
+$color_tall_poppy_approx: hsl(357.31, 73.58%, 41.57%);
+$color_tapa_approx: hsl(0, 0%, 46.67%);
+$color_asparagus_approx: hsl(102.19, 26.02%, 51.76%);
+$color_gray_nurse_approx: hsl(0, 0%, 91.37%);
+$color_dove_gray_approx: hsl(0, 0%, 41.96%);
+$color_gunsmoke_50_approx: hsla(0, 0%, 51.76%, .5);
+$color_quill_gray_approx: hsl(312, 5.38%, 81.76%);
+$color_cararra_approx: hsl(300, 4.76%, 91.76%);
+$color_monsoon_approx: hsl(310, 4.88%, 51.76%);
+$color_bon_jour_approx: hsl(320, 5.26%, 88.82%);
+$black_10: hsla(0, 0%, 0%, .1);
+$color_celeste_approx: hsl(0, 0%, 80%);
+$black_2_5: hsla(0, 0%, 0%, .025);
+$color_bright_red_approx: hsl(0, 100%, 33.33%);
+$color_lima_approx: hsl(94.4, 64.66%, 45.49%);
+$color_alto_approx: hsl(320, 4.48%, 86.86%);
+$color_pink_swan_approx: hsl(315, 5.56%, 71.76%);
+$color_pale_slate_approx: hsl(310, 5.08%, 76.86%);
+
+//fonts
+$font_0: "star";
+$font_1: "shop";
+$font_2: "shop";
+$font_3: "shop";
+$font_4: "shop";
+$font_5: "star";
+$font_6: "shop";
+$font_7: "shop";
+$font_8: "shop";
+$font_9: "shop";
+
+.clear {
+  clear: both;
+}
+
+.shop {
+  .shop-breadcrumb {
+    &:after {
+      clear: both;
+      content: " ";
+      display: table;
+    }
+
+    &:before {
+      content: " ";
+      display: table;
+    }
+  }
+
+  .shop-error {
+    padding: 1em 2em 1em 3.5em !important;
+    margin: 0 0 2em !important;
+    position: relative;
+    background-color: $color_black_haze_approx;
+    color: $color_fuscous_gray_approx;
+    border-top: 3px solid $color_strikemaster_approx;
+    list-style: none !important;
+    width: auto;
+    word-wrap: break-word;
+    border-top-color: $color_tall_poppy_approx;
+
+    &:after {
+      clear: both;
+      content: " ";
+      display: table;
+    }
+
+    &:before {
+      content: " ";
+      display: table;
+      font-family: $font_2;
+      content: "\e028";
+      display: inline-block;
+      position: absolute;
+      top: 1em;
+      left: 1.5em;
+      content: "\e016";
+      color: $color_tall_poppy_approx;
+    }
+
+    .button {
+      float: right;
+    }
+
+    li {
+      list-style: none !important;
+      padding-left: 0 !important;
+      margin-left: 0 !important;
+    }
+  }
+
+  .shop-info {
+    padding: 1em 2em 1em 3.5em !important;
+    margin: 0 0 2em !important;
+    position: relative;
+    background-color: $color_black_haze_approx;
+    color: $color_fuscous_gray_approx;
+    border-top: 3px solid $color_strikemaster_approx;
+    list-style: none !important;
+    width: auto;
+    word-wrap: break-word;
+    border-top-color: $color_eastern_blue_approx;
+
+    &:after {
+      clear: both;
+      content: " ";
+      display: table;
+    }
+
+    &:before {
+      content: " ";
+      display: table;
+      font-family: $font_2;
+      content: "\e028";
+      display: inline-block;
+      position: absolute;
+      top: 1em;
+      left: 1.5em;
+      color: $color_eastern_blue_approx;
+    }
+
+    .button {
+      float: right;
+    }
+
+    li {
+      list-style: none !important;
+      padding-left: 0 !important;
+      margin-left: 0 !important;
+    }
+  }
+
+  .shop-message {
+    padding: 1em 2em 1em 3.5em !important;
+    margin: 0 0 2em !important;
+    position: relative;
+    background-color: $color_black_haze_approx;
+    color: $color_fuscous_gray_approx;
+    border-top: 3px solid $color_strikemaster_approx;
+    list-style: none !important;
+    width: auto;
+    word-wrap: break-word;
+    border-top-color: $color_citron_approx;
+
+    &:after {
+      clear: both;
+      content: " ";
+      display: table;
+    }
+
+    &:before {
+      content: " ";
+      display: table;
+      font-family: $font_2;
+      content: "\e028";
+      display: inline-block;
+      position: absolute;
+      top: 1em;
+      left: 1.5em;
+      content: "\e015";
+      color: $color_citron_approx;
+    }
+
+    .button {
+      float: right;
+    }
+
+    li {
+      list-style: none !important;
+      padding-left: 0 !important;
+      margin-left: 0 !important;
+    }
+  }
+
+  form {
+    .form-row {
+      padding: 3px;
+      margin: 0 0 6px;
+
+      label {
+        line-height: 2;
+
+        &.hidden {
+          visibility: hidden;
+        }
+
+        &.inline {
+          display: inline;
+        }
+      }
+
+      select {
+        cursor: pointer;
+        margin: 0;
+      }
+
+      .required {
+        color: $red;
+        font-weight: 700;
+        border: 0;
+      }
+
+      .input-checkbox {
+        display: inline;
+        margin: -2px 8px 0 0;
+        text-align: center;
+        vertical-align: middle;
+      }
+
+      textarea {
+        //Instead of the line below you could use @include box-sizing($bs)
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0;
+        outline: 0;
+        height: 4em;
+        line-height: 1.5;
+        display: block;
+        //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+        box-shadow: none;
+      }
+
+      .select2-container {
+        width: 100%;
+        line-height: 2em;
+      }
+
+      &.shop-invalid {
+        .select2-container {
+          border-color: $color_bright_red_approx;
+        }
+
+        select {
+          border-color: $color_bright_red_approx;
+        }
+
+        input.input-text {
+          border-color: $color_bright_red_approx;
+        }
+      }
+
+      &.shop-validated {
+        .select2-container {
+          border-color: $color_lima_approx;
+        }
+
+        select {
+          border-color: $color_lima_approx;
+        }
+
+        input.input-text {
+          border-color: $color_lima_approx;
+        }
+      }
+
+      ::-webkit-input-placeholder {
+        line-height: normal;
+      }
+
+      :-moz-placeholder {
+        line-height: normal;
+      }
+
+      :-ms-input-placeholder {
+        line-height: normal;
+      }
+
+      [placeholder]:focus::-webkit-input-placeholder {
+        //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+        transition: opacity .5s .5s ease;
+        opacity: 0;
+      }
+
+      input.input-text {
+        //Instead of the line below you could use @include box-sizing($bs)
+        box-sizing: border-box;
+        width: 100%;
+        margin: 0;
+        outline: 0;
+      }
+    }
+
+    &.checkout_coupon {
+      border: 1px solid $color_quill_gray_approx;
+      padding: 20px;
+      margin: 2em 0;
+      text-align: left;
+    }
+
+    &.login {
+      border: 1px solid $color_quill_gray_approx;
+      padding: 20px;
+      margin: 2em 0;
+      text-align: left;
+    }
+
+    &.register {
+      border: 1px solid $color_quill_gray_approx;
+      padding: 20px;
+      margin: 2em 0;
+      text-align: left;
+    }
+  }
+
+  a {
+    &.remove {
+      display: block;
+      font-size: 1.5em;
+      height: 1em;
+      width: 1em;
+      text-align: center;
+      line-height: 1;
+      //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+      border-radius: 100%;
+      color: $red !important;
+      text-decoration: none;
+      font-weight: 700;
+      border: 0;
+
+      &:hover {
+        color: $white !important;
+        background: $red;
+      }
+    }
+
+    &.button {
+      &.loading {
+        opacity: .25;
+        padding-right: 2.618em;
+
+        &:after {
+          font-family: $font_3;
+          content: "\e01c";
+          vertical-align: top;
+          font-weight: 400;
+          position: absolute;
+          top: .618em;
+          right: 1em;
+          animation: spin 2s linear infinite;
+        }
+      }
+
+      &.alt {
+        color: $white;
+
+        &:hover {
+          color: $white;
+        }
+
+        &.disabled {
+          background-color: $color_strikemaster_approx;
+          color: $white;
+
+          &:hover {
+            background-color: $color_strikemaster_approx;
+            color: $white;
+          }
+        }
+
+        &:disabled {
+          background-color: $color_strikemaster_approx;
+          color: $white;
+
+          &:hover {
+            background-color: $color_strikemaster_approx;
+            color: $white;
+          }
+        }
+
+        &:disabled[disabled] {
+          background-color: $color_strikemaster_approx;
+          color: $white;
+
+          &:hover {
+            background-color: $color_strikemaster_approx;
+            color: $white;
+          }
+        }
+      }
+
+      &.disabled {
+        color: inherit;
+        cursor: not-allowed;
+        opacity: .5;
+
+        &:hover {
+          color: inherit;
+          background-color: $color_cararra_approx;
+        }
+      }
+
+      &:disabled {
+        color: inherit;
+        cursor: not-allowed;
+        opacity: .5;
+
+        &:hover {
+          color: inherit;
+          background-color: $color_cararra_approx;
+        }
+      }
+
+      &:disabled[disabled] {
+        color: inherit;
+        cursor: not-allowed;
+        opacity: .5;
+
+        &:hover {
+          color: inherit;
+          background-color: $color_cararra_approx;
+        }
+      }
+
+      &.added:after {
+        font-family: $font_4;
+        content: "\e017";
+        margin-left: .53em;
+        vertical-align: bottom;
+      }
+    }
+
+    &.added_to_cart {
+      padding-top: .5em;
+      white-space: nowrap;
+      display: inline-block;
+    }
+  }
+
+  #reviews {
+    #comments {
+      .add_review {
+        &:after {
+          clear: both;
+          content: " ";
+          display: table;
+        }
+
+        &:before {
+          content: " ";
+          display: table;
+        }
+      }
+
+      h2 {
+        clear: none;
+      }
+
+      ol.commentlist {
+        margin: 0;
+        width: 100%;
+        background: 0 0;
+        list-style: none;
+
+        li {
+          padding: 0;
+          margin: 0 0 20px;
+          position: relative;
+          background: 0;
+          border: 0;
+
+          .comment-text {
+            margin: 0 0 0 90px;
+            border: 1px solid $color_bon_jour_approx;
+            padding: 1em 1em 0;
+
+            &:after {
+              content: " ";
+              display: table;
+              clear: both;
+            }
+
+            &:before {
+              content: " ";
+              display: table;
+            }
+
+            p {
+              margin: 0 0 1em;
+
+              &.meta {
+                font-size: .83em;
+              }
+            }
+          }
+
+          .meta {
+            color: $color_tapa_approx;
+            font-size: .75em;
+          }
+
+          img.avatar {
+            float: left;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 3px;
+            width: 65px;
+            height: auto;
+            border: 1px solid $color_bon_jour_approx;
+            margin: 0;
+            //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+            box-shadow: none;
+          }
+        }
+
+        &:after {
+          content: " ";
+          display: table;
+          clear: both;
+        }
+
+        &:before {
+          content: " ";
+          display: table;
+        }
+
+        #respond {
+          border: 1px solid $color_bon_jour_approx;
+          //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+          border-radius: 4px;
+          padding: 1em 1em 0;
+          margin: 20px 0 0 50px;
+        }
+
+        ul.children {
+          list-style: none;
+          margin: 20px 0 0 50px;
+
+          .star-rating {
+            display: none;
+          }
+        }
+      }
+
+      .commentlist > li:before {
+        content: "";
+      }
+    }
+
+    h3 {
+      font-size: 1.8rem;
+      margin: 1em 0 0;
+    }
+
+    #respond {
+      margin: 0;
+      border: 0;
+      padding: 0;
+    }
+
+    #comment {
+      height: 75px;
+    }
+
+    h2 small {
+      float: right;
+      color: $color_tapa_approx;
+      font-size: 15px;
+      margin: 10px 0 0;
+
+      a {
+        text-decoration: none;
+        color: $color_tapa_approx;
+      }
+    }
+  }
+
+  .products {
+    ul {
+      margin: 0 0 1em;
+      padding: 0;
+      list-style: none;
+      clear: both;
+
+      &:after {
+        clear: both;
+        content: " ";
+        display: table;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+
+      li {
+        list-style: none;
+      }
+    }
+
+    .star-rating {
+      display: block;
+      margin: 0 0 .5em;
+      float: none;
+    }
+  }
+
+  ul {
+    &.products {
+      margin: 0 0 1em;
+      padding: 0;
+      list-style: none;
+      clear: both;
+
+      &:after {
+        clear: both;
+        content: " ";
+        display: table;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+
+      li {
+        list-style: none;
+
+        &.product {
+          h3 {
+            padding: .5em 0;
+            margin: 0;
+            font-size: 1em;
+          }
+
+          a {
+            text-decoration: none;
+
+            img {
+              width: 100%;
+              display: block;
+              margin: 0 0 1em;
+              //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+              box-shadow: none;
+              height: 240px !important;
+            }
+          }
+
+          strong {
+            display: block;
+          }
+
+          .star-rating {
+            font-size: .857em;
+          }
+
+          .button {
+            margin-top: 1em;
+          }
+
+          .price {
+            color: $color_asparagus_approx;
+            display: block;
+            font-weight: 400;
+            margin-bottom: .5em;
+            font-size: .857em;
+
+            del {
+              color: inherit;
+              opacity: .5;
+              display: block;
+            }
+
+            ins {
+              background: 0 0;
+              font-weight: 700;
+            }
+
+            .from {
+              font-size: .67em;
+              margin: -2px 0 0;
+              text-transform: uppercase;
+              color: $color_gunsmoke_50_approx;
+            }
+          }
+        }
+      }
+    }
+
+    &.cart_list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        padding: 10px 0;
+        margin: 0;
+        list-style: none;
+
+        dl {
+          margin: 0;
+          padding-left: 1em;
+          border-left: 2px solid $black_10;
+
+          &:after {
+            clear: both;
+            content: " ";
+            display: table;
+          }
+
+          &:before {
+            content: " ";
+            display: table;
+          }
+
+          dd {
+            display: inline-block;
+            float: left;
+            margin-bottom: 1em;
+            padding: 0 0 .25em;
+
+            p:last-child {
+              margin-bottom: 0;
+            }
+          }
+
+          dt {
+            display: inline-block;
+            float: left;
+            margin-bottom: 1em;
+            font-weight: 700;
+            padding: 0 0 .25em;
+            margin: 0 4px 0 0;
+            clear: left;
+          }
+        }
+
+        &:after {
+          clear: both;
+          content: " ";
+          display: table;
+        }
+
+        &:before {
+          content: " ";
+          display: table;
+        }
+
+        a {
+          display: block;
+        }
+
+        img {
+          float: left;
+          width: 60px;
+          height: auto;
+          //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+          box-shadow: none;
+        }
+
+        .star-rating {
+          float: none;
+        }
+      }
+    }
+
+    &.product_list_widget {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        padding: 10px 0;
+        margin: 0;
+        list-style: none;
+
+        dl {
+          margin: 0;
+          padding-left: 1em;
+          border-left: 2px solid $black_10;
+
+          &:after {
+            clear: both;
+            content: " ";
+            display: table;
+          }
+
+          &:before {
+            content: " ";
+            display: table;
+          }
+
+          dd {
+            display: inline-block;
+            float: left;
+            margin-bottom: 1em;
+            padding: 0 0 .25em;
+
+            p:last-child {
+              margin-bottom: 0;
+            }
+          }
+
+          dt {
+            display: inline-block;
+            float: left;
+            margin-bottom: 1em;
+            font-weight: 700;
+            padding: 0 0 .25em;
+            margin: 0 4px 0 0;
+            clear: left;
+          }
+        }
+
+        &:after {
+          clear: both;
+          content: " ";
+          display: table;
+        }
+
+        &:before {
+          content: " ";
+          display: table;
+        }
+
+        a {
+          display: block;
+        }
+
+        img {
+          float: left;
+          width: 60px;
+          height: auto;
+          //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+          box-shadow: none;
+        }
+
+        .star-rating {
+          float: none;
+        }
+      }
+    }
+
+    &#shipping_method {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+
+      li {
+        margin: 0;
+        padding: .25em 0 .25em 22px;
+        text-indent: -22px;
+        list-style: none;
+      }
+
+      .amount {
+        font-weight: 700;
+      }
+    }
+  }
+
+  .shop-ordering {
+    margin: 0 0 1em;
+
+    select {
+      vertical-align: top;
+    }
+  }
+
+  .shop-result-count {
+    margin: 0 0 1em;
+  }
+
+  .cart {
+    .button {
+      float: none;
+    }
+
+    input.button {
+      float: none;
+    }
+  }
+
+  .shop-product-rating {
+    line-height: 2;
+    display: block;
+
+    &:after {
+      clear: both;
+      content: " ";
+      display: table;
+    }
+
+    &:before {
+      content: " ";
+      display: table;
+    }
+
+    .star-rating {
+      margin: .5em 4px 0 0;
+      float: left;
+    }
+  }
+
+  td {
+    &.product-name {
+      dl.variation {
+        margin: .25em 0;
+
+        &:after {
+          clear: both;
+          content: " ";
+          display: table;
+        }
+
+        &:before {
+          content: " ";
+          display: table;
+        }
+
+        dd {
+          display: inline-block;
+          float: left;
+          margin-bottom: 1em;
+          padding: 0 0 .25em;
+
+          p:last-child {
+            margin-bottom: 0;
+          }
+        }
+
+        dt {
+          display: inline-block;
+          float: left;
+          margin-bottom: 1em;
+          font-weight: 700;
+          padding: 0 0 .25em;
+          margin: 0 4px 0 0;
+          clear: left;
+        }
+      }
+
+      p.backorder_notification {
+        font-size: .83em;
+      }
+    }
+
+    &.product-quantity {
+      min-width: 80px;
+    }
+  }
+
+  .star-rating {
+    float: right;
+    overflow: hidden;
+    position: relative;
+    height: 1em;
+    line-height: 1;
+    font-size: .85em;
+    width: 5.4em;
+    font-family: $font_5;
+
+    &:before {
+      content: "\73\73\73\73\73";
+      color: $color_quill_gray_approx;
+      float: left;
+      top: 0;
+      left: 0;
+      position: absolute;
+    }
+
+    span {
+      overflow: hidden;
+      float: left;
+      top: 0;
+      left: 0;
+      position: absolute;
+      padding-top: 1.5em;
+
+      &:before {
+        content: "\53\53\53\53\53";
+        top: 0;
+        position: absolute;
+        left: 0;
+      }
+    }
+  }
+
+  table {
+    &.shop_attributes {
+      border: 0;
+      border-top: 1px dotted $black_10;
+      margin-bottom: 1.618em;
+      width: 100%;
+
+      td {
+        line-height: 1.5;
+        border-bottom: 1px dotted $black_10;
+        border-top: 0;
+        margin: 0;
+        font-style: italic;
+        padding: 0;
+
+        p {
+          margin: 0;
+          padding: 8px 0;
+        }
+      }
+
+      th {
+        line-height: 1.5;
+        border-bottom: 1px dotted $black_10;
+        border-top: 0;
+        margin: 0;
+        width: 150px;
+        font-weight: 700;
+        padding: 8px;
+      }
+
+      .alt {
+        td {
+          background: $black_2_5;
+        }
+
+        th {
+          background: $black_2_5;
+        }
+      }
+    }
+
+    &.shop_table {
+      margin: 0 -1px 24px 0;
+      text-align: left;
+      width: 100%;
+      border-collapse: separate;
+
+      th {
+        font-weight: 700;
+        padding: 9px 12px;
+      }
+
+      td {
+        vertical-align: middle;
+
+        small {
+          font-weight: 400;
+        }
+      }
+
+      tbody {
+        th {
+          font-weight: 700;
+        }
+
+        &:first-child tr:first-child {
+          td {
+            border-top: 0;
+          }
+
+          th {
+            border-top: 0;
+          }
+        }
+      }
+
+      tfoot {
+        td {
+          font-weight: 700;
+        }
+
+        th {
+          font-weight: 700;
+        }
+      }
+    }
+
+    &.my_account_orders {
+      td {
+        vertical-align: middle;
+      }
+
+      th {
+        vertical-align: middle;
+      }
+
+      .button {
+        white-space: nowrap;
+      }
+
+      .order-actions {
+        text-align: right;
+
+        .button {
+          margin: .125em 0 .125em .25em;
+        }
+      }
+    }
+  }
+
+  p {
+    &.stars {
+      position: relative;
+      font-size: 1em;
+
+      a {
+        display: inline-block;
+        font-weight: 700;
+        margin-right: 1em;
+        text-indent: -9999px;
+        position: relative;
+        border-bottom: 0 !important;
+        outline: 0;
+
+        &:last-child {
+          border-right: 0;
+        }
+
+        &.star-1 {
+          border-right: 1px solid $color_celeste_approx;
+          width: 2em;
+
+          &:after {
+            font-family: $font_6;
+            text-indent: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: "\e021";
+          }
+
+          &.active:after {
+            content: "";
+          }
+
+          &:hover:after {
+            content: "";
+          }
+        }
+
+        &.star-2 {
+          border-right: 1px solid $color_celeste_approx;
+          width: 3em;
+
+          &:after {
+            font-family: $font_6;
+            text-indent: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: "\e021\e021";
+          }
+
+          &.active:after {
+            content: "";
+          }
+
+          &:hover:after {
+            content: "";
+          }
+        }
+
+        &.star-3 {
+          border-right: 1px solid $color_celeste_approx;
+          width: 4em;
+
+          &:after {
+            font-family: $font_6;
+            text-indent: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: "\e021\e021\e021";
+          }
+
+          &.active:after {
+            content: "";
+          }
+
+          &:hover:after {
+            content: "";
+          }
+        }
+
+        &.star-4 {
+          border-right: 1px solid $color_celeste_approx;
+          width: 5em;
+
+          &:after {
+            font-family: $font_6;
+            text-indent: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: "\e021\e021\e021\e021";
+          }
+
+          &.active:after {
+            content: "";
+          }
+
+          &:hover:after {
+            content: "";
+          }
+        }
+
+        &.star-5 {
+          border-right: 1px solid $color_celeste_approx;
+          width: 6em;
+          border: 0;
+
+          &:after {
+            font-family: $font_6;
+            text-indent: 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            content: "\e021\e021\e021\e021\e021";
+          }
+
+          &.active:after {
+            content: "";
+          }
+
+          &:hover:after {
+            content: "";
+          }
+        }
+      }
+    }
+
+    &.shop-shipping-contents {
+      margin: 0;
+    }
+  }
+
+  .order_details {
+    margin: 0 0 1.5em;
+    list-style: none;
+
+    &:after {
+      clear: both;
+      content: " ";
+      display: table;
+    }
+
+    &:before {
+      content: " ";
+      display: table;
+    }
+
+    li {
+      float: left;
+      margin-right: 2em;
+      text-transform: uppercase;
+      font-size: .715em;
+      line-height: 1;
+      border-right: 1px dashed $color_quill_gray_approx;
+      padding-right: 2em;
+      margin-left: 0;
+      padding-left: 0;
+
+      strong {
+        display: block;
+        font-size: 1.4em;
+        text-transform: none;
+        line-height: 1.5;
+      }
+
+      &:last-of-type {
+        border: none;
+      }
+    }
+  }
+
+  .widget_shopping_cart {
+    .buttons {
+      &:after {
+        clear: both;
+        content: " ";
+        display: table;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+    }
+
+    .total {
+      border-top: 3px double $color_cararra_approx;
+      padding: 10px 0 0;
+      font-weight: 600;
+
+      strong {
+        min-width: 40px;
+        display: inline-block;
+      }
+    }
+
+    .cart_list li {
+      position: relative;
+
+      a.remove {
+        position: absolute;
+        top: 25%;
+        right: 0;
+      }
+    }
+  }
+
+  &.widget_shopping_cart {
+    .buttons {
+      &:after {
+        clear: both;
+        content: " ";
+        display: table;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+    }
+
+    .total {
+      border-top: 3px double $color_cararra_approx;
+      padding: 10px 0 0;
+      font-weight: 600;
+
+      strong {
+        min-width: 40px;
+        display: inline-block;
+      }
+    }
+
+    .cart_list li {
+      position: relative;
+
+      a.remove {
+        position: absolute;
+        top: 25%;
+        right: 0;
+      }
+    }
+  }
+
+  .widget_price_filter {
+    .price_slider {
+      margin-bottom: 1em;
+      margin-top: 1em;
+    }
+
+    .price_slider_amount {
+      text-align: right;
+      line-height: 2.4;
+      font-size: .8751em;
+
+      .button {
+        font-size: 1.15em;
+        float: left;
+      }
+    }
+
+    .ui-slider {
+      position: relative;
+      text-align: left;
+      margin-left: .5em;
+      margin-right: .5em;
+
+      .ui-slider-handle {
+        position: absolute;
+        z-index: 2;
+        width: 1em;
+        height: 1em;
+        cursor: ew-resize;
+        outline: 0;
+        top: -.25em;
+        margin-left: -.5em;
+      }
+
+      .ui-slider-range {
+        position: absolute;
+        z-index: 1;
+        font-size: .7em;
+        display: block;
+        border: 0;
+        //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+        border-radius: 1em;
+      }
+    }
+
+    .ui-slider-horizontal {
+      height: .5em;
+
+      .ui-slider-range {
+        top: 0;
+        height: 100%;
+      }
+
+      .ui-slider-range-min {
+        left: -1px;
+      }
+
+      .ui-slider-range-max {
+        right: -1px;
+      }
+    }
+
+    .price_slider_wrapper .ui-widget-content {
+      //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+      border-radius: 1em;
+      background-color: $color_celeste_approx;
+      border: 0;
+    }
+  }
+
+  div.product {
+    margin-bottom: 0;
+    position: relative;
+
+    .product_title {
+      margin-top: 0;
+      padding: 0;
+    }
+
+    p {
+      &.cart {
+        margin-bottom: 2em;
+
+        &:after {
+          clear: both;
+          display: table;
+          content: " ";
+        }
+
+        &:before {
+          display: table;
+          content: " ";
+        }
+      }
+
+      &.price {
+        color: $color_asparagus_approx;
+        font-size: 1.25em;
+
+        ins {
+          background: inherit;
+          font-weight: 700;
+        }
+
+        del {
+          opacity: .5;
+        }
+      }
+
+      &.stock {
+        font-size: .92em;
+      }
+    }
+
+    .stock {
+      color: $color_asparagus_approx;
+    }
+
+    .out-of-stock {
+      color: $red;
+    }
+
+    .shop-product-rating {
+      margin-bottom: 1.618em;
+    }
+
+    div {
+      &.images {
+        margin-bottom: 2em;
+
+        div.thumbnails {
+          padding-top: 1em;
+        }
+      }
+
+      &.summary {
+        margin-bottom: 2em;
+      }
+
+      &.social {
+        text-align: right;
+        margin: 0 0 1em;
+
+        span {
+          margin: 0 0 0 2px;
+
+          span {
+            margin: 0;
+          }
+
+          .stButton .chicklets {
+            padding-left: 16px;
+            width: 0;
+          }
+        }
+
+        iframe {
+          float: left;
+          margin-top: 3px;
+        }
+      }
+    }
+
+    .shop-tabs {
+      .panel {
+        margin: 0 0 4em;
+        padding: 0;
+      }
+
+      ul.tabs {
+        list-style: none;
+        margin: 0;
+        position: relative;
+
+        li {
+          border: 1px solid $color_gray_nurse_approx;
+          display: inline-block;
+          position: relative;
+          z-index: 0;
+          padding: 0 1em;
+
+          a {
+            display: inline-block;
+            padding: .5em 0;
+            font-weight: normal;
+            color: $color_fuscous_gray_approx;
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: none;
+              color: $color_dove_gray_approx;
+            }
+          }
+
+          &.active {
+            color: $white;
+            z-index: 2;
+
+            a {
+              color: inherit;
+              //Instead of the line below you could use @include text-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+              text-shadow: inherit;
+            }
+          }
+        }
+
+        &:before {
+          position: absolute;
+          content: " ";
+          width: 100%;
+          bottom: 0;
+          left: 0;
+          border-bottom: 3px solid;
+          z-index: 1;
+        }
+      }
+    }
+
+    form.cart {
+      margin-bottom: 2em;
+
+      .reset_variations {
+        visibility: hidden;
+      }
+
+      &:after {
+        clear: both;
+        display: table;
+        content: " ";
+      }
+
+      &:before {
+        display: table;
+        content: " ";
+      }
+
+      table {
+        border-width: 0 0 1px;
+
+        td {
+          padding-left: 0;
+        }
+
+        div.quantity {
+          float: none;
+          margin: 0;
+        }
+
+        small.stock {
+          display: block;
+          float: none;
+        }
+      }
+
+      .variations {
+        margin-bottom: 1em;
+        border: 0;
+
+        td {
+          border: 0;
+          vertical-align: top;
+
+          &.label {
+            padding-right: 1em;
+          }
+        }
+
+        th {
+          border: 0;
+        }
+
+        label {
+          font-weight: 600;
+        }
+
+        select {
+          width: 100%;
+          float: left;
+        }
+      }
+
+      .wc-no-matching-variations {
+        display: none;
+      }
+
+      .button {
+        vertical-align: middle;
+        float: left;
+      }
+
+      div.quantity {
+        float: left;
+        margin: 0 15px 0 0;
+      }
+
+      .shop-variation-description p {
+        margin-bottom: 1em;
+      }
+
+      .group_table td {
+        vertical-align: top;
+        padding-bottom: .5em;
+        border: 0;
+
+        &.label {
+          padding-right: 1em;
+          padding-left: 1em;
+        }
+      }
+    }
+
+    span.price {
+      color: $color_asparagus_approx;
+      font-size: 1.25em;
+
+      ins {
+        background: inherit;
+        font-weight: 700;
+      }
+
+      del {
+        opacity: .5;
+      }
+    }
+  }
+
+  .blockUI.blockOverlay {
+    position: relative;
+
+    &:before {
+      height: 1em;
+      width: 1em;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-left: -.5em;
+      margin-top: -.5em;
+      display: block;
+      content: "";
+      animation: spin 1s ease-in-out infinite;
+      background: url("../images/icons/loader.html") center center;
+      background-size: cover;
+      line-height: 1;
+      text-align: center;
+      font-size: 2em;
+      color: $black_75;
+    }
+  }
+
+  .loader:before {
+    height: 1em;
+    width: 1em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -.5em;
+    margin-top: -.5em;
+    display: block;
+    content: "";
+    animation: spin 1s ease-in-out infinite;
+    background: url("../images/icons/loader.html") center center;
+    background-size: cover;
+    line-height: 1;
+    text-align: center;
+    font-size: 2em;
+    color: $black_75;
+  }
+
+  small.note {
+    display: block;
+    color: $color_tapa_approx;
+    font-size: .857em;
+    margin-top: 10px;
+  }
+
+  .quantity .qty {
+    width: 3.631em;
+    text-align: center;
+  }
+
+  nav.shop-pagination {
+    text-align: center;
+
+    ul {
+      clear: both;
+      display: inline-block;
+      white-space: nowrap;
+      padding: 0;
+      border: 1px solid $color_quill_gray_approx;
+      border-right: 0;
+      margin: 1px;
+
+      li {
+        border-right: 1px solid $color_quill_gray_approx;
+        padding: 0;
+        margin: 0;
+        float: left;
+        display: inline;
+        overflow: hidden;
+
+        a {
+          margin: 0;
+          text-decoration: none;
+          line-height: 1;
+          font-size: 1em;
+          font-weight: 400;
+          padding: .5em;
+          min-width: 1em;
+          display: block;
+
+          &:focus {
+            background: $color_cararra_approx;
+            color: $color_monsoon_approx;
+          }
+
+          &:hover {
+            background: $color_cararra_approx;
+            color: $color_monsoon_approx;
+          }
+        }
+
+        span {
+          margin: 0;
+          text-decoration: none;
+          line-height: 1;
+          font-size: 1em;
+          font-weight: 400;
+          padding: .5em;
+          min-width: 1em;
+          display: block;
+
+          &.current {
+            background: $color_cararra_approx;
+            color: $color_monsoon_approx;
+          }
+        }
+      }
+    }
+  }
+
+  #respond input#submit {
+    &.loading {
+      opacity: .25;
+      padding-right: 2.618em;
+
+      &:after {
+        font-family: $font_3;
+        content: "\e01c";
+        vertical-align: top;
+        font-weight: 400;
+        position: absolute;
+        top: .618em;
+        right: 1em;
+        animation: spin 2s linear infinite;
+      }
+    }
+
+    &.alt {
+      color: $white;
+
+      &:hover {
+        color: $white;
+      }
+
+      &.disabled {
+        background-color: $color_strikemaster_approx;
+        color: $white;
+
+        &:hover {
+          background-color: $color_strikemaster_approx;
+          color: $white;
+        }
+      }
+
+      &:disabled {
+        background-color: $color_strikemaster_approx;
+        color: $white;
+
+        &:hover {
+          background-color: $color_strikemaster_approx;
+          color: $white;
+        }
+      }
+
+      &:disabled[disabled] {
+        background-color: $color_strikemaster_approx;
+        color: $white;
+
+        &:hover {
+          background-color: $color_strikemaster_approx;
+          color: $white;
+        }
+      }
+    }
+
+    &.disabled {
+      color: inherit;
+      cursor: not-allowed;
+      opacity: .5;
+
+      &:hover {
+        color: inherit;
+        background-color: $color_cararra_approx;
+      }
+    }
+
+    &:disabled {
+      color: inherit;
+      cursor: not-allowed;
+      opacity: .5;
+
+      &:hover {
+        color: inherit;
+        background-color: $color_cararra_approx;
+      }
+    }
+
+    &:disabled[disabled] {
+      color: inherit;
+      cursor: not-allowed;
+      opacity: .5;
+
+      &:hover {
+        color: inherit;
+        background-color: $color_cararra_approx;
+      }
+    }
+
+    &.added:after {
+      font-family: $font_4;
+      content: "\e017";
+      margin-left: .53em;
+      vertical-align: bottom;
+    }
+  }
+
+  button.button {
+    &.loading {
+      opacity: .25;
+      padding-right: 2.618em;
+
+      &:after {
+        font-family: $font_3;
+        content: "\e01c";
+        vertical-align: top;
+        font-weight: 400;
+        position: absolute;
+        top: .618em;
+        right: 1em;
+        animation: spin 2s linear infinite;
+      }
+    }
+
+    &.alt {
+      color: $white;
+
+      &:hover {
+        color: $white;
+      }
+
+      &.disabled {
+        background-color: $color_strikemaster_approx;
+        color: $white;
+
+        &:hover {
+          background-color: $color_strikemaster_approx;
+          color: $white;
+        }
+      }
+
+      &:disabled {
+        background-color: $color_strikemaster_approx;
+        color: $white;
+
+        &:hover {
+          background-color: $color_strikemaster_approx;
+          color: $white;
+        }
+      }
+
+      &:disabled[disabled] {
+        background-color: $color_strikemaster_approx;
+        color: $white;
+
+        &:hover {
+          background-color: $color_strikemaster_approx;
+          color: $white;
+        }
+      }
+    }
+
+    &.disabled {
+      color: inherit;
+      cursor: not-allowed;
+      opacity: .5;
+
+      &:hover {
+        color: inherit;
+        background-color: $color_cararra_approx;
+      }
+    }
+
+    &:disabled {
+      color: inherit;
+      cursor: not-allowed;
+      opacity: .5;
+
+      &:hover {
+        color: inherit;
+        background-color: $color_cararra_approx;
+      }
+    }
+
+    &:disabled[disabled] {
+      color: inherit;
+      cursor: not-allowed;
+      opacity: .5;
+
+      &:hover {
+        color: inherit;
+        background-color: $color_cararra_approx;
+      }
+    }
+
+    &.added:after {
+      font-family: $font_4;
+      content: "\e017";
+      margin-left: .53em;
+      vertical-align: bottom;
+    }
+  }
+
+  input.button {
+    &.loading {
+      opacity: .25;
+      padding-right: 2.618em;
+
+      &:after {
+        font-family: $font_3;
+        content: "\e01c";
+        vertical-align: top;
+        font-weight: 400;
+        position: absolute;
+        top: .618em;
+        right: 1em;
+        animation: spin 2s linear infinite;
+      }
+    }
+
+    &.alt {
+      color: $white;
+
+      &:hover {
+        color: $white;
+      }
+
+      &.disabled {
+        background-color: $color_strikemaster_approx;
+        color: $white;
+
+        &:hover {
+          background-color: $color_strikemaster_approx;
+          color: $white;
+        }
+      }
+
+      &:disabled {
+        background-color: $color_strikemaster_approx;
+        color: $white;
+
+        &:hover {
+          background-color: $color_strikemaster_approx;
+          color: $white;
+        }
+      }
+
+      &:disabled[disabled] {
+        background-color: $color_strikemaster_approx;
+        color: $white;
+
+        &:hover {
+          background-color: $color_strikemaster_approx;
+          color: $white;
+        }
+      }
+    }
+
+    &.disabled {
+      color: inherit;
+      cursor: not-allowed;
+      opacity: .5;
+
+      &:hover {
+        color: inherit;
+        background-color: $color_cararra_approx;
+      }
+    }
+
+    &:disabled {
+      color: inherit;
+      cursor: not-allowed;
+      opacity: .5;
+
+      &:hover {
+        color: inherit;
+        background-color: $color_cararra_approx;
+      }
+    }
+
+    &:disabled[disabled] {
+      color: inherit;
+      cursor: not-allowed;
+      opacity: .5;
+
+      &:hover {
+        color: inherit;
+        background-color: $color_cararra_approx;
+      }
+    }
+
+    &.added:after {
+      font-family: $font_4;
+      content: "\e017";
+      margin-left: .53em;
+      vertical-align: bottom;
+    }
+  }
+
+  #review_form #respond {
+    position: static;
+    margin: 0;
+    width: auto;
+    padding: 0;
+    background: 0 0;
+    border: 0;
+
+    &:after {
+      clear: both;
+      content: " ";
+      display: table;
+    }
+
+    &:before {
+      content: " ";
+      display: table;
+    }
+
+    p {
+      margin: 0 0 10px;
+    }
+
+    textarea {
+      //Instead of the line below you could use @include box-sizing($bs)
+      box-sizing: border-box;
+      width: 100%;
+    }
+
+    .form-submit input {
+      left: auto;
+    }
+  }
+
+  .hreview-aggregate .star-rating {
+    margin: 10px 0 0;
+  }
+
+  .widget_layered_nav ul {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+
+    li {
+      list-style: none;
+
+      &:after {
+        clear: both;
+        content: " ";
+        display: table;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+
+      a {
+        padding: 1px 0;
+      }
+
+      span {
+        padding: 1px 0;
+      }
+
+      &.chosen a:before {
+        font-weight: 400;
+        line-height: 1;
+        content: "";
+        color: $color_bright_red_approx;
+        font-family: $font_7;
+        speak: none;
+        font-variant: normal;
+        text-transform: none;
+        text-decoration: none;
+        margin-right: .618em;
+      }
+    }
+  }
+
+  .widget_layered_nav_filters ul {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    list-style: none;
+    overflow: hidden;
+    zoom: 1;
+
+    li {
+      float: left;
+      padding: 0 1px 1px 0;
+      list-style: none;
+
+      a {
+        text-decoration: none;
+
+        &:before {
+          font-weight: 400;
+          line-height: 1;
+          content: "";
+          color: $color_bright_red_approx;
+          font-family: $font_7;
+          speak: none;
+          font-variant: normal;
+          text-transform: none;
+          text-decoration: none;
+          margin-right: .618em;
+        }
+      }
+    }
+  }
+}
+
+@-webkit-keyframes spin {
+  100% {
+  }
+}
+
+@-moz-keyframes spin {
+  100% {
+  }
+}
+
+@keyframes spin {
+  100% {
+    //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
+    transform: rotate(360deg);
+  }
+}
+
+@font-face {
+  font-family: $font_0;
+  src: url("../fonts/stard41d.eot?#iefix") format("embedded-opentype"), url("../fonts/star.woff") format("woff"), url("../fonts/star.ttf") format("truetype"), url("../fonts/star.svg#star") format("svg");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: $font_1;
+  src: url("../fonts/shopd41d.eot?#iefix") format("embedded-opentype"), url("../fonts/shop.woff") format("woff"), url("../fonts/shop.ttf") format("truetype"), url("../fonts/shop.svg#shop") format("svg");
+  font-weight: 400;
+  font-style: normal;
+}
+
+.shop-account {
+  .addresses .title {
+    &:after {
+      clear: both;
+      content: " ";
+      display: table;
+    }
+
+    &:before {
+      content: " ";
+      display: table;
+    }
+
+    h3 {
+      float: left;
+    }
+
+    .edit {
+      float: right;
+    }
+  }
+
+  ul.digital-downloads {
+    margin-left: 0;
+    padding-left: 0;
+
+    li {
+      list-style: none;
+      margin-left: 0;
+      padding-left: 0;
+
+      .count {
+        float: right;
+      }
+
+      &:before {
+        font-family: $font_8;
+        speak: none;
+        font-weight: 400;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        margin-right: .618em;
+        content: "";
+        text-decoration: none;
+      }
+    }
+  }
+
+  ol.commentlist.notes li.note {
+    p.meta {
+      font-weight: 700;
+      margin-bottom: 0;
+    }
+
+    .description p:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.shop-cart {
+  .wc-proceed-to-checkout {
+    padding: 1em 0;
+    text-align: right;
+
+    &:after {
+      clear: both;
+      content: " ";
+      display: table;
+    }
+
+    &:before {
+      content: " ";
+      display: table;
+    }
+
+    a.checkout-button {
+      text-align: center;
+      margin-bottom: 1em;
+    }
+  }
+
+  .cart-collaterals {
+    .shipping_calculator {
+      .button {
+        width: 100%;
+        float: none;
+        display: block;
+      }
+
+      .shipping-calculator-button:after {
+        font-family: $font_9;
+        speak: none;
+        font-weight: 400;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        margin-left: .618em;
+        content: "";
+        text-decoration: none;
+      }
+    }
+
+    .cart_totals {
+      table {
+        border-collapse: separate;
+        margin: 0 0 6px;
+        padding: 0;
+        border-left: 0;
+
+        th {
+          width: 25%;
+          vertical-align: top;
+          border-left: 0;
+          border-right: 0;
+          padding: 6px 0;
+          line-height: 2em;
+        }
+
+        td {
+          vertical-align: top;
+          border-left: 0;
+          border-right: 0;
+          padding: 6px 0;
+          line-height: 2em;
+        }
+
+        small {
+          color: $color_tapa_approx;
+        }
+
+        select {
+          width: 100%;
+        }
+
+        tr:first-child {
+          td {
+            border-top: 0;
+          }
+
+          th {
+            border-top: 0;
+          }
+        }
+      }
+
+      p small {
+        color: $color_tapa_approx;
+        font-size: .83em;
+      }
+
+      .discount td {
+        color: $color_asparagus_approx;
+      }
+    }
+
+    .cross-sells ul.products li.product {
+      margin-top: 0;
+    }
+  }
+
+  table.cart {
+    .product-thumbnail {
+      min-width: 32px;
+    }
+
+    img {
+      width: 65px;
+      //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+      box-shadow: none;
+    }
+
+    td {
+      vertical-align: middle;
+
+      &.actions .coupon .input-text {
+        float: left;
+        //Instead of the line below you could use @include box-sizing($bs)
+        box-sizing: border-box;
+        border: 1px solid $color_quill_gray_approx;
+        margin: 0 4px 0 0;
+        outline: 0;
+      }
+    }
+
+    th {
+      vertical-align: middle;
+    }
+
+    input {
+      margin: 0;
+      vertical-align: middle;
+    }
+  }
+}
+
+.shop-checkout {
+  #payment {
+    background: $color_cararra_approx;
+
+    div {
+      &.form-row {
+        padding: 1em;
+      }
+
+      &.payment_box {
+        position: relative;
+        //Instead of the line below you could use @include box-sizing($bs)
+        box-sizing: border-box;
+        width: 100%;
+        padding: 1em;
+        margin: 1em 0;
+        font-size: .92em;
+        //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+        border-radius: 2px;
+        line-height: 1.5;
+        background-color: $color_alto_approx;
+        color: $color_fuscous_gray_approx;
+
+        textarea {
+          border-color: $color_pink_swan_approx $color_pale_slate_approx $color_pale_slate_approx;
+        }
+
+        ::-webkit-input-placeholder {
+          color: $color_pink_swan_approx;
+        }
+
+        :-moz-placeholder {
+          color: $color_pink_swan_approx;
+        }
+
+        :-ms-input-placeholder {
+          color: $color_pink_swan_approx;
+        }
+
+        .wc-credit-card-form-card-cvc {
+          font-size: 1.5em;
+          padding: 8px;
+          background-repeat: no-repeat;
+          background-position: right;
+
+          &.visa {
+            background-image: url("../images/icons/credit-cards/visa.html");
+          }
+
+          &.mastercard {
+            background-image: url("../images/icons/credit-cards/mastercard.html");
+          }
+
+          &.laser {
+            background-image: url("../images/icons/credit-cards/laser.html");
+          }
+
+          &.dinersclub {
+            background-image: url("../images/icons/credit-cards/diners.html");
+          }
+
+          &.maestro {
+            background-image: url("../images/icons/credit-cards/maestro.html");
+          }
+
+          &.jcb {
+            background-image: url("../images/icons/credit-cards/jcb.html");
+          }
+
+          &.amex {
+            background-image: url("../images/icons/credit-cards/amex.html");
+          }
+
+          &.discover {
+            background-image: url("../images/icons/credit-cards/discover.html");
+          }
+        }
+
+        .wc-credit-card-form-card-expiry {
+          font-size: 1.5em;
+          padding: 8px;
+          background-repeat: no-repeat;
+          background-position: right;
+
+          &.visa {
+            background-image: url("../images/icons/credit-cards/visa.html");
+          }
+
+          &.mastercard {
+            background-image: url("../images/icons/credit-cards/mastercard.html");
+          }
+
+          &.laser {
+            background-image: url("../images/icons/credit-cards/laser.html");
+          }
+
+          &.dinersclub {
+            background-image: url("../images/icons/credit-cards/diners.html");
+          }
+
+          &.maestro {
+            background-image: url("../images/icons/credit-cards/maestro.html");
+          }
+
+          &.jcb {
+            background-image: url("../images/icons/credit-cards/jcb.html");
+          }
+
+          &.amex {
+            background-image: url("../images/icons/credit-cards/amex.html");
+          }
+
+          &.discover {
+            background-image: url("../images/icons/credit-cards/discover.html");
+          }
+        }
+
+        .wc-credit-card-form-card-number {
+          font-size: 1.5em;
+          padding: 8px;
+          background-repeat: no-repeat;
+          background-position: right;
+
+          &.visa {
+            background-image: url("../images/icons/credit-cards/visa.html");
+          }
+
+          &.mastercard {
+            background-image: url("../images/icons/credit-cards/mastercard.html");
+          }
+
+          &.laser {
+            background-image: url("../images/icons/credit-cards/laser.html");
+          }
+
+          &.dinersclub {
+            background-image: url("../images/icons/credit-cards/diners.html");
+          }
+
+          &.maestro {
+            background-image: url("../images/icons/credit-cards/maestro.html");
+          }
+
+          &.jcb {
+            background-image: url("../images/icons/credit-cards/jcb.html");
+          }
+
+          &.amex {
+            background-image: url("../images/icons/credit-cards/amex.html");
+          }
+
+          &.discover {
+            background-image: url("../images/icons/credit-cards/discover.html");
+          }
+        }
+
+        .form-row {
+          margin: 0 0 1em;
+        }
+
+        &:before {
+          content: "";
+          display: block;
+          border: 1em solid $color_alto_approx;
+          border-right-color: transparent;
+          border-left-color: transparent;
+          border-top-color: transparent;
+          position: absolute;
+          top: -.75em;
+          left: 0;
+          margin: -1em 0 0 2em;
+        }
+
+        input.input-text {
+          border-color: $color_pink_swan_approx $color_pale_slate_approx $color_pale_slate_approx;
+        }
+
+        span.help {
+          font-size: .857em;
+          color: $color_tapa_approx;
+          font-weight: 400;
+        }
+
+        p:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .payment_method_paypal {
+      .about_paypal {
+        float: right;
+        line-height: 52px;
+        font-size: .83em;
+      }
+
+      img {
+        max-height: 52px;
+        vertical-align: middle;
+      }
+    }
+
+    ul.payment_methods {
+      text-align: left;
+      padding: 1em;
+      border-bottom: 1px solid $color_quill_gray_approx;
+      margin: 0;
+      list-style: none;
+
+      li {
+        line-height: 2;
+        text-align: left;
+        margin: 0;
+        font-weight: 400;
+
+        &:after {
+          content: " ";
+          display: table;
+          clear: both;
+        }
+
+        &:before {
+          content: " ";
+          display: table;
+        }
+
+        input {
+          margin: 0 1em 0 0;
+        }
+
+        img {
+          vertical-align: middle;
+          margin: -2px 0 0 .5em;
+          padding: 0;
+          position: relative;
+          //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+          box-shadow: none;
+
+          + img {
+            margin-left: 2px;
+          }
+        }
+      }
+
+      &:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+    }
+  }
+
+  .checkout {
+    .col-2 {
+      .form-row-first {
+        clear: left;
+      }
+
+      .notes {
+        clear: left;
+      }
+
+      h3#ship-to-different-address {
+        float: left;
+        clear: none;
+      }
+    }
+
+    .shipping_address {
+      clear: both;
+    }
+
+    .create-account small {
+      font-size: 11px;
+      color: $color_tapa_approx;
+      font-weight: 400;
+    }
+
+    div.shipping-address {
+      padding: 0;
+      clear: left;
+      width: 100%;
+    }
+  }
+}
+
+p.demo_store {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: 0;
+  width: 100%;
+  font-size: 1em;
+  padding: 1em 0;
+  text-align: center;
+  background-color: $color_strikemaster_approx;
+  color: $white;
+  z-index: 99998;
+  //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: 0 1px 1em $black_20;
+
+  a {
+    color: $white;
+  }
+}
+
+.admin-bar p.demo_store {
+  top: 32px;
+}
+
+.single-product .twentythirteen {
+  #reply-title {
+    padding: 0;
+  }
+
+  .entry-summary {
+    padding: 0;
+  }
+
+  p.stars {
+    clear: both;
+  }
+
+  #respond #commentform {
+    padding: 0;
+  }
+}
+
+#content.twentyeleven .shop-pagination a {
+  font-size: 1em;
+  line-height: 1;
+}
+
+.twentythirteen .shop-breadcrumb {
+  padding-top: 40px;
+}
+
+.twentyfourteen ul.products li.product {
+  margin-top: 0 !important;
+}

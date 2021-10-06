@@ -1,4 +1,4 @@
-<div class="f-box">
+<div class="f-box" xmlns:v-on="http://www.w3.org/1999/xhtml">
 
         <span class="filter_title">
             <i class="fa fa-align-right" aria-hidden="true"></i>
@@ -28,9 +28,9 @@
             جستجو در نتایج
     </span>
 
-    <form class="filter_search">
+    <form class="filter_search" v-on:submit.prevent="getProducts()">
         <i class="fa fa-search icon" aria-hidden="true"></i>
-        <input placeholder="نام محصول مورد نظر را بنویسید" class="search_input">
+        <input placeholder="نام محصول مورد نظر را بنویسید" class="search_input" v-model="search">
     </form>
 
 </div>
@@ -40,16 +40,14 @@
     <form class="filter_switch">
 
         <label class="switch">
-            <input type="checkbox">
+            <input type="checkbox" v-model="for_sale">
             <span class="slider round"></span>
         </label>
 
         <label class="title_">فقط کالاهای موجود</label>
     </form>
 
-
 </div>
-
 
 @foreach($filters as $filter)
     <div class="f-box filter_value">
@@ -59,14 +57,15 @@
                 {{$filter->title}}
         </span>
 
-        <ul>
-            @foreach($filter->detailValues as $value)
-                <label class="custom_ch">
-                    <input type="checkbox">
-                    <span class="checkmark"></span> {{$value->title}}
-                </label>
-            @endforeach
-        </ul>
+    <ul class="filter_checkbox">
+        @foreach($filter->detailByCategory($id) as $value)
+            <label class="custom_ch">
+                <input type="checkbox" @change="setFilter()" data-id="{{ $value->id }}"
+                       @if(collect(request()->filters)->flatten()->contains($value->id)) checked @endif >
+                <span class="checkmark"></span> {{$value->title}}
+            </label>
+        @endforeach
+    </ul>
 
-    </div>
+</div>
 @endforeach

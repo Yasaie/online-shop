@@ -1,7 +1,7 @@
 @extends('front.layout')
 
 @section('header_include')
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+    <script src="{{ asset('assets/front/plugin/masonry/masonry.pkgd.min.js') }}"></script>
 
     <script>
         $(function () {
@@ -30,7 +30,7 @@
                             <a href="{{route('category', $category->id)}}">
                                 <img src="{{$category->getFirstMedia('image')
                                     ? $category->getFirstMedia('image')->getFullUrl('small')
-                                    : asset('assets/front/image/no-default-thumbnail.png')}}" alt="">
+                                    : asset('assets/front/image/no-default-thumbnail.png')}}" >
 
                                 <h2 class="titel_of_category">{{$category->title}}</h2>
                             </a>

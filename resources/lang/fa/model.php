@@ -6,15 +6,16 @@
  */
 
 return array_merge(
-    __('inc/product'),
-    __('inc/public'),
-    __('inc/user'),
-    __('inc/setting'),
-    __('inc/currency'),
-    __('inc/address'),
-    __('inc/category'),
-    __('inc/seller'),
-    __('inc/detail'),
-    __('inc/report'),
-    __('inc/cart')
+    trans('inc/product'),
+    trans('inc/public'),
+    trans('inc/user'),
+    trans('inc/profile'),
+    trans('inc/setting'),
+    trans('inc/currency'),
+    trans('inc/address'),
+    trans('inc/category'),
+    trans('inc/seller'),
+    trans('inc/detail'),
+    trans('inc/report'),
+    trans('inc/cart')
 );

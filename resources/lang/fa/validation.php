@@ -114,6 +114,7 @@ return [
     'uploaded'             => 'بارگذاری فایل :attribute موفقیت آمیز نبود.',
     'url'                  => ':attribute معتبر نمی‌باشد.',
     'uuid'                 => 'The :attribute must be a valid UUID.',
+    'recaptcha' => 'Recaptcha شما را ربات تشخیص داده است.',
 
     /*
     |--------------------------------------------------------------------------
@@ -148,6 +149,7 @@ return [
         'last_name'             => 'نام خانوادگی',
         'password'              => 'گذرواژه',
         'password_confirmation' => 'تکرار گذرواژه',
+        'old_password'          => 'گذرواژه فعلی',
         'city'                  => 'شهر',
         'country'               => 'کشور',
         'address'               => 'نشانی',
@@ -173,5 +175,7 @@ return [
         'size'                  => 'اندازه',
         'terms'                 => 'شرایط',
         'province'              => 'استان',
-    ], __('model')),
+    ], __('model'), [
+        'profile' => __('inc/profile')
+    ]),
 ];

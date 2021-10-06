@@ -9,14 +9,14 @@
 
             <div class="small-box bg-info">
                 <div class="inner">
-                    <h3>150</h3>
+                    <h3>{{ $orders }}</h3>
 
-                    <p>سفارشات جدید</p>
+                    <p>سفارشات </p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-bag"></i>
                 </div>
-                <a href="#" class="small-box-footer">اطلاعات بیشتر <i
+                <a href="{{ route('admin.cart.index') }}" class="small-box-footer">اطلاعات بیشتر <i
                             class="fa fa-arrow-circle-left"></i></a>
             </div>
         </div>

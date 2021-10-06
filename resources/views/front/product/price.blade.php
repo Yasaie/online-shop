@@ -34,7 +34,6 @@
                 </div>
             </div>
 
-
             <div class="list_item by_btn">
                 <a href="{{route('cart.add', $seller->id)}}">افزودن به سبد خرید <span class="shadow"></span> </a>
 
@@ -52,17 +51,14 @@
         @else
          
 
-
-
         <div class="notenough_alarm">
 
                 <h4 ><span class="line"></span>
-                <span class="title" style="">ناموجود</span>    
+                <span class="title" >ناموجود</span>
                 </h4>
                  <p> متاسفانه این کالا در حال حاضر موجود نیست. می&zwnj;توانید از طریق لیست پایین صفحه، از محصولات مشابه این کالا دیدن نمایید</p>
     
         </div>
-
 
         @endif
     </div>

@@ -1,21 +1,17 @@
 @extends('front/layout')
 
-@section('header_include')
-    <link href="{{ asset('assets/front/css/category.css') }}" rel="stylesheet">
-@endsection
-
 @section('page-title', $current_category->title)
 
 @section('content')
 
     <div class="container-fluid app_filter">
-        <div class="row">
+        <div class="row" id="results">
 
             <div class="col-lg-2 col-md-2 col-sm-2  filter">
                 @include('front.category.sidebar')
             </div>
 
-            <div class="col-lg-10 col-md-10 col-sm-12 result" id="results">
+            <div class="col-lg-10 col-md-10 col-sm-12 result">
 
                 @include('front.category.navbar')
 
@@ -29,25 +25,8 @@
 
 @section('footer_include')
     <script>
-        new Vue({
-            el: '#results',
-            computed: {
-                products: function () {
-                    var list = {};
-
-                    $.ajax({
-                        url: app_url + '/api/product.json',
-                        data: {
-                            category: {{$id}}
-                        },
-                        async: false
-                    }).done(function (r) {
-                        list = r
-                    });
-
-                    return list;
-                }
-            }
-        });
+        var category = {{ $id }};
+        var q_param = {!! json_encode(request()->all()) !!};
     </script>
+    <script type="text/javascript" src="{{ asset('assets/front/js/category.min.js') }}" async defer></script>
 @endsection

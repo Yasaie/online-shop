@@ -9,56 +9,60 @@
 
                     <h2 class="title-cart">سبد خرید</h2>
 
-                    <div class="list_body" v-if="Object.keys(orders).length" >
+                    <div class="list_body" v-if="Object.keys(orders).length">
 
-                            <li class="list_product" v-for="order in orders">
-                                <a class="btn rm_btn btn-danger" href="javascript:;" @click="deleteOrder(order.id)">
-                                    <i class="fa fa-times" aria-hidden="true"></i>
-                                </a>
+                        <li class="list_product" v-for="order in orders">
+                            <a class="btn rm_btn btn-danger" href="javascript:;" @click="deleteOrder(order.id)">
+                                <i class="fa fa-times" aria-hidden="true"></i>
+                            </a>
 
-                                <a :href="productPage(order.product_id)">
-                                    <img class="img" :src="order.image">
-                                </a>
+                            <a :href="productPage(order.product_id)">
+                                <img class="img" :src="order.image">
+                            </a>
 
-                                <div class="information">
-                                    <h2>
-                                        <a :href="productPage(order.product_id)">@{{order.name}}</a>
-                                    </h2>
-                                    <div class="shop_name">فروشنده: @{{ order.seller }}</div>
-                                        <div class="shop_info_product" v-if="order.service">
-                                            @{{ order.service }}
-                                        </div>
+                            <div class="information">
+                                <h2>
+                                    <a :href="productPage(order.product_id)">@{{order.name}}</a>
+                                </h2>
+                                <div class="shop_name">فروشنده: @{{ order.seller }}</div>
+                                <div class="shop_info_product" v-if="order.service">
+                                    @{{ order.service }}
                                 </div>
+                            </div>
 
-                                <div class="add_product" v-if="order.amount" style="text-align: center">
-                                    تعداد
-                                    <select class="mdb-select md-form" v-model="order.quantity" @change="updateQuantity(order.id, order.quantity)">
-                                        <option :value="option" v-for="option in order.amount">@{{ option }}</option>
-                                    </select>
-                                    <div class="text-warning" style="margin-top: 10px" v-if="order.old_price != order.price">
-                                        قیمت این کالا تغییر کرده است.
-                                    </div>
+                            <div class="add_product" v-if="order.amount" style="text-align: center">
+                                تعداد
+                                <select class="mdb-select md-form" v-model="order.quantity"
+                                        @change="updateQuantity(order.id, order.quantity)">
+                                    <option :value="option" v-for="option in order.amount">@{{ option }}</option>
+                                </select>
+                                <div class="text-warning" style="margin-top: 10px"
+                                     v-if="order.old_price != order.price">
+                                    قیمت این کالا تغییر کرده است.
                                 </div>
-                                <div class="text-danger" v-else>
-                                    موجودی کافی نمی‌باشد
-                                </div>
+                            </div>
+                            <div class="text-danger" v-else>
+                                موجودی کافی نمی‌باشد
+                            </div>
 
-                                <div class="information_unit">
+                            <div class="information_unit">
 
-                                    <div class="price_off" v-if="order.prev_price > 0">
-                                        <del>@{{ commaPrice(order.prev_price * order.quantity) }} {{config('app.current_currency')->title}} </del><br>
-                                        <span class="text-danger">
+                                <div class="price_off" v-if="order.prev_price > 0">
+                                    <del>@{{ commaPrice(order.prev_price * order.quantity)
+                                        }} {{config('app.current_currency')->title}} </del>
+                                    <br>
+                                    <span class="text-danger">
                                             تخفیف :
                                             @{{ commaPrice((order.prev_price - order.price) * order.quantity) }} {{config('app.current_currency')->title}}
                                         </span>
-                                    </div>
+                                </div>
 
-                                    <span>@{{ commaPrice(order.price * order.quantity) }}
+                                <span>@{{ commaPrice(order.price * order.quantity) }}
                                    
                                     </span>
-                                    <span class="unit">{{config('app.current_currency')->title}}</span>
-                                </div>
-                            </li>
+                                <span class="unit">{{config('app.current_currency')->title}}</span>
+                            </div>
+                        </li>
 
                     </div>
                     <div class="alert alert-warning" role="alert" v-else>
@@ -67,11 +71,10 @@
 
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 info_cart" >
+            <div class="col-lg-3 col-md-6 col-sm-6 info_cart">
                 <div class="_body">
 
-
-                    <div class="box_1" >
+                    <div class="box_1">
                         <li class="list_item">
                     <span class="name_">
                             <i class="fa fa-credit-card" aria-hidden="true"></i>
@@ -79,7 +82,6 @@
                         مبلغ کل (@{{ total.count }} کالا)</span>
                             <span class="val_">@{{ commaPrice(total.prev) }} {{config('app.current_currency')->title}}</span>
                         </li>
-
 
                         <li class="list_item">
                             <span class="name_">
@@ -93,26 +95,24 @@
 
                     </div>
 
-
-                    <div class="box_2" >
+                    <div class="box_2">
 
                         <p class="info">مبلغ قابل پرداخت:</p>
                         <p class="money">@{{ commaPrice(total.price) }} {{config('app.current_currency')->title}}</p>
-                        <a name="" id="" class="btn btn-info" :class="Object.keys(orders).length ? '' : 'disabled'" href="#" role="button">ثبت سفارش</a>
-
+                        <a class="btn btn-info" :class="Object.keys(orders).length ? '' : 'disabled'"
+                           href="{{ route('profile.order', Auth::user()->myCart()->id) }}" role="button">ثبت سفارش</a>
 
                     </div>
-
 
                 </div>
 
                 <div class="_body _body_p" style="margin-top: 10px;">
 
-                        <p>
-                            محصولات موجود در سبد خرید شما تنها در صورت ثبت و پرداخت سفارش برای شما رزرو می&zwnj;شوند. در
-                            صورت عدم ثبت سفارش، تورکان ایپک یولی
+                    <p>
+                        محصولات موجود در سبد خرید شما تنها در صورت ثبت و پرداخت سفارش برای شما رزرو می&zwnj;شوند. در
+                        صورت عدم ثبت سفارش، تورکان ایپک یولی
 
-                            هیچگونه مسئولیتی در قبال تغییر قیمت یا موجودی این کالاها ندارد. </p>
+                        هیچگونه مسئولیتی در قبال تغییر قیمت یا موجودی این کالاها ندارد. </p>
                 </div>
 
             </div>

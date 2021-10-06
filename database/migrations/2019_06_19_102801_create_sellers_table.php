@@ -21,7 +21,7 @@ class CreateSellersTable extends Migration
             $table->decimal('price', 12, 2);
             $table->decimal('prev_price', 12, 2)->nullable();
             $table->decimal('post_price', 12, 2)->default(0);
-            $table->unsignedTinyInteger('amount')->default(0);
+            $table->unsignedInteger('amount')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

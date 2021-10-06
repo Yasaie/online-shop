@@ -1,17 +1,16 @@
-@extends('front/layout')
+@extends('front.layout')
 @section('content')
 
-<link href="{{ asset('assets/front/css/user_page.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/front/css/user_page.css') }}" rel="stylesheet">
 
-<div class="container-fluid user_page">
-    <div class="row">
-        <section class="col-lg-3 right_box">
-
+    <div class="container-fluid user_page">
+        <div class="row">
+            <section class="col-lg-3 right_box">
 
                 <div class="profile">
 
-                <img src="{{asset('assets/front/image/img_default_user.jpg')}}" class="user_image">
-                         <h3 class="user_name">{{Auth::user()->full_name}}</h3>
+                    <img src="{{asset('assets/front/image/img_default_user.jpg')}}" class="user_image">
+                    <h3 class="user_name">{{Auth::user()->full_name}}</h3>
                     <div class="user_action">
 
                         <div class="btn_" style="border-left: 1px dashed #bbb;">
@@ -32,39 +31,58 @@
                         </div>
                     </div>
 
-                 </div>
+                </div>
 
+                <div class="user_methods">
 
-            <div class="user_methods">
+                    <h3 class="titel">حساب کاربری شما</h3>
 
-                <h3 class="titel">حساب کاربری شما</h3>
+                    <a href="{{route('profile')}}" class="method">
+                        <i class="fa fa-user-o" aria-hidden="true"></i>
+                        پروفایل
+                    </a>
 
-                <a href="{{route('profile')}}" class="method">
-                    <i class="fa fa-user-o" aria-hidden="true"></i>
-                    پروفایل
-                </a>
-
-                <a href="{{route('profile.orders')}}" class="method">
+                    <a href="{{route('profile.orders')}}" class="method">
                         <i class="fa fa-user-o" aria-hidden="true"></i>
                         همه سفارش ها
-                </a>
+                    </a>
 
-                <a href="{{route('cart.index')}}" class="method">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    سبد خرید
-                </a>
+                    <a href="{{route('cart.index')}}" class="method">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        سبد خرید
+                    </a>
 
-                <a href="{{route('profile.seller')}}" class="method">
-                    <i class="fa fa-handshake-o" aria-hidden="true"></i>
-                    فروشنده شوید
-                </a>
-            </div>
+                    @role('customer')
+                    <a href="{{route('profile.seller')}}" class="method">
+                        <i class="fa fa-handshake-o" aria-hidden="true"></i>
+                        فروشنده شوید
+                    </a>
+                    @endrole
+                </div>
 
-        </section>
+            </section>
 
-        @yield('body')
+            <section class="col-lg-9 left_box">
+
+                @if($errors->any())
+                    <div class="alert alert-danger" role="alert" style="margin-top: 50px;">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                @if(session('success'))
+                    <div class="alert alert-success" style="margin-top: 50px;">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @yield('body')
+            </section>
+        </div>
     </div>
-</div>
-
 
 @endsection

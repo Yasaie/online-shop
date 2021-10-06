@@ -16,7 +16,7 @@
                 <span class="col-md-12 list_salers">
                      <i class="fa fa-shopping-basket" aria-hidden="true"></i>
                      <a class="name_of_saler">{{$seller->user->full_name}}</a><br>
-                    <div style="margin-top: 10px" class="rateYo_saler" data-rateyo-rating="{{$seller->rates}}"></div>
+                    <div style="margin-top: 10px" class="rateYo_saler" data-rateyo-rating="{{$seller->rates ?: 0}}"></div>
                 </span>
 
                 @if($seller->service)
@@ -50,7 +50,7 @@
         <span class="col-md-3 list_salers"><i class="fa fa-shopping-basket" aria-hidden="true"></i>
             <a class="name_of_saler">{{$seller->user->full_name}}</a>
             <a class="point">
-                <div style="margin-top: 10px" class="rateYo_saler" data-rateyo-rating="{{$seller->rates}}"></div>
+                <div style="margin-top: 10px" class="rateYo_saler" data-rateyo-rating="{{$seller->rates ?: 0}}"></div>
             </a>
         </span>
 

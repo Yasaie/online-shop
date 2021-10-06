@@ -12,17 +12,6 @@ const mix = require('laravel-mix');
  */
 
 
-mix.sass('resources/assets/admin/main.scss', 'public/assets/admin/css')
-    .options({
-        processCssUrls: false
-    })
-    .copyDirectory('resources/assets/plugins/font-awesome/fonts', 'public/assets/admin/fonts')
-    .copyDirectory('resources/assets/fonts', 'public/assets/admin/fonts')
-    .copy('resources/assets/plugins/iCheck/flat/blue.png', 'public/assets/admin/css/blue.png')
-    .copy('resources/assets/plugins/iCheck/flat/blue@2x.png', 'public/assets/admin/css/blue@2x.png')
-    .copy('resources/assets/admin/css/custom-style.css', 'public/assets/admin/css/custom-style.css')
-    .copy('resources/assets/admin/css/bootstrap-rtl.min.css', 'public/assets/admin/css/bootstrap-rtl.mincss');
-
 mix.scripts([
     // 'resources/assets/plugins/morris/morris.min.js',
     // 'resources/assets/plugins/knob/jquery.knob.js',

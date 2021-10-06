@@ -6,5 +6,5 @@
             /
         @endif
     @endforeach
-    <span class="sort_size">@{{Object.keys(products).length}} کالا</span>
+    <span class="sort_size">@{{pages.items}} کالا</span>
 </div>

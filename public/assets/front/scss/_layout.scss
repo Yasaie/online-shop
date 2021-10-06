@@ -1,0 +1,995 @@
+//colors
+$white: hsl(0, 0%, 100%);
+$black_15: hsla(0, 0%, 0%, .15);
+
+//@extend-elements
+//original selectors
+//.shop .col2-set .col-1, .shop-page .col2-set .col-1
+%extend_1 {
+  float: left;
+  width: 48%;
+  padding: 1em;
+}
+
+//original selectors
+//.shop .col2-set .col-2, .shop-page .col2-set .col-2
+%extend_2 {
+  float: right;
+  width: 48%;
+  padding: 1em;
+}
+
+//original selectors
+//.shop #content div.product div.thumbnails.columns-1 a, .shop div.product div.thumbnails.columns-1 a, .shop-page #content div.product div.thumbnails.columns-1 a, .shop-page div.product div.thumbnails.columns-1 a
+%extend_3 {
+  width: 100%;
+  margin-right: 0;
+  float: none;
+}
+
+//original selectors
+//.shop .cart-collaterals .shipping_calculator, .shop-page .cart-collaterals .shipping_calculator
+%extend_4 {
+  width: 48%;
+  clear: right;
+  float: right;
+}
+
+//original selectors
+//.shop form .form-row-first, .shop form .form-row-last, .shop-page form .form-row-first, .shop-page form .form-row-last
+%extend_5 {
+  float: left;
+  width: 47%;
+  overflow: visible;
+}
+
+
+.shop {
+  #content {
+    div.product {
+      .shop-tabs {
+        clear: both;
+
+        ul.tabs {
+          &:after {
+            content: " ";
+            display: table;
+            clear: both;
+          }
+
+          &:before {
+            content: " ";
+            display: table;
+          }
+
+          li {
+            display: inline-block;
+          }
+        }
+      }
+
+      div.thumbnails {
+        &:after {
+          content: " ";
+          display: table;
+          clear: both;
+        }
+
+        &:before {
+          content: " ";
+          display: table;
+        }
+
+        a {
+          &.first {
+            clear: both;
+          }
+
+          &.last {
+            margin-right: 0;
+          }
+        }
+
+        &.columns-1 a {
+          @extend %extend_3;
+        }
+
+        &.columns-2 a {
+          width: 48%;
+        }
+
+        &.columns-4 a {
+          width: 22.05%;
+        }
+
+        &.columns-5 a {
+          width: 16.9%;
+        }
+      }
+
+      #reviews .comment {
+        &:after {
+          content: " ";
+          display: table;
+          clear: both;
+        }
+
+        &:before {
+          content: " ";
+          display: table;
+        }
+
+        img {
+          float: right;
+          height: auto;
+        }
+      }
+    }
+
+    table.cart {
+      img {
+        height: auto;
+      }
+
+      td.actions {
+        text-align: right;
+
+        .input-text {
+          width: 150px;
+        }
+
+        .coupon {
+          float: left;
+
+          label {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  .col2-set {
+    width: 100%;
+
+    &:after {
+      content: " ";
+      display: table;
+      clear: both;
+    }
+
+    &:before {
+      content: " ";
+      display: table;
+    }
+
+    .col-1 {
+      @extend %extend_1;
+    }
+
+    .col-2 {
+      @extend %extend_2;
+    }
+  }
+
+  .cart-collaterals {
+    width: 100%;
+
+    &:after {
+      clear: both;
+      content: " ";
+      display: table;
+    }
+
+    .shipping_calculator {
+      @extend %extend_4;
+
+      &:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+
+      .col2-set {
+        .col-1 {
+          width: 47%;
+        }
+
+        .col-2 {
+          width: 47%;
+        }
+      }
+    }
+
+    &:before {
+      content: " ";
+      display: table;
+    }
+
+    .related {
+      width: 30.75%;
+      float: left;
+    }
+
+    .cross-sells ul.products {
+      float: none;
+    }
+  }
+
+  ul {
+    &.products {
+      clear: both;
+
+      li {
+        &.first {
+          clear: both;
+        }
+
+        &.last {
+          margin-right: 0;
+        }
+      }
+
+      &:after {
+        clear: both;
+        content: " ";
+        display: table;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+    }
+
+    &.cart_list li {
+      &:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+
+      img {
+        float: left;
+        height: auto;
+      }
+    }
+
+    &.product_list_widget li {
+      &:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+
+      img {
+        float: left;
+        height: auto;
+      }
+    }
+  }
+
+  img {
+    height: auto;
+  }
+
+  .shop-result-count {
+    float: left;
+  }
+
+  .shop-ordering {
+    float: right;
+  }
+
+  form {
+    .form-row {
+      &:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+
+      label {
+        display: block;
+
+        &.checkbox {
+          display: inline;
+        }
+      }
+
+      select {
+        width: 100%;
+      }
+
+      .input-text {
+        //Instead of the line below you could use @include box-sizing($bs)
+        box-sizing: border-box;
+        width: 100%;
+      }
+    }
+
+    .form-row-wide {
+      clear: both;
+    }
+
+    .form-row-first {
+      @extend %extend_5;
+    }
+
+    .form-row-last {
+      @extend %extend_5;
+      float: right;
+    }
+  }
+
+  #payment {
+    #place_order {
+      float: right;
+    }
+
+    .terms {
+      text-align: right;
+      padding: 0 1em;
+    }
+
+    .form-row select {
+      width: auto;
+    }
+  }
+
+  div.product {
+    .shop-tabs {
+      clear: both;
+
+      ul.tabs {
+        &:after {
+          content: " ";
+          display: table;
+          clear: both;
+        }
+
+        &:before {
+          content: " ";
+          display: table;
+        }
+
+        li {
+          display: inline-block;
+        }
+      }
+    }
+
+    div.thumbnails {
+      &:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+
+      a {
+        &.first {
+          clear: both;
+        }
+
+        &.last {
+          margin-right: 0;
+        }
+      }
+
+      &.columns-1 a {
+        @extend %extend_3;
+      }
+
+      &.columns-2 a {
+        width: 48%;
+      }
+
+      &.columns-4 a {
+        width: 22.05%;
+      }
+
+      &.columns-5 a {
+        width: 16.9%;
+      }
+    }
+
+    #reviews .comment {
+      &:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+
+      img {
+        float: right;
+        height: auto;
+      }
+    }
+  }
+
+  .shop-pagination ul.page-numbers {
+    &:after {
+      clear: both;
+      content: " ";
+      display: table;
+    }
+
+    &:before {
+      content: " ";
+      display: table;
+    }
+
+    li {
+      display: inline-block;
+    }
+  }
+
+  table.cart {
+    img {
+      height: auto;
+    }
+
+    td.actions {
+      text-align: right;
+
+      .input-text {
+        width: 150px;
+      }
+
+      .coupon {
+        float: left;
+
+        label {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.shop-page {
+  #content {
+    div.product {
+      .shop-tabs {
+        clear: both;
+
+        ul.tabs {
+          &:after {
+            content: " ";
+            display: table;
+            clear: both;
+          }
+
+          &:before {
+            content: " ";
+            display: table;
+          }
+
+          li {
+            display: inline-block;
+          }
+        }
+      }
+
+      div.thumbnails {
+        &:after {
+          content: " ";
+          display: table;
+          clear: both;
+        }
+
+        &:before {
+          content: " ";
+          display: table;
+        }
+
+        a {
+          &.first {
+            clear: both;
+          }
+
+          &.last {
+            margin-right: 0;
+          }
+        }
+
+        &.columns-1 a {
+          @extend %extend_3;
+        }
+
+        &.columns-2 a {
+          width: 48%;
+        }
+
+        &.columns-4 a {
+          width: 22.05%;
+        }
+
+        &.columns-5 a {
+          width: 16.9%;
+        }
+      }
+
+      #reviews .comment {
+        &:after {
+          content: " ";
+          display: table;
+          clear: both;
+        }
+
+        &:before {
+          content: " ";
+          display: table;
+        }
+
+        img {
+          float: right;
+          height: auto;
+        }
+      }
+    }
+
+    table.cart {
+      img {
+        height: auto;
+      }
+
+      td.actions {
+        text-align: right;
+
+        .input-text {
+          width: 150px;
+        }
+
+        .coupon {
+          float: left;
+
+          label {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  .col2-set {
+    width: 100%;
+
+    &:after {
+      content: " ";
+      display: table;
+      clear: both;
+    }
+
+    &:before {
+      content: " ";
+      display: table;
+    }
+
+    .col-1 {
+      @extend %extend_1;
+    }
+
+    .col-2 {
+      @extend %extend_2;
+    }
+  }
+
+  .cart-collaterals {
+    width: 100%;
+
+    &:after {
+      clear: both;
+      content: " ";
+      display: table;
+    }
+
+    .shipping_calculator {
+      @extend %extend_4;
+
+      &:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+
+      .col2-set {
+        .col-1 {
+          width: 47%;
+        }
+
+        .col-2 {
+          width: 47%;
+        }
+      }
+    }
+
+    &:before {
+      content: " ";
+      display: table;
+    }
+
+    .related {
+      width: 30.75%;
+      float: left;
+    }
+
+    .cross-sells ul.products {
+      float: none;
+    }
+  }
+
+  ul {
+    &.products {
+      clear: both;
+
+      li {
+        &.first {
+          clear: both;
+        }
+
+        &.last {
+          margin-right: 0;
+        }
+      }
+
+      &:after {
+        clear: both;
+        content: " ";
+        display: table;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+    }
+
+    &.cart_list li {
+      &:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+
+      img {
+        float: left;
+        height: auto;
+      }
+    }
+
+    &.product_list_widget li {
+      &:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+
+      img {
+        float: left;
+        height: auto;
+      }
+    }
+  }
+
+  img {
+    height: auto;
+  }
+
+  .shop-result-count {
+    float: left;
+  }
+
+  .shop-ordering {
+    float: right;
+  }
+
+  form {
+    .form-row {
+      &:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+
+      label {
+        display: block;
+
+        &.checkbox {
+          display: inline;
+        }
+      }
+
+      select {
+        width: 100%;
+      }
+
+      .input-text {
+        //Instead of the line below you could use @include box-sizing($bs)
+        box-sizing: border-box;
+        width: 100%;
+      }
+    }
+
+    .form-row-wide {
+      clear: both;
+    }
+
+    .form-row-first {
+      @extend %extend_5;
+    }
+
+    .form-row-last {
+      @extend %extend_5;
+      float: right;
+    }
+  }
+
+  #payment {
+    #place_order {
+      float: right;
+    }
+
+    .terms {
+      text-align: right;
+      padding: 0 1em;
+    }
+
+    .form-row select {
+      width: auto;
+    }
+  }
+
+  div.product {
+    .shop-tabs {
+      clear: both;
+
+      ul.tabs {
+        &:after {
+          content: " ";
+          display: table;
+          clear: both;
+        }
+
+        &:before {
+          content: " ";
+          display: table;
+        }
+
+        li {
+          display: inline-block;
+        }
+      }
+    }
+
+    div.thumbnails {
+      &:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+
+      a {
+        &.first {
+          clear: both;
+        }
+
+        &.last {
+          margin-right: 0;
+        }
+      }
+
+      &.columns-1 a {
+        @extend %extend_3;
+      }
+
+      &.columns-2 a {
+        width: 48%;
+      }
+
+      &.columns-4 a {
+        width: 22.05%;
+      }
+
+      &.columns-5 a {
+        width: 16.9%;
+      }
+    }
+
+    #reviews .comment {
+      &:after {
+        content: " ";
+        display: table;
+        clear: both;
+      }
+
+      &:before {
+        content: " ";
+        display: table;
+      }
+
+      img {
+        float: right;
+        height: auto;
+      }
+    }
+  }
+
+  .shop-pagination ul.page-numbers {
+    &:after {
+      clear: both;
+      content: " ";
+      display: table;
+    }
+
+    &:before {
+      content: " ";
+      display: table;
+    }
+
+    li {
+      display: inline-block;
+    }
+  }
+
+  table.cart {
+    img {
+      height: auto;
+    }
+
+    td.actions {
+      text-align: right;
+
+      .input-text {
+        width: 150px;
+      }
+
+      .coupon {
+        float: left;
+
+        label {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media screen and(min-width: 673px) {
+  .twentyfourteen .tfwc {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+}
+
+@media screen and(min-width: 1040px) {
+  .twentyfourteen .tfwc {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
+
+@media screen and(min-width: 1110px) {
+  .twentyfourteen .tfwc {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+}
+
+@media screen and(min-width: 1218px) {
+  .twentyfourteen .tfwc {
+    margin-right: 54px;
+  }
+  .full-width .twentyfourteen .tfwc {
+    margin-right: auto;
+  }
+}
+
+@media screen and(min-width: 38.75em) {
+  .twentyfifteen .t15wc {
+    margin-right: 7.6923%;
+    margin-left: 7.6923%;
+    margin-top: 8.3333%;
+  }
+}
+
+@media screen and(min-width: 59.6875em) {
+  .twentyfifteen .t15wc {
+    margin-left: 8.3333%;
+    margin-right: 8.3333%;
+    padding: 10%;
+  }
+  .single-product .twentyfifteen .entry-summary {
+    padding: 0 !important;
+  }
+}
+
+.twentyfourteen .tfwc {
+  padding: 12px 10px 0;
+  max-width: 474px;
+  margin: 0 auto;
+
+  .product {
+    .entry-summary {
+      padding: 0 !important;
+      margin: 0 0 1.618em !important;
+    }
+
+    .images img {
+      margin-bottom: 1em;
+    }
+  }
+
+  div.product.hentry.has-post-thumbnail {
+    margin-top: 0;
+  }
+}
+
+.twentyfifteen .t15wc {
+  padding-left: 7.6923%;
+  padding-right: 7.6923%;
+  padding-top: 7.6923%;
+  margin-bottom: 7.6923%;
+  background: $white;
+  //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+  box-shadow: 0 0 1px $black_15;
+
+  .page-title {
+    margin-left: 0;
+  }
+}

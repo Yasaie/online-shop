@@ -10,5 +10,6 @@ return [
     'detail' => 'مشخصه',
     'values' => 'مقادیر',
     'detail_values' => 'مقادیر',
-    'highlighted' => 'ویژگی خاص'
+    'highlighted' => 'ویژگی خاص',
+    'weight' => 'وزن'
 ];

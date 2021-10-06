@@ -88,7 +88,30 @@ class SettingsTableSeeder extends Seeder
             ];
         }
 
-        $array = array_merge($site, $footer, $slider);
+        $advertising = [];
+
+        for ($i = 1; $i <= 10; $i++) {
+            $advertising[] = [
+                'section' => 'adv',
+                'key' => "$i.title",
+                'type' => 'text',
+                'value' => ''
+            ];
+            $advertising[] = [
+                'section' => 'adv',
+                'key' => "$i.link",
+                'type' => 'text',
+                'value' => ''
+            ];
+            $advertising[] = [
+                'section' => 'adv',
+                'key' => "$i.image",
+                'type' => 'file',
+                'value' => ''
+            ];
+        }
+
+        $array = array_merge($site, $footer, $slider, $advertising);
 
         DB::table('settings')->insert($array);
     }

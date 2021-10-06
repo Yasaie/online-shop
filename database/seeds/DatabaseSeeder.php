@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             CurrencyTableSeeder::class,
             SettingsTableSeeder::class,
             PermissionsTableSeeder::class,
-            //             RoleTableSeeder::class,
+            ProfileTableSeeder::class,
 
             # optional
             CategoryTableSeeder::class,
